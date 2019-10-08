@@ -113,7 +113,15 @@ git rm -r --cached .  如果已经提交过的代码，使用.gitignore是无效
     ```
        比如: git remote add origin git@github.com:nizp/2019-10-8.git
     ```
-    - 
+
+- 同步远程
+    - git pull origin master
+
+- 推送到远程
+    - git push origin(远程名字) master(分支名)
+    ```
+        比如:git push origin master
+    ```
 
 
 

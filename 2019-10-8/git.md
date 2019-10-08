@@ -90,7 +90,18 @@ git rm -r --cached .  如果已经提交过的代码，使用.gitignore是无效
     - 工作区到暂存区  git diff
     - 工作区到版本区  git diff master
     - 暂存区到版本区  git diff --cached
-    
+
+
+- 把本地git的版本上传到github上管理
+
+    设置秘钥:
+        ssh-keygen -t rsa -C "your_email@example.com"
+
+
+
+
+
+
 
 
 

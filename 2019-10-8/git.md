@@ -94,8 +94,26 @@ git rm -r --cached .  如果已经提交过的代码，使用.gitignore是无效
 
 - 把本地git的版本上传到github上管理
 
-    设置秘钥:
+    - 设置秘钥:
         ssh-keygen -t rsa -C "your_email@example.com"
+
+    - 登录github，右边头像下拉列表有个settings，找到SSH and GPG keys，找到new ssh key点击，把秘钥放到文本框中，点击add ssh key。
+
+    - 在github上创建一个项目
+        - 加号下拉列表，第一个创建新项目
+        - 仓库名称
+        - 说明
+        - 公开
+        - README打钩
+
+- 查看远程仓库
+    - git remote -v   
+- 创建远程仓库
+    - git remote add origin 远程地址
+    ```
+       比如: git remote add origin git@github.com:nizp/2019-10-8.git
+    ```
+    - 
 
 
 

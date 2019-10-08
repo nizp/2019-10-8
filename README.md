@@ -1,2 +1,2 @@
-# removeclass
-试试
+# rmc2
+炮灰

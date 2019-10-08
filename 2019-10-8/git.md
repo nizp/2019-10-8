@@ -122,6 +122,50 @@ git rm -r --cached .  如果已经提交过的代码，使用.gitignore是无效
     ```
         比如:git push origin master
     ```
+- 删除远程仓库
+    - git remote remove 远程名字
+
+
+- 克隆项目
+    - 找到远程仓库的地址，git clone远程仓库地址 回车
+
+
+
+### node的安装（自带就有npm）
+
+- 项目的初始化
+    - npm init -y
+- npm install 安装程序
+
+- npm uninstall 删除安装程序
+
+- npm 目前是全球最大的包管理平台（里面有很多的代码资源）
+
+npm install nrm -g
+
+- 测nrm的速度  
+    - nrm test
+- 切换资源路线
+    - nrm use taobao
+
+- yarn的安装
+    - npm install yarn -g
+
+    - yarn add 安装程序
+    - yarn remove 要删除的程序
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

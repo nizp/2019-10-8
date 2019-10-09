@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button >按钮一</button>
+    <button >按钮二</button>
+    <button >按钮三</button>
+<script>
+    /*
+        函数就是一个闭包，闭包，函数可以使用函数之外定义的变量。
+
+        内部函数的作用域链仍然保持着对父函数活动对象的引用，就是闭包(closure)
+
+        (1)函数嵌套函数，(2)子函数引用父函数的参数或者变量，(3)并且子函数还被外界所引用，这个时候子函数
+        的作用域链仍然保持着对父函数活动对象的引用，父函数的参数和变量就不会被浏览器垃圾
+        回收机制给回收，此时打印父函数的函数返回值，会发现在返回值下面有一个scopes，这个scopes下面
+        有个closure，它就是闭包（整个父级都形成了闭包环境）
+    */
+
+    /*
+        全局的活动对象在关闭浏览器之后才会被销毁
+    */    
+    // function fn(){
+    //     var a = 10;
+    //     function fn2(){
+    //         a++;
+    //         console.log(a);
+    //     }
+    //     function fn3(){
+
+    //     }
+    //     console.dir(fn3)
+    //     return fn2;
+    // }
+
+    // var f = fn();
+
+    // console.dir(f);
+
+    // f();
+    // f();
+
+
+    // function fn1(a){
+    //     function fn(){
+    //         a++;
+    //         console.log(a);
+    //     }
+    //     return fn;
+    // }
+    // fn1(1)();
+    // fn1(1)();
+
+    // var f = fn1(1);
+    // f();
+    // f();
+   
+    // console.dir(f);
+
+    // const btns = document.querySelectorAll('button');
+
+    // for(var i=0;i<btns.length;i++){
+    //     btns[i].index = i;
+    //     btns[i].onclick = function(){
+    //         alert(this.index);
+    //     }
+    // }
+
+
+    // for(var i=0;i<btns.length;i++){
+    //     function fn(a){
+    //         btns[a].onclick = function(){
+    //             alert(a);
+    //         }
+    //     }
+    //     fn(i)
+    // }
+
+
+    // for(var i=0;i<btns.length;i++){
+    //    (function(i){
+    //         btns[i].onclick = function(){
+    //             alert(i);
+    //         }
+    //    })(i)
+    // }
+
+    // var a = 10;
+    // for(var i=0;i<10;i++){
+    //     function fn(i){
+    //         setTimeout(function(){
+    //             console.log(i);
+    //             console.log(a);
+    //         },100);
+    //     }
+    //     fn(i);
+    // }
+
+    /*
+        function(){
+            console.log(0);
+        }
+        function(){
+            console.log(1);
+        }
+    */
+
+    const btns = document.querySelectorAll('button');
+
+    // var _loop = function _loop(i) {
+    //     btns[i].onclick = function () {
+    //         console.log(i);
+    //     };
+    // };
+
+    // for (var i = 0; i < 3; i++) {
+    //     _loop(i);
+    // }
+
+
+
+
+
+</script>
+</body>
+</html>

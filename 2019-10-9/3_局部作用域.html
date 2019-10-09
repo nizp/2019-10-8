@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        function fn(){
+
+
+        }
+
+        fn()
+            函数调用的时候，开辟了一个栈内存
+                1.形参赋值
+                2.变量提升
+                3.执行上下文
+                4.执行栈销毁（变量和参数）
+    */
+
+
+
+    function fn(a){
+        //var a
+        console.log(a);  //10  function a(){}
+        var a = 20;
+        function a(){}
+    }
+    fn(function(){console.log(1111)});
+
+
+
+
+
+
+
+
+
+
+
+    // var a ..
+    // window.fn = funct
+
+    //a = undefined
+    // var a = 20;
+    // function fn(a){
+    //     /*
+    //         var b
+    //         a = function a(){}
+    //     */
+    //     console.log(a);//undefined  20   function a(){}
+    //     var b = 6; 
+    //     var a = 5;
+    //     function a(){}
+    //     console.log(a);
+    // }
+    // // fn(a);
+    // fn(function(){});
+
+
+
+
+
+    // var a = 20; //a = 20  window.a = 20
+    // function fn(a){
+    //     /*
+    //         var b
+    //         var a
+    //     */
+    //     console.log(a);//undefined
+    //     var b = 6; //b = 6
+    //     var a = 5;// a = 5
+    //     console.log(b,a); //6
+    // }
+    // fn(a);
+
+
+    // var a = 10;
+    // function fn(){
+    //     //var a
+    //     console.log(a);//undefined
+    //     var a = 5;
+    //     console.log(a);//5
+    // }
+    // fn(5);
+
+
+    // var a = 10;
+    // function fn(a){
+    //     console.log(a);
+    // }
+    // fn(5);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        var 变量提升，存入到全局的活动变量对象中,允许有多个同名的变量，不支持块级作用域
+        var i=0
+        for(;i<3;i++){
+
+        }
+
+        let 不会变量提升且有暂存死区(在变量定义的上方都访问不到这个变量)
+        不会存入到全局的活动变量对象中
+        不允许有多个同名的变量
+        支持块级作用域
+
+
+
+        const 常量
+            不会变量提升且有暂存死区(在变量定义的上方都访问不到这个变量)
+            不会存入到全局的活动变量对象中
+            不允许有多个同名的变量
+            值是不能被改变的（引用类型可以改变属性值）
+            声明了必须赋值
+    */
+
+    
+    // const a;
+    // console.log(a);
+
+    // const a = 0;
+    // a = 10;
+
+    // const a = {
+    //     aa:10
+    // }
+    // a = 10;
+    // a.aa = 50;
+
+    // console.log(a);
+
+
+    // 块
+
+    // {
+    //     console.log(a); //在上方访问块中的函数a，结果undefined
+    //     if(a){
+    //         console.log(1)
+    //     }else{
+    //         console.log(2)
+    //     }
+    //     {
+    //         //这个函数在块中，在预解析的时候会undefined
+    //         function a(){}
+    //     }
+    //     console.log(a);
+    // }
+
+    // {
+    //     // var a = 10;
+    //     let a  = 10;
+    //     {
+    //         {
+    //             {
+    //                 console.log(a);
+    //             }
+    //         }
+    //     }
+    // }
+    // console.log(a);
+
+    
+    // console.log(a);
+    // let a = 10;
+    // var a = 12;
+    // function a(){}
+    // let a = 12;
+    // console.log(window);
+
+
+    // console.log(a); //undefined
+    // var a = 10;  
+    // var a = 12;
+
+    // console.log(window);
+
+    
+    // for(var i=0;i<3;i++){
+
+    // }
+
+    // console.log(i);
+
+    // for(let i=0;i<3;i++){
+
+    // }
+    // console.log(i);
+
+    
+    
+</script>
+</body>
+</html>

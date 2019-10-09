@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // var obj = {
+    //     val:2,
+    //     dbl:function(){
+    //         console.log(this);//obj
+    //         this.val*=2;//4
+    //         console.log(this.val);
+    //         console.log(val);//报错
+    //     }
+    // }
+    // var ff = obj.dbl();
+    // var fn = obj.dbl;
+    // fn();
+
+    // +function(){
+    //     /*
+    //         a = 5
+    //         b = 6
+    //         var c = 6
+
+    //     */
+    //     console.log(a) //undefined  function a(){}
+    //     var a = 5;
+    //     function a(){}
+    //     console.log(a)//5
+    //     function b(){}
+    //     b = 6;
+    //     console.log(b) //函数   6
+    //     var c = d = b;
+    //     //var c = window.d = b   window.d=6
+    //     //var c = d,d = b; -> var c  var d
+    // }()
+    // console.log(d) //6
+    // console.log(c)//6  报错
+
+
+//     var a = 123;
+// 　　function fun(a) {
+// 　　　　alert(a);//undefined
+// 　　　　a = 456;
+// 　　}
+// 　　fun();
+//     alert(a);//123
+
+
+//     var a = 123;
+// 　　function fun(a) {
+// 　　　　alert(a);   //123
+// 　　　　a = 456;
+//     }
+//     fun(123);
+//     alert(a);//123
+
+
+    // function test(a, b) {
+    //     /*
+    //         a = 123
+    //         var b = function() {}
+    //     */
+    // 　　console.log(a); //1   function a() {}
+    // 　　console.log(b); //1   undefined
+    // 　　var b = 234;
+    // 　　console.log(b); //234
+    // 　　a = 123;
+    // 　　console.log(a);//undefined   123
+    // 　　function a() {}
+    // 　　var a;
+    // 　　b = 234;
+    // 　　var b = function() {}
+    // 　　console.log(a); //function a() {}    123
+    // 　　console.log(b);  //undefined   function() {}
+    // }
+    // test(1);
+
+    // function fn(a) {
+    //     /*
+    //         a =  123
+    //         var b = function() {}
+    //         d = function d() {}
+    //     */
+
+    // 　　console.log(a);  //function a() {}
+    // 　　var a = 123;
+    // 　　console.log(a);//123
+    //     function a() {}
+    //     console.log(a);//123
+    //     var b = function() {}
+    //     console.log(b); //function() {}
+
+    //     function d() {}
+    // }
+    // fn(1);
+
+
+    // function fn() {　　
+
+    // 　　console.log(12)
+    // }
+    // var as = fn()
+
+    // console.log(as) //undefined
+
+
+
+    // function fn() {　　
+    //     console.log(12)　　//12
+    //     return 45;　　
+    //     console.log(456)　　
+    // }
+    // fn()
+
+
+    // var a = 12;　
+    // function fn() {　
+    //     /*
+    //         var a
+    //     */　
+    //     console.log(a)　　//undefined
+
+    //     return 4;　　
+    //     var a = 45;
+    // }
+    // fn();
+
+
+    // var a = 100;　
+    // function testResult() {　
+    // 　
+    // 　　var b = 2 * a　　
+    // 　　var a = 200　　
+    // 　　var c = a / 2　　
+
+    // 　　alert(b)　　// NaN
+
+    // 　　alert(c)  //100
+    // }
+    // testResult()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        this:这个（小难点）
+    */    
+
+    // document.onclick = function(){
+    //     console.log(this);
+    // }
+
+    // document.onclick = fn;
+    // function fn(){
+    //     console.log(this); //window
+    // }
+    // fn();
+
+    // document.onclick = fn();
+    // function fn(){
+    //     console.log(this);//window
+    // }
+
+    // document.onhaha = fn();
+    // console.log(document.onhaha);
+
+    // document.onclick = function(){
+    //     console.log(this);
+    //     fn();
+    // }
+    // document.onclick = (function (){
+    //     console.log(this);//window
+    //     return fn;
+    // })()
+
+
+    // document.onclick = function (){
+    //     return fn;
+    // }
+
+    // function fn(){
+    //     console.log(this);
+    // }
+
+    // let obj = {
+    //     fn:fn,
+    //     oo:{
+    //         f:{
+    //             num:0,
+    //             fn:fn,
+    //             f:()=>{
+    //                 console.log(this);
+    //             }
+    //         }
+    //     }
+    // }
+    // // obj.oo.f.fn();
+    // obj.oo.f.f();
+
+
+    // document.onclick = function(){
+    //     let fn = ()=>{
+    //         console.log(this);
+    //     }
+    //     fn();
+    // }
+
+    // document.onclick = ()=>{
+    //     console.log(this);
+    // }
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+ 
+ 
+
+
+</script>
+</body>
+</html>

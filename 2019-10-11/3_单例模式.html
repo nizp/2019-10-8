@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        单例 -> 单独的实例  
+        let obj = new Object()
+
+        高级单例模式:
+            匿名函数自执行 + return 对象
+
+
+        一个 人（实例）
+
+        简单类型
+        引用类型{}
+    */    
+
+    
+    
+    
+
+    // let name2 = '尹德志';
+    // let age = 15;
+    // let job = '前端开发工程师';
+    // let age2 = 20;
+    // let name = '赵炎';
+    // let job2 = '高级前端开发工程师';
+    // let sex = '?';
+    // let sex2 = '男';
+
+    // let obj = {
+    //     name:'赵炎',
+    //     age:15,
+    //     job:'前端开发工程师',
+    //     sex:'?'
+    // }
+
+    // let obj2 = {
+    //     name:'尹德志',
+    //     age:15,
+    //     job:'前端开发工程师',
+    //     sex:'?'
+    // }
+    
+    //访问对象属性默认就暴露出来了，功能不够强大
+    // let obj2 = {
+    //     name:'尹德志',
+    //     age:15,
+    //     job:'前端开发工程师',
+    //     sex:'?'
+    // }
+
+    // console.log(obj2);
+
+    let num = 10;
+    let obj = (function(){
+        let age = 15;
+
+        function fn(a,b){
+            // console.log(age + num);
+            return (a + b);
+        }
+        return {
+            name:'赵炎',
+            num2: fn(age,num),
+            fn:fn
+        }
+    })();
+
+
+
+    let obj2 = (function(){
+        let nn = 10;
+        function fn(a,b){
+            return (a * b);
+        }
+        return {
+            nn:nn,
+            nn2:obj.fn(num,nn)
+        }
+    })();
+
+    console.log(obj);
+
+    console.log(obj);
+
+
+    //柯里化函数
+    function fn1(x){
+        return function(y){
+            return (x+y);
+        }
+    }
+    let a = fn1(1);
+    let b = a(2);
+    console.log(b);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

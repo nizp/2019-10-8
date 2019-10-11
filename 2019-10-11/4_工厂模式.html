@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 函数 -> 复用  
+
+    //有初始化、加工、出厂（工厂模式）
+    //工厂模式的目的就是为了批量生产对象
+    function person(name,age,job,sex){
+        let obj = new Object(); //初始化(原材料)
+
+        //加工
+        obj.name = name;
+        obj.age = age;
+        obj.job = job;
+        obj.sex = sex;
+        // let obj = {
+        //     name:name,
+        //     age:age,
+        //     job:job,
+        //     sex:sex
+        // }    
+        //出厂
+        return obj;
+        // let obj = {
+        //     name,
+        //     age,
+        //     job,
+        //     sex
+        // }    
+    }
+
+    let obj = person('赵炎',15,'前端开发工程师','?');
+    let obj2 = person('你真胖',15,'前端开发工程师','?');
+
+
+
+    // let obj2 = {
+    //     name:'赵炎',
+    //     age:15,
+    //     job:'前端开发工程师',
+    //     sex:'?'
+    // }
+    // let obj3 = {
+    //     name:'你真胖',
+    //     age:15,
+    //     job:'前端开发工程师',
+    //     sex:'?'
+    // }
+
+
+</script>
+</body>
+</html>

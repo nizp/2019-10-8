@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // for(var i=0;i<5;i++){
+    //     (function(i){
+    //         setTimeout(function(){
+    //             console.log(i);
+    //         }, i*1000);
+    //     })(i)
+    // }    
+    // console.dir(window)
+
+    /*
+        var y
+        var x
+
+        window.y = 10 11
+        window.x
+    */
+
+    // var y = 10;
+    // if(!(x in window)){
+    //     var x = 10;
+    // }else{
+    //     ++y
+    // }
+    // console.log(x);//undefined
+    // console.log(y);//11
+
+
+    //写出判断数据类型的方法
+    // typeof
+    //instanceof
+    //Object.prototype.toString.call(xx)
+
+
+    /*
+        全局栈一般是浏览器关闭才会被销毁
+        局部栈一般是函数调用完之后销毁
+
+        堆:引用类型
+        let obj = {}
+        obj = null
+    */
+    // let obj = {}
+    // obj = null;//给obj赋值了一个空指针，谷歌浏览器会在空闲的时候去查看谁用着obj，null指针说明没有使用，所以obj被销毁
+
+    // function fn(){
+    //     var i = 0;
+    //     return function(){
+    //         console.log(i);
+    //         i = null;
+    //     }
+    // }
+
+    // let f = fn();
+    // f();
+    // console.dir(f);
+
+    
+    
+    //当你莫名其妙写了一个闭包的时候，记得释放内存
+    window.onload = function(){
+        let a = 10;
+        document.onclick = function(){
+            console.log(a);
+            console.dir(document.onclick)
+            a = null;
+        }
+    }
+
+    
+
+
+
+
+
+
+</script>
+</body>
+</html>

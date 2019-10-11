@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Fn(){
+        this.a = 10;
+    }
+    Fn.prototype.a = 20;
+    Fn.a = 30;
+    Function.prototype.a = 50;
+    let f = new Fn();
+    f.a = 40;
+
+    console.log(f.a);
+    // console.log(Fn.prototype.a)
+
+    // Fn()
+    // console.log(window.a);
+
+    // console.log(Fn.a);
+
+
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        new
+            一元运算符，专门运算**函数**的,能让函数不加括号的情况下执行
+            加括号是为了传参
+            1.构造函数中的this就是这个构造函数的*实例化对象*，默认的this也是*实例化对象*
+            2.return返回值如果是简单类型，那么返回的结果为*实例化对象*，如果
+            返回值为如果为引用类型，那么返回的结果就是这个*引用类型*
+
+
+
+
+    */    
+
+    function Fn(t){  //Fn{}   {key:val}
+        // alert(t);
+        // console.log(this);
+        return null
+    }
+
+    let f =  new Fn('珠峰培训');
+
+    console.log(f);
+    // console.log(Fn)
+
+
+</script>
+</body>
+</html>

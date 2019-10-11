@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        面向对象(Object Oriented,OO):
+            是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。
+
+        现实理解(东西是一样的，但是角度不同，所以描述的过程不同)，抽象方法
+
+        抽象:抽出像的部分（归类）
+
+
+        警察:
+            正义的使者、很危险的职业、气质、流氓头头、正直、威信、勇敢
+            为人民服务、穿警服、配警枪、开警车
+
+
+        归类（归纳多种相同的特征）
+
+
+        面向对象是一种编程思想，就是把相同部分的代码**抽离**出来*归为一类*，把
+        描述这个类的共有特征（方法或者属性）挂在*类的原型*下的一种编程思想（方式、模式）
+
+
+        new Array   
+        new Date  
+        new String  
+        ...
+
+
+        潜规则类的首字母大写
+
+    */
+
+    //person这个函数类（构造函数）
+    function Person(name,age,sex,job){  //抽象  
+        //let obj = {}
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.job = job;
+        this.say = function(){ 
+            alert('我的名字叫'+this.name);//001
+        }
+        // return obj;
+    }
+    let obj = new Person('邓志刚',18,'男','资深前端');
+    let obj2 = new Person('你真胖',18,'男','资深前端');
+
+
+    let ary = [];  //new Array
+    let ary2 = [];
+
+    // ary.push(1);
+    // ary2.push(2);
+
+    // console.log(ary == ary2);
+
+    console.log(ary.push === ary2.push);
+
+
+    // obj.say();
+    // obj2.say();
+
+    // console.log(obj == obj2);
+
+    // console.log(obj.say == obj2.say);
+
+
+
+
+
+
+
+
+    // let name = '邓志刚';
+    // let age = 18;
+    // let sex = '男';
+    // let job = '资深前端';
+
+    // let name = '彭锦程';
+    // let age = 18;
+    // let sex = '男';
+    // let job = '资深前端';
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

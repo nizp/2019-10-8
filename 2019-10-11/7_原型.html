@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        当一个**函数**创建出来的时候，自身会带有一些属性和方法
+        其中有一个属性叫**prototype**，值为对象，它就是原型。
+
+
+        作用:
+            构造函数的原型下的属性或者方法，只能给构造函数的实例化对象使用
+
+
+        原型链:
+            __proto__ 只要是实例都都 __proto__ ，而这个原型链是全等于构造函数的原型
+
+            obj.__proto__ === Fn.prototype
+        
+    */    
+
+    function Fn(){
+
+    }
+
+    Object.prototype.say = 20;
+
+    // Fn.prototype.say = function(){
+    //     console.log(1);
+    // }
+
+    let obj = new Fn;  //f是Fn的实例
+    let obj2 = new Fn;
+
+    // obj.say = 10;
+
+    // console.log(obj.__proto__ === Fn.prototype);
+    // console.log(obj.__proto__.say === Fn.prototype.say);
+    // console.log(Fn.prototype.__proto__ === Object.prototype);
+    // console.log(Object.prototype.__proto__);//数据查找到了Object的原型就没有然后了，因为Object.prototype.__proto__ = null
+    // console.dir(obj);
+    console.log(obj.say);
+
+    // obj.say();
+    // obj2.say();
+
+    // console.log(obj.say == obj2.say);
+
+    // console.log(f.say);//Fn{}
+
+
+
+
+
+    // fn.prototype.say()
+
+
+
+    // console.dir(fn.prototype);
+
+</script>
+</body>
+</html>

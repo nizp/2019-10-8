@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        for in会枚举原型链,也就是除了对象自身的属性以外，还会查找原型链上的自定义属性
+        
+        可以通过obj.hasOwnProperty('属性名')去检测某个属性是不是对象自身的
+        如果是自身的，就返回true，否则false
+    */
+
+    Object.prototype.aaa = '123';
+
+    let obj = {
+        name:'赵炎',
+        age:8888,
+    }
+
+    for(let attr in obj){
+        if(obj.hasOwnProperty(attr)){
+            console.log(obj[attr]);
+        }
+        // console.log(attr);
+    }
+
+
+</script>
+    
+</body>
+</html>

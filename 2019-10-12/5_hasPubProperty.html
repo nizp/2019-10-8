@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        查看某个属性是不是公共的
+    */
+
+    function Fn(){
+        this.a = 10;
+        this.b = 20;
+    }
+    Fn.prototype.c = 30;  //公共属性
+
+    let f = new Fn;
+
+    // console.log(f.c);
+
+    // console.log('c' in f); //判断f下能不能访问当c
+    // console.log(f.c !== undefined);
+
+    console.log(hasPubProperty(f,'a'));
+
+
+    function hasPubProperty(obj,attr){
+        //如果f能找到c并且c不是f自身的属性，那么就是公共的
+        return (attr in obj) && !obj.hasOwnProperty(attr);
+    }
+</script>
+</body>
+</html>

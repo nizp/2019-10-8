@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div,#box3 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show,#box3 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+            <button class="active">按钮一</button>
+            <button>按钮二</button>
+            <button>按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+
+    <div id="box3">
+            <button class="active">按钮一</button>
+            <button>按钮二</button>
+            <button>按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+    
+<script>
+    /*
+        一般面向对象都是属性挂在类里面，方法挂在类的原型下
+        1.抽象
+        2.挂功能方法
+    */
+
+    function Tab(id){
+        this.box = document.getElementById(id);
+        this.btns = this.box.querySelectorAll('button');
+        this.divs = this.box.querySelectorAll('div');
+        this.timer = null;
+        this.num = 0;
+    }
+
+    //循环按钮，事件触发
+    Tab.prototype.events = function(evName){
+        // this
+        let that = this; //实例
+        this.btns.forEach((ele,i)=>{
+            ele[evName] = function(){
+                that.change(i);
+            }
+        });
+    }
+    //切换
+    Tab.prototype.change = function(i){
+        //大清洗
+        this.btns.forEach((ele,i)=>{
+            ele.className = '';
+            this.divs[i].className = '';
+        });
+        //当前切换
+        this.btns[i].className = 'active';
+        // that.className = 'active';
+        this.divs[i].className = 'show';
+    }
+
+    Tab.prototype.autoPlay = function(){
+        this.timer = setInterval(()=>{
+            this.num ++;
+            this.num %= 3;
+            this.change(this.num);
+        },1000)
+    }
+
+
+
+    let t = new Tab('box');
+    t.events('onclick');
+    let t2 = new Tab('box2');
+    t2.events('onmouseover');
+
+    let t3 = new Tab('box3');
+    t3.autoPlay();
+    // console.log(t);
+    // t.events();
+
+
+
+   
+
+</script>
+</body>
+</html>

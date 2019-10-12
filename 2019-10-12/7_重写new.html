@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        new:
+            函数内的this变成了实例
+            默认return实例
+    */
+    function myNew(fn,...arg){
+        let obj = {}; //Object.create({})
+        //构造函数的原型 === 实例的原型链
+        obj.__proto__ =  fn.prototype; //Object
+
+        let reVal = fn.call(obj,...arg);
+
+        // console.log(reVal);
+
+        if(isYYType(reVal)){
+            return reVal
+        }else{
+            return obj;
+        }
+
+        // if(reVal !== undefined && reVal !== null){
+        //     reVal.ha = 1;
+        //     console.log(reVal.ha === undefined);//如果ha是个undefined说明它是简单类型
+        //     if(reVal.ha === undefined){
+        //         return obj;
+        //     }else{
+        //         return reVal;
+        //     }
+        // }else{
+        //     return obj;
+        // }
+        
+
+        //如何判断一个数据是不是引用类型？
+        // console.log(reVal.ha); //
+
+
+        //如果构造函数return的不是引用类型默认就为实例
+        // if(!reVal){
+        //     return obj;
+        // }else{
+        //     // 如果构造函数return的是引用类型返回的就是构造函数return的引用类型
+        //     return reVal;
+        // }
+    }
+
+
+    function Fn(name,age){
+        // console.log(this);
+        this.name = name;
+        this.age = age;
+        // return [];
+    }
+    
+    let f = myNew(Fn,'赵炎',8888);
+
+    console.log(f);
+
+
+    // console.log(f.__proto__);//Fn.prototype
+
+
+    function isYYType(data){
+        //如果data是symbol那么直接返回false;
+        if(typeof data === 'symbol')return false;
+        let ary = ['String','Number','Null','Undefined','Boolean'];
+        let toS = Object.prototype.toString;
+        let rv = ary.some(item=>toS.call(data) === '[object '+ item +']');
+        //不是预留的简单类型就是引用类型
+        if(!rv){
+            return true;
+        }
+        return false;
+    }
+
+    // console.log(isYYType(45));
+
+    
+
+
+
+</script>
+</body>
+</html>

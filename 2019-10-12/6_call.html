@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        call 为了修改this指针
+            当一个函数在创建的时候，自身有一些属性和方法，其中有个方法为call
+
+            多个参数:
+                1.修改this指针
+                2.第二个参数之后都是实参
+
+            第一个参数除了null和undefined，别的都是写啥是啥
+    */
+    function fn(a,b,c){
+        // alert(1);
+        console.log(this,a,b,c);
+    }
+
+    fn.call(document,1,2,3);
+
+    // console.dir(fn);
+</script>
+</body>
+</html>

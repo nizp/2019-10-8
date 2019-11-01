@@ -113,6 +113,44 @@
     7.git push origin master   上传（第一次会出现让输入用户名和密码）
 
     
+# node
+    NPM 跟着node安装一起安装下来的模块
+
+    NPM 是目前世界上最大的资源管理平台
+
+    Yarn 最快的资源管理平台
+        npm install yarn -g
+
+
+
+    创建项目:
+        npm init -y  会生成一个package.json的文件，这个文件里面放的时候所有的项目配置依赖
+
+    如何下载资源呢？
+        npm install 资源名 
+            -g 全局安装
+            -S 项目依赖
+
+        下载下来的时候会自动生成一个node_modules的文件夹，文件夹中放的就是你需要的资源
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
 
 
 

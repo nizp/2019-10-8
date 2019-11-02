@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        闭包:
+            教课书上说的是，一个函数访问外部变量就这个函数就叫闭包。
+          
+           作用:
+                为了存储变量或者参数,好累积计算。
+
+                (function(){
+
+                })();
+
+
+            1.函数嵌套函数
+            2.子函数引用父函数的参数或者变量
+            3.子函数被外界所引用
+            4.父级就形成了闭包环境，父级的参数或者变量就不会被浏览器垃圾回收机制回收
+            5.打印父级的函数返回值，那么会发现，scopes下有个closure,就是闭包
+
+
+
+        内部的变量不被外界所污染，函数的特性之一
+    */    
+
+    // var a = 5;
+
+    function fn(){
+        var a = 10;
+        function f(){
+            ++a;
+            console.log(a)
+        }
+        function f2(){
+
+        }
+        // console.dir(f2);
+
+        return f;
+    }
+
+    var ff = fn(1);  //fn就形成了闭包环境,fn中的参数或者变量就不会被浏览器垃圾回收机制回收
+    // fn()(); //11
+    // fn()(); //11
+    // ff();//11
+    // ff();//12
+    console.dir(ff);
+
+</script>
+</body>
+</html>

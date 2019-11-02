@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script>
+    //window.onload 当页面的所有静态资源加载完成才执行里面的函数
+    window.onload = function(){
+        // console.log(document.getElementById('btn'));
+
+        var btn = document.getElementById('btn');
+        var i = 0;
+        btn.onclick = function(){
+            alert(i);
+            // btn.onclick = null;
+            i = null;
+            console.dir(btn.onclick);
+        }
+
+        btn2.onclick = function(){
+            console.dir(btn.onclick);
+        }
+
+        console.dir(btn.onclick)
+    }
+    // console.log(1);
+</script>
+</head>
+<body>
+    <button id="btn">1</button>
+    <button id="btn2">2</button>
+    <button>3</button>
+<script>
+    // var i=0;
+    // for(;i<10;i++){
+    //     function fn(a){
+    //         setTimeout(function(){
+    //             console.log(a);
+    //         },1000);
+    //     }
+    //     fn(i);
+    // }    
+
+
+    // const btns = document.querySelectorAll('button');
+    // var i=0; //3
+    // for(;i<btns.length;i++){
+    //     // console.log(i);
+    //     // btns[i].index = i;
+    //     // function fn(aa){
+    //     //     btns[i].onclick = function(){ //001 002  003
+    //     //         alert(aa);
+    //     //     }
+    //     // }
+    //     // fn(i);
+
+    //     ;(function(aa){
+    //         btns[aa].onclick = function(){
+    //             alert(aa);
+    //         }
+    //     })(i);
+
+    // }
+
+    /*
+        window.onload = function(){
+
+        }
+    */
+
+
+    
+
+</script>
+</body>
+</html>

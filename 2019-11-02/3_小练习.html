@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // +function(){
+    //     /*
+    //         形参赋值: ''
+    //         *********
+    //         预解析:
+    //             // var a
+    //             a = function a(){}
+    //             b = function b(){}
+    //             var c
+    //         *********
+    //         执行上下文:
+    //             function a(){}
+    //             a = 5   
+    //             b = 6
+    //             c = d = b      window.d = 6;
+
+    //     */
+    //     console.log(a) //函数function a(){}
+    //     var a=5;
+    //     function a(){}
+    //     console.log(a) //5
+    //     function b(){}
+    //     b=6
+    //     console.log(b) //function b(){}   6
+    //     var c=d=b
+    // }()
+    // console.log(d) //6   拿不到      6   window.d
+    // console.log(c) //6   拿不到      拿不到 报错
+
+
+
+    //this
+    /*
+        事件触发是谁，this就是谁
+        window  全局打印this  fn()  this是window
+        对象下的this 就是.前面的主
+    */
+    var obj = {
+        val:2,
+        dbl:function(){ //001
+            var val = 45;
+            console.log(this); //obj
+            this.val *= 2;
+            console.log(val); //45
+            console.log(this.val);//4
+        }
+    }
+    // var ff = obj.dbl(); //obj  45 4    
+    // var fn = obj.dbl; //window  45  NaN
+    // fn();
+
+
+
+    // console.log(this);
+
+    // function fn(){
+    //     console.log(this);
+    // }
+    // console.log(window)
+    // window.fn();
+
+
+
+    let obj2 = {
+        style:{
+            fn:function(){ //001
+                console.log(this);
+            }
+        }
+    }
+
+    // obj2.style.fn(); //this是obj2下的style对象
+    // console.log()
+
+    let f = obj2.style.fn; //001
+    f();
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

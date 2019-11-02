@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!-- <script>
+    var b = 20;  //全局变量对象(window)  window.b 
+    alert(a); //报错
+    alert(1);
+</script> -->
+<!-- <script>
+    // alert(b);//20
+    console.log(window);
+    var a = 10;
+    function a(){}
+</script> -->
+
+<script>
+    /*
+       var a 
+    */
+    // console.log(a);
+    // var a = 20;
+    // let a = 20;
+
+    // console.log(window); //window.a
+
+    // var a = 20;
+    var a = 20;  //window.a
+    // console.log(a);
+
+    // function fn(){ //在函数内开辟一个执行栈
+    //     //形参赋值
+    //     //变量提升  var function
+    //     //执行上下文
+    //     //销毁作用域
+    //     a = 30;   //window.a
+    // }
+    // fn();
+
+    // function fn(){
+    //     var a = 50;
+    //     function f(){
+    //         console.log(a);
+    //     }
+    //     f();
+    // }
+    // fn();
+
+    // console.log(a);
+
+
+    // var b = 10;
+    // function fn(){
+    //     //var function  var a var b
+    //     alert(a);
+    //     alert(b);
+    //     var a = 20;
+    //     b = 50;
+    //     alert(a);//20
+    //     var b;
+    // }
+    // fn();
+    // alert(b);
+
+
+    // var b = 10;
+    // function fn(){
+    //     //var a,b
+    //     alert(a); //undefined
+    //     var a = 20;
+    //     alert(b); //undefined
+    //     window.b = 30;
+    //     alert(a);//20
+    //     b = 50;
+    //     var b;
+    // }
+    // fn();
+    // alert(b);//30
+
+
+    // var a = 20;
+    // function fn(a){ //var a = 20
+    //     alert(a);//20
+    //     var b = 30;
+    //     a = 40;
+    //     alert(a);//40
+    // }
+    // fn(a);
+    // alert(a);
+
+
+    var a = 20;
+    function fn(a){
+        /*
+            形参赋值:
+                a = 20;
+            **************
+            预解析:
+                var b
+            **************
+            执行上下文:
+                a = 20
+                b = 30;
+                a = 40
+        */
+        alert(a);
+        var b = 30;
+        a = 40;
+        var a;
+        alert(a);
+    }
+    fn(a);
+    alert(a);
+
+
+
+
+    // var a = function(){console.log(4567890)};
+    function fn(a){
+        /*
+        //    a = function(){console.log(4567890)}  形参赋值
+
+           *************************************
+
+           预解析:
+            // var a 
+            var b
+            a = function a(){
+                alert(5);
+            }
+
+            *************************************
+            执行上下文:
+                a = function a(){
+                    alert(5);
+                }
+                b = 30;
+                a = 40
+        */
+        alert(a);  
+        var b = 30;
+        a = 40;
+        var a;
+        alert(a);
+        function a(){
+            alert(5);
+        }
+    }
+    // fn(a);
+    // alert(a);//function(){console.log(4567890)};
+
+
+    
+
+
+
+
+</script>
+
+</body>
+</html>

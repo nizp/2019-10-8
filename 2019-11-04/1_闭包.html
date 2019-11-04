@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //作业
+    /*
+        闭包:抽象
+
+            闭包的定义:
+                
+                1.函数就是闭包(局部变量不被外界所污染)
+                2.函数可以使用函数之外定义的变量(教科书上的)
+                3.
+                    (function(i){
+                        btn[i].onclick = function(){
+                            alert(i);
+                        }
+                        btn[i].onclick = null;
+                    })(i)    某个变量不被浏览器垃圾回收机制回收
+
+                4.
+                    函数套函数，子函数引用父函数的参数或者变量并且子函数被外界所引用
+                    这个时候父级就形成闭包环境(父级的执行栈不被销毁)，父级的参数或者变量不会被浏览器垃圾回收机制回收
+                    此时打印父级的返回值查看scopes下有个closure，closure就是闭包
+                
+
+            闭包的应用
+                存值
+
+                栈溢出 -> 用完变量就释放这个变量
+    */    
+
+    function fn(){
+        var i = 0;
+        function f(){
+            i ++;
+            console.log(i); 
+        }
+        function ff2(){
+
+        }
+        console.dir(ff2);
+
+        return f;
+    }
+
+    let ff = fn();
+    ff();
+    ff();
+
+   
+    // function fff(){
+    //     var a = 10;
+    //     console.log(++ a);
+    // }
+    // fff();
+    // fff();
+
+   
+
+
+
+
+
+    console.dir(ff);
+
+
+
+
+</script>
+</body>
+</html>

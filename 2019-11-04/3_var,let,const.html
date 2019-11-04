@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+<script>
+    
+    /*
+
+        原始值
+            存储在栈（stack）中的简单数据段，也就是说，它们的值直接存储在变量访问的位置。
+        引用值
+            存储在堆（heap）中的对象，也就是说，存储在变量处的值是一个指针（point），指向存储对象的内存处。
+
+        var、let  
+        const
+
+
+        var:
+            当通过var创建一个变量的时候，会进行预解析（变量提升）
+            因为var会预解析，所以变量会当做属性存到全局的活动变量对象下(window下)
+            不支持块级作用域
+
+            不会主动存每次循环的值
+
+
+
+        let:
+            当通过var创建一个变量的时候，不会进行预解析（不会变量提升）不会在window下挂属性
+            在定义变量之前访问这个变量，之前访问的空间叫暂存死区
+
+            支持块级作用域
+
+            会把每次循环的值存储起来
+
+            不能声明同名的变量、函数、参数
+
+
+        const:常量(不可变的量)
+
+            当声明一个变量，不允许改变的时候就使用const就定义
+
+            不能声明同名的变量、函数、参数
+
+            const box = document.getElementById('box');
+
+            注意:
+                const赋值的数据，它只会监控这个数据的地址.
+
+            
+
+
+
+        js是一个弱类型语言
+        let num:number = 10;
+        num = '10'
+
+
+
+        块:{}
+
+            在块套块中，子块有函数，如果在父块或者父块的上方访问这个函数
+            那么都是undefined
+
+            如果在子块的下方访问这个函数，就能找到这个函数
+
+
+            for(let i=0;i<5;i++){
+
+            }
+
+
+    */  
+
+
+    // console.log(a);
+    // {
+    //     var a = 10;
+    // }
+
+    // var a = 10;
+
+    
+    // {
+    //     let a = 10;
+    //     console.log(a)
+    // }
+    
+    
+    // {
+    //     // let a = 20;
+    //     // console.log(a);
+    //     // console.log(fn);
+    //     // function fn(){console.log(1)}
+    //     {
+    //         function fn(){console.log(1)}
+    //     }
+    //     console.log(fn);
+    // }
+    // function fn(){}
+
+
+    // let btns = document.querySelectorAll('button');
+
+    // for(let i=0;i<btns.length;i++){
+    //     btns[i].onclick = function(){
+    //         alert(i);
+    //     }
+    // }
+
+     // fn(i);
+
+
+    // function fn(i){
+    //     btns[i].onclick = function(){
+    //         alert(i);
+    //     }
+    // }
+
+
+    // let a = 10;
+    // let a = 20;
+    // const a = 10;
+    // const a = 20;
+
+    // var a = 10;
+    // var a = 20;
+    // console.log(a);
+
+
+    // const a = 10;
+    // a = 20;  //会报错
+
+    const obj = {
+        b:0
+    }
+    // obj = 10;
+    obj.b = 100;
+    console.log(obj);
+
+
+    // let fn = 4;
+    // function fn(a){
+    //     // let a = 10;
+    // }
+    // fn(1)
+
+    
+
+
+
+
+   
+    
+
+
+    
+    // let a = 10;
+    // var a = 10;
+    // console.log(window.a);
+
+    // let arr = [1,2,3,4];
+    // arr.length = 0;
+    // console.log(arr[0]);
+
+    // let aa = {
+    //     aa:10
+    // }
+    // let bb = {
+    //     bb:10
+    // }
+    // let obj = {
+    //     aa:20
+    // }
+    // obj[bb] = 30; 
+    /*
+        obj = {
+            {bb:10}:30
+            [object Object]：30
+        }
+    */
+    // console.log(obj[aa]);
+
+    
+    // let ary = [];
+    // for(var i=0;i<4;i++);{
+    //     ary.push(i+1);
+    // }
+    // console.log(ary);//5
+
+    /*
+        for(var i=0;i<4;i++){}
+        {
+            ary.push(i+1);
+        }
+    */
+
+
+
+    
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function f(){
+        alert(5);
+    }
+    f();
+   
+    ~function(){
+        function f(){
+            alert(6);
+        }
+        f(); 
+    }();
+</script>
+</body>
+</html>

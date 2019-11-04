@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    let con = {
+        log:function(i){
+            console.log(i);
+            return i;
+        },
+        dir:function(i){
+            console.dir(i);
+            return i;
+        },
+        sum:function(log,dir){
+            return  log + dir;
+        }
+    }
+
+
+    let obj2 = (function(){
+        let sum = 0;
+        function sumFn(log,dir){
+            return  log + dir;
+        }
+        return {
+            sum:sumFn(5,5)
+        }
+    })();
+
+    console.log(obj2.sum)
+
+    
+
+    // console.log(con.sum(con.log(5),con.dir(5)))
+
+
+    
+</script>
+</body>
+</html>

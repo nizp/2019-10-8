@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        都不是特别难,但是就是有些同学不会(大部分)
+
+        单例模式:
+
+            单例:单独的实例
+
+            实例:描述具体的是一个事务        你真胖（具体）
+            构造函数:抽象一个类的封装过程    老师（教书育人..）
+
+            obj = {
+                name:'xxx'
+            }
+
+
+        高级单例模式：
+            让当前这个实例功能更加强大，还可以隐藏或者暴露细节信息
+
+            (function(){
+                function sum(){
+
+                }
+
+                return {
+                   
+                }
+            })();
+
+        高级单例模式你需要知道哪些东西？
+            1.为什么要用高级单例模式？
+                让当前这个实例功能更加强大，还可以隐藏或者暴露内部细节信息
+
+                解决了命名冲突的问题
+
+            2.高级单例模式如何写?
+                (function(){
+
+                    return {
+
+                    }
+                })()
+            最后让一个变量去收这个功能强大的对象
+
+        解决命名冲突的问题:
+            1.封闭空间  （把变量或者函数放到函数中）
+                let a = 10;
+                (function(){
+                    let a =20;
+                })()
+
+            2.命名空间
+                // let name = 10;
+                obj.name
+                // let name = 20;
+                obj2.name
+
+    */    
+    
+    // 原始值:字符串，数字，布尔值...
+
+    let name = '珠峰';
+    let ip2 = '回龙观东大街';
+    let age = 10;
+    let name2 = '孟记粥铺';
+    let ip = '回龙观东大街';
+    let age2 = 5;
+
+    //引用类型(里面让着很多的原始值和引用值)
+
+    //对象（实例）
+    // let obj = {
+    //     name:'珠峰',
+    //     age:10,
+    //     ip:'回龙观东大街'
+    // }
+
+    // console.log(Array);
+
+    // [] -> Array   {}->Object   '' -> new String()
+
+    let obj2 = (function(){
+        let name = '珠峰';
+        let ip = '回龙观东大街';
+        let age = 0;
+
+        function sum(){
+            let age = 0;
+            for(let i=0;i<10;i++){
+                age ++
+            }
+            return age;
+        }
+        age = sum();
+
+        console.log(age);
+
+        return {
+            name:name,
+            ip:ip,
+            sum:sum
+        }
+    })();
+
+    let obj3 = (function(){
+        let age = 0;
+
+        function sum(){
+            console.log(1);
+        }
+        sum();
+        // age = sumfn();
+        console.log(obj2.sum());
+    })();
+
+    /*
+        // [].push
+        // ''.substring
+
+        Object.prototype.toString
+        [1,2,3] -> '1,2,3'
+        {} -> '[object Object]'
+    */
+
+    console.log(obj2)
+
+
+
+
+
+    
+    
+    
+
+
+   
+
+</script>
+</body>
+</html>

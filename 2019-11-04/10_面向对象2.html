@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    /*
+        猫:
+            四条腿，体型小，会喵喵叫，有尾巴，有毛，有胡子，小爪子，会抓老鼠
+            会上树，爱吃鱼
+    */
+    
+    //猫类   构造函数
+    function Cat(name){
+        this.name = name;
+        this.foot = '4只';
+        this.body = '小';
+        this.weiba = true;
+        this.mao = '毛';
+        this.zhuazi = '小爪子';
+    }
+    Cat.prototype.say = function(){
+        alert('喵喵');
+    }
+    // Cat.prototype.skill = function(){
+    //     alert('抓老鼠');
+    // }
+
+    let kitty = new Cat('kitty'); //实例
+    // kitty.skill();
+
+    Object.prototype.skill = 8;
+    console.log(kitty.skill)
+
+    /*
+        kitty.skill  -> kitty.__proto__ -> Cat.prototype
+
+        Cat.prototype = {
+            __proto__:构造函数的原型
+        }
+
+        Object.prototype
+
+
+
+        实例有原型链，函数有原型，原型又是一个对象，对象它就是实例
+        实例又有原型链，找到构造函数的原型，Object.prototype.__proto__ = null
+
+    */
+
+    console.dir(kitty)
+
+
+    // console.log(Object.prototype.__proto__);
+
+
+
+</script>
+</body>
+</html>

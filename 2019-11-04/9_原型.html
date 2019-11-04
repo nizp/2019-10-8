@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        在js中，所有的class(类)都是函数模拟出来的
+
+        当声明一个函数的时候，这个函数自身有一些属性或者方法(天生自带的)
+        其中有一个属性叫做prototype,它的** 值为对象 ** 
+
+        这个prototype就叫原型，也就是说函数身上才有原型
+
+        *** 函数原型下的属性或者方法只给它(构造函数)的实例化对象使用。
+
+
+        Obejct.prototype.__proto__ 为null，找到Obejct的原型下如果没有某个属性或者方法就真的没有了
+
+
+
+        原型链:
+            __proto__  实例化对象下都有 __proto__ ，
+            这个属性全等于 实例的构造函数的原型
+
+
+
+    */
+    function fn(){
+        
+    }
+
+    fn.prototype.say = 10;
+    fn.prototype.aa = function(){}
+
+    // console.dir(fn.prototype);
+
+    let f = new fn;
+    // f.say = 20;
+    // console.log(f.say);
+    console.dir(f.__proto__.say);
+    /*
+        f.say  -> f.__proto__ ->  fn.prototype
+    */
+    // console.dir(f.__proto__ === fn.prototype); //实例化对象
+
+
+    // Object.prototype.say = 0;
+    // let obj = new Object;
+    // console.log(obj.say);
+
+
+    // let ary = new Array;
+    // ary.push = function(){
+    //     alert(1);
+    // }
+    // console.log(ary.push(6));
+    // console.dir(Array);
+
+
+</script>
+</body>
+</html>

@@ -57,7 +57,7 @@
         封装一个hasPubProperty  某个属性是公共的
     */
     function hasPubProperty(obj,attr){
-        return obj.hasOwnProperty(attr);
+        return !obj.hasOwnProperty(attr);
     }
 
     

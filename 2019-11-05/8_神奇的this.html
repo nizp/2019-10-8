@@ -19,7 +19,10 @@
         3.点前面的主
 
         4.实例
-            构造函数下的this是实例，构造函数原型的this也是实例(实例调用)
+            构造函数下的this是实例   new Fn
+            构造函数原型的this也是实例 (实例调用)
+            Fn.prototype.say()  this为Fn.prototype
+
 
         5.箭头函数
             指向的是声明箭头函数的上下文this
@@ -76,9 +79,9 @@
         // this.name1 = 'zf';
     }
     Fn.prototype.name1 = function(){
-        console.log(this);
+        console.log(this);//Fn.prototype
         let fn = ()=> {
-            console.log(this);
+            console.log(this);//Fn.prototype Fn{}
         }
         fn();
     };
@@ -89,6 +92,7 @@
         console.log(this);
     } 
     new Fn().name1();//Fn{}
+    Fn.prototype.name1();
 
 
     
@@ -99,6 +103,91 @@
 
     //     fn();
     // }
+
+    // function Fn(){
+    //     console.log(this);
+    // }
+
+    // function Fnn(){
+    //     Fn();
+    // }
+    // new Fnn;
+
+    // document.onclick = ()=>{
+    //    console.log(this);
+    // }
+
+
+    // document.onclick = function(){
+    //     fn();
+    // }
+    // function fn(){
+    //     console.log(this);
+    // }
+
+    // fn.say()
+    // Fn.prototype.say()
+
+
+    // function add(){
+    //     var num = 0;
+    //     num += 1;
+    //     // console.log(num)
+    // }
+
+    // var num = 0;
+    // function add(){
+    //     num += 1;
+    //     console.log(num)
+    // }
+
+    // function add1(){
+    //     var num = 0;
+    //     return function(){
+    //         num += 1;
+    //         console.log(num)
+    //     }
+    // }
+    // let add = add1();
+    // add();//1
+    // add()//2
+    // add()//3
+
+
+    // let obj = {}
+
+    // let obj2 = obj;
+
+    // console.log(obj === obj2)
+
+   
+// 下面代码片段的输出结果是什么?
+var name = "The Window"; //window.name = 'The Window'
+// var object = {
+//     name : "My Object",  //obj.name = 'My Objec'
+//     getNameFunc : function(){
+//         //this -> obj
+//         return function(){
+//             return this.name;
+//         }
+//     }
+// };
+
+// let oo = object.getNameFunc();
+// console.log(oo())
+
+// alert(object.getNameFunc()());
+
+
+
+
+
+    // let ff = (a,b) => {
+    //     // console.log(arguments)
+    // }
+    // new ff(1,2)
+
+
 
     
 

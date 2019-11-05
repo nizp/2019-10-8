@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        1.window
+            全局打印this
+            函数 + 括号
+            定时器
+            (function(){})()
+
+        2.事件触发的元素
+            只要是事件函数内的this都指向事件触发的元素
+
+        3.点前面的主
+
+        4.实例
+            构造函数下的this是实例，构造函数原型的this也是实例(实例调用)
+
+        5.箭头函数
+            指向的是声明箭头函数的上下文this
+
+            没有arguments，不能new
+    */    
+
+    // document.onclick = fn();
+    // function fn(){
+    //     console.log(this);
+    // }
+
+    // document.onclick = (function(){
+    //     console.log(this); //window
+    //     return function fn(){
+    //         console.log(this);//document
+    //     }
+    // })();
+
+    // document.onclick = function(){
+    //     setTimeout(new fn,1000);
+    //     function fn(){
+    //         console.log(this);  //fn{}  报错
+    //     }
+    // }
+    
+    // var name = '小强';
+    // var obj = {
+    //     name:'zf',
+    //     getName:function(){
+    //         console.log(this.name);//window.name
+    //     }
+    // }
+    // setTimeout(obj.getName,1000);
+
+    // obj.getName();
+
+
+
+    // function Fn(){
+    //     this.name1 = 'zf';
+    // }
+    // Fn.prototype.name1 = '小明';
+    // Fn.name1 = '小强';
+    // Function.prototype.name1 = '小花';
+    /*
+        function Object(){} -> Function.prototype.name1
+    */
+    // console.dir(Object.name1); 
+   
+
+
+    function Fn(){
+        // this.name1 = 'zf';
+    }
+    Fn.prototype.name1 = function(){
+        console.log(this);
+        let fn = ()=> {
+            console.log(this);
+        }
+        fn();
+    };
+    Fn.name1 = function (){
+        console.log(this);
+    }
+    Function.prototype.name1 = function(){
+        console.log(this);
+    } 
+    new Fn().name1();//Fn{}
+
+
+    
+    // document.onclick = function(){
+    //     let fn = ()=> {
+    //         console.log(this);
+    //     }
+
+    //     fn();
+    // }
+
+    
+
+</script>
+</body>
+</html>

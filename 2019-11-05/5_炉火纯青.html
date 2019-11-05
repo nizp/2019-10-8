@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Person() {
+        this.name = 'zhufeng'
+    };
+    Person.prototype.getName = function () {
+        console.log(this.name)
+        console.log(this.age)
+    };
+    Person.prototype.age = 5000;
+
+    var per1 = new Person;
+    per1.getName(); //zhufeng  5000
+    per1.age = 9;
+    per1.getName(); //zhufeng  9
+    console.log(per1.age); //9
+    var per2 = new Person;
+    console.log(per2.age);  //5000   
+</script>
+</body>
+</html>

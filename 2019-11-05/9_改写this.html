@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        当一个函数创建的时候，天生自带的方法，其中有call,apply,bind方法
+        call:
+            有若干个参数:
+                第一个参数:
+                    修改this指向
+
+                第二个参数之后:
+                    函数的实参
+        apply:
+            有2个参数:
+                第一个参数:
+                    修改this指向
+                第二个参数:
+                    数组，数组里面放的是实参
+        bind:(惰性函数,柯里化函数，高阶函数)
+            多个参数
+                第一个参数:
+                    修改this指向
+
+                第二个参数之后:
+                    函数的实参
+
+        它返回的是新函数，只要调用返回的函数才能执行函数内的代码
+
+        都是改变this指向的方法
+
+
+        细节:
+            在使用它们修改this的时候，不要传null和undefined，因为传了也不认还是走默认的window
+
+
+    */
+    function fn(a,b){
+        console.log(this,a,b);
+    }
+    fn.call(document,1,2);
+    // fn.apply(document,[1,2])
+
+    // fn.bind(document,1,2)()
+    // fn.bind(document)(1,2)
+
+//    console.dir(fn);
+
+</script>
+</body>
+</html>

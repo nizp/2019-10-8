@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        Foo = function(){}
+        getName = function(){}  函数
+        var a,b,c
+
+
+        getName = function () {console.log(4);};
+
+        getName = function () {console.log(1);
+
+    */
+    function Foo() {
+        getName = function () {console.log(1);};  
+        //windiw.getName = function () {console.log(1);
+        return this;
+    }
+    Foo.getName = function () {console.log(2);}; 
+    Foo.prototype.getName = function () {console.log(3);};
+    var getName = function () {console.log(4);};  
+    function getName() {console.log(5);} 
+
+    Foo.getName();   //2
+    getName(); //4
+    Foo().getName(); //1
+    getName();//1
+    var a = new Foo.getName();//2   a = Foo.getName{}
+    var b = new Foo().getName(); //3  b = undefined
+    var c = new new Foo().getName //3  c = Foo.getName{}
+
+    /*
+        new Foo()  Foo{} -> Foo.prototype.getName   function () {console.log(3);}; 
+        new function () {console.log(3);};  //3
+    */
+
+    console.log(a,b,c);
+    // console.log(typeof c);    
+</script>
+</body>
+</html>

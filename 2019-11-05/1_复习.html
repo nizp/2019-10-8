@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        obj = {
+            name:'xx',
+            age:19
+        }
+
+        单例模式:单独的实例
+        高级单例模式:
+
+            A同学
+            let obj = (function(){
+                // let obj = {}
+                function sum(){
+
+                }
+                return {
+                    sum:sum
+                };
+            })()
+
+            B同学
+            let obj2 = (function(i){
+                function sum(){}
+                obj.sum()
+                return {
+
+                }
+            })(i)
+
+            封闭空间不是闭包，而闭包有封闭空间的功能
+
+            工厂模式:
+                function fn(name,age){
+                    let obj = {};
+                    obj.name = name
+                    obj.age = age
+                    return obj;
+                } 
+
+
+            面向对象:(谁来做这件事)
+                封装、继承、多态，面向对象的特征
+
+                封装就是归类的过程
+
+                **换了一种编程方式**:把具有相同特征特性的代码归为一类（类）
+                把描述这个类的特性(共有属性、方法)挂在这个类的原型下的一种
+                编程方式
+
+            面向过程:   
+                思考如何把它实现
+
+            new
+                函数的一元运算符，只能运算函数 
+
+                1.this变成了实例
+                2.默认return实例，如果手动设置了返回值，如果是原始类型的那么还是实例，如果是引用类型的那么返回的就是引用类型
+                3.加不加括号都能执行函数，括号主要为了传参
+                4.首字母大写
+
+            原型:
+                当声明函数的时候，函数天生自带的一个属性
+                prototype(key) : {}(val)
+                
+                prototype下的方法或者属性只能通过两种方式使用:
+                    1.给自己的实例化对象使用 new fn().a
+                    2.直接使用fn.prototype.a
+            原型链:
+                实例化对象上都有一个叫做___proto__的属性，
+                它的值全等于构造函数的原型
+
+                如果某个原型下没有想要的属性或者方法，那么还会通过
+                这个原型下的原型链继续查找，直到找到Object.prototype为止
+                因为Object.prototype.__proto__为null
+
+    
+
+
+
+
+
+
+            {
+                prototype:{
+
+                }
+            }
+
+    */
+
+    function fn(){
+
+    }
+    // Object.prototype.a = 20
+    // fn.prototype.a = function(){
+    //     console.log(this);
+    // };
+
+//    console.dir(new fn().__proto__  === fn.prototype);
+    // console.log(fn.prototype)
+    // console.log(new fn().__proto__.a);
+    // new fn().__proto__.a();
+    // new fn().a();
+    /*
+        实例下的.a -> 实例.__proto__  -> 构造函数的原型(fn.prototype)
+
+        fn.prototype.__proto__ -> Object.prototype -> 
+        
+        Object.prototype.__proto__ = null
+
+
+        fn.prototype = {
+            __proto__:Object.prototype
+        }
+
+        内置类:浏览器自带的类
+
+            所有的类型都是构造函数构造出来的
+
+            string  '',"",``,new String()
+
+            object  {}, new Object()
+
+            function  new Function
+
+            []
+
+
+
+    */
+    // console.log(new fn().a);
+
+    // console.log(new String('123'))
+
+    // console.log(new fn().a)
+
+    // console.dir(typeof Object);
+
+    // console.log(typeof new Function());
+
+    // let fn1 = new Function('a,b','return (a+b)');
+    // console.log(fn1(1,2));
+
+    // console.log(typeof Function)
+
+    // console.log(Object instanceof Object);
+
+    // console.dir(Function);
+
+
+    Function.prototype.a  = 10;
+
+    function ff(){
+
+    }
+    ff.prototype.a = 20;
+
+    // console.log(new ff().a); 
+    console.log(ff.a); 
+
+    // console.dir(ff)
+
+    /*
+        ff.a -> ff.__proto__ -> Function.prototype
+
+        
+    */
+
+
+
+
+    /*
+        fn.a  fn.__proto__ -> Function.prototype
+
+        Function.a   Function.__proto__ -> Function.prototype
+    */
+
+    // console.log(Function.a)
+
+
+
+
+</script>
+</body>
+</html>

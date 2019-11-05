@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        三种角色:
+            function fn(){}
+            函数:
+                能够调用的角色
+
+            构造函数:
+                new 构造对象的
+                fn.prototype  公共的属性或者方法挂在这个构造函数的原型下
+
+                new Array().push()
+                new Array().forEach()
+
+                [].push
+
+            Function的实例:
+                new Function -> function(){}
+
+                __proto__
+
+            在函数的原型下有一个属性，constructor,这个属性指向构造函数
+            但是当前的constructor并不是100%准确的，它的指针仅仅只是
+            一个指向构造函数的方向(一个参考)，非常容易被修改
+
+            Fn.prototype = {
+
+            }
+
+            注意的是在对象赋值给构造函数原型的时候，constructor指向会被修改
+            指向的是Object,所以手动修正constructor指向。
+
+            Fn.prototype = {
+                 constructor:Fn
+            }
+
+            
+    */
+
+    function Fn(){
+
+    }
+
+    Fn.prototype = {
+        constructor:Fn
+    }  ;//Object
+
+    // console.log(new Fn);
+
+
+
+    console.dir(Fn.prototype.constructor);
+
+
+
+</script>
+</body>
+</html>

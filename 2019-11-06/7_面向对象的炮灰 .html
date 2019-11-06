@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active" index="0">按钮一</button>
+        <button index="1">按钮二</button>
+        <button index="2">按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+            <button class="active" index="0">按钮一</button>
+            <button index="1">按钮二</button>
+            <button index="2">按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+
+    <button id="btn1">让第二个停</button>
+    <button id="btn2">让第一个开</button>
+    <button id="btn3">让开的关，关的开</button>
+<script>
+    /*
+       定点清除:
+            1.先把刚才的class清除
+            2.再把当前的class添加上
+    */
+
+    function tab(id,onoff){
+        const box = document.getElementById(id);
+        const btns = box.querySelectorAll('button');
+        const divs = box.querySelectorAll('div');
+        box2.timer;
+        let num = 0;
+        let prevIndex = 0;
+
+        btns.forEach((element,index)=>{
+           
+            element.onclick = function(){
+                btns[prevIndex].className = '';
+                divs[prevIndex].className = '';
+                this.className = 'active';
+                divs[index].className = 'show';
+                prevIndex = index;
+            }
+        });
+
+        btn1.onclick = function(){
+            clearInterval(box2.timer);
+            // console.log(box);
+        }
+
+        btn2.onclick = function(){
+            tab('box',true);
+        }
+
+        if(onoff){
+            box2.timer = setInterval(function(){
+                num ++;
+                num %= btns.length;
+                btns[prevIndex].className = '';
+                divs[prevIndex].className = '';
+                btns[num].className = 'active';
+                divs[num].className = 'show';
+                prevIndex = num;
+            },500)
+        }
+    }
+
+    
+    
+    tab('box');
+    tab('box2',true);
+
+
+
+
+
+   
+
+
+
+    
+    
+</script>
+</body>
+</html>

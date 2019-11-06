@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        class 类名 {
+            constructor(){
+                //给自身添加属性或者方法，就必须要写constructor
+            }
+        }
+    */
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+        say(){
+            console.log(this.name);
+        }
+    }  
+
+    // Person.prototype.haha = 10;
+
+    // Person.prototype = {   //如果使用类那么不能直接修改类的原型地址
+    //     haha:10
+    // }
+
+
+    let p = new Person('哈哈');
+
+    // p.say();
+    console.log(p.haha);
+
+    console.dir(p);
+
+    // function fn(){
+    //     console.log(3);
+    // }
+    
+    // let obj = {
+    //     // fn:function(){
+    //     //     console.log(1);
+    //     // },
+    //     // fn(){
+    //     //     console.log(2);
+    //     // }
+    //     // fn:fn  //如果key值和value值是一样的，那么可以只写一个
+    //     fn
+    // }
+
+    // obj.fn();
+
+    // console.log(p);
+    
+    
+    
+    // function Person(){}
+    // Person.prototype.say
+</script>
+</body>
+</html>

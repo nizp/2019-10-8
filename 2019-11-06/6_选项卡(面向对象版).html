@@ -39,6 +39,9 @@
             <div>22222</div>
             <div>33333</div>
         </div>
+        <button id="btn1">让第二个停</button>
+        <button id="btn2">让第一个开</button>
+        <button id="btn3">让开的关，关的开</button>
 <script>
 
     /*
@@ -53,17 +56,20 @@
         this.divs = this.box.querySelectorAll('div');
         this.btns = this.box.querySelectorAll('button');
         this.prevIndex = 0;
+        this.timer;
+        this.num = 0;
     }
 
-    //绑定事件
-    Tab.prototype.events = function(evName='onclick'){
+    //绑定事件，循环每个btn，给每个btn添加一个click事件
+    Tab.prototype.events = function(){//evName='onclick'
         const that = this;
         for(let i = 0,len = this.btns.length;i < len;i++){
-            this.btns[i][evName] = function(){
+            this.btns[i].onclick = function(){
                 that.change(i);
             }
         }
     }
+    
     //切换
     Tab.prototype.change = function(i){
         this.btns[this.prevIndex].className = this.divs[this.prevIndex].className = '';
@@ -72,8 +78,52 @@
         this.prevIndex = i;
     }
 
+    Tab.prototype.play = function(){
+        this.timer = setInterval(()=>{
+            this.num ++;
+            this.num %= this.btns.length;
+            this.change(this.num);
+        },500);
+    }
+
+    Tab.prototype.stop = function(){
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    Tab.prototype.isAutoPlay = function(){
+        return this.timer;
+    }
+
+
+
     let t = new Tab('box');
+    let t2 = new Tab('box2');
     t.events();
+    // t2.play();
+
+    btn1.onclick = function(){
+        t2.stop();
+    }
+    btn2.onclick = function(){
+        t.play();
+    }
+    btn3.onclick = function(){
+        if(t.isAutoPlay()){
+            t.stop();
+        }else{
+            t.play();
+        }
+
+        if(t2.isAutoPlay()){
+            t2.stop();
+        }else{
+            t2.play();
+        }
+    }
+
+    // t.play();
+
 
 
 

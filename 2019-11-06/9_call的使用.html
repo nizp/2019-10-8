@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+<script>
+    // console.log(Object.prototype.toString.call([1,2,3]));
+
+    /*
+        所有的数据都有一个toString的方法，但是写法是不一样的
+        唯独Object的toString能够去检测当前的数据类型，所以
+        可以把this改变，达到我们的目的
+    */
+    // let toS = Object.prototype.toString;
+
+    // let str = '321312';
+    // console.log(str.toString());
+    // console.log([12,1,3,5].toString());
+
+//    console.log( Array.prototype.toString.call('3212') )
+    //Array的toString，除了数组本身别的也都能检测数据类型
+    // console.log( Array.prototype.toString.call() );
+
+
+    var lis = document.getElementsByTagName('li');
+
+    // var arr = [];
+    // for(var i=0;i<lis.length;i++){
+    //     arr.push(lis[i]);
+    // }
+    
+    /*
+        为什么call this就能借到某个方法？
+
+        因为这些方法内部使用的数据都是this
+
+        A: 水  ->  可乐
+
+        B: 土  ->  土乐
+
+
+        Array.from()  把类数组转数组
+
+    */
+    Array.prototype.mySlice = function(){
+        //this是个数组,把this改成了类数组
+        return [...this];
+    }
+
+    let ary2 = [1,2,3,4];
+
+    // console.log(ary2.mySlice());
+
+    //slice返回一个新的数组，不传参就是把整个数组返回
+    var arr =  Array.from(lis);//Array.prototype.mySlice.call(lis);
+
+    console.log(arr);
+
+    arr.forEach((ele,i)=>{
+        ele.onclick = function(){
+            alert(i);
+        }
+    });
+
+    console.log(Math.max.apply(null,[1,2,3,4]));
+
+    console.log(arr.forEach);
+
+</script>
+</body>
+</html>

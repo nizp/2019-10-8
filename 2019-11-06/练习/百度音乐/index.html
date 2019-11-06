@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.zyf{
+				background:pink
+			}
+			.active{
+				background:skyblue
+			}
+			img{
+				width:14px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+	</head>
+
+<body>
+	<div class="wrap">
+		<div class="baidu">
+			<ul id="list">
+				<li>
+					<div></div>
+					<span>泡沫</span>
+					<span>邓紫棋</span>
+				</li>
+				<li>
+					<div></div>
+					<span>说爱你</span>
+					<span>蔡依林</span>
+				</li>
+				<li>
+					<div></div>
+					<span>稻香</span>
+					<span>周杰伦</span>
+				</li>
+				<li>
+					<div></div>
+					<span>我的梦</span>
+					<span>张靓颖</span>
+				</li>
+				<li>
+					<div></div>
+					<span>怎么说我不爱你</span>
+					<span>萧敬腾</span>
+				</li>
+				<li>
+					<div>️</div>
+					<span>无处安放</span>
+					<span>白若溪</span>
+				</li>
+			</ul>
+			<div class="select">
+				<span class="selectAll" id="all"><span>全选</span></span>
+				<div class="others">
+					<span><em></em>收藏</span>
+					<span><em></em>添加</span>
+					<span><em></em>删除</span>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	const lis = document.querySelectorAll('li');
+	let ary = []; //为了存储所有的li的开关，因为要根据这些开关，来判断是否全选
+	all.onoff = false;//给全选按钮添加一个开关，默认为关闭状态
+	//循环所有的li
+	lis.forEach((ele,i)=>{
+		//把存li的开关的数组都添加一个布尔值
+		ary[i] = false;
+		ele.onoff = false; //给每个li添加一个开关属性，默认为关闭状态
+		//各行变色
+		if(i%2)ele.classList.add('zyf');
+		//点击勾选或未勾选
+		ele.onclick = function(){
+			//如果点击li的时候当前li是开状态就关，是关状态就开
+			if(this.onoff){
+				//清除√
+				ele.children[0].innerHTML = '';
+			}else{
+				//添加√
+				ele.children[0].innerHTML = '<img src="./2.png">';
+			}
+
+			this.onoff = !this.onoff;
+			//把当前li的布尔值给数组对应的那一项。
+			ary[i] = this.onoff;
+			//根据数组中的布尔值，来判断是否全选
+			if(ary.every(item=>item)){
+				//如果是全选状态，创建img，给img加图片，再插入到span的前面
+				let img = document.createElement('img');
+				img.src = '2.png';
+				all.insertBefore(img,all.children[0]);
+				//再把全选按钮的状态改成全选状态
+				all.onoff = true;
+			}else{
+				//没有全选，查看all的第一个子元素是否为img，是就删除它
+				if(all.children[0].nodeName === 'IMG'){
+					all.removeChild(all.children[0]);
+				}
+				//把全选变为关闭状态
+				all.onoff = false;
+			}
+			// console.log(ary);
+		}
+		ele.onmouseover = function(){
+			//移入添加蓝色
+			this.classList.add('active');
+		}
+		ele.onmouseout = function(){
+			//如果当前的开关是未勾选的，就还原成刚才那个颜色
+			//如果当前的开关是已勾选状态，那就是移入的颜色
+			if(!this.onoff){
+				this.classList.remove('active');
+			}	
+		}
+	});
+
+	all.onclick = function(){
+		//全选的开关
+		this.onoff = !this.onoff;
+		//循环一下所有的li，把所有li的状态变成和全选按钮状态一样
+		lis.forEach((ele,i)=>{
+			ele.onoff = this.onoff;
+			//当前li是否有√，取决于全选按钮的状态
+			ele.children[0].innerHTML = this.onoff?'<img src="./2.png">':'';
+			this.onoff?ele.classList.add('active'):ele.classList.remove('active');
+			//解决数组的问题;数组的成员要么全部为true，要么全部为false
+			ary[i] = this.onoff;
+		});
+		// console.log(this.onoff);
+		//通过判断全选按钮的状态，来显示全选按钮的样式
+		if(this.onoff){
+			let img = document.createElement('img');
+			img.src = '2.png';
+			all.insertBefore(img,all.children[0]);
+			all.onoff = true;
+		}else{
+			if(all.children[0].nodeName === 'IMG'){
+				all.removeChild(all.children[0]);
+			}
+			all.onoff = false;
+		}
+		// console.log(this.onoff)
+	}
+</script>
+</body>
+</html>

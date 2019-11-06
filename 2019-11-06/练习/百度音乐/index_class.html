@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.zyf{
+				background:pink
+			}
+			.active{
+				background:skyblue
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+	</head>
+
+<body>
+	<div class="wrap">
+		<div class="baidu">
+			<ul id="list">
+				<li>
+					<input type="checkbox"/>
+					<span>泡沫</span>
+					<span>邓紫棋</span>
+				</li>
+				<li>
+					<input type="checkbox"/>
+					<span>说爱你</span>
+					<span>蔡依林</span>
+				</li>
+				<li>
+					<input type="checkbox"/>
+					<span>稻香</span>
+					<span>周杰伦</span>
+				</li>
+				<li>
+					<input type="checkbox"/>
+					<span>我的梦</span>
+					<span>张靓颖</span>
+				</li>
+				<li>
+					<input type="checkbox"/>
+					<span>怎么说我不爱你</span>
+					<span>萧敬腾</span>
+				</li>
+				<li>
+					<input type="checkbox"/>
+					<span>无处安放</span>
+					<span>白若溪</span>
+				</li>
+			</ul>
+			<div class="select">
+				<span><input type="checkbox" id="all"/><span>全选</span></span>
+				<div class="others">
+					<span><em></em>收藏</span>
+					<span><em></em>添加</span>
+					<span><em></em>删除</span>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	/*
+		checkbox.checked   布尔值
+	*/
+	class Fn {
+		constructor() {
+			this.checkboxs = document.querySelectorAll('#list input');
+			this.lis = document.querySelectorAll('#list li');
+			this.ary = [];
+			this.all = document.getElementById('all');
+		}
+		init(){
+			this.setColor();
+			this.events();
+		}
+		setColor(){
+			this.lis.forEach((ele,i)=>{if(i%2)ele.classList.add('zyf');})
+		}
+		events(){
+			const _this = this;
+			this.lis.forEach((ele,i)=>{
+				this.ary[i] = false;
+				ele.onmouseover = function(){
+					_this.mouseover(this,'active');
+				}
+				ele.onmouseout = function(){
+					_this.mouseout(this,'active',i);
+				}
+				this.checkboxs[i].onclick = function(){
+					_this.ary[i] = this.checked;
+					_this.all.checked = _this.ary.every(item=>item);
+				}
+			});
+			this.all.onclick = function(){
+				_this.allChange(this);
+			}
+		}
+		mouseover(that,color){
+			that.classList.add(color);
+		}
+		mouseout(that,color,i){
+			// console.log(this.checkboxs[i].checked);
+			if(!this.checkboxs[i].checked){
+				that.classList.remove(color);
+			}
+		}
+		allChange(that){
+			this.checkboxs.forEach((ele,i)=>{
+				ele.checked = that.checked;
+				that.checked?this.lis[i].classList.add('active'):this.lis[i].classList.remove('active')
+				this.ary[i] = that.checked;
+			});
+		}
+	}
+
+	new Fn().init();
+	
+	
+
+
+
+</script>
+</body>
+</html>

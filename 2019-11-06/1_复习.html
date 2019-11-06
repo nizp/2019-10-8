@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        函数:
+            普通函数
+                运行函数中的代码，为了复用
+
+            构造函数(class)
+                this实例
+                默认return 实例
+                在类里面一般都是添加属性
+
+                new 构造函数 
+
+                function (){
+                    this.name = '郝永旺'
+                }
+
+                {
+                    name:'郝永旺'
+                }
+
+                原型和原型链:
+                    函数走原型  （构造函数的实例）
+                    实例走链 （实例找不到某个属性或者方法就走链）
+
+                    实例的原型链 === 构造函数的原型
+
+                    {name:'xxx'} -> this.name = 'xxx'
+                    obj.name = 'xxx' -> new Fn().name = 'xxx'
+
+
+                    obj.__proto__ -> Fn.prototype -> Fn.prototype.__proto__ -> Object.prototype
+
+            实例
+                new Function -> function
+    */
+
+    function Fn(){/*this.a = '郝永旺'*/}
+    // Fn.prototype.a = function(){ console.log('1');}
+    // Fn.a = function(){console.log('3');}
+
+    // Function.a = function(){ console.log('4');}
+    // Function.prototype.a = function(){console.log(5)}
+    // Object.a = function(){console.log('6')};
+    // Object.prototype.a = function(){console.log('7')};
+    // Fn.prototype.a = function(){ console.log('2');}
+    // let f = new Fn();
+
+
+    // Fn.prototype.a();
+    // console.log()
+    // f.a();
+    // Fn.a();
+    // Function.a();
+    // Object.a()
+        
+    // Function.prototype.a()
+    // Fn.a();
+    // console.log(f.a)
+
+
+
+
+
+
+
+    // f.name = '郝永旺';
+    // new Fn().name = 'xxx';
+
+    // console.log( f )
+    // console.log(new Fn().name);
+    // console.log({name:'郝永旺'}.name)
+
+
+    
+
+
+</script>
+</body>
+</html>

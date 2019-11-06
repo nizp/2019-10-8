@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active" index="0">按钮一</button>
+        <button index="1">按钮二</button>
+        <button index="2">按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+            <button class="active" index="0">按钮一</button>
+            <button index="1">按钮二</button>
+            <button index="2">按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+<script>
+
+    /*
+        实例
+        点谁是谁的this
+    */
+    function Tab(id){
+        this.box = document.getElementById(id);
+        this.divs = this.box.querySelectorAll('div');
+        this.btns = this.box.querySelectorAll('button');
+        this.prevIndex = 0;
+        // this.events();
+    }
+
+    Tab.prototype.events = function(){
+        const _that = this; //实例
+        this.btns.forEach(function(element,index){
+            element.onclick = function(){
+                // alert(1);
+                // console.log(this); //点谁是谁的按钮
+                _that.change(this,index);
+            }
+        });
+    }
+
+    Tab.prototype.change = function(that,index){
+        //把刚才按钮的class清掉
+        this.btns[this.prevIndex].className = '';
+        this.divs[this.prevIndex].className = '';
+        that.className = 'active';
+        this.divs[index].className = 'show';
+        this.prevIndex = index;
+    }
+
+    let t = new Tab('box');
+    let t2 = new Tab('box2');
+    t2.events();
+    t.events();
+
+    console.log(t);
+
+</script>
+</body>
+</html>

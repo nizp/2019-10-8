@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active" index="0">按钮一</button>
+        <button index="1">按钮二</button>
+        <button index="2">按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+            <button class="active" index="0">按钮一</button>
+            <button index="1">按钮二</button>
+            <button index="2">按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+<script>
+
+    /*
+        实例
+        点谁是谁的this
+
+        随着代码量的增大，面向过程会越写越恶心（难）
+        面向对象会越写越爽越简单
+    */
+    function Tab(id){
+        this.box = document.getElementById(id);
+        this.divs = this.box.querySelectorAll('div');
+        this.btns = this.box.querySelectorAll('button');
+        this.prevIndex = 0;
+    }
+
+    //绑定事件
+    Tab.prototype.events = function(evName='onclick'){
+        const that = this;
+        for(let i = 0,len = this.btns.length;i < len;i++){
+            this.btns[i][evName] = function(){
+                that.change(i);
+            }
+        }
+    }
+    //切换
+    Tab.prototype.change = function(i){
+        this.btns[this.prevIndex].className = this.divs[this.prevIndex].className = '';
+        this.btns[i].className = 'active';
+        this.divs[i].className = 'show'
+        this.prevIndex = i;
+    }
+
+    let t = new Tab('box');
+    t.events();
+
+
+
+   
+
+</script>
+</body>
+</html>

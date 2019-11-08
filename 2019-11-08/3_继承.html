@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        面向对象的特征:
+            封装、继承、多态
+
+        继承:
+            子类具有父类的一部分特征（这部分相同的特征是从父类继承下来的），自己还有自己的特征
+
+        人:
+            直立行走，使用工具，会说高级语言，是有感情的
+
+        警察:
+            配枪、正义的化身、穿警服、带警帽、开警车...
+
+    */    
+
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.say = function(){
+        alert(`我的名字叫`+this.name);
+    }
+
+    let p1 = new Person('刘成',18);
+    // p1.say();
+    
+    // console.log(p1);
+
+
+    /*
+        警察也有人类的特性，但是人类已经写过一遍了，在警察里面其实是不用写的
+
+        继承的写法可以让子类的代码量减少很多，从而达到高内聚，低耦合的目的，减少了开发成本
+    */
+    function Police (name,age){
+        this.name = name;
+        this.age = age;
+        this.job = '警察';
+    }
+    Police.prototype.say = function(){
+        alert(`我的名字叫`+this.name);
+    }
+    Police.prototype.kongfu = function(){
+        console.log(this.name +'弄某炎');
+    }
+
+    let p2 = new Police('赵炎',100);
+    p2.say();
+
+    p2.kongfu();
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

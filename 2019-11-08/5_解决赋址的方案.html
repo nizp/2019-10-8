@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        如果不是赋址，是赋值就解决了这个问题
+
+
+        Object.assign  浅拷贝
+
+        Object.assign(obj2,obj1,obj0)
+
+        从右往左浅拷贝对象的属性,可以放若干对象
+
+
+    */
+    // let prototype1 = {
+    //     say(){
+    //         console.log('我叫xxx');
+    //     }
+    // }   
+    // let prototype2 = {} 
+
+    // // prototype2 = prototype1; //赋址关系
+
+    // Object.prototype.aaa = 10;
+
+    // // for(let attr in prototype1){
+    // //     //for in会枚举当前对象原型下的属性或者方法，使用hasOwnProperty就能只找对象自身的属性了
+    // //     if(prototype1.hasOwnProperty(attr)){
+    // //         prototype2[attr] = prototype1[attr];
+    // //     }
+    // // }
+
+    // //浅拷贝
+    // Object.assign(prototype2,prototype1);
+
+    // // console.dir(Object)
+
+    // prototype2.say =  function(){
+    //     console.log('我是警察')
+    // }
+
+    // console.log(prototype2)
+
+    // prototype1.say();
+    // prototype2.say();
+
+
+
+    /*
+        2个引用类型的赋值就是赋值地址
+
+        原始类型的赋值就是普通赋值了，其实赋值引用类型的目的是B拿到A下面的属性
+
+        如何才能避免赋址呢？
+            1.需要2个不同地址
+            2.B地址下拥有A地址下的原始类型的数据即可（原始类型的赋值）
+
+
+    */
+    // let ary = [1,2,3,[1]]; 
+
+    // // let ary2 = ary;
+    // let ary2 = [];
+
+    // //浅拷贝(克隆)
+    // for(let i=0;i<ary.length;i++){
+    //     //原始数据类型的赋值就是简单赋值关系，不会赋值地址1,2,3
+    //     ary2[i] = ary[i];  //如果数组中还包有引用类型，那么赋值还是赋址
+    // }
+
+    // // ary2.push(5);
+
+    // ary2[3].push(2);
+
+    // console.log(ary);//1,2,3,5
+
+
+
+
+
+
+
+    // let ary = [1,2,3,[[[[[[[[[[1]]]]]]]]]]];
+
+    let ary = [1,2,3,[1,2,3,{name:[1,2,3]}]];
+
+    //深度克隆
+    function deepclone(obj){
+        //看看obj是不是一个对象，不是对象就不执行deepclone
+        if(typeof obj !== 'object' && obj !== null)return null;
+        // let o = Array.isArray(obj)?[]:{};
+        let o = obj.push?[]:{}; //确认传进来的值到底是数组还是对象
+        for(let attr in obj){
+            //如果碰到了引用类型就继续循环，原始类型才赋值
+            if(typeof obj[attr] === 'object'){
+                o[attr] = deepclone(obj[attr]);
+            }else{
+                o[attr] = obj[attr];
+            }
+        }
+        return o;
+    }
+
+    //JSON.parse(JSON.stringify(ary))
+    let ary2 = deepclone(ary);
+    // ary2[3][0][0][0][0][0][0][0][0][0].push(4);
+    console.log(ary2);
+
+
+    
+
+
+</script>
+</body>
+</html>

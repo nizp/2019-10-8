@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active" index="0">按钮一</button>
+        <button index="1">按钮二</button>
+        <button index="2">按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+<script>
+    /*
+       定点清除:
+            1.先把刚才的class清除
+            2.再把当前的class添加上
+
+            改面向对象:
+            1.把所有的变量放到类中，把变量变成属性
+            2.把函数抽出来，挂到构造函数的原型上
+
+            程序确实需要经验（沉淀）。
+
+            知识点都不难，逻辑，思想难
+
+            *** 每个案例，一定要好好敲
+    */
+
+    function Tab(id){
+        this.box = document.getElementById(id);
+        this.btns = this.box.querySelectorAll('button');
+        this.divs = this.box.querySelectorAll('div');
+        this.prevIndex = 0;
+    }
+
+    Tab.prototype.events = function(){
+        let _this = this;
+        this.btns.forEach((element,index)=>{
+            element.onclick = function(){
+                _this.change(index);
+            }
+        });
+    }
+
+    //函数就是一个功能，把功能挂在构造函数的原型上
+    Tab.prototype.change = function(index){
+        this.clear();
+        this.changeStatus();
+        this.prevIndex = index;
+    }
+
+    Tab.prototype.changeStatus = function(){
+        this.btns[index].className = 'active';//当前点击的元素,按钮
+        this.divs[index].className = 'show';
+    }
+
+    Tab.prototype.clear = function(){
+        this.btns[this.prevIndex].className = '';
+        this.divs[this.prevIndex].className = '';
+    }
+
+    let t = new Tab('box');
+    t.events();
+
+
+
+
+
+   
+
+
+
+    
+    
+</script>
+</body>
+</html>

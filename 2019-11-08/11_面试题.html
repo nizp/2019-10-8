@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+        function Parent() {
+            this.a = 1;
+            this.b = [1, 2, this.a];
+            this.c = { demo: 5 };
+            this.show = function () {
+                console.log(this.a, this.b, this.c.demo);
+            }
+        }
+        function Child() {
+            this.a = 2;
+            this.change = function () {
+                this.b.push(this.a);
+                this.a = this.b.length;
+                this.c.demo = this.a++;
+                console.log(this.a,this.b,this.c.demo);
+            }
+        }
+        /*
+            new Child的实例有Parent下的所有方法
+        */
+        Child.prototype = new Parent(); //原型继承
+        var parent = new Parent();
+        var child1 = new Child();
+        var child2 = new Child();
+        child1.a = 11;
+        child2.a = 12;
+
+        parent.show(); //1,[1,2,1],5
+
+        /*
+            child1 -> Child.prototype
+            Child.prototype = {
+                a : 11;
+                b : [1, 2, 1]; //引用类型
+                c : { demo: 5 };
+                show : function () {
+                    console.log(this.a, this.b, this.c.demo);
+                }
+            }
+            
+            11,[1, 2, 1],5
+
+        */
+        child1.show();
+
+        /*
+            child2 -> Child.prototype
+            Child.prototype = {
+                a : 12;
+                b : [1, 2, 1]; //引用类型
+                c : { demo: 5 };
+                show : function () {
+                    console.log(this.a, this.b, this.c.demo);
+                }
+            }
+
+            12,[1, 2, 1],5
+        */
+        child2.show();
+
+        /*
+           
+            [1, 2, 1,11,12]
+            this.a = 5
+            this.c.demo = 5;
+           
+        */
+
+        child1.change();
+
+        /*
+            [1, 2, 1,11,12]
+            this.a = 6;
+            this.c.demo = 5;
+        */
+        child2.change();
+
+        
+        /*
+            console.log(this.a, this.b, this.c.demo);
+        
+            1,[1,2,1],5
+
+            parent = new Parent() AAAFFF000
+
+            Child.prototype = new Parent() AAAFFF111
+
+        */
+        parent.show();
+        
+        /*
+            [1, 2, 1,11,12]
+            6
+            5
+        */
+        child1.show();
+        /*
+            [1, 2, 1,11,12]
+            6
+            5
+        */
+        child2.show();    
+    </script>
+</body>
+
+</html>

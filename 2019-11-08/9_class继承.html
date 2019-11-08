@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        Array.isArray
+        Object.assigin
+        Object.create
+        Array.from
+        .....
+
+        通过class中的static 可以创建静态方法，只有类才能调用，实例是调用不到的
+        就算是继承，也只能是继承子类去调用，子类的实例是调用不到的
+    */
+    class Person {
+        static eat(){ //静态方法。只有类才能调用，实例是调用不到的
+            console.log('吃饭');
+        }
+        constructor(name,age) {
+            this.name = name;
+            this.age = age;
+        }
+        say(){
+            alert(`我的名字叫`+this.name);
+        }
+    }    
+
+    class Police extends Person {
+        //在继承的constructor中，如果要使用this，一定要写super
+        constructor(job,...arg) { //剩余运算符 ['xxx',19]
+            // console.log(this);//super的上面是拿不到this的
+            super(...arg);//扩展运算符
+            this.job = job;
+        }
+        say(){
+            console.log('我是警察');
+        }
+    }
+
+    let p2 = new Police('警察','xxx',19);
+    let p1 = new Person('yyy',18);
+    // p2.say();
+    // p1.say();
+    // console.log(p2);
+
+
+    // Police.eat()
+
+
+
+</script>
+</body>
+</html>

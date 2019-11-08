@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        函数
+        类
+        实例
+
+        function fn(){} -> new Function
+
+
+        Function是个内置类 -> 它也是个函数
+
+        Function.prototype  给所有的小写function使用也包括它自己
+
+
+
+
+        fn : {
+            __proto__:Function.prototype,
+
+            prototype:{
+                constructor:fn
+            },
+
+            执行栈:{
+                console.log(1);
+                this.a = 6;
+            },
+            a:5
+        }
+
+        fn() -> 执行栈
+        new fn() -> prototype
+        fn.a -> Function.prototype
+
+
+        Function.prototype是的函数，不是对象，而且这个函数还不是new Function
+        构造出来的
+
+    */    
+
+    // Function.prototype.a = 10;
+
+    // console.log(Function.a);
+
+    console.log(Object.a);
+
+    // console.log(Function.prototype instanceof Object);
+    // console.log(typeof Function.prototype)
+
+    // console.log(Function)
+
+    // function fn(){
+    //     // console.log(1);
+    //     // this.a = 5;
+    // }
+
+    // console.log(fn.a)
+
+    // fn(); //函数
+    // new fn(); //类
+    // fn.xx //->实例
+
+</script>
+</body>
+</html>

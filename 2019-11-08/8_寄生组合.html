@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.say = function(){
+        alert(`我的名字叫`+this.name);
+    }
+  
+    function Police (name,age){
+        Person.call(this,name,age);
+    }
+    Police.prototype = Object.create(Person.prototype); //寄生式组合
+    // // Police.prototype.constructor = Police;
+
+
+
+    Police.prototype.say = function(){
+        alert(`我是警察`+this.name);
+    }
+    // Police.prototype.kongfu = function(){
+    //     console.log(this.name +'弄某炎');
+    // }
+
+    let p2 = new Police('赵炎',100);
+    let p1 = new Person('刘成',19);
+
+    p2.say();
+    p1.say();
+
+    // console.log(p2.constructor);
+
+
+    // let obj =  Object.create({name:'haha'});
+
+    // console.log(obj);
+  
+</script>
+</body>
+</html>

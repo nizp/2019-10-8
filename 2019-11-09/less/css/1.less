@@ -1,0 +1,25 @@
+@import './index.less';
+@g:green;
+@z:pink;
+@p:1px;
+body{
+    background:@g;
+}
+
+.bg(@a){
+    background:@a;
+}
+.pl(@a){
+    padding-left:@a * @p;
+}
+#box{
+    .w(100);
+    .h(100);
+    .bg(red);
+    .pl(50);
+    div{
+        .w(20);
+        .h(20);
+        .bg(@z);
+    }
+}

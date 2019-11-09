@@ -1,0 +1,133 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  font-size: 0.12px;
+  text-decoration: none;
+}
+header {
+  width: 7.5px;
+  height: 1.04px;
+  background: #2ca2f9;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+header h1 {
+  font-size: 0px;
+  width: 2.35px;
+  height: 1.04px;
+  margin-left: 0.22px;
+  float: left;
+  line-height: 1.04px;
+  text-align: center;
+}
+header h1 img {
+  width: 2.35px;
+  vertical-align: middle;
+  display: inline-block;
+}
+header .search {
+  width: 0.55px;
+  float: right;
+  line-height: 1.04px;
+  text-align: center;
+  margin-right: 0.22px;
+}
+header .search img {
+  width: 0.55px;
+  vertical-align: middle;
+  display: inline-block;
+}
+nav {
+  height: 1.02px;
+  background: #fff;
+  width: 7.5px;
+  margin: 0px auto;
+  overflow: hidden;
+  position: absolute;
+  top: 1.04px;
+  left: 0px;
+}
+.nav li {
+  float: left;
+  width: 1.78px;
+  height: 0.96px;
+  text-align: center;
+  line-height: 0.96px;
+  border-bottom: 0.06px solid #fff;
+}
+.nav li a {
+  font-size: 0.4px;
+  color: #000;
+}
+.nav li.active {
+  border-bottom: 0.06px solid #2ca2f9;
+}
+.body_box {
+  background: #f8f8f8;
+  position: absolute;
+  top: 2.08rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+.body {
+  width: 7.32px;
+  margin: 0.1px auto;
+}
+.banner {
+  width: 7.32px;
+  overflow: hidden;
+  position: relative;
+  height: 2.75px;
+}
+.banner ul {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 2.75px;
+  transform: translateX(0);
+}
+.banner li {
+  width: 7.32px;
+  float: left;
+}
+.banner img {
+  width: 7.32px;
+}
+.list li {
+  height: 1.32px;
+  border-bottom: 0.02px solid #e5e5e5;
+  background: #fff;
+}
+.list li p {
+  height: 1.32px;
+  font-size: 0.32px;
+  line-height: 1.32px;
+  margin-left: 0.26px;
+  float: left;
+  width: 6.2px;
+  overflow: hidden;
+}
+.list li img {
+  float: right;
+  width: 0.44px;
+  margin-top: 0.46px;
+  margin-left: 0.15px;
+}
+body {
+  background: green;
+}
+#box {
+  width: 100px;
+  height: 100px;
+  background: red;
+  padding-left: 50px;
+}
+#box div {
+  width: 20px;
+  height: 20px;
+  background: pink;
+}

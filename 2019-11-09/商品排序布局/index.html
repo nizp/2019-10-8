@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+   <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);" data-name="time">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);" data-name="hot">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);" data-name="price">
+                <i class="up "></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <select name="" id="sele">
+                    <option value="hot">按照热度搜索</option>
+                    <option value="price">按照价格搜索</option>
+                    <option value="hot">按照文字搜索</option>
+                </select>
+                <input type="text">
+                <button id="search">搜索</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul">
+            <!-- <li>
+                <img src="./img/2.jpg" alt="">
+                <p>商品名称:<span>dsdsadsads</span></p>
+                <p>上架时间:<span>2019-10-10</span></p>
+                <p>商品热度:<span>32</span></p>
+                <p>商品价格::<span>200</span></p>
+            </li> -->
+        </ul>
+       
+   </section>
+<!-- <script src="./json/product.js"></script> -->
+<script>
+    /*
+        live server 插件
+        http://127.0.0.1:5500/index.html 使用右键选择 open with live server
+
+
+        json文件需要通过服务器环境去拿，安装live server的目的是在编辑器中开一个服务器
+        当开了服务器之后，就可以通过http请求（fetch）的方式拿到json文件
+
+
+
+        11月9日 我们开始进行ajax请求
+
+        fetch(文件路径).then(d=>d.json())
+        .then(data=>{
+            console.log(data);
+        })
+
+        谁先理解这句话，谁就不会在ajax这里掉坑。
+
+        数据请求不难，一句话的事，难的时候，拿到数据怎么办？
+
+
+        需求:
+            1.请求数据，拿到那10个数据
+            2.把数据变成页面结构（把数据渲染到页面）
+            3.排序:
+                上架时间排序
+                热度排序
+                价格排序
+            
+            4.扩展功能:
+                搜索:
+                    按照商品名称搜索
+                    按照商品价格搜索
+                    按照商品热度搜索
+    */
+    // console.log(fetch);
+    fetch('./json/product.json')
+    .then(d=>d.json())
+    .then(data=>{
+        // console.log(data);
+
+        //一个li结构
+    //     let temp = `
+    //         <li>
+    //             <img src="./img/2.jpg" alt="">
+    //             <p>商品名称:<span>dsdsadsads</span></p>
+    //             <p>上架时间:<span>2019-10-10</span></p>
+    //             <p>商品热度:<span>32</span></p>
+    //             <p>商品价格::<span>200</span></p>
+    //         </li>
+    //    `;
+
+        console.log(data);
+
+        let newdata = data.concat(); //复制一份新数组，为了一会排序的时候不影响原数组
+        //渲染数据
+        function render(newdata){
+            //lis就是数据生成的结构
+            let lis = newdata.map(({title,img,price,time,hot},i)=>{
+        //    const {title,img,price,time,hot} = item;
+                return (
+                `<li>
+                    <img src="${img}" alt="">
+                    <p
+                        title="${title}"
+                    >商品名称:<span>${title.substr(0,6)}</span></p>
+                    <p>上架时间:<span>${time}</span></p>
+                    <p>商品热度:<span>${hot}</span></p>
+                    <p>商品价格::<span>${price}</span></p>
+                </li>`
+                );
+            }).join('');
+            ul.innerHTML = lis;
+        }
+        render(newdata);
+    /*
+        排序：
+            sort()
+            高阶函数 -> 
+                参数允许传入一个函数，一般来说都是传一个函数返回一个新函数
+            默认按照ascll码进行排列  1,12,2
+            从小到大
+                (a,b)=>{
+                    return 必须返回合法的数字  > 0 正数 交换位置 a - b;  3,5
+                }
+            从大到小
+                (a,b) =>{
+                    return b - a
+                }
+                
+            随机排序
+                ()=>{
+                    return Math.random() - 0.5;
+                }
+    */ 
+    
+    const as = document.querySelectorAll('a');
+    as.forEach((ele,i)=>{
+        //每个A都添加了一个自定义属性
+        ele.onoff = true; //默认为从小到大
+        ele.onclick = function(){
+            // alert(i);
+            // console.dir(this.dataset.name);
+            if(this.onoff){
+                newdata.sort((a,b)=>{
+                    console.log(a-b);
+                    //如果是time，就按照转时间的方式去操作，转完之后就能相减，就能成功返回数字
+                    if(this.dataset.name === 'time'){
+                        return new Date( a.time ) - new Date( b.time )
+                    }
+                    //否则按照数字相减的方式
+                    return a[this.dataset.name] - b[this.dataset.name];
+                });
+                this.children[1].classList.remove('activeb');
+                this.children[0].classList.add('activet');
+            }else{
+                newdata.sort((a,b)=>{
+                    //如果是time，就按照转时间的方式去操作
+                    if(this.dataset.name === 'time'){
+                        return  new Date( b.time ) - new Date( a.time )
+                    }
+                    //否则按照数字相减的方式
+                    return b[this.dataset.name] - a[this.dataset.name];
+                });
+                this.children[0].classList.remove('activet');
+                this.children[1].classList.add('activeb');
+            }
+            //按照从小到大
+            // if(this.onoff){
+            //     this.children[1].classList.remove('activeb');
+            //     this.children[0].classList.add('activet');
+            // }else{
+            //     this.children[0].classList.remove('activet');
+            //     this.children[1].classList.add('activeb');
+            // }
+            // console.log(newdata);
+            this.onoff = !this.onoff;
+            render(newdata);
+        }
+        //'2017-02-08' - '2017-01-25'
+    });
+
+
+    console.log(as.length);
+
+
+
+
+
+    });
+
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+body {
+  background: rgba(135, 206, 235, 0.3);
+  color: #fff;
+}
+.box {
+  width: 964px;
+  margin: 0px auto;
+  height: 500px;
+}
+nav {
+  height: 50px;
+  background: skyblue;
+  line-height: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+nav div {
+  display: inline-block;
+}
+nav div #sele {
+  display: inline-block;
+  height: 22px;
+}
+nav div #search {
+  display: inline-block;
+  background: #fff;
+  width: 50px;
+  border: none;
+  height: 22px;
+}
+nav .show {
+  display: inline-block;
+}
+nav .hide {
+  display: none;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+nav a i {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  right: -10px;
+  top: 20px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+}
+nav a .up {
+  margin-top: -4px;
+  border-bottom: 4px solid #ffffff;
+}
+nav a .down {
+  margin-top: 8px;
+  border-top: 4px solid #ffffff;
+}
+nav a .activet {
+  border-bottom: 4px solid #ff0000;
+}
+nav a .activeb {
+  border-top: 4px solid #ff0000;
+}
+.list {
+  margin-top: 20px;
+  list-style: none;
+  position: relative;
+}
+.list li {
+  padding: 10px;
+  width: 205px;
+  height: 310px;
+  box-shadow: 0.5px 1px 5px #5f5f5f;
+  transition: 0.5s;
+  margin-bottom: 10px;
+  background: #fff;
+  float: left;
+  margin-left: 10px;
+}
+.list li img {
+  width: 204px;
+}
+.list li p {
+  width: 188px;
+  margin: 0px auto;
+  line-height: 25px;
+  color: #666;
+}
+.list li p span {
+  margin-left: 14px;
+}

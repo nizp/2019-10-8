@@ -1,0 +1,53 @@
+@s:skyblue;
+@v:1px;
+*{
+    margin:0;
+    padding:0;
+    font-size:16px;
+}
+.mt(@a){
+    margin-top:@a * @v;
+}
+.w(@a){
+    width:@a * @v;
+}
+.h(@a){
+    height:@a * @v;
+}
+.bg(@a){
+    background:@a;
+}
+.ma(@a){
+    margin:@a*@v auto;
+}
+.pa(@a){
+    padding:@a * @v;
+}
+.por(){
+    position: relative;
+}
+.poa(){
+    position: absolute;
+}
+.bor(@a,@c){
+    border:@a*@v solid @c;
+}
+.ft(@a){
+    font-size:@a * @v;
+}
+.lh(@a){
+    line-height:@a * @v;
+}
+.ta(){
+    text-align: center;
+}
+.fl(){
+    float:left;
+}
+.fr(){
+    float:right;
+}
+.ml(@a){
+    margin-left:@a * @v;
+}
+

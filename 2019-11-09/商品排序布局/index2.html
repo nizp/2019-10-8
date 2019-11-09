@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+   <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);" data-name="time">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);" data-name="hot">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);" data-name="price">
+                <i class="up "></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <select id="sele">
+                    <option value="title">按照文字搜索</option>
+                    <option value="hot">按照热度搜索</option>
+                    <option value="price">按照价格搜索</option>
+                    
+                </select>
+               <div id="num" class="hide">
+                    从<input type="text" id="start">
+                    到<input type="text" id="end">
+               </div>
+               <div id="txt" class="show">
+                    <input type="text" id="txt1">
+               </div>
+               
+
+
+                <button id="search">搜索</button>
+                <button id="init">还原</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul">
+            <!-- <li>
+                <img src="./img/2.jpg" alt="">
+                <p>商品名称:<span>dsdsadsads</span></p>
+                <p>上架时间:<span>2019-10-10</span></p>
+                <p>商品热度:<span>32</span></p>
+                <p>商品价格::<span>200</span></p>
+            </li> -->
+        </ul>
+       
+   </section>
+<!-- <script src="./json/product.js"></script> -->
+<script>
+    /*
+        live server 插件
+        http://127.0.0.1:5500/index.html 使用右键选择 open with live server
+
+
+        json文件需要通过服务器环境去拿，安装live server的目的是在编辑器中开一个服务器
+        当开了服务器之后，就可以通过http请求（fetch）的方式拿到json文件
+
+
+
+        11月9日 我们开始进行ajax请求
+
+        fetch(文件路径).then(d=>d.json())
+        .then(data=>{
+            console.log(data);
+        })
+
+        谁先理解这句话，谁就不会在ajax这里掉坑。
+
+        数据请求不难，一句话的事，难的时候，拿到数据怎么办？
+
+
+        需求:
+            1.请求数据，拿到那10个数据
+            2.把数据变成页面结构（把数据渲染到页面）
+            3.排序:
+                上架时间排序
+                热度排序
+                价格排序
+            
+            4.扩展功能:
+                搜索:
+                    按照商品名称搜索
+                    按照商品价格搜索
+                    按照商品热度搜索
+    */
+    // console.log(fetch);
+    fetch('./json/product.json')
+    .then(d=>d.json())
+    .then(data=>{
+        console.log(data);
+        let newdata = data.concat(); //复制一份新数组，为了一会排序的时候不影响原数组
+        //渲染数据
+        function render(newdata){
+            //lis就是数据生成的结构
+            let lis = newdata.map(({title,img,price,time,hot},i)=>{
+                return (
+                `<li>
+                    <img src="${img}" alt="">
+                    <p
+                        title="${title}"
+                    >商品名称:<span>${title.substr(0,6)}</span></p>
+                    <p>上架时间:<span>${time}</span></p>
+                    <p>商品热度:<span>${hot}</span></p>
+                    <p>商品价格::<span>${price}</span></p>
+                </li>`
+                );
+            }).join('');
+            ul.innerHTML = lis;
+        }
+        render(newdata);
+        //排序
+        const as = document.querySelectorAll('a');
+        as.forEach((ele,i)=>{
+            ele.onoff = true; //默认为从小到大
+            ele.onclick = function(){
+                if(this.onoff){
+                    newdata.sort((a,b)=>{
+                        if(this.dataset.name === 'time'){
+                            return new Date( a.time ) - new Date( b.time )
+                        }
+                        //否则按照数字相减的方式
+                        return a[this.dataset.name] - b[this.dataset.name];
+                    });
+                    this.children[1].classList.remove('activeb');
+                    this.children[0].classList.add('activet');
+                }else{
+                    newdata.sort((a,b)=>{
+                        //如果是time，就按照转时间的方式去操作
+                        if(this.dataset.name === 'time'){
+                            return  new Date( b.time ) - new Date( a.time )
+                        }
+                        //否则按照数字相减的方式
+                        return b[this.dataset.name] - a[this.dataset.name];
+                    });
+                    this.children[0].classList.remove('activet');
+                    this.children[1].classList.add('activeb');
+                }
+                this.onoff = !this.onoff;
+                render(newdata);
+            }
+        });
+        
+        //搜索
+        const start = document.querySelector('#start');
+        const end = document.querySelector('#end');
+        const btn = document.querySelector('#search');
+        const sele = document.querySelector('#sele');
+        const txt1 = document.querySelector('#txt1');
+
+
+        btn.onclick = function(){
+            let {value:v1} = start; //let v1 = start.value;
+            let {value:v2} = end;
+            let {value:v4} = txt1;
+
+            //v1 === '' || v2 === ''  !''
+            //v1或者v2有一个没有填写
+            /*
+                v1和v2内容不能为空
+
+                v4没有内容，v1和v2
+
+            */
+            if(v4 || v1 && v2){
+                let {value:v3} = sele; //要搜索的关键字
+                /*
+                    当点击了确定之后，找到我要搜索的内容，从内容中找范围
+
+                    目的:
+                        拿到条件符合的数据(一个个小对象)
+                        过滤:
+                            filter
+
+                    item{
+                        id，
+                        title，
+                        time，
+                        hot
+                    }
+                */
+                let d = null;
+                if(v4){ //搜文字
+                    d = data.filter(item=>{
+                        return item[v3].includes(v4);
+                    })
+                }else{ //搜数字
+                    d = data.filter(item=>{
+                        return item[v3] >= v1 && item[v3] <= v2
+                    });
+                }
+                render(d);
+                
+                console.log(v3);
+                //还原数据
+                init.onclick = function(){
+                    render(data);
+                }
+            }else{
+                alert('请正确输入搜索内容');
+            }
+        };
+        //当内容改变的时候触发这个事件
+        sele.onchange = function(){ 
+            txt1.value = start.value = end.value = '';
+            // console.log(1);
+            let {value} = this;
+            if(value === 'title'){
+                num.className = 'hide';
+                txt.className = 'show';
+            }else{
+                num.className = 'show';
+                txt.className = 'hide';
+            }
+        }
+    });
+
+
+    
+</script>
+</body>
+</html>

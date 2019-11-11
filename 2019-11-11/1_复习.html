@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        数据类型的含义（到底是干嘛？）
+        undefined
+        不知道是什么？报错
+        什么时候报错心里没底（代码敲的少（不够用心），console）
+
+        课堂(开小差) + 课下 = 懵圈
+
+        薪资和经验是个矛盾体 
+
+        混4个月 === '转行'
+    */
+
+    // let num = 123;
+    // num.a = 10;
+    // console.log(num.a);//10,报错
+
+    let ary = [1,2,3];
+    /*
+        =号是赋值
+
+
+        就是把右边的数据赋值到左边
+
+        简单数据类型就是赋值（你是你的，我是我的，修改你不会影响我）
+        引用类型赋址操作（你的是我的，我的还是我的，修改你会影响我）
+
+        >= == 
+
+        function a(){
+
+        }
+        var a = 5;
+        function a(){
+
+        }
+        a();
+
+        为什么ary要赋值给ary2？
+            因为ary2想拿到ary中的数据（目的）
+
+        为什么要拷贝？
+            因为引用类型的赋值是赋址，即不想进行赋址操作又想拿到另一个引用类型的数据
+        
+        [1,2,3,[7,8]]  aaafff000
+
+        [1,2,3]  aaafff111
+
+    */
+    // let ary2 = [];
+    // for(let i=0;i<ary.length;i++){
+    //     ary2[i] = ary[i];  //[1] = [1,[]][0]  //[]001 = []001
+    // }
+
+    // function deepClone(ary){
+    //     let ary2 = [];
+    //     for(let i=0;i<ary.length;i++){
+    //         if(ary[i] !== null && typeof ary[i] === 'object'){
+    //             ary2[i] = deepClone(ary[i])
+    //         }else{
+    //             ary2[i] = ary[i]; //简单类型就是赋值 
+    //         }
+    //         /*
+    //             //ary[i] -> 有可能是引用类型,但是又不想让这个引用类型赋值
+    //             这个时候就想要到，如果是引用类型，就继续循环里面的数据
+    //         */
+    //     }
+    //     return ary2;
+    // }
+
+    function deepClone(o) {
+        let obj = o.push?[]:{};
+        for(let attr in o){
+            if(o[attr] !== null && typeof o[attr] === 'object'){
+                obj[attr] = deepClone(o[attr])
+            }else{
+                obj[attr] = o[attr]; //简单类型就是赋值 
+            }
+        }
+        return obj;
+    }
+   
+    let ary2 = deepClone(ary);
+    ary2.push(4);
+
+    console.log(ary);
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+
+
+    
+
+
+</script>
+</body>
+</html>

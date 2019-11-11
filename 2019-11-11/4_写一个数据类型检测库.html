@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        如何检测一个变量是什么类型的？
+        [] -> typeof 'object'
+
+        Object.prototype.toString.call(数据) === 
+    */
+
+    Object.prototype.aaa = 10;
+
+    // class Tools {
+    //     static type(data){//传的是数据，然后通过这个数据检测它的类型
+           
+    //         if(typeof data !== 'object'){
+    //             return typeof data;
+    //         }
+    //         // let ary = ['Null','Array','Object'];
+    //         // let ary2 = ['null','array','object'];
+    //         //{object:'Object'}
+    //         let obj = {
+    //             object:'Object',
+    //             array:'Array',
+    //             null:'Null'
+    //         }
+    //         let toS = Object.prototype.toString;
+    //         for(let attr in obj){
+    //             if(toS.call(data) === `[object ${obj[attr]}]`){
+    //                 return attr;
+    //             }
+    //         }
+    //         // for(let i=0;i<ary.length;i++){
+    //         //     if(toS.call(data) === `[object ${ary[i]}]`){
+    //         //         return ary[i].toLowerCase();
+    //         //     }
+    //         // }
+    //     }
+    // }
+
+
+    class Tools {
+        static type(data){
+            if(typeof data !== 'object'){
+                return typeof data;
+            }
+            let obj = {
+                object:'Object',
+                array:'Array',
+                null:'Null'
+            }
+            let toS = Object.prototype.toString;
+            for(let attr in obj){
+                if(toS.call(data) === `[object ${obj[attr]}]`){
+                    return attr;
+                }
+            }
+        }
+    }
+
+  
+    console.log( Tools.type([]) );// -> [] -> 'array'
+
+</script>
+</body>
+</html>

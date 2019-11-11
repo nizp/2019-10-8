@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // var x = 1,
+    // y = 2;
+    // //window.x = 1   window.y = 2
+    // function fn() {
+    //     /*
+    //         var x
+    //     */
+    //     console.log(x, y);//1,2     undefined,2
+    //     var x = y = 3;
+    //     /*
+    //         x = y = 3    window.y = 3
+    //     */
+    //     console.log(x, y);//3,3
+    // }
+    // fn();
+    // console.log(x, y); //1,3
+
+
+
+    // var x = 1,
+    //     y = 2,
+    //     z = 3;
+    // function fn(x) {
+    //     //var y;
+    //     console.log(x, y, z);//2,undefined,3
+    //     x = 4; //x是函数内的，不会改变外面的
+    //     var y = 5;
+    //     z = 6; //window.z = 6
+    //     console.log(x, y, z);//4,5,6
+    // }
+    // y = fn(y);//undefined
+    // console.log(x, y, z);//1,undefined,6
+
+    // var x = 0;
+    ////var let function 参数(是原始类型的，引用类型的参数，如果改变属性才会跑出去)
+    // function fn(){ 
+    //     var x = 10;
+    //     function f(){
+    //         console.log(x);
+    //     }
+    //     f();
+    // }
+    // fn()
+
+
+
+
+    // var x = [10, 20, 30, 40];//001 //[10, 20, 30, 40,100]
+    // function fn(x) {
+    //     console.log(x.join('|'));//'10|20|30|40'
+    //     x.push(100);//[10, 20, 30, 40,100]
+    //     x = x.slice(2);//x = [30,40,100];//002
+    //     x.unshift(200);//x = [200,30,40,100]
+    //     console.log(x.join('&'));//'200&30&40&100'
+    // }
+    // fn(x);
+    // console.log(x.toString());//'10,20,30,40,100'    '[object Object]'
+
+
+    // var x = 5;
+    // function fn() {
+    //     return function(y) {
+    //         console.log(y + (++x));//12
+    //     }
+    // }
+    // var f = fn(6);
+
+    // console.dir(f);
+
+    // f(7); //13    x = 6
+    // fn(8)(9);//16 x = 7
+    // f(10);//16  18 x = 8
+    // console.log(x);//5   8
+
+
+
+    
+    // function fn() {
+    //     var x = 5;
+    //     return function(y) {
+    //         console.log(y + (++x));
+    //     }
+    // }
+    // var f = fn(6);
+    // f(7); //x = 6   13
+    // fn(8)(9);// 9 + 6 = 15
+    // f(10);//10+7 = 17
+    // console.dir(f);
+
+
+    // var x=0,
+    // y=1;
+    // function fn(){
+    //     x+=2;  //window.x += 2  x=2
+    //     //在第一次函数调用的时候，把一个新函数赋值给了fn，这个时候会把全局的fn变成当前这个新的函数
+    //     fn=function(y){
+    //         console.log(y + (--x));
+    //     };
+    //     console.log(x, y);
+    // }
+    // fn(3);//2,1
+
+    // fn(4);//5   4+1   x=1
+    // console.log(x, y);//1,1
+
+
+
+    /*
+        匿名函数自执行的this是window
+    */
+    var x=2;
+    var y={
+        x:3,
+        z:(function(x){//var x = 2    
+            this.x*=x;  //x *= 2   window.x = 4
+            x+=2;//4
+            return function(n){
+                this.x*=n;  //y.x *= 5   3*=5  y.x = 15
+                x+=3;  //7   父级的x变成7 -> 10
+                console.log(x);
+            }
+        })(x)
+    };
+    var m=y.z; //return 后面的函数
+
+    // console.dir(m);
+    m(4);//7  window.x *= n -> 4*=4   x = 16
+
+    y.z(5);//7   10
+
+    console.log(x, y.x);//7,30     16,15
+
+
+
+</script>
+</body>
+</html>

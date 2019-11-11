@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        函数 -> 局部作用域  
+
+            let，var，参数，函数  正常情况下都不会跑外面
+
+            在函数内如果没有变量声明、函数、参数，当前的变量是属于window的
+
+            var a = b = 5; //b是window的 
+            var a = 5,b = 5; //a和b都是局部作用域的
+
+            函数 + 括号 函数中的this就是window
+
+        
+        预解析（变量提升） -> 代码从上而下执行（=,打印输出）
+
+        var Foo = function Foo() { 
+            getName = function () {console.log(1);};
+            return this;
+        }
+
+        var getName = function getName() {console.log(5);} 
+
+        var a,b,c
+
+
+        ========================================================
+
+
+        1.Foo.getName = function () {console.log(2);}; 
+
+            Foo.getName (啥啥.xx) Foo就是个实例
+                obj.name
+                str.length -> new String
+                ary.push
+
+                Foo(函数) -> new Function
+
+            Foo.getName(); 
+        
+        2.Foo.prototype.getName = function () {console.log(3);};
+
+            Foo.prototype.getName(); -> this (Foo.prototype)
+            new Foo().getName(); ->this(new Foo())
+
+        3.getName = function () {console.log(4);};
+
+            window.getName = log4了
+            getName()
+            window.getName()
+
+        4. Foo.getName();  //2
+        5. getName(); //4
+        6. Foo().getName();
+
+            window.getName = function () {console.log(1);};
+            return this;
+
+            window.getName() //1
+
+        7.  getName();   //1
+
+
+        8.  a = new Foo.getName() 
+            ->  Foo.getName -> new Foo.getName (Foo.getName变成了一个构造函数了)
+            ->  //2  Foo.getName{}
+
+            a = Foo.getName{}
+
+        9. b = new Foo().getName();  //优先计算new Foo,再从这个实例下去找getName
+           
+           //上面这句话的意思是调用实例下的某个方法（函数执行）//3
+           没有返回值所以b为undefined
+
+        10. c = new new Foo().getName   
+
+            先看new Foo() , 再看实例的属性 ，最后再new这个实例的属性
+
+            new Foo() -> Foo{} -> {}.getName -> Foo原型 -> //log3
+
+            -> new (Foo{}.getName) -> Foo{}.getName{}
+
+
+            c = Foo{}.getName{}
+
+    */
+    function Foo() { 
+        getName = function () {console.log(1);};
+        return this;
+    }
+
+    Foo.getName = function () {console.log(2);}; 
+    Foo.prototype.getName = function () {console.log(3);};
+    var getName = function () {console.log(4);};  
+    function getName() {console.log(5);} 
+
+    Foo.getName(); 
+    getName();
+    Foo().getName();
+    getName();
+    var a = new Foo.getName();
+    var b = new Foo().getName(); 
+    var c = new new Foo().getName  
+    
+    console.log(a,b,c);
+
+    
+
+
+    /*
+        1、参数为原始数据类型（在函数内运算不会影响外面的）
+        2、参数为引用数据类型（在函数内改变属性值是会影响外面的）
+        3、参数为引用数据类型，参数又赋值另一个引用类型（在赋值新地址之后是不会影响外面的引用类型的）
+    */
+    // let obj = {
+    //     name:'某智'
+    // }
+    // // let num = 10;
+    // function fn(o){//var o = obj;（001） //赋址了
+    //     o.name = '冉某';
+    //     // o ++;
+    //     // console.log(o);//11
+    //     o = { //(002)
+    //         name:'彭某'
+    //     }
+
+    //     console.log(o.name);
+    // }
+    // // fn(num);
+    // fn(obj);//如果是实参是个引用类型，那么在函数内执行修改这个参数的属性是会互相影响的
+
+    // // console.log(num);//10
+    // console.log(obj);//'冉某'
+
+
+</script>
+</body>
+</html>

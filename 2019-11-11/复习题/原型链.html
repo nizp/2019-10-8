@@ -1,0 +1,90 @@
+<!DOCTYPE html><html><head><title>第二周第一次考试</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="第二周第一次考试">第二周第一次考试</h3>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//第一题</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> name = <span class="hljs-string">"WINDOW"</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> obj = {
+</div><div class="hljs-line">    <span class="hljs-attr">name</span>:<span class="hljs-string">"OBJ"</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">fn</span>:<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">};
+</div><div class="hljs-line">fn();
+</div><div class="hljs-line">obj.fn();
+</div><div class="hljs-line">fn.call(obj);
+</div><div class="hljs-line"><span class="hljs-built_in">window</span>.onload=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">    <span class="hljs-comment">//页面加载完成，事件就会触发</span>
+</div><div class="hljs-line">    fn();
+</div><div class="hljs-line">    obj.fn();
+</div><div class="hljs-line">};
+</div><div class="hljs-line">fn.bind(obj);
+</div></code></pre>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//第二题</span>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> print=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{alert(<span class="hljs-number">1</span>);}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Fn</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    print=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{alert(<span class="hljs-number">2</span>);}
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">print</span>(<span class="hljs-params"></span>)</span>{alert(<span class="hljs-number">3</span>);}
+</div><div class="hljs-line">Foo.prototype.print=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{alert(<span class="hljs-number">4</span>);}
+</div><div class="hljs-line">Fn.print=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{alert(<span class="hljs-number">5</span>);}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">print();
+</div><div class="hljs-line">Fn.print();
+</div><div class="hljs-line">Fn().print();
+</div><div class="hljs-line"><span class="hljs-keyword">new</span> Fn.print();
+</div><div class="hljs-line"><span class="hljs-keyword">new</span> Fn().print();
+</div></code></pre>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//第三题</span>
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Fn</span>(<span class="hljs-params">n,m</span>) </span>{
+</div><div class="hljs-line">    n=n||<span class="hljs-number">0</span>;
+</div><div class="hljs-line">    m=m||<span class="hljs-number">0</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">this</span>.x = n;
+</div><div class="hljs-line">    <span class="hljs-keyword">this</span>.y = m;
+</div><div class="hljs-line">    <span class="hljs-keyword">this</span>.getX = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.x);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> n+m;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">Fn.prototype.sum=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.x+<span class="hljs-keyword">this</span>.y);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">Fn.prototype={
+</div><div class="hljs-line">    <span class="hljs-attr">getX</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">this</span>.x+=<span class="hljs-number">1</span>;
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.x);
+</div><div class="hljs-line">    },
+</div><div class="hljs-line">    <span class="hljs-attr">getY</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">        <span class="hljs-keyword">this</span>.y-=<span class="hljs-number">1</span>;
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.y);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> f1 = <span class="hljs-keyword">new</span> Fn(<span class="hljs-number">10</span>,<span class="hljs-number">20</span>);
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> f2 = <span class="hljs-keyword">new</span> Fn;
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(f1.getX === f2.getX);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(f1.getY === f2.getY);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(f1.__proto__.getY === Fn.prototype.getY);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(Fn.prototype.getX === f2.getX);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(f1.constructor);
+</div><div class="hljs-line">f1.getX();
+</div><div class="hljs-line">Fn.prototype.getX();
+</div><div class="hljs-line">f2.getY();
+</div><div class="hljs-line">Fn.prototype.getY();
+</div><div class="hljs-line">f1.sum();
+</div></code></pre>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">// 第四题</span>
+</div><div class="hljs-line"><span class="hljs-comment">// 获取数组中的最大值（至少三种办法）</span>
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> ary = [<span class="hljs-number">12</span>,<span class="hljs-number">23</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">13</span>,<span class="hljs-number">12</span>,<span class="hljs-number">23</span>,<span class="hljs-number">14</span>,<span class="hljs-number">8</span>];
+</div><div class="hljs-line"><span class="hljs-comment">//=&gt;实现你的代码（至少三种）</span>
+</div></code></pre></div></body></html>

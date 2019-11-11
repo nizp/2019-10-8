@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        call：
+            只要是个函数就有call方法  (是个啥？)
+            改变this的指向的（干嘛用的？）
+            参数:（怎么用？）
+                多个参数
+                第一个是修改的this
+                第二个之后实参
+            注意:（有没有坑？）
+                null，undefined都数据window
+
+        如何改变this？
+
+        this属于谁 -> 事件触发谁this就是谁？.前面的？
+            document.onclick = function(){}
+            把一个函数地址赋值给document.onclick
+
+            obj.click = function(){
+                console.log(this);
+            }
+
+            obj.fn() -> this是obj
+
+            this就是.前面的主。
+
+            document.xx = function(){
+                console.log(this);
+            }
+
+            核心:
+                也就是说，只要让一个函数地址，等于某个对象下的方法，
+                this自然就变成了那个对象.
+
+    */    
+    
+    Function.prototype.mycall = function(that,...arg){
+        // this//fn
+        let type = typeof that;
+        if(that === null || that === undefined){
+            that = window;
+        }else{
+            switch(type){
+                case 'string':
+                    that = new String(that);
+                break;
+                case 'boolean':
+                    that = new Boolean(that);
+                break;
+                case 'number':
+                    that = new Number(that);
+                break;
+            }
+        }
+    
+    //     that.fn = this;
+    //     that.fn(...arg); 
+    //     // delete that.fn;
+    //     console.log(that);
+    // }  
+
+
+    // Function.prototype.mycall = function(context){
+    //     const cxt = context || window;
+    //     cxt.func = this;
+        
+    //     const args = Array.from(context).slice(1);
+    //     const res = args.length>1?cxt.func(...args):cxt.func();
+    //     delete cxt.func;
+    //     return res;
+    // }
+
+
+    
+    //001
+    // function fn(a,b){
+    //     delete this.fn;
+    //     console.log(this);
+    //     console.log(a+b);
+    // }
+
+    
+
+    // let obj = {
+    //     name:'某炎'
+    // }
+
+    // fn.mycall({},1,2);
+
+    // fn.call(123,1,2);//Number{123}
+
+
+    // window.xx = fn;
+    // obj.xx = fn;
+    // window.xx();
+    // obj.xx();
+
+
+
+
+    function fn(){
+        console.log(1);
+    }
+    function fn2(){
+        console.log(2,this);
+    }
+
+    // fn.call(fn2);
+    // fn.call.call(fn2); //如果有多个call，第一个参数一定是会被调用的（this）
+
+    /*
+        如果有多个call，最后一个call的第一个参数为调用的那个函数，第二个参数是this指向，之后才是实参
+    */
+    // Function.prototype.call.call.call.call.call(fn2,1);
+
+    
+
+
+
+
+
+</script>
+</body>
+</html>

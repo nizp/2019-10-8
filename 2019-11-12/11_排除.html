@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        ^ 开头
+        
+        如果^在中括号中，那么代表排除
+    */    
+    let str = 'a12ca456ca6789ca123456caca1ca78c';
+    console.log(str.match(/a[^123]+c/g));//a开头c结尾，中间排除1
+</script>
+</body>
+</html>

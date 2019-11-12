@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        string.match(//)  是字符串的方法
+            找到正则匹配的字符并且把它们放到数组中（返回值是数组）
+
+        跟exec类似
+
+        懒惰: 
+            你让它找一个，绝对不会找第二个，你让它找一堆，它绝对不会找第二堆
+
+        贪婪:
+            只要符合某个规则就不停的找，直到找不到为止
+
+        i : 忽略大小写  ignoreCase
+                
+    */   
+//    console.dir(new String());
+
+    // let str = '32632321323rgb087yr23n6x832321';
+    // console.log(str.match(/\d+/g));
+
+    let str = '37z89z37Z218Z9';
+
+    console.log(str.match(/z/gi));//查找全局是否有z(不管大写还是小写)
+
+
+</script>
+</body>
+</html>

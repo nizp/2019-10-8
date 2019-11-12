@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        正则身上的方法:
+            //.exec(字符串)
+                找到正则匹配的字符串（首次出现的字符【就一次】），并且放到数组中(返回的是数组)
+            
+            
+            //.test(字符串)
+                查看字符串中是否有规则匹配项，如果有就返回true，否则false
+
+
+        特殊转义符:
+            \d  一个0-9的数字
+
+        量词:
+            +  至少出现1次，最多不限
+
+        修饰符:
+            g -> global 全局查找
+
+
+        regexp
+    */   
+
+
+   
+    // console.log(typeof /a/);
+    // console.log(Object.prototype.toString.call(/a/));
+
+    // let str = 'dh8137289371299dx1';
+
+    /*
+        ["1", index: 3, input: "dh819dx1", groups: undefined]
+
+        '1'为找到的字符
+        index: '1'首次出现的位置
+        input:整个字符
+        groups:undefined
+        length:1  (因为找的是'1'这个字符串)
+    */
+    // console.log(/\d+/.exec(str)); //查看字符串中是否有正则匹配项
+
+    let str = 'dh8137289371299zdx1'; 
+    console.log(/z/.test(str));// 找当前字符串中是否有z这个字符
+
+
+
+
+    // console.log(/a/);
+</script>
+</body>
+</html>

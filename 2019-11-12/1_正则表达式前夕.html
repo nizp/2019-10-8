@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        请你把下列字符串中的数字挑出来，存到一个数组中
+
+        请你把下列字符串中数组包括连续的数字挑出来，存到一个数组中
+
+        str[i] i+1 i+1
+
+        temp = ''
+
+        temp += '2'  -> '2'
+        temp += '7'  -> '27'
+        temp += '1'  -> '271'
+
+        ['271']
+        temp = '';
+
+
+    */    
+
+    let str = 'xh271y5rc74 326rgb087yr23n6x832321';
+    // console.log(str.match(/\d+/g));
+    // let ary = [];
+    // let temp = '';
+    // for(let i=0;i<str.length;i++){
+    //     //如果当前的字符串为数字那么进行字符串拼接
+    //     if(!isNaN(parseInt(str[i]))){
+    //         //最后一次循环的时候如果字符为数字，那么只是做了拼接，没有进行push，所以最后一次数字是没有放到数组中的
+    //         temp += str[i];
+    //     }else{
+    //         //如果当前的字符串不是数字，那么就把之前拼接好的字符放到数组中并且清空这个字符串为了保证下次使用
+    //         //temp = '271' 
+    //         if(temp){ //保证temp不是一个空字符串
+    //             ary.push(temp);
+    //             temp = '';
+    //         }
+    //     }
+    // }
+    // //for循环完之后，如果发现temp不是一个空字符串，说明最后几个为数字，需要把没有push到数组中的数字字符放到数组中
+    // if(temp){ //保证temp不是一个空字符串
+    //     ary.push(temp);
+    //     temp = '';
+    // }
+    // console.log(ary);
+
+
+
+
+
+
+    /*
+        Number('') -> 0
+
+        parseInt('') -> NaN -> typeof NaN -> 'number'
+
+        isNaN(parseInt('')) -> true -> !isNaN(parseInt(''))
+    */
+    // for(let i=0;i<str.length;i++){
+    //     if(!isNaN(parseInt(str[i]))){ //不是NaN就是数字
+    //         ary.push(str[i]);
+    //     }
+    // }
+
+    // console.log(ary);
+
+    // console.log(str.split('').filter(item=>!isNaN(parseInt(item))))
+
+
+
+
+</script>
+</body>
+</html>

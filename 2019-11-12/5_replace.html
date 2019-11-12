@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        string.replace(''或者放正则,'替换字符'或者放函数)  替换
+
+        过滤敏感词
+    */    
+//    let str = '1珠266枫3';
+//    console.log(str.replace('枫','峰'));
+
+    // console.log(str.replace(/\d+/g,''));
+
+    let str = '冉某和某磊见不得光的新鲜事';
+
+    // console.log(str.replace(/冉某|某磊|不得光/g,'***'));
+
+    /*
+        函数的第一个参数就是每次匹配的字符，如果匹配多次那么会多次调用
+
+        打游戏的时候，打怒了会喷人，艹泥煤  *￥#%
+    */
+    console.log(str.replace(/冉某|某磊|不得光/g,function($0){
+        // console.log($0);
+        let temp = '';
+        for(let i=0;i<$0.length;i++){
+            temp += '*';
+        }
+        return temp;
+    }));
+
+
+
+</script>
+</body>
+</html>

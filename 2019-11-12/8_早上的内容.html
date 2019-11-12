@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        正则是什么？
+            专门用来检索字符串一种规则(更擅长处理模糊范围的字符串)
+
+        /规则或者不带引号的查询字符/  'a'  /a/
+        new RegExp(字符串或者变量,修饰符) 
+        
+        \ 转义符
+        \d 0-9的一个数字
+        \D 非数字
+
+        修饰符:
+            g  全局
+            i  忽略大小写
+
+        量词:
+            +  最少1个，最多不限
+
+        懒惰
+            让它一个它一定不会找多个
+        贪婪
+            让它找一堆数字，不管字符串有多长都会找完
+
+        exec  ->  把正则匹配到的字符放到数组中（首次出现的字符，一次），找不到返回null
+        test  ->  某个字符串是否匹配正则规则，返回布尔值 
+        match ->  把正则匹配到的字符放到数组中(可以依次也可以多次)，找不到返回null
+        replace(''|正则,''|函数)
+            第一个参数，匹配的结果
+            第二个参数是根据是否有分组来计算值
+                没有分组 -> 索引
+                有分组 -> 第一个分组，第三个参数遵循一样的查找规则
+            
+            后面的参数为:
+                整个字符串 
+                undefined
+
+        分组：  （提权）(1+1)*5
+            ()
+            (\d)+   -> 这个分组是最后一个数字
+
+        []
+        
+
+    */    
+</script>
+</body>
+</html>

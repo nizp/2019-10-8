@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"/><button id="btn">发送</button>
+    <ul id="ul"></ul>
+<script>
+    btn.onclick = function(){
+        let {value} = txt;
+        let fhx = value;
+        let li = document.createElement('li');
+        let btns = document.createElement('button');
+        let span = document.createElement('span');
+        btns.innerText = '反河蟹';
+
+        btns.onclick = function(){
+            span.innerText = fhx;
+        }
+
+        let sql = ['卧槽','艹','羊驼'];  // /卧槽|艹|羊驼/
+        let str = '*%$#@^!'; //这个字符串是替换的文字
+
+        let re = new RegExp(sql.join('|'),'g'); //'卧槽|艹|羊驼'
+
+        value = value.replace(re,($0)=>{
+            //$0是每次匹配到的敏感词
+            //拿到敏感词之后要看下length。通过length去添加替换文字的个数
+            //拿到0-替换字符串长度的数字
+            let temp = '';
+            for(let i=0;i<$0.length;i++){
+                temp += str[Math.round(Math.random() * str.length-1)];
+            }
+            return temp;
+        });
+        console.log(value);
+
+        span.innerText = value;
+        li.appendChild(span)
+        li.appendChild(btns);
+        ul.insertBefore(li,ul.children[0]);
+        txt.value = '';
+    }
+</script>
+</body>
+</html>

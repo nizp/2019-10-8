@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        () 分组
+
+            应用:
+                1.replace
+                2.match
+            通过分组能够得到更加具体的字符
+            分组是从左往右数
+            ()()(()()())()()
+            (\d)+  这个\d代表最后一个数字
+
+        replace回调函数的参数
+        
+        ?=  前瞻仰
+        ?<= 后瞻仰
+        ?!  负前瞻仰
+        ?<! 负后瞻仰
+    */
+
+    // let str = '2019-----11';
+    // console.log(str.match(/(\d+)\D+(\d+)/));
+    let str2 = '中国人中国人德国人美国人越南人缅甸人中国人老挝人菲律宾人';
+
+    // console.log(str2.replace(/中国人/g,($0)=>$0.substr(0,2) + '神'));
+
+
+    //匹配项是括号的后面（后瞻仰）
+    // console.log(str2.replace(/(?<=中国)人/g,'神'));
+
+
+    // console.log(str2.replace(/中国/g,'華夏龍'));
+
+    // console.log(str2.replace(/中国(?=人)/g,'華夏龍'));
+
+
+    let str3 = 'vctivea,vctiveb,lia,lib,diva,divb';
+
+    //不要activea和不要带activeb
+
+    // console.log(str3.match(/[ld]i[a-z]{1,2}/g));
+
+    // console.log(str3.match(/(?<!vctive)(a|b)/g));
+
+    // console.log(str3.match(/vctive(a|b)/g))
+
+    //只找排除vctive的a
+    // console.log(str3.match(/(?<!vctive)(a|b)/g));
+
+
+    // console.log(str2.match(/(?<=中国)人/g));
+    // console.log(str2.match(/中国(?=人)/g));
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="li clear li1">1</li>
+        <li>2</li>
+        <li class="li">3</li>
+    </ul>
+<script>
+    // let li = document.getElementsByTagName('li');
+    // for(let i=0;i<li.length;i++){
+    //     console.log(li[i].className)
+    //     if(li[i].className === 'li'){
+    //         li[i].style.background = 'red';
+    //     }
+    // }
+
+    /*
+        1.找到页面所有的标签
+        2.从这些标签中获取带class为li的元素
+        3.找到它们，并且放到数组中
+
+        'li'
+
+        '|li| clear li1'
+        '|li|'
+        'a'
+        'aaa |li|'
+        'aaa |li| bbb'
+
+        |li| ->\bli\b
+
+    */
+    // function getByClass(cname){
+    //     let elements = document.getElementsByTagName('*');//找到所有的标签
+    //     let ary = [];
+    //     for(let i=0;i<elements.length;i++){
+    //         //'li' 'li      clear' 'a' 'b'
+    //         //获取到所有的class名
+    //         let scn = elements[i].className;
+    //         //然后把获取到的class名都用空格分割 -> ['li','clear'],['li'],['a']
+    //         let ary2 = scn.split(' ');
+    //         //循环分割之后的数组，
+    //         ary2.forEach(classname=>{
+    //             if(classname === cname){
+    //                 ary.push(elements[i]);
+    //             }
+    //         });
+    //         // if(elements[i].className === 'li'){
+    //         //     ary.push(elements[i])
+    //         // }
+    //     }
+    //     return ary;
+    // }
+
+    /*
+        //
+        new RegExp
+
+        'cname'
+    */
+
+    function getByClass(cname){
+        let elements = document.getElementsByTagName('*');//找到所有的标签
+        let ary = [];
+        
+        let re = new RegExp('\\b'+cname+'\\b');
+        for(let i=0;i<elements.length;i++){
+            if(re.test(elements[i].className)){
+                ary.push(elements[i]);
+            }
+        }
+        return ary;
+    }
+
+    let lis = getByClass('li');
+
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.background = 'red';
+    }
+
+    console.log(lis);
+
+</script>
+</body>
+</html>

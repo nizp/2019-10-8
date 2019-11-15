@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#txt{
+    width:100px;
+    height:50px;
+    /* border:1px solid #000; */
+}
+</style>
+</head>
+<body>
+    <!-- <textarea id="txt"></textarea> -->
+    <div id="txt">dsadsdsadsadsadsa
+        dsadsdsadsadsadsad
+        sadsdsadsadsadsadsad
+        sdsadsadsadsads
+        adsdsadsadsadsadsa
+        dsdsadsadsadsa
+    </div>
+    <button id="btn">获取txt的高度</button>
+<script>
+    btn.onclick = function(){
+        // console.log(txt.clientHeight);
+        // console.log(txt.offsetHeight);
+        console.log(txt.scrollHeight); //被内容撑开的高度,不算边框的
+    }
+</script>
+</body>
+</html>

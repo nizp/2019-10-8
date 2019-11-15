@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    position: relative;
+}
+#box1{
+    position: relative;
+}
+#box2{
+    zoom:1;
+    position: absolute;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2"></div>
+        </div>
+    </div>
+<script>
+    /*
+        在低版本IE下要触发haslayout属性，使用起来才不会出问题
+
+        定位父级
+    */
+    console.log(box2.offsetParent);
+</script>    
+</body>
+</html>

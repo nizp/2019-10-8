@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        n63_h1@163.com
+        xxx_love@163.com
+        xxx_32@126.com
+        xx-x_32@139.com
+        xxx_32@gmail.com
+        xxx_32@hotmail.com
+        xxx._32@hotmail.com
+        xxx^._32@sina.com
+        xxx._32@sina.cn
+
+        ?=
+        ?>=
+
+
+        https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js
+    */    
+
+    // let str = 'xxx._32@sina.com';
+
+    // console.log(/^[\w\W]{5,10}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str))
+
+    //开头字母为英文\w{4}
+    // console.log(/^[a-zA-Z][\w.]{4,9}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str))
+
+
+    // let str = ' https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js';
+    /*
+        {
+            ie:'utf-8',
+            rsv_bp:1
+        }
+        () -> 重复子项
+
+        \数字(子项的个数) -> \1 \2  代表第N个子项
+
+        重复子项只能用在匹配子项之后
+
+        下面的代码，本来是打算匹配acbc，因为c为第三个分组
+        a后面跟了一个\3（c），\3在 c分组的前面所以匹配不成功
+
+    */
+    // let str = 'acbc';
+    // console.log()
+    // str.replace(/(a)\3(b)(c)/,function($0,$1){
+    //     console.log($0);
+    // })
+    // str.replace(/(a)(c)(b)\2/,function($0,$1){
+    //     console.log($0);
+    // });
+
+
+    let str = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js';
+
+    /*
+        (http)s?
+
+        :// -> :\/\/
+
+        www -> w{3}
+
+        . -> \.
+
+        baidu -> [a-z]{2,18}  zhufengpeixun
+
+        .com|.cn|.net|.com.cn|.org -> (\.[a-z]{2,3}){1,2}
+
+        /dsdsa? -> \/[a-z]{1,10}
+
+        ie=utf-8&f=8&rsv_bp=1&
+
+        (([a-z]\w{0,10})=([\w\W]+)&?)+
+
+       
+
+
+
+    */
+//    console.log('https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js'.match(/^(http)s?:\/\/w{3}\.[a-z]{2,18}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w=%-]+)&?)+$/))
+
+        let str2 = 'ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js%20全角转半角%20正则&oq=%25E5%2585%25A8%25E8%25A7%2592%25E8%25BD%25AC%25E5%258D%258A%25E8%25A7%2592%2520%25E6%25AD%25A3%25E5%2588%2599&rsv_pq=ed9277970000f747&rsv_t=719cvLoB2Cy7pOW4%2F1hf3xOXnlRxJsSEPLA5xAfCoQ5RkeA6ruGTQ0OPjo4';
+
+
+        // console.log(str2.match(/([a-z]\w{0,10}=[\w=%-]+&?)+/))
+
+        //验证的是是否为一个合法的url
+        let re = /^(http)s?:\/\/w{3}\.[a-z]{2,18}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w=%-]+)&?)+$/;
+        
+        //queryURLParams
+        let re2 = /([a-z]\w{0,10})=([\w=%-]+)/g;
+        let obj = {};
+        str2.replace(re2,(...arg)=>{
+            let a = arg[1];
+            let b = arg[2];
+            obj[a] = b;
+        });
+        console.log(obj);
+    
+
+
+
+</script>
+</body>
+</html>

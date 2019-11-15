@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        n63_h1@163.com
+        xxx_love@163.com
+        xxx_32@126.com
+        xx-x_32@139.com
+        xxx_32@gmail.com
+        xxx_32@hotmail.com
+        xxx._32@hotmail.com
+        xxx^._32@sina.com
+        xxx._32@sina.cn
+
+
+        必须6-8位，字母+数字，可以有点，严格区分大小写
+
+        /^[A-Z][a-zA-Z0-9.]{5,7}$/
+
+
+        ?=
+        ?>=
+
+        身份证号码、密码
+
+        省份城市那个区生日男的女的X
+        11
+        34城市
+        56区县
+        生日
+
+        19990808
+
+        1920 - 2019
+
+        19
+        20
+
+        19[2-9]\d   1920-1999
+
+        2000-2019  20[0-1]\d
+
+        月:
+            01-12 -> 01-09  10-12  
+
+            01-31 -> 01-09   10-29  30-31
+
+        派出所编号2位
+        男女(单是男,双是女)   
+        校验码（0-9|x）
+
+        queryURLParams  -> https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=js
+
+        /^[1-8]\d{5}](19[2-9]\d|20[0-1]\d)/(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01]\d{3}(\d|X))$/
+    */    
+
+    // let str = 'xxx._32@sina.com';
+
+    // console.log(/^[\w\W]{5,10}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str))
+
+    //开头字母为英文\w{4}
+    // console.log(/^[a-zA-Z][\w.]{4,9}@[\da-zA-Z]{2,8}\.c(om|n)$/.test(str))
+
+
+    let str2 = '53010320190808291';
+
+    console.log(/^[1-8]\d{5}(19[2-9]\d|20[0-1]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/.test(str2));
+
+    // console.log(/^[1-8]\d{5}$/.test('530103'))
+    // console.log(/^(19[2-9]\d|20[0-1]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/.test('20100808'))//0808
+
+</script>
+</body>
+</html>

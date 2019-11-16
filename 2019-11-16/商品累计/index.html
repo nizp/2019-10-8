@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list" id="ul">
+					<!-- <li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li> -->
+				</ul>
+				<div class="info">
+					<span>商品公合计：<em id="snum">0</em>件</span>
+					<span>共花费了：<em id="sprice">0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em id="smax">0</em>元</span>
+				</div>
+			</div>
+		</div>
+<script>
+	let ary = [
+		{
+			id:0,
+			num:0,
+			price:12.5,
+			sum:0
+		},
+		{
+			id:1,
+			num:0,
+			price:10.5,
+			sum:0
+		},
+		{
+			id:2,
+			num:0,
+			price:8.5,
+			sum:0
+		},
+		{
+			id:3,
+			num:0,
+			price:8,
+			sum:0
+		},
+		{
+			id:4,
+			num:0,
+			price:14.5,
+			sum:0
+		}
+	]	
+
+	
+	ary.forEach((item,i)=>render(ary[i]));
+	
+
+	function render({num,price,sum,id}){
+		
+		const li = document.createElement('li');
+		const btn1 = document.createElement('i');
+		const btn2 = document.createElement('i');
+		const em = document.createElement('em');
+		em.innerText = num;
+		const span = document.createElement('span');
+		const strong1 = document.createElement('strong');
+		strong1.innerText = '单价:' + price + '元';
+		const strong2 = document.createElement('strong');
+		strong2.innerText = '小计:' + sum + '元';
+
+		//--
+		btn1.onclick = function(){
+			//小于0就等于0
+			ary[id].num --;
+			ary[id].num = ary[id].num<0?0:ary[id].num;
+			em.innerText = ary[id].num;
+
+			ary[id].sum = ary[id].num * price;
+			//小计
+			strong2.innerText = '小计:' + ary[id].sum + '元';
+
+			//总计:
+			snum.innerText = sumfn('num').num;
+			sprice.innerText = sumfn('sum').sum;
+			smax.innerText = max();
+		}
+		btn2.onclick = function(){
+			em.innerText =  ++ ary[id].num;
+
+			//小计
+			ary[id].sum = ary[id].num * price;
+			strong2.innerText = '小计:' + ary[id].sum + '元';
+
+
+			//总计:
+			snum.innerText = sumfn('num').num;
+			sprice.innerText = sumfn('sum').sum;
+			smax.innerText = max();
+		}
+
+		
+		li.append(btn1);
+		li.append(em);
+		li.append(btn2);
+		span.append(strong1);
+		span.append(strong2);
+		li.append(span);
+		ul.append(li);
+	}
+
+
+	function sumfn(attr){
+		return ary.reduce((prev,next)=>{
+			let n = prev[attr] + next[attr];
+			return {
+				[attr]:n
+			}
+		});
+	}
+
+	function max(){
+		//拿到个数不是0的单价(filter), map-> 把单价弄出来
+		let ary2 = ary.filter(e=>e.num).map(e=>e.price);
+		return  ary2.length?Math.max(...ary2):0;
+	}
+	
+
+</script>
+</body>
+</html>

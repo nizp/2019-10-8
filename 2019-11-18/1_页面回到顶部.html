@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:50px;
+    font-size:20px;
+    background: red;
+    color:#fff;
+    position: absolute;
+    right:0;
+    top:100%;
+    text-align: center;
+    line-height:50px;
+    cursor: pointer;
+}
+body{
+    height:3000px;
+    _overflow: hidden;
+}
+</style>
+</head>
+<body>
+    <div id="box">回到顶部</div>
+<script>
+    /*
+        滚轮事件:（当有滚动条的时候，滚轮即触发该事件）
+            onscroll
+
+            scrollHeight  被内容撑开的高度
+            
+            scrollLeft/scrollTop  滚动条的距离
+
+
+
+    */
+
+    const {offsetTop} = box;//610
+    onscroll = function(){
+        let {scrollTop} = document.documentElement;
+        //元素的定位距离小于等于滚动条的距离，就让盒子fixed定位
+        if(offsetTop <= scrollTop){
+            box.style.position = 'fixed';
+            box.style.top = '50%';
+        }else{
+            box.style.position = 'absolute';
+            box.style.top = '100%';
+        }
+        // console.log(document.documentElement.scrollTop);
+    }
+
+    box.onclick = function(){
+        document.documentElement.scrollTop = 0;
+    }
+
+</script>
+</body>
+</html>

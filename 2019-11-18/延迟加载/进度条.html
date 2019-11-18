@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:1280px;
+    height:5px;
+    border:1px solid hotpink;
+}
+#box2{
+    height:5px;
+    width:0%;
+    background:rebeccapurple;
+    transition: .2s;
+}
+</style>
+</head>
+<body id="body">
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+
+<script>
+    let ary = [
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846x.jpg'
+    ];
+    let num = 0;
+    ary.forEach(img=>{
+        let pic = document.createElement('img');
+        pic.src = img;
+        pic.onload = function (){
+            box2.style.width = 25 * (++num) + '%';
+            if(25 * num === 100){
+                body.style.transition = '1s';
+                body.style.background = 'hotpink';
+            }
+        }
+        pic.onerror = function(){
+            pic.onload();
+        }
+
+    });
+
+
+
+</script>
+</body>
+</html>

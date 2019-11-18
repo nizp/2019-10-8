@@ -1,0 +1,105 @@
+@bg:rgb(63, 146, 179);
+@p:1px;
+@margin:0 auto;
+.w(@a){
+    width: @a*@p;
+}
+.h(@a){
+    height:@a*@p
+}
+.lh(@a){
+    line-height: @a*@p;
+}
+.back(@a){
+    background:@a
+}
+.rep(){
+    position: relative;
+}
+.abp(){
+    position: absolute;
+}
+.mart(@a){
+    margin-top:@a*@p
+}
+.padd(@a){
+    padding:@a*@p;
+}
+.fl{
+    float: left;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+    .w(1040);
+    margin: @margin;
+}
+nav{
+    // .w(1040);
+    .h(80);
+    .back(@bg);
+    .lh(80);
+    margin: @margin;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+nav a{
+    text-decoration: none;
+    list-style: none;
+    color:#fff;
+    .rep();   
+}
+nav a li{
+    .abp();
+    .w(0);
+    .h(0);
+    top:40px;
+    right:-10px;
+    border:4px solid transparent;
+}
+nav a .up{
+    .mart(-9);
+    border-bottom:4px solid #fff;
+}
+nav a .down{
+    .mart(6);
+    border-top:4px solid #fff;
+}
+
+ nav a .p{
+    .mart(-9);
+    border-bottom:4px solid yellowgreen;
+}
+ nav a .d{
+    .mart(6);
+    border-top:4px solid yellowgreen;
+}
+.list{
+    .mart(20);
+    list-style: none;
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+.list li{
+    .padd(20);
+    .w(190);
+    .h(304);
+    .fl();
+    margin:10px;
+    box-shadow: 0.5px 1px 5px gray;
+    border-radius: 10%;
+}
+
+.list li img{
+    .w(200)
+}
+.list li p{
+    .lh(24);
+    margin:@margin;
+}
+.list li p span{
+    margin-left:20px;
+}

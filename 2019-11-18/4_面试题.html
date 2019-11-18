@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        与解析:
+           
+            a = function(){}
+
+        =  12
+
+        报错
+
+    */
+    // console.log(a); //12   undefined    函数
+    // var a=12;
+    // function a(){
+    //     console.log(a);//13   undefined   12
+    //     a=13;
+    // }
+    // a();
+    // console.log(a);  //13   12    (13|报错)
+
+
+    var n=0; 
+    function a(){
+        var n=10; //11
+        function b(){
+            n++; 
+            console.log(n); //11
+        }
+        b();
+        return b; 
+    }
+    var c=a(); //报错   b  //11
+    c(); //12
+    console.log(n);//0
+
+
+</script>
+</body>
+</html>

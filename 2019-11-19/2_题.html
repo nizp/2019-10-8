@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var a1=4,
+        a2=[1,2],//[1,2,3]
+        x=6;
+    function f(){
+        console.log(this.x); 
+    }
+    f();//6
+    function b(x,y,z) {      
+        console.log(arguments);//[10,[],fn]
+        arguments[0]=10;     
+        arguments[1].push(3);  
+        arguments[2](); //undefined
+        console.log(arguments); //[10,[],fn]
+        y = []
+        console.log(x,y); //10,[]
+    }         
+    b(a1,a2,f);   
+    console.log(a1,a2);   //4,[1,2,3] 
+</script>
+</body>
+</html>

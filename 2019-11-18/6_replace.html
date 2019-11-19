@@ -89,11 +89,10 @@
     }
 
     let str = 'abababababab';
-  
-    console.log(str.myReplace(/a/g,($0,$1,$2)=>{
-        console.log($0,$1,$2)
-        return 'A';
-    }))
+    let i = 0;
+    console.log(str.myReplace(/a/g,'ac'))
+
+    //acbacbacbacbacbacb
 
     // console.log(str.myReplace(/a/g,($0,$1,$2)=>{
     //     console.log($0,$1,$2)

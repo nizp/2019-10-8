@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+        body{
+            background: seagreen
+        }
+        div{
+            position: relative;
+            padding: 30px;
+            background: salmon
+        }
+        td{
+            border:1px solid #ccc;
+            padding: 10px;
+        }
+        span{
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <tr>
+                <td id='td'>
+                    <span id='span'>www</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+
+</body>
+
+</html>
+<script>
+    /* 
+        1、获取数据  封装成一个函数，去实现获取数据的操作
+        2、渲染数据  把从后台获取到的数据展示页面上，按照列来展示的，
+                    循环后台给的数组， 然后把每一条数据拼接好，添加到长度最小的那一列
+                    这里封装了一个获取长度最小的列的方法 getMinLi
+                    把元素集合转成数组， 然后按照 clientHeight 进行排序，由此找到最低的哪个li;
+        3、滚动加载更多，长度最小的哪个li的底部露出来时， 我们就去加载新的数据；loadMore
+            为了方式 一次性请求多次  我们做了一个 flag的判断；只有当flag为false的时候， 才去执行新数据的请求
+            当请求开始的时候 我们把flag置为true,渲染成功 我们把flag再置为false;    
+        4、再加上图片懒加载的操作；loadImg   loadAll
+            懒加载  就是当图片还没有出现到可视窗口的时候  不去加载图片，
+                只有当图片露出来的时候  我们再去加载真正的图片
+            预加载  就是 当图片要展示成真正的图片时， 先用默认图展示，然后再利用JS创建一个临时的图片，让这张临时的
+                    图片去远程请求 真正的图片， 当请求成功之后， 再把这个真实图片的地址赋给页面上的哪个img标签
+        5、实现图片的渐显  fadeIn 利用定时器 对img进行 opacity的累加操作；
+    */
+    function offset(ele) {
+        let t = ele.offsetTop,
+            l = ele.offsetLeft;
+        let temp = ele.offsetParent;
+        while(temp){
+            l += temp.offsetLeft + temp.clientLeft;
+            t += temp.offsetTop + temp.clientTop;
+            temp = temp.offsetParent;
+        }  
+        return {
+            l,t
+        }
+    }
+</script>

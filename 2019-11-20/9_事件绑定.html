@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+<script>
+    /*
+        解除事件函数 - > 给元素事件赋值 null即可
+
+
+        var a = function(){};
+        a = function(){}
+
+        a()
+
+
+        带on的事件方式是DOM0中的标准，不够强大
+
+        DOM2
+            事件绑定 -> addEventListener('不带on的事件名',事件函数,布尔值|对象)
+
+
+            布尔值:
+                true : 捕获
+                false: 冒泡
+
+                默认为false
+            
+    */
+    // btn.onclick = function(){
+    //     alert(1);
+    //     // btn.onclick = null;
+    // }
+    // btn.onclick = function(){
+    //     alert(2);
+    // }
+
+
+    window.addEventListener('click',function(){
+        alert('window');
+    },false);
+    btn.addEventListener('click',function(){
+        alert(1);
+    },false);
+    btn.addEventListener('click',function(){
+        alert(2);
+    },false);
+
+</script>
+</body>
+</html>

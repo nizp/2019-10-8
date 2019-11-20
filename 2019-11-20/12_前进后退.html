@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:50px;
+    height:50px;
+    background:orchid;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.box2{
+    width:5px;
+    height:5px;
+    background:seagreen;
+    border-radius: 50%;
+    position: absolute;
+    top:0px;
+    left:22px;
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+<script>
+    /*
+        作业:
+            1.做到切换按键的时候不卡
+            2.2个按键按下时斜着跑
+    */
+
+    document.onkeydown = function(ev){
+        switch (ev.keyCode) {
+            case 87:
+                box.style.top = box.offsetTop - 15 + 'px';
+                break;
+            case 83:
+                box.style.top = box.offsetTop + 15 + 'px';
+                break;
+            case 65:
+                box.style.left = box.offsetLeft - 15 + 'px';
+                break;
+            case 68:
+                box.style.left = box.offsetLeft + 15 + 'px';
+                break;
+
+            case 13:
+               
+                let div = document.createElement('div');
+                div.className = 'box2';
+                box.append(div);
+                setTimeout(() => {
+                    div.style.top = -1000 + 'px';
+                });
+                break;
+        
+            default:
+                break;
+        }
+        console.log(ev.keyCode);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击创建</button>
+    <ul id="ul">
+        <li>1</li>
+    </ul>
+<script>
+    //getElements系列，children 都是动态获取
+    let lis = document.getElementsByTagName('li');//动态获取
+    // let lis = document.querySelectorAll('li');//静态获取
+    let num = 1;
+
+   
+    /*
+        <li onclick>
+
+        ul.innerHTML = <li> + <li>
+    */
+    btn.onclick = function(){
+        ul.innerHTML += '<li>'+(++num)+'</li>'; //覆盖的问题
+        // lis = document.querySelectorAll('li');
+        // console.log(lis.length);
+        // for(var i=0;i<lis.length;i++){
+        //     lis[i].onclick = function(){
+        //         alert(this.innerHTML);
+        //     }
+        // }
+    }
+
+
+    ul.onclick = function(ev){
+        // console.log(ev.target);
+        // console.log(ev.target.tagName);
+        if(ev.target.tagName === 'LI'){
+            // alert(ev.target.innerHTML);
+            ev.target.style.background = 'red';
+        }
+    }
+    
+
+</script>
+</body>
+</html>

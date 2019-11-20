@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <ul id="ul"></ul>
+<script>
+    /*
+        当按下键盘的时候触发的事件
+
+        keydown   键盘按下
+        keyup     键盘抬起
+
+        特殊按键
+            ev.ctrlKey   布尔值  只要按着就为true
+            ev.shiftKey
+            ev.altKey
+
+        组合键默认是用不了的，后面的按键会把前面的按键覆盖
+        
+    */
+
+    // txt.onkeydown = function(){
+    //     alert(this.value);
+    // }
+
+    // txt.onkeyup = function(){ //抬起的时候才能拿到最新的value值
+    //     console.log(this.value);
+    // }
+
+
+    // console.dir(txt)
+
+    txt.onkeyup = function(ev){ 
+
+        if(ev.keyCode === 13 && ev.ctrlKey){
+            ul.innerHTML += `<li>${this.value}</li>`;
+            this.value = '';
+        }
+        console.log( ev.keyCode );
+    }
+
+
+</script>
+</body>
+</html>

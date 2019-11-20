@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="哈哈" id="txt">
+<script>
+
+    let val = txt.value;
+
+    let num = 0;
+
+    txt.oninput = function(){
+        val = txt.value;
+        // console.log(val);
+        num ++;
+        console.log(num);
+    }
+
+    console.log(num);
+
+    document.onclick = function(){
+        console.log(num);
+    }
+
+
+    
+
+
+</script>
+</body>
+</html>

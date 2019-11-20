@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box1{
+    width:100px;
+    height:100px;
+    background: tomato;
+}
+#box2{
+    width:30px;
+    height:30px;
+    background: turquoise;
+}
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+
+<script>
+    box1.onmouseenter = function(){
+        console.log('大盒子移入')
+    }
+    box1.onmouseleave = function(){
+        console.log('大盒子移出')
+    }
+
+    box2.onmouseenter = function(ev){
+        console.log('xiao盒子移入')
+        // ev.cancelBubble = true;
+    }
+    box2.onmouseleave = function(){
+        console.log('xiao盒子移出')
+    }
+</script>
+</body>
+</html>

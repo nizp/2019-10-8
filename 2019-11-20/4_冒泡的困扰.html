@@ -17,10 +17,10 @@
 
     <div id="box"></div>
 <script>
-    btn.onmousemove = function(ev){
+    btn.onclick = function(ev){
         box.style.display = 'block';
         // alert(1);
-        // ev.cancelBubble = true;
+        ev.cancelBubble = true;
     }
 
     window.onclick = function(){

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+div{
+    padding:100px;
+}
+#box{
+    background: red;;
+}
+#box1{
+    background:slateblue;
+}
+#box2{
+    background:teal;
+}
+#btn{
+    background:tomato;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2">
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+<script>
+    box.onclick = function(){
+        alert('box')
+    }
+    box1.onclick = function(){
+        alert('box1')
+    }
+    box2.onclick = function(){
+        alert('box2')
+    }
+    btn.onclick = function(ev){
+        alert('btn')
+        // ev.cancelBubble = true;
+        ev.stopPropagation();
+        console.log(ev)
+    }
+    window.onclick = function(){
+        alert('window')
+    }
+   
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:200px;
+    height:200px;
+    background: slateblue;
+    position: absolute;
+    left:0;
+    top:0;
+    cursor: move;
+}
+</style>
+
+</head>
+<body style="height:3000px">
+    <div id="box"></div>
+    <button id="btn">按钮</button>
+    <button id="btn2">按钮2</button>
+<script>
+    btn2.onclick = function(){
+        alert('点击')
+    }
+
+    function changan(cb){
+        let timer ;
+        btn.onmousedown = function(){
+            let time = +new Date;
+            timer = setInterval(() => {
+                let now = new Date;
+                if(now - time > 1000){
+                    // console.log('长按');
+                    cb();//钩子函数，生命周期函数
+                }
+            });
+        }
+        btn.onmouseup = function(){
+            clearInterval(timer);
+        }
+    }
+
+    let num = 1;
+    changan(function(){
+        num -= .01;
+        box.style.opacity = num;
+    });
+
+
+    box.onmousemove = function(ev){
+        // console.log('移动');
+        console.log(ev);
+        this.style.left = ev.clientX - this.clientWidth/2 + 'px';
+        this.style.top = ev.pageY - this.clientHeight/2+ 'px';
+        // this.style.top = window.pageYOffset + ev.clientY - this.clientHeight/2+ 'px';
+    }
+
+
+
+
+    
+    // btn.onmouseup = function(){
+    //     console.log('抬起');
+    // }
+</script>
+</body>
+</html>

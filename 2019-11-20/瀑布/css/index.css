@@ -77,4 +77,19 @@ body{
     text-align: center
 }
 
+#loading{
+    width:100%;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    height:100px;
+    overflow: hidden;
+}
+#loading img{
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    margin-left: -125px;
+}
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: tomato;
+    display: none;
+}
+</style>
+</head>
+<body>
+    <button id="btn">显示</button>
+
+    <div id="box"></div>
+<script>
+    btn.onmousemove = function(ev){
+        box.style.display = 'block';
+        // alert(1);
+        // ev.cancelBubble = true;
+    }
+
+    window.onclick = function(){
+        box.style.display = 'none';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+html,body{
+    overflow: hidden;
+}
+#ul{
+    position: absolute;
+    list-style: none;
+    top:0;
+    left:0;
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+<ul id="ul">
+
+</ul>
+<script>
+    let ary = ['green','pink','skyblue','hotpink','yellow'];
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    let html = ary.map(item=>`<li style="width:${w}px;height:${h}px;background:${item}"></li>`).join('');
+    ul.innerHTML = html;
+
+    let num = 0;
+    
+    addWheel(document,throttling(fn,1000));//debounce(fn,1100)
+
+    function fn(o){
+        if(o){
+            num --;
+            if(num < 0){
+                num = 0;
+            }
+        }else{
+            num ++;
+            if(num > ary.length-1){
+                num = ary.length-1;
+            }
+        }
+        ul.style.top = - num * h + 'px';
+    }
+
+
+    function addWheel(obj,cb){
+        // console.log(obj.onmousewheel);
+        if(obj.onmousewheel === null){ //说明有这个事件
+            obj.onmousewheel = listen;
+        }else{  
+            obj.addEventListener('DOMMouseScroll',listen);
+        }
+        function listen(ev){
+            let o = false; //默认是向下，true向上
+            //使上下方向统一
+            if(ev.wheelDelta){ //chrome
+                o = ev.wheelDelta > 0? true : false;
+            }else{
+                o = ev.detail < 0 ? true : false;
+            }
+            // console.log(o);
+            cb.call(this,o);
+        }
+    }
+
+    function debounce(cb,time){
+        let timer;
+        return function(...arg){
+            //当事件触发的时候就先关闭上次的timer
+            if(timer){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                cb.call(this,...arg);
+            }, time);
+        }
+    }
+
+    function throttling(cb,time){
+        let prevtime = 0;
+        return function(...arg){
+            let nowTime = +new Date;
+            // console.log(nowTime - prevtime)
+            if(nowTime - prevtime > time){
+                cb.call(this,...arg);
+            }
+            prevtime = nowTime;
+        }
+    }
+</script>
+</body>
+</html>

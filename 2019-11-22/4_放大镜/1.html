@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+div{
+    float:left
+}
+#box{
+    width:350px;
+    height: 350px;
+    border:1px solid #000;
+    position: relative;
+}
+#box2{
+    position: absolute;
+    width:100px;
+    height:100px;
+    background:rgba(255,125,175,.5);
+    top:0;
+    left:0;
+    display:none;
+    cursor: move;
+}
+#box3{
+    width:500px;
+    height:500px;
+    border:1px solid #000;
+    position: relative;
+    overflow: hidden;
+    display:none;
+}
+#img2{
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <img src="./1.jpg" alt="" srcset="">
+        <div id="box2"></div>
+    </div>
+    <div id="box3">
+            <img id="img2" src="./2.jpg" alt="" srcset="">
+    </div>
+<script>
+    box.onmouseover = function(ev){
+        box3.style.display = box2.style.display = 'block';
+
+        // box2.style.top = ev.clientY - box2.clientHeight/2 + 'px';
+        // box2.style.left = ev.clientX - box2.clientWidth/2 + 'px';
+    }
+    box.onmouseout = function(){
+        box3.style.display = box2.style.display = 'none';
+    }
+
+
+    let boxw = box.clientWidth;  //获取box的宽
+    let boxh = box.clientHeight;//获取box的高
+    box.onmousemove = function(ev){
+        //box2的移动距离
+        let l = ev.clientX - box2.clientWidth/2;
+        let t = ev.clientY - box2.clientHeight/2;
+
+        //限制范围
+        if(l < 0){
+            l = 0;
+        }else if(l > boxw - box2.clientWidth){
+            l = boxw - box2.clientWidth;
+        }
+        if(t < 0){
+            t = 0;
+        }else if(t > boxh - box2.clientHeight){
+            t = boxh - box2.clientHeight;
+        }
+
+        // console.log((ev.pageX - box2.clientWidth/2)/(boxw - box2.clientWidth))
+
+        //0-1之间的比例
+        let scalex = (ev.pageX - box2.clientWidth/2)/(boxw - box2.clientWidth);
+        let scaley = (ev.pageY - box2.clientHeight/2)/(boxh - box2.clientHeight);
+        
+        //通过比例去计算img2的位置
+        img2.style.left = scalex * (box3.clientWidth - img2.offsetWidth) + 'px';
+        img2.style.top = scaley * (box3.clientHeight - img2.offsetHeight) + 'px';
+
+        box2.style.top = t + 'px';
+        box2.style.left = l + 'px';
+
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

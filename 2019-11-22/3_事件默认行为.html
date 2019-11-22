@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+#ul {
+    width:100px;
+    border:1px solid hotpink;
+    display: none;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#ul li{
+    height:20px;
+    line-height: 20px;
+    text-align: center;
+    border-bottom:1px dashed plum;
+}
+#ul li:hover{
+    background: hotpink;
+    color:#fff;
+}
+
+</style>
+</head>
+<body style="height:3000px">
+    <!-- <input type="text" id="txt">
+    <img id="img"src="./timg.jpg" alt="" srcset=""> -->
+
+    <a href="http://www.baidu.com" id="aa">去百度</a>
+
+    <ul id="ul">
+        <li>我的帖子</li>
+        <li>用户管理</li>
+        <li>我的关注</li>
+        <li>我的好兄弟</li>
+    </ul>
+
+
+
+
+<script>
+    /*
+        浏览器默认行为:
+            某些行为并不是人为做的，而且浏览器悄悄做的
+
+        DOM0的方式
+
+        要阻止默认行为要知道是什么事件触发的这种行为
+
+            ev.returnValue = false;  去阻止默认行为（灵活）
+            return false
+            ev.preventDefault();  (事件绑定的时候使用或者returnValue)
+
+        oncontextmenu 鼠标右键
+    */
+
+    // document.onkeydown = function(ev){
+    //     if(ev.keyCode === 32){
+    //         // console.log(ev);
+    //         // ev.returnValue = false;
+    //         return false;
+    //     }
+    //     return false;
+    // }
+
+    // txt.onkeydown = function(ev){
+    //     console.log(1);
+    //     ev.cancelBubble = true;
+    // }
+
+
+    // img.onmousedown = function(){
+    //     return false;
+    // }
+
+
+    // document.oncontextmenu = function(ev){
+    //     // console.log(1);
+
+    //     // ul.style.display = 'block';
+
+    //     ul.style.cssText = `display:block;top:${ev.clientY}px;left:${ev.clientX}px`;
+
+    //     return false;
+    // }
+
+    // ul.onclick = function(ev){
+    //     console.log(ev.target.innerHTML)
+    //     ev.stopPropagation();
+    //     // ul.style.display = 'none';
+    // }
+
+    // document.onclick = function(){
+    //     ul.style.display = 'none';
+    // }
+
+    let yan = true;
+
+    aa.addEventListener('click',function(ev){
+        // ev.returnValue = false;
+        // return false;
+        ev.preventDefault();
+    })
+
+    // aa.onclick = function(){
+    //     if(!yan){
+    //         return false;
+    //     }
+    // }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width: 100px;
+    height:100px;
+    background: lightseagreen;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body _style="height:3000px">
+    <div id="box"></div>
+<script>
+    /*
+        onscroll  滚动条改变的时候触发
+        onmousewheel  滚轮事件
+
+            ev.wheelDelta  检测滚动的方向
+                大于0就是向上的
+                小于0就是向下的
+
+
+        FF：DOMMouseScroll 
+            注意这个事件只能使用事件绑定的方式去写
+            ev.detail
+                大于0就是向下的
+                小于0就是向上的
+
+
+    */ 
+
+    // onscroll = function(){
+    //     console.log(1);
+    // }
+
+
+    function addWheel(obj,cb){
+        // console.log(obj.onmousewheel);
+        if(obj.onmousewheel === null){ //说明有这个事件
+            obj.onmousewheel = listen;
+        }else{  
+            obj.addEventListener('DOMMouseScroll',listen);
+        }
+        function listen(ev){
+            let o = false; //默认是向下，true向上
+            //使上下方向统一
+            if(ev.wheelDelta){ //chrome
+                o = ev.wheelDelta > 0? true : false;
+            }else{
+                o = ev.detail < 0 ? true : false;
+            }
+            // console.log(o);
+            cb.call(this,o);
+        }
+    }
+
+    addWheel(box,function(o){
+        console.log(1)
+        let {width,height} = getComputedStyle(this);
+        console.log(width)
+        if(o){
+            this.style.width = parseFloat(width) + 5 + 'px';
+            this.style.height = parseFloat(height) + 5 + 'px';
+        }else{
+            this.style.width = parseFloat(width) - 5 + 'px';
+            this.style.height = parseFloat(height) - 5 + 'px';
+        }
+    });
+
+
+
+
+    // window.addEventListener('DOMMouseScroll',function(ev){
+    //     // console.dir(ev)
+    //     if(ev.detail > 0){
+    //         console.log('下')
+    //     }else{
+    //         console.log('上')
+    //     }
+    // })
+
+
+    // window.onmousewheel = function(ev){
+    //     console.log(111)
+    //     // console.log(ev.wheelDelta);
+    //     if(ev.wheelDelta > 0){
+    //         console.log('上');
+    //         box.style.top = box.offsetTop - 5 + 'px';
+    //     }else{
+    //         // console.log('下');
+    //         console.log(box.offsetTop)
+    //         box.style.top = box.offsetTop + 5 + 'px';
+    //     }
+    // }
+</script>
+</body>
+</html>

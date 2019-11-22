@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:50px;
+    height:50px;
+    background:orchid;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.box2{
+    width:5px;
+    height:5px;
+    background:seagreen;
+    border-radius: 50%;
+    position: absolute;
+    top:0px;
+    left:22px;
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+    <!-- <input type="text" id="txt"> -->
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+<script>
+    /*
+        作业:
+            1.做到切换按键的时候不卡
+            2.2个按键按下时斜着跑
+    */
+
+    
+    let timer;
+    // txt.onkeydown = function(){
+    //     let old = new Date
+    //     timer = setInterval(() => {
+    //         let now = new Date;
+
+    //         console.log(now - old);
+
+    //         old = now;
+    //     }, 20);
+    // }
+
+
+    //down的时候只是修改方向
+    // document.onkeydown = function(ev){
+    //     clearInterval(timer);
+    //     timer = setInterval(() => {
+    //         switch (ev.keyCode) {
+    //         case 87:
+    //             box.style.top = box.offsetTop - 5 + 'px';
+    //             break;
+    //         case 83:
+    //             box.style.top = box.offsetTop + 5 + 'px';
+    //             break;
+    //         case 65:
+    //             box.style.left = box.offsetLeft - 5 + 'px';
+    //             break;
+    //         case 68:
+    //             box.style.left = box.offsetLeft + 5 + 'px';
+    //             break;
+
+    //         case 13:
+               
+    //             let div = document.createElement('div');
+    //             div.className = 'box2';
+    //             box.append(div);
+    //             setTimeout(() => {
+    //                 div.style.top = -1000 + 'px';
+    //             });
+    //             break;
+        
+    //         default:
+    //             break;
+    //         }
+    //     }, 16.7);
+        
+    //     // console.log(ev.keyCode);
+    // }
+    
+    let e = 0;
+    let obj = {}
+
+    document.onkeydown = function(ev){
+        e = ev.keyCode;
+        obj[e] = true;
+        if(!timer){
+            timer = setInterval(fn,16.7);
+        }
+    }
+
+    let fn = ()=>{
+        // console.log(obj)
+        if(obj['87']){
+            box.style.top = box.offsetTop - 5 + 'px';
+        }
+        if(obj['83']){
+            box.style.top = box.offsetTop + 5 + 'px';
+        }
+        if(obj['65']){
+            box.style.left = box.offsetLeft - 5 + 'px';
+        }
+        if(obj['68']){
+            box.style.left = box.offsetLeft + 5 + 'px';
+        }
+        console.log(1);
+    }
+
+    timer = setInterval(fn,16.7);
+
+    
+
+    document.onkeyup = function(ev){
+       
+        obj[ev.keyCode] = false;
+        if(Object.values(obj).every(item=>!item)){
+            clearInterval(timer);
+            timer = null;
+        }
+    }
+
+</script>
+</body>
+</html>

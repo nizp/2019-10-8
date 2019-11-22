@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    top:0;
+    left:0;
+    background: lightskyblue;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    /*
+        三大事件组成:
+            onmousedown
+            onmousemove
+            onmouseup
+
+        先要触发down，然后才能move和up
+    */
+
+    // box.onmousedown = function(ev){
+    //     // console.log('down')
+    //     let disX = ev.pageX; //按下的作用
+    //     let disY = ev.pageY;
+
+    //     let t = box.offsetTop;
+    //     let l = box.offsetLeft;
+    //     box.onmousemove = function(ev){
+    //         console.log('move')
+    //         //移动的坐标
+    //         box.style.left = l + (ev.pageX - disX )+ 'px';
+    //         box.style.top = t + (ev.pageY - disY) + 'px';
+
+    //     }
+    //     box.onmouseup = function(){
+    //         console.log('up');
+    //         box.onmousemove = null;
+    //     }
+    // }
+
+
+
+    box.onmousedown = function(ev){
+      
+        let disX = ev.pageX - box.offsetLeft; //按下的作用
+        let disY = ev.pageY - box.offsetTop; //点到盒子边的距离
+
+        document.onmousemove = function(ev){
+            console.log('move')
+            //移动的坐标
+            box.style.left = ev.pageX - disX + 'px';
+            box.style.top = ev.pageY - disY + 'px';
+            // console.log(box.offsetLeft)
+
+        }
+        document.onmouseup = function(){
+            console.log('up');
+            document.onmousemove = null;
+        }
+    }
+    
+
+</script>
+</body>
+</html>

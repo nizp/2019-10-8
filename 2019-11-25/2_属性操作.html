@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" data-index="1"></div>
+
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+      
+    <input type="checkbox" />
+      
+
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    /*
+        attr  -> getAttribute,setAttribute
+        removeAttr -> removeAttribute
+    */
+
+    // $('#box').attr('index','0');
+    // console.log($('#box').attr('index'));
+    // $('#box').removeAttr('data-index');
+
+
+    $(':button:eq(0)').click(function(){
+        //xxx.checked = true;
+        $(':checkbox').attr('checked',true);
+    })
+    $(':button:eq(1)').click(function(){
+        //xxx.checked = false;
+        $(':checkbox').attr('checked',false);
+    });
+    $(':button:eq(2)').click(function(){
+    //    console.log($(':checkbox').attr('checked'))
+        // if($(':checkbox').attr('checked') === true){
+            console.log($(':checkbox').prop('checked'))
+        if($(':checkbox').prop('checked') === true){
+            $(':checkbox').attr('checked',false);
+        }else{
+            $(':checkbox').attr('checked',true);
+        }
+    });
+
+
+</script>
+</body>
+</html>

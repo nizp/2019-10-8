@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+
+    <ul id="ul1">
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+    </ul>
+
+    <ul id="ul2">
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+        </ul>
+
+
+    <input type="button" value="按钮" class="am"/>
+    <input type="button" value="按钮" class="am"/>
+    <input type="button" value="按钮" class="am"/>
+    <input type="button" value="按钮" class="am"/>
+    <input type="text" class="ag"/>
+    <input type="checkbox" class="ac"/>
+    <input type="checkbox" class="ac"/>
+    <input type="checkbox" class="ac"/>
+    <input type="radio" class="ab"/>
+    <input type="password" class="aba"/>
+    <input type="time" class="b"/>
+    <input type="date" class="ab"/>
+
+
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script>
+    /*
+        选择器
+        属性操作
+        DOM
+        BOM
+        事件
+    */
+//    console.log($);
+    // console.log($('#box')); //获取的是一个jquery对象，因为是jquery对象就可以使用jquery的内置方法
+    // $('#ul2 li').css({
+    //     width:100,
+    //     height:100,
+    //     background:'red'
+    // }).click(function(){
+    //     // console.log(this);  //li，原生对象
+    //     $(this).animate({
+    //         width:300
+    //     })
+    // });
+
+
+    // $('input[type="button"]').click(function(){
+    //     // alert(this.value);
+    //     $(this).val('按钮2');
+    //     // alert($(this).val());
+    // });
+
+
+    // $('input[type!="button"]').click(function(){
+    //     alert(this.value);
+    //     // alert($(this).val());
+    // });
+
+    // console.log($('input[class$="b"]'));
+
+
+    //even偶数，但是js从0开始计数（所以它看上去是生活中的奇数）
+    // $('#ul1 li:even').css('background','red');
+    // $('#ul1 li:odd').css('background','green');
+
+    // $(':button').click(function(){
+    //     $(this).val('2222');
+    // });
+
+    $(':button').click(function(){
+        console.log($(':checked')); //选中的input
+    });
+
+
+</script>
+</body>
+</html>

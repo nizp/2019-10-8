@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>发送</button>
+    <input type="text"/>
+    <ul></ul>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    $(':button').click(function(){
+        let val = $(':text').val();
+        $('ul').html( '<li>'+val+'</li>' + $('ul').html());
+        $(':text').val('');
+    });
+</script>
+</body>
+</html>

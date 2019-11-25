@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //构造函数
+
+    /*
+        不能在外面new，但是如果在里面new那么就出现了递归
+
+
+        全局
+        局部
+            函数
+            快
+    */
+    
+    // function fn(){
+    //     var a = 10;
+    //     return function(){
+    //         console.log(a);
+    //     }
+    // }
+    // let f = fn();
+
+    
+    /*
+        global为了找this
+
+        typeof this !== 'undefined'?window:this
+    */
+    // (function(g,fn){
+    //     fn(g)
+    // })(this,function(){
+
+    // })
+    
+    (function(global,factory){
+        factory(global);
+    })(this,function(global,NoGlobal){//NoGlobal就是undefined
+        console.log(NoGlobal);
+
+        // if(obj.x  === NoGlobal){
+
+        // }
+
+        /*
+            A:报错，B:undefined C:null D:function(){}  E:window
+        */
+        function myQuery(){
+            //因为不能new自己，所以创建了一个$函数作为替身，这个替身拥有myQuery所有方法和属性
+            return new fn.init;//new myQuery; //递归
+        } 
+        
+
+        let fn = myQuery.prototype = {
+            v:'x.0',
+            constructor:myQuery,
+            css:function(){
+                console.log(1);
+            }
+        }
+
+        fn.init = function(){
+
+        }
+
+        /*
+            让$的实例化对象拥有myQuery的方法
+        */
+        fn.init.prototype = myQuery.prototype;
+
+        window.myQuery = $ = myQuery;
+    });
+
+
+    /*
+        低版本中undefined会被修改
+    */
+//    var undefined = 1;
+//    console.log(undefined); //低版本浏览器下，undefined就是1,undefined容易被修改，所以NoGlobal的意思就是不会被修改的undefined
+
+    
+    
+
+    console.log($);
+
+
+    $().css();
+
+
+
+    // function fn(){
+    //     window.a = 10;
+    //     return a;
+    // }
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div>
+    </div>
+    <div id="box2">
+            <button class="active">按钮一</button>
+            <button>按钮二</button>
+            <button>按钮三</button>
+            <div class="show">11111</div>
+            <div>22222</div>
+            <div>33333</div>
+        </div>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    const $box = $('#box');
+    const $btns = $box.find('button');
+    const $divs = $box.find('div');
+
+
+    $btns.click(function(){
+        //把当前的class添加好，把它的兄弟的class清除
+        $(this).addClass('active').siblings('button').removeClass('active');
+        //把当前按钮对应的class添加好，把它的兄弟的class清除，
+        $divs.eq($(this).index()).addClass('show').siblings('div').removeClass('show');
+    });
+
+
+    // $btns.click(function(){
+    //     $btns.removeClass('active');
+    //     $divs.removeClass('show');
+    //     $(this).addClass('active');
+    //     $divs.eq($(this).index()).addClass('show');
+    // });
+
+
+</script>
+</body>
+</html>

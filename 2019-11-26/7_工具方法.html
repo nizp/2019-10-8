@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        
+    </ul>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    /*
+        $.  
+
+        $.each
+
+        $.ajax()
+
+        fetch('url').then(e=>e.json()).then(d=>d)
+    */
+    // let ary = [1,2,3,4];  
+    // $.each(ary,function(i,item){
+    //     console.log(i,item)
+    // });
+
+
+    /*
+        https://www.baidu.com/s?id=12345&user=lilei&pass=123;
+
+
+        fetch('https://www.baidu.com/s?id=12345&user=lilei&pass=123').then(d=>d.json()).then(d=>{d})
+
+        axios()
+
+        $.ajax({
+            method:'post',
+            url:'https://www.baidu.com/s',
+            data:{
+                id:12345,
+                user:'lilei',
+                pass:123
+            },
+            success:function(data){
+
+            }
+        });
+
+
+    */
+    /*
+        https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1462,21099,18560,29567,29700,29220,26350&wd=s&req=2&csor=1&cb=fn
+    */
+    // https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1462,21099,18560,29567,29700,29220,26350&wd=s&req=2&csor=1&cb=fn
+    // $.ajax({
+    //     url:'https://www.baidu.com/sugrec?',
+    //     data:{
+    //         prod:'pc',
+    //         sugsid:'1462,21099,18560,29567,29700,29220,26350',
+    //         wd:'今天多少度'
+    //     },
+    //     dataType:'jsonp',
+    //     success:function(d){
+    //         // console.log(d);
+    //         d.g.forEach(item=>{
+    //             let $li = $('<li>'+ item.q +'</li>');
+    //             $('#ul').append($li);
+    //         })
+    //     }
+    // });
+
+    //拿数据简单，难的是拿到数据怎么办
+    // $.ajax({
+    //     url:'./1.json',
+    //     success:function(d){
+    //         console.log(d);
+    //     }
+    // });
+
+
+    // fetch('./1.json').then(e=>e.json()).then(d=>console.log(d));
+
+    
+    let obj = {
+        name:'小明'
+    }
+
+    // let obj2 = $.extend({},obj);   
+
+    // console.log(obj2 == obj);
+
+
+    // let ary = [1,2,[3,4]];
+
+    // let ary2 = $.extend(true,[],ary);   //true就代表深度克隆
+
+    // ary2[2].push(5);
+
+    // console.log(ary2);
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="txt"></textarea>  
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    /*
+        
+        深浅拷贝、扩展方法
+        $.extend  工具方法  -> $.xx()
+        $.fn.extend  功能方法  -> $().xx()
+
+        trimLeft
+
+
+    */
+
+    //扩展插件使用，extend里面写一个对象，对象的属性就是添加的方法名，值就是函数
+    // $.extend({
+    //     trimLeft:function(str){
+    //         return str.replace(/^\s+/,'');
+    //     }
+    // });
+
+    //功能方法（$()的方法）
+    $.fn.extend({
+        scrollH:function(){
+           return this[0].scrollHeight;
+        }
+    });
+
+    // console.log($.trimLeft('   12345'));
+
+    $(document).click(function(){
+        // console.log($('#txt').height())
+        // console.log($('#txt').innerHeight())
+        console.log($('#txt').scrollH());
+    });
+
+
+
+</script>
+</body>
+</html>

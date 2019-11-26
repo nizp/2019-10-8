@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box{
+    width:202px;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <!-- <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">11111</div>
+        <div>22222</div>
+        <div>33333</div> -->
+    </div>
+
+    <div id="box2"></div>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script src="tabs_x.0.js"></script>
+<script>
+    $('#box').tabs({
+        btns:['体育','新闻','娱乐']
+    }).dialog(); //$.fn.extend
+
+
+
+    // $('#box2').tabs();
+</script>
+</body>
+</html>

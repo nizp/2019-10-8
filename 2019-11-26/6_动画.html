@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:50px;
+    left:0;
+    /* transition: .5s; */
+}
+</style>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div id="box"></div>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    /*
+        hide
+        show 也是有动画的
+
+
+        在做jq动画的时候，记得使用stop(),把前面的动画清掉
+    */
+    $('#btn').click(function(){
+        // $('#box').hide(500);
+
+        // $('#box').toggle(500); //改变宽高、透明度
+
+        $('#box').stop().slideToggle(200); //改变高度
+
+        // $('#box').fadeToggle(200); //渐隐渐现
+    });
+
+
+
+    // $(document).click(function(){
+    //     // $('#box').css({
+    //     //     left:400
+    //     // })
+
+    //     // $('#box').delay(1000).animate({
+    //     //     left:400
+    //     // },3000);
+
+    //     // setInterval(() => {
+    //     //     $('#box').animate({
+    //     //         left:$('#box').offset().left + 100
+    //     //     },500);
+    //     // },1000);
+    // });
+</script>
+</body>
+</html>

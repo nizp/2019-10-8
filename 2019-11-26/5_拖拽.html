@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:0;
+    left:0;
+}
+#boxShadow{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    opacity: .3;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body id="body">
+    <div id="box"></div>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    /*
+        offset() -> 绝对位置
+        position() -> 基于父级的（offset）
+    */
+
+    let num = 1;
+    $('#box').mousedown(function(ev){
+        let $box2 = $('<div id="boxShadow"></div>');
+        $box2.css({
+            left:$('#box').offset().left,
+            top:$('#box').offset().top,
+        })
+        $(body).append($box2);
+
+        let disX = ev.pageX - $('#box').offset().left;
+        let disY = ev.pageY - $('#box').offset().top;
+        $(document).mousemove(function(ev){
+
+            let t = ev.pageY - disY;
+
+            // if(t < 100){
+            //     t = 0;
+            // }
+            
+            $box2.css({
+                left:ev.pageX - disX,
+                top:t
+            });
+        });
+
+        $(document).mouseup(function(ev){
+            $(document).off('mousemove');
+            $(document).off('mouseup');
+
+            $('#box').css({
+                left:$box2.offset().left,
+                top:$box2.offset().top
+            });
+
+            $box2.remove();
+            // num -= .1;
+            // $('#box').css({opacity:num})
+        });
+        return false;
+    });
+
+
+
+    // $('#box').mousedown(function(ev){
+    //     let disX = ev.pageX - $('#box').offset().left;
+    //     let disY = ev.pageY - $('#box').offset().top;
+
+    //     $(document).mousemove(function(ev){
+    //         $('#box').css({
+    //             left:ev.pageX - disX,
+    //             top:ev.pageY - disY
+    //         });
+    //     });
+
+    //     $(document).mouseup(function(){
+    //         $(document).off('mousemove');
+    //         // console.log('11111');
+    //         $(document).off('mouseup');
+    //     });
+
+    // });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    // const promise = new Promise((resolve, reject) => {
+    //     console.log(1)
+    //     resolve()
+    //     console.log(2)
+    // })
+    // promise.then(() => {
+    //     console.log(3)
+    // })
+    // console.log(4)
+
+
+    // let p = new Promise((resolve)=>{
+    //     setTimeout(() => {
+    //         resolve();
+    //     }, 0);
+    // });
+    // console.log(p);
+
+
+
+    // const promise1 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('success')
+    //     }, 1000)
+    // })
+    // const promise2 = promise1.then(() => {
+    //     throw new Error('error!!!')
+    // })
+ 
+    // console.log('promise1', promise1);//pending
+    // console.log('promise2', promise2);//pending
+    
+    // setTimeout(() => {
+    //     console.log('promise1', promise1);//resolved
+    //     console.log('promise2', promise2);//reject
+    // }, 2000);
+
+
+    
+    // const promise = new Promise((resolve, reject) => {
+    //     resolve('success1')
+    //     reject('error')
+    //     resolve('success2')
+    // })
+ 
+    // promise.then((res) => {
+    //     console.log('then: ', res)
+    // }).catch((err) => {
+    //     console.log('catch: ', err)
+    // })
+
+    // Promise.resolve(1)
+    // .then((res) => {
+    //     console.log(res);//1
+    //     return 2
+    // })
+    // .catch((err) => {
+    //     return 3
+    // })
+    // .then((res) => {
+    //     console.log(res);//2
+    // })
+
+
+    // const promise = new Promise((resolve, reject) => {
+    //     //宏任务
+    //     setTimeout(() => {
+    //         console.log('once'); //1
+    //         resolve('success')
+    //     }, 1000)
+    // })
+    
+    // const start = Date.now(); //现在的时间戳
+    // promise.then((res) => {
+    //     console.log(res+'1', Date.now() - start);//success > 1000
+    // })
+    // promise.then((res) => {
+    //     //success  ->  2比1要略大一点
+    //     console.log(res+'2', Date.now() - start)
+    // });
+
+
+    
+    //throw 抛出异常，说明代码错误，会进catch，如果是return new Error('error!!!')不会进catch
+    // Promise.resolve()
+    // .then(() => {
+    //     // throw new Error('error!!!')
+    //     return new Error('error!!!')
+    // })
+    // .then((res) => {
+    //     console.log('then: ', res)
+    //     // return []
+    // })
+    // .catch((err) => {
+    //     console.log('catch: ', err)
+    // })
+    // .then((res)=>{
+    //     console.log(res);// 102行的代码没有返回值，所以res是undefined
+    // });
+
+
+    //.then 或 .catch 返回的值不能是 promise 本身，否则会造成死循环
+    // const promise = Promise.resolve()
+    // .then(() => {
+    //     return promise
+    // })
+    // promise.catch(console.error)
+
+
+    
+    // Promise.resolve(1)
+    // .then(2)
+    // .then(Promise.resolve(3))
+    // .then(console.log)
+
+
+    // Promise.resolve()
+    // .then(function success (res) {
+    //     throw new Error('error')
+    // }, function fail1 (e) {
+    //     console.error('fail1: ', e)
+    // })
+    // .catch(function fail2 (e) {
+    //     console.error('fail2: ', e)
+    // })
+
+</script>
+</body>
+</html>

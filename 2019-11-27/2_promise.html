@@ -10,6 +10,37 @@
     /*
         Promise  -> 承诺
 
+
+        为什么要用promise？
+            promise解决了异步编程的问题
+
+            在then里面就走"同步"
+
+        
+        如何使用promise？
+
+            new Promise(function(resolve,reject){
+                //主线程
+                //当异步代码执行完，通过异步代码的结果去调用resolve或者reject
+
+                //异步代码有可能报错或者错误，如果报错或者错误就执行reject
+                //一般都是resolve(放异步的结果)
+            });
+
+            它有一个返回值，返回值是promise对象，这个对象有then方法
+            then(成功函数,失败函数)
+            第一个then  （微任务）
+                成功函数里面的参数就是异步的结果
+
+            第二个then （微任务）
+                第一个then的返回值
+
+
+            此时的知识点需要后期内容的铺垫和若干个异步请求实验总结才能领悟这个promise
+
+
+
+
         let p = new Promise(function(resolve,reject){
             resolve(5);
         });

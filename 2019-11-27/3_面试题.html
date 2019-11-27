@@ -90,44 +90,48 @@
 
 
 /**********************************************************/
+    /*
+        timeout(2000).then(()=>{成功后的结果})
 
-    const timeout = ms => new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
 
-    const ajax1 = () => timeout(2000).then(() => {
-        console.log('1');
-        return 1;
-    });
-    const ajax2 = () => timeout(1000).then(() => {
-        console.log('2');
-        return 2;
-    });
-    const ajax3 = () => timeout(2000).then(() => {
-        console.log('3');
-        return 3;
-    });
+        如果是用promise.all，三个请求都要请求完毕（不能保证谁先执行谁后执行完），才做别的事情
+    */
+    // const timeout = ms => new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve();
+    //     }, ms);
+    // });
 
-    const mergePromise = ajaxArray => {
-        let ary = [];
-        let r = Promise.resolve();
-        // 在这里实现你的代码
-        ajaxArray.forEach(item => {
-            r = r.then(item).then(res=>{
-                ary.push(item);
-                return ary;
-            });
-        });
+    // const ajax1 = () => timeout(2000).then(() => {
+    //     console.log('1');
+    //     return 1;
+    // });
+    // const ajax2 = () => timeout(1000).then(() => {
+    //     console.log('2');
+    //     return 2;
+    // });
+    // const ajax3 = () => timeout(2000).then(() => {
+    //     console.log('3');
+    //     return 3;
+    // });
+    // const mergePromise = ajaxArray => {
+    //     let r = Promise.resolve(); //创建一个成功的promise对象
+    //     // console.log(r);
+    //     let ary = [];
+    //     //每次循环的时候都把执行函数放到r.then里去执行，执行完的返回结果在ary每一项
+    //     ajaxArray.forEach(item=>{
+    //         r = r.then(item).then((d)=>{
+    //             ary.push(d);
+    //             return ary; //[1,2,3]
+    //         });
+    //     });
+    //     return r;
+    // };
 
-        return r;
-    };
-
-    mergePromise([ajax1, ajax2, ajax3]).then((data) => {
-        // console.log('done');
-        console.log(data); // data 为 [1, 2, 3]
-    });
+    // mergePromise([ajax1, ajax2, ajax3]).then((data) => {
+    //     console.log('done');
+    //     console.log(data); // data 为 [1, 2, 3]
+    // });
 
 // 要求分别输出
 // 1
@@ -135,6 +139,75 @@
 // 3
 // done
 // [1, 2, 3]
+
+
+/*
+    let a = 10; 
+    setTimeout(()=>{
+        a = 20;
+        console.log(a);
+    },1000)
+*/
+
+// const first = () => (new Promise((resolve, reject) => {
+//         console.log(3);//1
+//         let p = new Promise((resolve, reject) => {
+//             console.log(7); //2
+//             setTimeout(() => {
+//                 console.log(5); //6步
+//                 resolve(6);
+//             }, 0)
+//             resolve(1);
+//         });
+//         resolve(2);
+//         p.then((arg) => {
+//             console.log(arg);//6       4步
+//         });
+// }));
+
+//     first().then((arg) => {
+//         console.log(arg);// 2     5步
+//     });
+//     console.log(4); //3
+
+//374125
+//374256  如果注释掉160行代码，那么结果会为这个
+
+
+
+var urls = ['https://www.kkkk1000.com/images/getImgData/getImgDatadata.jpg', 'https://www.kkkk1000.com/images/getImgData/gray.gif', 'https://www.kkkk1000.com/images/getImgData/Particle.gif', 'https://www.kkkk1000.com/images/getImgData/arithmetic.png', 'https://www.kkkk1000.com/images/getImgData/arithmetic2.gif', 'https://www.kkkk1000.com/images/getImgData/getImgDataError.jpg', 'https://www.kkkk1000.com/images/getImgData/arithmetic.gif', 'https://www.kkkk1000.com/images/wxQrCode2.png'];
+
+console.log(urls)
+function loadImg(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = function () {
+            console.log('一张图片加载完成');
+            resolve();
+        }
+        img.onerror = reject;
+        img.src = url
+    })
+};
+
+function fn(n=0,m=3){
+    for(let i=n;i<m;i++){
+        if(!urls[i])return;
+        loadImg(urls[i]).then(()=>{
+            console.log(i)
+            if(i == 2 || i == 5 ||i == 7){ //2 5 7  
+                fn(m,m+3);//3,6    
+            }
+        });
+    }
+}
+fn(0,3);
+
+
+
+
+
+
 
 
 </script>

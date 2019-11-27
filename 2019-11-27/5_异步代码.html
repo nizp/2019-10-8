@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./jquery.min.js"></script>
+<script>
+
+    /*
+        同步
+        异步:
+    */
+
+    // setTimeout(() => {
+    //     a = 200
+    // }, 1000);  
+    // console.log(a); 
+
+   
+
+    // fetch('./1.json')
+    
+    console.log(1);
+
+    function myFetch(url){
+        return new Promise(function(resolve,reject){
+            $.ajax({
+                url,
+                success:function(data){ //请求之后的
+                    resolve(data);
+                },
+                error:reject
+            });
+        })
+    }
+
+    //race 在数组中只要有一个异步成功就返回这次成功的结果，all是数组中的异步操作都要成功才返回成功结果
+    let  p = Promise.race([myFetch('2.json'),myFetch('1.json')])
+
+    /*
+        then的第二个参数为失败函数，也可以不用写，直接在then函数之后.catch()
+        就可以了
+    */
+    p.then((d)=>{
+        console.log(d);
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+    // p.then((d)=>{
+    //     console.log(d);
+    // },(error)=>{
+    //     console.log(error)
+    //     // console.log(error.status);
+    // })
+
+
+    // let p = myFetch('1.json');
+
+    // p.then(d=>{
+    //     console.log(d);
+    //     console.log(d[0].name);
+    // });
+    
+    
+    
+
+    
+
+    // function ajax(callbcak){
+    //     callbcak();
+    // }
+    // ajax(function(){})
+    
+
+
+</script>
+</body>
+</html>

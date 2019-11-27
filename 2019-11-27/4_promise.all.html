@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    //http://img3.imgtn.bdimg.com/it/u=3677258552,564194221&fm=26&gp=0.jpg
+    //http://img0.imgtn.bdimg.com/it/u=3803702211,3145928971&fm=26&gp=0.jpg
+    //http://img5.imgtn.bdimg.com/it/u=2987519344,35541637&fm=26&gp=0.jpg 
+    
+
+    function promisePic(url){
+        return new Promise((resolve,reject)=>{
+            let img = document.createElement('img');
+            img.src =  url;
+            img.onload = function(){
+                resolve(img);
+            }
+            img.onerror = function(){
+                reject('错误');
+            }
+        });
+    }
+
+    let p1 = promisePic('http://img3.imgtn.bdimg.com/it/u=3677258552,564194221&fm=26&gp=0.jpg');
+    let p2 = promisePic('http://img0.imgtn.bdimg.com/it/u=3803702211,3145928971&fm=26&gp=0.jpg');
+    Promise.all([p1,p2]).then(([a,b])=>{
+        // console.log(a,b);
+        box.append(a);
+        box.append(b);
+       return promisePic('http://img5.imgtn.bdimg.com/it/u=2987519344,35541637&fm=26&gp=0.jpg')
+    },()=>{
+        console.log('错误')
+    }).then((img)=>{
+        box.append(img);
+    })
+
+
+</script>
+</body>
+</html>

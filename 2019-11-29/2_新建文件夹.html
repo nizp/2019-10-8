@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <div id="box">
+        <!-- <div class="folder">
+            <img src="./img/folder-b.png">
+            <input type="text"/>
+            <p>新建文件夹</p>
+        </div> -->
+    </div>
+<script src="./jquery.min.js"></script>
+<script>
+    let ary = [
+        {
+            title:'新建文件夹',
+            id:0
+        },
+        {
+            title:'新建文件夹(1)',
+            id:1
+        }
+    ];
+
+
+    /*
+        select  全选 + 聚焦  表单的
+    */ 
+
+    //1.生成内容
+
+    function render(arr){
+        $('#box').html('');
+        $.each(arr,(i,item)=>{
+            //创建文件夹
+            let $folder = $(`
+                <div class="folder">
+                    <img src="./img/folder-b.png">
+                    <input type="text"/>
+                    <p>${item.title}</p>
+                </div>
+            `);
+            $folder.find('input').hide();
+            $('#box').append($folder);
+        });
+    }
+    render(ary);
+
+    //2.点击创建文件夹
+    //先在box中创建一个folder的元素，然后当folder中的input失焦之后再添加数据到ary中
+    //然后通过最新的ary渲染页面即可
+    $('#btn').click(function(){
+        let $folder = $(`
+            <div class="folder">
+                <img src="./img/folder-b.png">
+                <input type="text" placeholder="请设置文件名"  value="新建文件夹"/>
+            </div>
+        `);
+        $('#box').append($folder);
+        //先插入在聚焦
+        let $txt = $folder.find('input');
+        $txt.select(); //选中聚焦
+        $txt.blur(function(){
+            //当失焦的时候把新的数据push到ary中，并且通过新的数据渲染页面
+            
+            /*
+                新建文件夹
+                新建文件夹(1)
+                新建文件夹(2)
+
+                新建文件夹(3)
+
+
+                新建文件夹(1).replace(/\(\d\)$/,'')
+
+            */
+            let val = $txt.val();
+            //看看是否重复命名
+            let bool = ary.map(item=>item.title).includes(val);
+            let nval = '';
+            let num = 1; 
+            nval = val; //把input中value给最新的value（最新的value就是最后的结果）
+            while(bool){
+                //如果重名了那么从1开始看有没有重名
+                let s = val.replace(/\(\d\)$/,'') + '('+ num++ +')';
+                bool = ary.map(item=>item.title).includes(s);
+                nval = s;
+            }
+            ary.push({
+                id:+new Date,
+                title:nval
+            });
+            render(ary);
+        });//失焦事件
+    });
+</script>
+</body>
+</html>

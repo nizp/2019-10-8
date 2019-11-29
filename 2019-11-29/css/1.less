@@ -1,0 +1,37 @@
+@r:1px;
+*{
+    margin:0;
+    padding:0;
+    font-size:12px;
+}
+.dib(){
+    display: inline-block;
+}
+.w(@a) {
+    width:@a * @r;
+}
+.folder{
+    float: left;
+    margin:10px;
+    padding:4px;
+    border:1px solid #ccc;
+    .w(100);
+    text-align: center;
+    img{
+        .w(80);
+    }
+    input{
+        .w(80);
+        margin:0 auto;
+        .dib();
+        text-align: center
+    }
+    p{
+        .w(80);
+        margin:0 auto;
+        text-align: center;
+    }
+}
+#btn{
+    margin-bottom:10px;
+}

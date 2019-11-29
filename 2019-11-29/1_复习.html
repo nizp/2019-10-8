@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        js可同步和异步
+
+        同步 -> 主线程
+        异步 -> 异步队列
+
+
+        异步的编程哪里不好？
+
+            代码不是单纯从上往下阅读，要考虑到同步异步的情况，会干扰判断
+            如果用回调函数的方式去解决，那么会出现回调地狱。
+
+            从上往下的阅读方式，方便开发人员调试和判断
+
+            promise解决异步的编程问题
+
+            new Promise((resolve,reject)=>{
+                //放入异步代码，把异步代码的结果放到resolve或者reject身上
+            });
+
+            then().then()
+
+
+            console.log(a);
+
+            代码有可能会报错的情况下，防止该代码报错，使用try，catch包一下就不会阻止错误代码下面的代码运行了
+            try{}catch(e){}
+
+
+            JSON -> 数据结构本质是字符串，像js对象或者数组
+
+            JSON.parse()  ->  必须要是标准格式，不是就报错
+            JSON.stringify ->  把对象转成JSON (函数和undefined会过滤)
+
+            <person>
+                <name>赵没来</name>  
+                <age>10</age>  
+            </person>
+
+
+            '{name:"赵没来",age:10}'
+
+
+        Promise.all([promise实例1,promise实例2...])   所有的promise实例都成功才算成功，只要有一个失败就都失败
+        Promise.race([promise实例1,promise实例2...]) 只要有一个成功就成功
+        
+        let p = Promise.resolve(); 成功promise实例
+        .then(成功,失败)
+        .then(成功).catch(失败)
+        .then(()=>1).then((d)=>{d就为1})
+
+
+
+    */    
+
+    // let a = 10;
+    // // while(true){
+
+    // // }
+    // setTimeout(() => {
+    //     a = 20;
+    // },0);
+    // console.log(a);
+
+
+    // function fn(){
+    //     // b;
+    //     // console.log(b);
+    //     try{
+    //         b;
+    //         console.log(b);
+    //     }catch(e){
+    //         console.log(e);
+    //         setTimeout(() => {
+    //             b = 20;
+    //             fn();
+    //         },2000);
+    //     }
+    // }
+    // fn();
+    // console.log(1);
+
+
+
+    // myPromise((resolve,reject)=>{
+    //     resolve();
+    //     console.log(123);
+    //     b;
+    // });
+
+    // function myPromise(callback){
+    //     let resolve = function(){
+    //         //resolve
+    //     }
+    //     let reject = function(){
+    //         //reject
+    //     }
+    //     try{
+    //         callback(resolve,reject);
+    //     }catch(e){
+
+    //     }
+    // }
+
+
+    // console.log(JSON.stringify({name:'尹'}))
+
+
+    // let j = JSON.stringify({name:'尹',age:9},function(key,val){
+    //     if(key === 'age'){
+    //         val = val<10?'0'+val:''+val;
+    //     }
+    //     return val;
+    // });
+
+    // console.log(j);
+
+
+
+    // new Promise((s,j)=>j()).then(()=>{
+    //     console.log(1);
+    // },()=>{
+    //     console.log(2);
+    // }).catch(()=>{
+    //     console.log(3);
+    // })
+
+
+
+</script>
+</body>
+</html>

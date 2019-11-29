@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+.folder {
+  float: left;
+  margin: 10px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  width: 100px;
+  text-align: center;
+}
+.folder img {
+  width: 80px;
+}
+.folder input {
+  width: 80px;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+}
+.folder p {
+  width: 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+#btn {
+  margin-bottom: 10px;
+}

@@ -25,6 +25,7 @@
 <body>
     <div id="box"></div>
     <div id="box2"></div>
+<script src="./bong.js"></script>
 <script>
 
     /*
@@ -38,31 +39,55 @@
                     *** 解除绑定必须是一个有名函数（要和绑定的函数对应）
 
     */
+    // box.addEventListener('mousedown',function(ev){
+    //     let {left,top:t} = this.getBoundingClientRect();
+    //     let disX = ev.pageX - left;
+    //     let disY = ev.pageY - t;
+
+    //     function m(ev){
+    //         let l = ev.pageX - disX;
+    //         let t = ev.pageY - disY;
+    //         let r = l + box.offsetWidth;
+    //         let b = t + box.offsetHeight;
+
+    //         let {left:l2,top:t2,bottom:b2,right:r2} = box2.getBoundingClientRect();
+
+    //         // console.log(box.getBoundingClientRect())
+    //         // console.log(r < l2, b < t2)
+    //         if(r < l2 || b < t2 || l > r2 || t > b2){
+    //             console.log('没碰到');
+    //             box2.style.background = 'skyblue';
+    //         }else{
+    //             console.log('碰到');
+    //             box2.style.background = 'pink';
+    //         }
+
+    //         box.style.cssText = `left:${l}px;top:${t}px;`;
+    //     }
+    //     function up(ev){
+    //         document.removeEventListener('mousemove',m); //解除函数
+    //         document.removeEventListener('mouseup',up);//解除函数
+    //     }
+    //     document.addEventListener('mousemove',m); //绑定函数
+    //     document.addEventListener('mouseup',up);//绑定函数
+
+    //     ev.preventDefault();
+    // });
+
+
     box.addEventListener('mousedown',function(ev){
         let {left,top:t} = this.getBoundingClientRect();
         let disX = ev.pageX - left;
         let disY = ev.pageY - t;
 
         function m(ev){
-            
-            let l = ev.pageX - disX;
-            let t = ev.pageY - disY;
-            let r = l + box.offsetWidth;
-            let b = t + box.offsetHeight;
-
-            let {left:l2,top:t2,bottom:b2,right:r2} = box2.getBoundingClientRect();
-
-            // console.log(box.getBoundingClientRect())
-            // console.log(r < l2, b < t2)
-            if(r < l2 || b < t2 || l > r2 || t > b2){
-                console.log('没碰到');
-                box2.style.background = 'skyblue';
-            }else{
-                console.log('碰到');
+            if(bong(box,box2)){
                 box2.style.background = 'pink';
-            }
+            }else{
+                box2.style.background = 'skyblue';
+            }   
 
-            box.style.cssText = `left:${l}px;top:${t}px;`;
+            box.style.cssText = `left:${ev.pageX - disX}px;top:${ ev.pageY - disY}px;`;
         }
         function up(ev){
             document.removeEventListener('mousemove',m); //解除函数
@@ -73,6 +98,9 @@
 
         ev.preventDefault();
     });
+
+
+
 </script>
 </body>
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:0;
+    height:0;
+    background:rgba(200,210, .3);
+    border:1px dashed green;
+    position: absolute;
+    left:0;
+    top:0;
+    display: none;
+}
+</style>
+</head>
+<body style="height:3000px">
+    <div id="box"></div>
+<script>
+    // class  Drag {
+    //     constructor(id) {
+    //         this.disX = this.disY = 0;
+    //         this.box = document.getElementById(id);
+    //     }
+    //     init(){
+    //         this.box.addEventListener('mousedown',this.d = this.down.bind(this));
+    //     }
+    //     down(ev){
+    //         let {left,top} = this.box.getBoundingClientRect();
+    //         this.disX = ev.pageX - left;
+    //         this.disY = ev.pageY - top;
+            
+    //         document.addEventListener('mousemove',this.mv = this.move.bind(this));
+    //         document.addEventListener('mouseup',this.u = this.up.bind(this));
+    //     }
+    //     move(ev){
+    //         this.box.style.top = ev.pageY - this.disY + 'px';
+    //         this.box.style.left = ev.pageX - this.disX + 'px';
+    //     }
+    //     up(){
+    //         document.removeEventListener('mousemove',this.mv);
+    //         document.removeEventListener('mouseup',this.u);
+    //     }
+    // }
+
+
+    class  Drag {
+        constructor(id) {
+            this.disX = this.disY = 0;
+            this.box = document.getElementById(id);
+        }
+        init(){
+            document.addEventListener('mousedown',this.d = this.down.bind(this));
+        }
+        down(ev){
+            let {left,top} = this.box.getBoundingClientRect();
+            this.disX = ev.pageX;
+            this.disY = ev.pageY;
+            this.box.style.display = 'block';
+
+            //按下的时候让box等于鼠标按下的位置
+            this.box.style.top = this.disY + 'px';
+            this.box.style.left = this.disX + 'px';
+
+            
+            document.addEventListener('mousemove',this.mv = this.move.bind(this));
+            document.addEventListener('mouseup',this.u = this.up.bind(this));
+        }
+        move(ev){
+
+            // if(ev.pageX - this.disX < 0 || ev.pageY - this.disY < 0){
+            //     this.box.style.top = (ev.pageY) + 'px';
+            //     this.box.style.left = (ev.pageX) + 'px';
+            // }
+
+             /*
+                往右移动left和top是不动的
+
+                    move的值 - down的值如果大于0，就是右边，否则就是左边
+
+                往左移动的时候才需要改变left和top值
+
+                但是我们又发现了另一个突破点，就是按下的值和移动的值比
+
+                如果说，按下的值比移动的大，那么left值就是移动的值
+                如果说，移动的值比按下的值大，那么left值就是按下的值
+                所以得到下面的公式。
+            */
+            
+            this.box.style.top = Math.min(ev.pageY,this.disY) + 'px';
+            this.box.style.left = Math.min(ev.pageX,this.disX) + 'px';
+            
+            console.log(this.disX,ev.pageX)
+
+           
+
+            //移动的距离 - 按下的距离 = 移动了多少距离
+            this.box.style.width = Math.abs(ev.pageX - this.disX) + 'px';
+            this.box.style.height = Math.abs(ev.pageY - this.disY) + 'px';
+
+        }
+        up(){
+            this.box.style.height = this.box.style.width = 0;
+            this.box.style.display = 'none';
+            document.removeEventListener('mousemove',this.mv);
+            document.removeEventListener('mouseup',this.u);
+        }
+    }
+    let d = new Drag('box');
+    d.init();
+</script>
+</body>
+</html>

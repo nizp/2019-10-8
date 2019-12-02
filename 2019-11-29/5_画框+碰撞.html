@@ -68,6 +68,8 @@
         move(ev){
 
             
+            this.box.style.top = ev.pageY-this.disY>0?this.disY:ev.pageY+ 'px';
+
             this.box.style.top = Math.min(ev.pageY,this.disY) + 'px';
             this.box.style.left = Math.min(ev.pageX,this.disX) + 'px';
             

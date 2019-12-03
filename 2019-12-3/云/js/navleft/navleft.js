@@ -21,22 +21,20 @@ $del.click(function(){
 
 //重命名
 $rename.click(function(){
+    returnVal = true;
     let reData = list.filter(item=>item.checked); 
-
-    
-
     if(list.some(item=>item.checked)){
         if(reData.length === 1){
             /*
                 reData.title = val   (不能重名)
             */
-           let $folder = $folders.find('.active');
-           let $span = $folder.find('span');
-           let $txt = $folder.find('input');
-           $span.hide();
-           $txt.css('display','block');
-           $txt.select();
-           $txt.blur(function(){
+            let $folder = $folders.find('.active');
+            let $span = $folder.find('span');
+            let $txt = $folder.find('input');
+            $span.hide();
+            $txt.css('display','block');
+            $txt.select();
+            $txt.blur(function(){
                //不能重名    
                /*
                     1.用户修改了吗？没有修改就不动，有就修改
@@ -59,12 +57,16 @@ $rename.click(function(){
                         console.log('不好意思,你重名了');
                         $txt.select();
                     }else{
+                        //当修改成功之后就要阻止模型行为。
+                        returnVal = false; 
                         data[id].title = val;
                         data[id].checked = false;
                         render(pid);
                     }
                 }
-           });
+            });
+
+
         }else{
             alert('只能选择一个文件');
         }

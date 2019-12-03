@@ -32,17 +32,17 @@
 </style>
 </head>
 <body style="height:3000px">
-    <!-- <input type="text" id="txt">
-    <img id="img"src="./timg.jpg" alt="" srcset=""> -->
+    <input type="text" id="txt">
+     <!--<img id="img"src="./timg.jpg" alt="" srcset=""> -->
 
-    <a href="http://www.baidu.com" id="aa">去百度</a>
+    <!-- <a href="http://www.baidu.com" id="aa">去百度</!-->
 
-    <ul id="ul">
+    <!-- <ul id="ul">
         <li>我的帖子</li>
         <li>用户管理</li>
         <li>我的关注</li>
         <li>我的好兄弟</li>
-    </ul>
+    </ul> -->
 
 
 
@@ -63,19 +63,19 @@
         oncontextmenu 鼠标右键
     */
 
-    // document.onkeydown = function(ev){
-    //     if(ev.keyCode === 32){
-    //         // console.log(ev);
-    //         // ev.returnValue = false;
-    //         return false;
-    //     }
-    //     return false;
-    // }
+    document.onkeydown = function(ev){
+        if(ev.keyCode === 32){
+            // console.log(ev);
+            // ev.returnValue = false;
+            return false;
+        }
+        return false;
+    }
 
-    // txt.onkeydown = function(ev){
-    //     console.log(1);
-    //     ev.cancelBubble = true;
-    // }
+    txt.onkeydown = function(ev){
+        // console.log(1);
+        ev.cancelBubble = true;
+    }
 
 
     // img.onmousedown = function(){
@@ -105,11 +105,11 @@
 
     let yan = true;
 
-    aa.addEventListener('click',function(ev){
-        // ev.returnValue = false;
-        // return false;
-        ev.preventDefault();
-    })
+    // aa.addEventListener('click',function(ev){
+    //     // ev.returnValue = false;
+    //     // return false;
+    //     ev.preventDefault();
+    // })
 
     // aa.onclick = function(){
     //     if(!yan){

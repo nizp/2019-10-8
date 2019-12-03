@@ -4,7 +4,7 @@
     <span>我的文档</span> -->
 </div> */}
 //面包屑功能
-const {getParents,bong} = tools;
+const {getParents,bong,getChild,getChilds} = tools;
 const $breadnNav = $('.bread-nav');
 
 let list = null;

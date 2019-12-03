@@ -8,6 +8,11 @@ let tools = (function(){
         return ary.filter(item=>data[item].pid === id).map(item=>data[item]);
     }
 
+    function getChilds(id=-1){
+        let ary = Object.keys(data); 
+        return ary.filter(item=>data[item].pid === id).map(item=>data[item]);
+    }
+
     //专门用来找一个父级的
     function getParent(id){
         //data[id].pid 是个数字   data[data[id].pid]
@@ -44,6 +49,7 @@ let tools = (function(){
     return {
         getChild,
         getParents,
-        bong
-    }
+        bong,
+        getChilds
+    } 
 })();

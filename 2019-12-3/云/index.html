@@ -46,13 +46,16 @@
             </div>
         </header>
         <section id="section">
-            <div class="tree-menu" class="fix" onselectstart="return false;">
-                <!-- <ul>
+            <div class="tree-menu fix" onselectstart="return false;">
+                <ul>
                     <li>
                         <div class="tree-title tree-ico open">
                             <span><i></i>微云</span>
                         </div>
-                        <ul>
+                        
+                    </li>
+                </ul>
+                        <!-- <ul>
                             <li>
                                 <div class="tree-title tree-ico close">
                                     <span><i></i>我的文档</span>
@@ -178,7 +181,14 @@
             <h2>选择存储位置</h2>
             <p class="folderName">我的文档</p>
             <div class="content">
-
+                    <ul id="model_list">
+                        <li>
+                            <div class="tree-title tree-ico open">
+                                <span><i></i>微云</span>
+                            </div>
+                            
+                        </li>
+                    </ul>
             </div>
             <div class="footer">
                 <input type="button" name="" class="cancel" value="取消">
@@ -217,7 +227,9 @@
     <script src="js/folders/folders.js"></script>
     <script src="js/navleft/navleft.js"></script>
     <script src="js/kuang/kuang.js"></script>
+    <script src="js/tree/tree.js"></script>
     <script>
+       
         /*
             如果你把云做好，你就走进了顺利就业的那20%的人群中。
             70%

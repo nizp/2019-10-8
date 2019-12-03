@@ -1,5 +1,6 @@
 const $del = $('#del');
 const $rename = $('#rename');
+const $remove = $('#remove');
 //删除
 $del.click(function(){
     //去判断至少要有一个文件被选中，如果都没被选中，说明找不到要删除的文件
@@ -75,6 +76,104 @@ $rename.click(function(){
         alert('请选择文件');
     }
 });
+
+//modal-tree
+
+let that = null;
+let okcode = -1;
+function createModelTree(num){
+    //通过num找到对应的子级
+    let ary = getChild(data,num);
+    if(!ary.length)return;
+    //只要有自己就创建一个ul，因为ul中要插入li
+    let $ul = $('<ul style="padding-left:5px"></ul>');
+    //循环子级数据，生成很多的li
+    ary.forEach(item=>{
+        let $li = $(`
+            <li>
+                <div class="tree-title tree-ico">
+                    <span><i></i>${item.title}</span>
+                </div>
+            </li>
+        `);
+
+        if(!getChild(data,item.id).length){
+            $li.find('i').css('background','none');
+        }
+
+        $li.off().click(function(){
+            let reData = list.filter(item=>item.checked); 
+            //点击li的时候，看看点击的文件和要移动的文件是不是有直系关系
+            //如果有直系关系，那么就点不开
+            if(reData.some(d=>d.id === item.id)){
+                okcode = 'error';
+                return;
+            }else{
+                okcode = item.id;
+            }
+
+           
+
+            if(that){
+                that.css({background:'none'});
+            }
+            $(this).find('span').css({
+                background:'#ccc'
+            });
+            that = $(this).find('span');
+
+            if(this.children[0].classList.toggle('open')){
+                $(this).append(createModelTree(item.id));
+            }else{
+                // okcode = item.id; 
+                $(this).find('ul').remove();
+            }
+            
+           
+            return false;
+        });
+        //再把li放到ul中
+        $ul.append($li);
+    }); 
+    //返回当前创建的ul，里面有很多的li(文件夹)
+    return  $ul;
+}
+
+
+
+
+const $model_list = $('#model_list').children();
+$remove.off().click(function(){
+    let reData = list.filter(item=>item.checked); 
+    if(!reData.length){
+        console.log('木有移动的文件');
+    }else{
+        $('.modal-tree').show(); //打开移动的框
+        $model_list.find('ul').remove();
+        $model_list.append(createModelTree(0)); 
+    }
+
+    const ok = $('.modal-tree').find('.ok');
+    ok.off().click(function(){
+        // console.log(okcode);
+        if(okcode === 'error'){
+            console.log('非法操作');
+            return;
+        }
+        let id = reData[0].pid; //存一下改之前的pid，为了一会刷新页面
+        reData.forEach(item=>{
+            item.pid = okcode;
+            item.checked = false;
+        });
+        $tree_menu.children().children().append( createTree(0,true) );
+        render(id);
+        
+        $('.modal-tree').hide();
+    });
+
+})
+
+
 
 
 

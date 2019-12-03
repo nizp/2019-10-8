@@ -64,6 +64,9 @@ function render(num=0){
             render(id);
             createMenu(id); //为了联动面包屑
         });
+
+        //阻止按下文件夹的默认行为
+        $folder.mousedown(function(){return false;});
        
         $folders.append($folder);
     });
@@ -77,7 +80,6 @@ function render(num=0){
         d.forEach(item=>item.checked = !every);//先同步数据
         render(num);//再通过数据渲染页面
     });
-
 
     if(every){
         $checkedAll.addClass('checked');

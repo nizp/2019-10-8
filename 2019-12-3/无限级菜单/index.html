@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			html {
+
+				width: 100%;
+				height: 100%;
+			}
+			body{
+				margin: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			.main {
+				width: 100%;
+				height: 100%;
+				background: url(./image/bg.png) no-repeat;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+			.logo {
+				display: block;
+				width: 200px;
+				height: 55px;
+				
+				margin: 20px auto;
+			}
+			.tree{
+				height:100%;
+				overflow: auto;
+			}
+			ul{
+				list-style: none;
+				font-size: 22px;
+				color: #8c949c;
+				font-weight: bold;
+				width:100%;
+				/* height:100%; */
+			}
+
+			ul li {
+				position: relative;
+				padding-left: 10px;
+				/* height:32px; */
+				overflow: hidden;
+			}
+
+			ul li div{
+				height: 98%;
+				/* width: 1px; */
+				border-left: 1px dotted #ccc;
+				/* position: absolute; */
+				/* left: 34px; */
+				/* top: 18px; */
+				/* margin-left :4px; */
+				line-height:32px;
+			}
+
+			ul ul{
+				display: none;
+			}
+
+			ul li span {
+				display: block;
+				line-height: 32px;
+				padding-left: 15px;
+				background: url(./image/icon.png) no-repeat left 500px;
+				width:20px;
+				height:20px;
+				float : left;
+			}
+			
+			ul li span.add {
+				background-position: 0px -32px;
+			}
+			ul li span.line {
+				background-position: 0px 11px;
+			}
+
+
+			.tree {
+				margin-left: 300px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<a href="#" class="logo"></a>
+			<div class="tree">
+				<ul id="oUl">
+					<!-- <li>
+						<span class="add"></span>
+						<div>第一级菜单</div>
+						<ul>
+							<li>
+								<span class="line"></span>
+								<div>第二级菜单</div>
+							</li>
+							<li>
+								<span class="line"></span>
+								<div>第二级菜单</div>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<span class="line"></span>
+						<div>第一级菜单</div>
+					</li>
+					<li>
+						<span class="line"></span>
+						<div>第一级菜单</div>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</body>
+<script>
+	//递归组件
+
+	fetch('data.json').then((d)=>d.json()).then(d=>{
+		// console.log(d);
+		function render(d){
+			let temp = '';
+			d.forEach((item,i)=>{
+				temp += `
+					<li>
+						<span class="${item.child?'add':''}"></span>
+						<div>${item.title}</div>
+						${item.child?`<ul>${render(item.child)}</ul>`:''}
+					</li>
+				`;
+			});
+			return temp;
+		}
+		// console.log(render(d))
+		oUl.innerHTML = render(d);
+
+
+		oUl.onclick = function(ev){
+			//点击的元素是否为div
+			if(ev.target.tagName === 'DIV'){
+				//div下有木有ul
+				let ul = ev.target.nextElementSibling;
+				//如果有ul就让ul打开
+				if(ul){
+					//通过classList.toggle去判断是否当前添加line
+					let b = ul.parentNode.children[0].classList.toggle('line');
+					// ul.style.display = b?'block':'none';
+					if(b){
+						ul.style.display = 'block';
+					}else{
+						ul.style.display = 'none';
+						// console.log(ul.querySelectorAll('ul'))
+						ul.querySelectorAll('ul').forEach(ele=>{
+							ele.style.display = 'none';
+							ele.parentNode.children[0].className = 'add';
+						});
+
+					}	
+					// console.log(b);
+				}
+			}
+		};
+
+
+
+	});
+</script>
+</html>

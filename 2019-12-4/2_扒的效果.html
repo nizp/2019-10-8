@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+body{
+	background:#CFCFCF;
+}
+.image {
+  position: relative;
+  overflow:hidden;
+  width: 300px;
+  height: 450px;
+}
+img {
+  width:300px;
+  height: 450px;
+}
+em {
+  position: absolute;
+  display:block;
+  width: 200px;
+  height: 450px;
+  background:#fff;
+  top: 0;
+  left: -400px;
+  transform:skewY(25deg);
+  transform: skewX(-25deg);
+  background:linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+}
+.image:hover em {
+  left:400px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+ }
+</style>
+</head>
+<body>
+        <div id="container">
+                <div class="image">
+                  <img src="http://ww4.sinaimg.cn/mw600/005vbOHfgw1ercvg85sr0j30jg0t6tdq.jpg" 
+            alt="Hello World" />
+                  <em></em>
+                </div>
+            </div>
+            <script type="text/javascript" src="http://cdn.gbtags.com/jquery/1.11.1/jquery.min.js">
+            </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    position:absolute;
+    top:0;
+    left:300px;
+    background:violet;
+} 
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    // let ary = [10,-10,8,-8,6,-6,4,-4,2,-2,0];
+    box.onclick = function(){
+        fn();
+    }
+    function fn(){
+        douMove(box,'left',10,function(){
+            box.style.transition = '.3s';
+            box.style.top = box.offsetTop + 50 + 'px';
+            setTimeout(function(){
+                box.style.transition = '';
+                fn();
+            },350);
+        });
+    }
+
+
+    function douMove(obj,attr,n=10,cb=function(){}){
+        let num = 0,ary = [];
+        let b = parseFloat(getComputedStyle(box).left);
+
+        for(let i=n;i>=0;i-=2){
+            ary.push(i,-i);
+        }
+
+        (function dou(){
+            box.timer = requestAnimationFrame(function(){
+                dou();
+                box.style.left = b + ary[num++] + 'px';
+                if(num >= ary.length){
+                    cancelAnimationFrame(box.timer);
+                    num = 0;
+                    cb();
+                    console.log(box.timer)
+                }
+            });
+        })();
+    }
+</script>
+</body>
+</html>

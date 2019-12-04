@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="outer">
+    <!-- <div id="mask">
+        <div id="prev"></div>
+        <div id="next"></div>
+    </div> -->
+    <!-- <div id="swiper"> -->
+        <!-- <div><img src="img/banner1.jpg" alt=""></div>
+        <div><img src="img/banner2.jpg" alt=""></div> -->
+    <!-- </div> -->
+    <ul id="focus1">
+        <!-- <li class="select"></li>
+        <li></li>
+        <li></li>
+        <li></li> -->
+    </ul>
+</!-->
+<script src="./js/tween.js"></script>
+<script src="./js/swiper.js"></script>
+<script>
+    fetch('./json/banner.json').then(d=>d.json()).then(d=>{
+        // console.log(d);
+        new Swiper('#outer',{
+            picAry:d.map(item=>item.img),
+            navigation:true,
+            loop:true,
+            // autoplay:{
+            //     stopOnLastSlide:true
+            // },
+            pagination:{ //分页器
+                el:'#focus1',
+                events:true
+            },
+
+        });
+    });
+</script>
+</body>
+</html>

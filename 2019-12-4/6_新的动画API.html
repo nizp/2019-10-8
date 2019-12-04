@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        width:100px;
+        height:100px;
+        background:slategrey;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+    </style>
+</head>
+<body>
+    <button id="btn">关闭</button>
+    <div id="box"></div>
+    <script>
+
+        /*
+            写一个有名自执行函数，里面使用requestAnimationFrame
+            在里面调用有名自执行函数
+
+            也有一个返回值，返回值数字（编号）
+
+            cancelAnimationFrame(编号)  关闭动画
+        */
+       let timer;
+       box.onclick = function(){
+            (function move(){
+                timer = requestAnimationFrame(function(){
+                    box.style.left = box.offsetLeft + 10 + 'px';
+                    move();
+                })
+            })();
+       }
+
+       btn.onclick = function(){
+           cancelAnimationFrame(timer);
+       }
+    </script>
+</body>
+</html>

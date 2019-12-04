@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+#outer{
+    position: relative;
+    width:1000px;
+    height:300px;
+    margin:30px auto;
+    overflow: hidden;
+}
+#swiper{
+    position: absolute;
+    left:0;
+    width:6000px;
+    height:300px;
+}
+#swiper div{
+    width:1000px;
+    height:300px;
+    float: left;
+}
+#focus1{
+    width:120px;
+    height:30px;
+    position: absolute;
+    left:50%;
+    bottom :15px;
+    margin-left:-60px;
+    z-index: 10;
+}
+#focus1 li{
+    width:25px;
+    height:25px;
+    margin-right:5px;
+    float:left;
+    border-radius: 50%;
+    background: #ffffff;
+}
+#focus1 li.select{
+    background: lightcoral;
+}
+
+#mask{
+    width:1000px;
+    height: 300px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    font-size:0;
+}
+#prev,#next{
+    width:50%;
+    height:300px;
+    display: inline-block;
+}
+
+#prev::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('../img/pre.png') 0 0 no-repeat;
+    position:absolute;
+    left:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#next::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('../img/pre.png') -50px 0 no-repeat;
+    position:absolute;
+    right:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#prev:hover::after,#next:hover::after{
+    opacity: 1;
+}

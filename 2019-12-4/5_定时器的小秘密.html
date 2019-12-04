@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:slategrey;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script src="./tween.js"></script>
+<script>
+    // c*(t/d) + b;    
+    var timer;
+
+    /*
+        c:总长度
+        t:当前走了多少时间
+        d:总时间
+        b:初始的距离
+
+        当前走了多少时间(动) / 总时间(固定的) * 总长度(固定的) + 初始的距离(固定的)
+
+        总时间 = 10秒
+        总长度 = 500px
+        
+    */
+
+    box.onclick = function (){
+        // alert(1)
+        move(box,1000,1000,'left');
+    }
+
+    /*
+        定时器用运动容易掉帧，而且性能会差，所以使用requestAnimationFrame
+    */
+
+    function move(obj,c,d,attr){
+        var timer;
+        var t = 0;
+        var b = parseFloat(getComputedStyle(obj)[attr]); //带单位
+        c = c - b; //总长度 - 开始的位置 = 应该走的步长
+        (function start(){
+            timer = requestAnimationFrame(function (){
+                start();
+                t += 16.7;//每16.7毫秒走了多少时间
+                //如果当前的时间大于等于总时间，那么就让当前时间等于总时间,为了让停下来的距离和设置距离一致
+                if(t >= d){
+                    t = d;
+                    cancelAnimationFrame(timer);
+                }
+                obj.style[attr] = Tween.linear(t, b, c, d) + 'px';//c*(t/d) + b + 'px'; //在当前时间走了多少步长
+            });
+        })()
+    }
+
+</script>
+</body>
+</html>

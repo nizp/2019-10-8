@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" multiple name="" id="file" /><button id="btn">按钮</button>
+
+<script>
+    /*
+        如何拿到用户传入的数据？
+
+        在file控件元素下有一个files属性，files[0]就是上传的数据
+
+    */
+    btn.onclick = function(){
+        // console.dir(file.files[0]);
+        console.dir(file.files.length);
+    }
+</script>
+</body>
+</html>

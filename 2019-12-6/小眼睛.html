@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+
+#box{
+    width: 106px;
+    height:20px;
+    position: relative;
+    border:1px solid #ccc;
+}
+#icon{
+    display: inline-block;
+    width:32px;
+    height:20px;
+    float: right;
+    border-left:1px solid #ccc;
+    cursor: pointer;
+    background-size:20px;
+    background-repeat:no-repeat ;
+    background-position:center center;
+}
+#txt{
+    width:68px;
+    height:20px;
+    border:none;
+    outline: none;
+    float:left;
+}
+.close{
+    background-image: url('./img/眼睛_闭.png');
+}
+.open{
+    background-image: url('./img/眼睛_开.png');
+}
+</style>
+</head>
+<body>
+    <section id="box" onmousedown="return false"> 
+        <input 
+            autofocus  
+            maxlength="8"
+            type="password" id="txt"><div id="icon" class="close"></div>
+    </section>
+<script>
+    
+    txt.onmousedown = function(ev){
+        ev.cancelBubble = true;
+    }
+
+    icon.onclick = function(){
+        if(this.classList.toggle('open')){
+            txt.type = 'text';
+        }else{
+            txt.type = 'password';
+        }
+    }
+</script>
+</body>
+</html>

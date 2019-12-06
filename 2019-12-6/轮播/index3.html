@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index2.css">
+<style>
+#mask{
+    width:1000px;
+    height: 300px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 999;
+    font-size:0;
+}
+#prev,#next{
+    width:50%;
+    height:300px;
+    display: inline-block;
+}
+
+#prev::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') 0 0 no-repeat;
+    position:absolute;
+    left:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#next::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') -50px 0 no-repeat;
+    position:absolute;
+    right:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#prev:hover::after,#next:hover::after{
+    opacity: 1;
+}
+
+
+</style>
+</head>
+<body>
+<div id="outer">
+    <div id="mask">
+        <div id="prev"></div>
+        <div id="next"></div>
+    </div>
+    <div id="swiper">
+        <div><img src="" alt="" id="img1"></div>
+        <div><img src="" alt="" id="img2"></div>
+    </div>
+</div>
+<script>
+    fetch('./json/banner.json').then(d=>d.json()).then(d=>{
+        let num = 0;
+
+        //先初始化图片
+        img1.src = d[num].img;
+        img2.src = d[num+1].img;
+        const w = outer.offsetWidth; //计算运动的距离
+        
+        next.onclick = function(){
+            num ++;
+            //始终让第二个img是下一张图片
+            img2.src = d[num%=3].img;
+            //让swiper运动到一个outer的width
+            swiper.style.transition = '.5s';
+            swiper.style.left = - w + 'px';
+            //运动完之后
+            setTimeout(() => {
+                //把第一张图片换成第二张图片，是为了保证拉回来的时候用户看到的是当前这张
+                img1.src = d[num].img;
+                //清掉swiper的transition，为了拉回来的时候没有过度效果
+                swiper.style.transition = 'none';
+                //拉回来
+                swiper.style.left = 0;
+            }, 510);
+        }
+    });
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+<style>
+#mask{
+    width:1000px;
+    height: 300px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 999;
+    font-size:0;
+}
+#prev,#next{
+    width:50%;
+    height:300px;
+    display: inline-block;
+}
+
+#prev::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') 0 0 no-repeat;
+    position:absolute;
+    left:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#next::after{
+    content: "";
+    width:28px;
+    height: 45px;
+    background:url('./img/pre.png') -50px 0 no-repeat;
+    position:absolute;
+    right:0;
+    top:128px;
+    opacity: 0;
+    transition: 1s;
+    cursor: pointer;
+}
+#prev:hover::after,#next:hover::after{
+    opacity: 1;
+}
+
+
+</style>
+</head>
+<body>
+<div id="outer">
+    <div id="mask">
+        <div id="prev"></div>
+        <div id="next"></div>
+    </div>
+    <div id="swiper">
+        <!-- <div><img src="img/banner1.jpg" alt=""></div>
+        <div><img src="img/banner2.jpg" alt=""></div> -->
+    </div>
+    <ul id="focus1">
+        <li class="select"></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="./js/tween.js"></script>
+<script>
+    fetch('./json/banner.json').then(d=>d.json()).then(d=>{
+        let temp = '';
+        temp = d.map(item=>`<div><img src="${item.img}" alt=""></div>`).join('');
+        swiper.innerHTML = temp;
+        const len = d.length;
+        const lis = focus1.children;
+        let z = 3;
+        
+        const swiperChild = swiper.children;
+        let num = 0,timer;
+
+
+        function change(){
+            for(let i=0;i<len;i++){
+                lis[i].className = '';
+            }
+            lis[num].className = 'select';
+        }
+
+        next.onclick = left;
+
+        outer.onmouseenter = function(){
+            clearInterval(timer);
+        }
+        outer.onmouseleave = function(){
+            timer = setInterval(() => {
+                left();
+            }, 3000);
+        }
+
+
+        timer = setInterval(() => {
+            left();
+        }, 3000);
+        
+        
+        function left(){
+            move({
+                el:swiperChild[num],
+                attr:{
+                    opacity:0
+                }
+            });
+            num ++;
+            num %= len;
+            change();
+            move({
+                el:swiperChild[num],
+                attr:{
+                    opacity:1
+                }
+            });
+        }
+
+
+        prev.onclick = function(){
+            move({
+                el:swiperChild[num],
+                attr:{
+                    opacity:0
+                }
+            });
+            num --;
+            if(num < 0){
+                num = len-1;
+            }
+            change();
+            swiperChild[num].style.zIndex = z++;
+            move({
+                el:swiperChild[num],
+                attr:{
+                    opacity:1
+                }
+            });
+        }
+
+        
+
+
+
+    });
+
+    
+</script>
+</body>
+</html>

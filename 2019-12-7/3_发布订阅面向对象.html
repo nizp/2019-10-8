@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+
+        class O {
+            constructor() {
+                this.subscribe = {};//大的订阅池
+            }
+            add(obj,evName,fn){
+                this.subscribe[evName] = this.subscribe[evName] || [];
+                this.subscribe[evName].push(fn);
+
+              
+            }
+            publish(obj,evName){
+                if(!this.subscribe[evName]) return null;
+                this.subscribe[evName].forEach(item=> item.call(obj) );
+            }
+            removeEvent(obj,evName,fn){
+                if(!this.subscribe[evName]) return null;
+                for(let i=0;i< this.subscribe[evName].length ; i++){
+                    if(this.subscribe[evName][i] === fn){
+                        this.subscribe[evName].splice(i,1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // (function(){
+        //     "use strict"
+        //      function aa(){
+        //         // "use strict"  //严格模式
+        //         // var a = 10;
+        //         console.log(this);
+        //     }
+        //     aa();
+        // })();
+
+       
+
+
+        let o = new O;
+
+
+        function fn(){
+
+            let aaa = 10;
+
+            o.add(btn,'咔嚓',function(){  //A
+                alert('1');
+                function a(){
+                    alert('aa')
+                    aaa = 20;
+                }
+                a();
+               
+            });
+
+            o.add(btn,'咔嚓',function(){ //B
+                alert('2');
+                function a(){
+                    alert('ba')
+                    aaa = 30;
+                }   
+                a();
+                console.log(aaa);
+            });
+        }
+        fn();
+        
+
+
+
+
+
+
+
+
+        btn.onclick = function(){
+            o.publish(btn,'咔嚓');
+        }
+
+
+       
+
+
+    </script>
+</body>
+</html>

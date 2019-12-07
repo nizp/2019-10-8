@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <video src="https://www.w3school.com.cn/i/movie.ogg"></video>
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575694077886&di=1b8cc653f7fdfc331b8558513b7d4668&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fb%2F568f5db020ec0.jpg" alt="" srcset="">
+    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575694077886&di=7e770de243b07e2bf9d9b6e2c520fa3f&imgtype=0&src=http%3A%2F%2Fimg.kanghui.org%2Fmeinv%2F2017%2F11%2F14%2Fufbap5c00qo.jpg" alt="" srcset="">
+<script src="jquery.min.js"></script>
+<script>
+    /*
+        onload   当静态文件加载完之后执行事件中的代码（适合游戏开发）
+
+        弊端:
+            当静态资源比较大，加载慢的时候，会影响用户体验
+
+        ready事件  当DOM加载完成时触发，只管标签，不管静态资源(适合网页开发)
+
+            原生的ready高版本浏览器使用
+                DOMContentLoaded
+            
+            低版本IE浏览器中是通过onreadystatechange事件去监听的,监听在
+            IE下只要DOM加载成功，会有一个叫做doScroll('left')一个方法
+            但是如果DOM没有加载成功是没有这个方法的，那么会报错，所以
+            使用try去监听
+
+            function ready(){
+                try{
+                    document.documentElement.doScroll('left')
+                    onready(function(){
+                        fn()
+                    })
+                }cath(e){
+                    setTimeout(ready,500)
+                }
+            }
+
+            onready(function(){
+                
+            })
+
+
+            $(function(){
+                let a = 10;
+            });
+
+            $(document).ready(function(){
+
+            })
+
+            DOMContentLoaded
+
+            DOMMouseScroll
+
+    */
+
+    // window.onload = function(){
+    //     alert(1);
+    // }
+
+    // $(document).ready(function(){
+    //     alert(1);
+    // });
+
+    document.addEventListener('DOMContentLoaded',function(){
+        alert(1);
+    });
+
+    // $(function(){
+    //     alert(1);
+    // });
+
+</script>
+</body>
+</html>

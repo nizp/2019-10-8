@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+}
+#box2{
+    width:100px;
+    height:100px;
+    background: yellow;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+<script>
+    /*
+        ontouchstart  手指按下
+        ontouchmove   手指滑动
+        ontouchend    手指抬起
+
+        它们比鼠标事件更加快捷，大大提升用户体验
+
+        上面的三大事件，是一套事件，也就是说，在某个元素上按下之后，
+        在屏幕的任意位置move或者end都会触发
+
+
+
+
+
+
+        onmousedown
+        onmousemove
+        onmouseup
+    */
+   
+    // box.onclick = function(){
+    //     console.log(1);
+    // } 
+
+    // box.onmousedown = function(){
+    //     console.log('down');
+    // }
+
+    // box.onmouseup = function(){
+    //     console.log('抬起');
+    // }
+
+    box.ontouchstart = function(){
+        console.log('start');
+    }
+
+    box.ontouchend = function(){
+        console.log('ontouchend');
+    }
+    box2.ontouchend = function(){
+        console.log('ontouchend2');
+    }
+
+</script>
+</body>
+</html>

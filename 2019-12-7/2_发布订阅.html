@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+
+        /*
+            发布订阅:
+                模拟  element.addEventListener()
+
+            xx.fn('click',function(){})    订阅的过程
+            xx.fn('click',function(){})  给某个元素的事件订阅一个事件函数
+
+            订阅的过程给某个元素的事件订阅一个事件函数
+
+            订阅池就要为一个（能够存储多个值的空间）对象，这个对象存储的是同一个元素下的多个事件。
+            
+            在同一个事件下又有事件池，它为数组[],这个列表在每次订阅事件和事件函数的时候，在订阅池中存储某个相同事件，在相同事件的事件池中添加不同的事件函数
+
+            当事件触发以后，发布之前订阅的所有事件函数（循环订阅池，去调用订阅池中的每个函数）
+
+            {
+                click:[function(){},function(){}]
+            }
+
+
+            removeEventListener('click',事件名)
+
+
+            on('click.a')
+
+            addEvent('咔嚓',function(){
+
+            })
+        */
+
+        //订阅器（存储器）
+        addEvent(btn,'click',function(){
+            alert(1);
+        });
+
+        addEvent(btn,'click',function(){
+            alert(2);
+        });
+
+        addEvent(btn,'click',ff);
+
+        function ff(){
+            alert(3);
+            console.log(this);
+            removeEvent(btn,'click',ff);
+        }
+
+        addEvent(btn,'mouseover',function(){
+            alert(1);
+        });
+
+        /*
+            1.先看看obj有没有订阅池，如果之前就已经有订阅池了，那么就直接在以前的订阅池中订阅事件和事件函数
+            如果没有订阅池，要创建一个订阅池，然后在这个新的订阅池中添加事件和事件函数
+
+            2.往事件池中添加事件函数
+                (1)先看这个订阅池中有木有这个事件，如果有，就用之前的事件池再次追加事件函数即可
+                    如果说没有事件，那么要在订阅池中添加这个事件池，并且在这个事件池中添加事件
+
+                (2)有了事件池之后，把传入的函数push到事件池中即可
+        */
+        //订阅
+        function addEvent(obj,evName,fn){
+            obj.subscribe = obj.subscribe || {};
+
+            obj.subscribe[evName] = obj.subscribe[evName] || [];
+
+            obj.subscribe[evName].push(fn);
+            console.log(obj.subscribe)
+        }
+
+        //发布
+        //先看看obj下有没有订阅池和事件池
+        //循环事件池，把事件池中的每个函数依次调用即可
+        function publish(obj,evName){
+            if(!obj.subscribe || !obj.subscribe[evName]){
+                return null;
+            }
+            obj.subscribe[evName].forEach(item=> item.call(obj) );
+        }
+
+
+        //解绑事件池中的事件函数
+        //把要解除绑定的函数挑出来删除
+        function removeEvent(obj,evName,fn){
+            if(!obj.subscribe || !obj.subscribe[evName]){
+                return null;
+            }
+            for(let i=0;i< obj.subscribe[evName].length ; i++){
+                if(obj.subscribe[evName][i] === fn){
+                    obj.subscribe[evName].splice(i,1);
+                    break;
+                }
+            }
+        }
+
+        document.onclick = function(ev){
+            if(ev.target.tagName === 'BUTTON'){
+                console.log(1)
+                publish(btn,'click');
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

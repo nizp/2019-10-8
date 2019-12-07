@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 <style>
+html,body{
+    overflow-x:hidden;
+}
 #box{
     width:100px;
     height:100px;
@@ -16,7 +19,7 @@
     opacity:.5;
 }
 #box2{
-    width:100px;
+    width:1000px;
     height:100px;
     background: yellow;
 }
@@ -24,11 +27,46 @@
 </head>
 <body>
     <div id="box"></div>
-    <a href="http://www.baidu.com">点击飞走</a>
+    <input type="text" id="txt">
+    <!-- <div id="div">点击飞走</div> -->
+    <a id="aa" href="http://www.baidu.com">点击飞走</a>
+    <div id="box2"></div>
 <script>
+    /*
+        移动端的300毫秒问题(点透)
+            因为手机浏览器认为用户在300毫秒之内，如果在某个坐标点上连续触发了2次，
+            判定为双击,浏览器就会在某个坐标点上监听，这个时候，如果上层元素消失或者偏移，
+            正好下层元素是一个焦点元素(a,input...)，这个时候就会触发焦点行为
+
+        1.超过300ms之后再让上层元素消失或者偏移
+        2.下层元素不用焦点元素即可
+            a href="可以进行搜索引擎优化"
+
+        3.直接在document身上阻止默认行为，然后在焦点元素身上添加事件，阻止冒泡   √
+
+    */
     box.ontouchend = function(){
-        this.style.display = 'none';
+        // setTimeout(() => {
+            this.style.display = 'none';
+        // }, 20);
     }
+
+    // document.ontouchend = function(){
+    //     return false;
+    // }
+
+    txt.ontouchend = function(ev){
+        ev.cancelBubble = true;
+    }
+    aa.ontouchend = function(ev){
+        // console.log(1);
+        // ev.cancelBubble = true;
+        // window.location.href = 'http://www.baidu.com';
+    }
+
+    // div.ontouchend = function(){
+    //     window.location.href = 'http://www.baidu.com';
+    // }
 
 </script>
 </body>

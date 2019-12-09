@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+/*
+    flex默认的主轴为x轴
+
+
+*/
+*{
+    margin:0;
+    padding:0
+}
+#box{
+    width:350px;
+    display: flex;
+    border:5px solid #000;
+    /* align-items:flex-end; */
+    /* align-items:center */
+    align-items:stretch;
+}
+span{
+    width:50px;
+    background:red;
+}
+ span:nth-of-type(1){
+    height:100px;
+}
+span:nth-of-type(2){
+    height:50px;
+}
+/*span:nth-of-type(3){
+    height:30px;
+} */
+
+
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+  
+<script>
+    /*
+        默认左上对齐
+            align-items:flex-start;
+
+        底部对齐
+            align-items:flex-end
+
+        文本对齐:
+            align-items:baseline
+
+        拉扯:
+             align-items:stretch (没有设置高度的会被拉扯)
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0
+}
+#box{
+    width:350px;
+    display: flex;
+    border:5px solid #000;
+    /* flex-wrap:wrap; */
+    flex-wrap:wrap-reverse;
+}
+span{
+    width:150px;
+    height:30px;
+    background:red;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+  
+<script>
+    /*
+        
+        强制换行:(注意的是flex布局默认是不换行的为默认**一行**显示)
+            flex-wrap:wrap;
+
+            flex-wrap:wrap-reverse;  两行颠倒
+    */
+</script>
+</body>
+</html>

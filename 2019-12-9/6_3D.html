@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    transition: .5s;
+    border:1px solid #000;
+    transform-origin:left;
+    margin: 20% auto;
+    transform-style: preserve-3d;
+}
+
+#box1{
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+    /*
+        景深 数值越大离的越远，数值越小离的就越近
+    */
+    perspective: 50px;
+}
+#box1:hover > div{
+    /*类似于平面转*/
+    /* transform: rotateZ(120deg); */
+    /* transform: rotateY(120deg); */
+    transform: rotateY(90deg);
+}
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box">11332112</div>
+    </div>
+<script>
+
+</script>
+</body>
+</html>

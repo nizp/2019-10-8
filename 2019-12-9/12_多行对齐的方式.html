@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0
+}
+#box{
+    width:350px;
+    height:400px;
+    display: flex;
+    border:5px solid #000;
+    flex-wrap: wrap;
+    /* align-content:flex-end; */
+    align-content:space-between;
+}
+span{
+    width:100px;
+    background:red;
+    margin-left:5px;;
+}
+
+
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>
+    </div>
+  
+<script>
+    /*
+        默认左上对齐
+            align-content:flex-start
+
+        底部对齐
+            align-content:flex-end
+
+        文本对齐:
+            align-items:baseline
+
+        拉扯:
+             align-items:stretch (没有设置高度的会被拉扯)
+    */
+</script>
+</body>
+</html>

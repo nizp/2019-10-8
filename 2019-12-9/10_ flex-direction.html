@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+/*
+    flex默认的主轴为x轴
+
+
+*/
+*{
+    margin:0;
+    padding:0
+}
+#box{
+    width:350px;
+    display: flex;
+    /* flex-direction: row; x轴 */
+    /* flex-direction:row-reverse;X轴并翻转 */
+    flex-direction:column;  /*column Y轴*/
+    /* flex-direction:column-reverse; Y轴并翻转 */
+    border:5px solid #000;
+}
+span{
+    width:50px;
+    height:30px;
+    background:red;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+  
+<script>
+   
+</script>
+</body>
+</html>

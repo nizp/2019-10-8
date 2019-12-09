@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:30px;
+    height:30px;
+    background:url('./border.png') no-repeat;
+    /* background-size:30px; */
+    /*设置cover之后会跟着容器的宽高走*/
+    background-size:cover;
+
+    /*filter 高斯模糊 */
+    filter: blur(10px);
+    transition: .5s;
+}
+#box:hover{
+    filter: blur(0);
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

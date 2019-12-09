@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    /* 在改变组件的样式时可以使用!important */
+    width:150px !important;
+    height: 100px;
+    background: red;
+}
+.box{
+    width:200px;
+}
+div{
+    width:250px;
+}
+input[type="text"]{
+    border:1px solid #000;
+}
+div[class|="a"]{
+    background:red;
+}
+#ul li{
+    background: yellow;
+}
+/* #ul li.red{
+    background:red;
+} */
+#ul li:nth-child(3){
+    background:red;
+}
+/* 倒数第几个子元素 */
+#ul li:nth-last-child(3){
+    background: blue;
+}
+
+/* 标签名要是同一类型(只有p标签的第二个元素被选中) */
+#box2 p:nth-of-type(2){
+    color:rgb(78, 70, 69);
+}
+
+/*可以不是同一类型的   倒数第2个元素(不管是什么元素的倒数第二个)*/
+#box2 :nth-last-child(2){
+    color:thistle
+}
+
+
+
+/* #ul li:nth-last-of-type(3){
+    background: pink;
+} */
+
+/*父级正数第几个元素*/
+/* #ul li:nth-of-type(1){
+    background: pink;
+} */
+div :only-child{
+    /* border:1px solid #000; */
+}
+:empty{
+    height:20px;
+    background:tomato;
+}
+#box3{
+    /* 在改变组件的样式时可以使用!important */
+    width:150px;
+    height: 100px;
+    background: skyblue;
+}
+#box3::before{
+    content:"";
+    display: block;
+    width:20px;
+    height:100px;
+    background: yellow;
+}
+
+#box4{
+    width:20px;
+    height:100px;
+    background: yellow;
+}
+
+</style>
+</head>
+<body>
+
+    <div id="box3">
+        <!-- <div id="box4"></div> -->
+    </div>
+
+    <div id="box" class="box" style="width:100px"></div>
+    <input type="text">
+    <input type="button">
+
+    <div id="box2">
+        <p>1111</p>
+        <span>1212</span>
+        <span>1313</span>
+        <p>2222</p>
+    </div>
+
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li class="red">3</li>
+        <li>4</li>
+    </ul>
+    <div class="aaa">1</div>
+    <div class="a-bc">2</div>
+    <div class="a">3</div>
+    <div class="a">
+        <p>我是p元素</p>
+    </div>
+    <p></p>
+
+
+<script>
+    /*
+        选择器比重
+
+        !important   10000
+
+        style        1000
+        
+        #            100
+        
+        .            10
+
+        targName、:  1
+         
+        通用选择器（*）、子选择器（>）、相邻选择器（+）、同胞选择器（~）、权重值为0
+    
+
+
+        > !important(10000) >  style(1000) > #(100) > 类，伪类(10) > targe，伪元素(1) > *+~ (0)
+ 
+        > div[class|="a"]  class要么是a要么是a-开头的
+
+        > nth-child(n)选择父元素的第N个子元素，N是整数（1,2,3）、关键字（even、odd）、公式（2n+1），n的初始值为1.
+
+        > nth-last-child(n)选择父元素的倒数第n个子元素(所有子元素中查找)
+
+        > nth-of-type(n) 只在同一种类型的原型上查找，第n个元素
+
+        > :only-child选择父元素只包含一个子元素
+
+        > only-of-type选择父元素只包含一个同类型的子元素
+
+        > empty  选择没有子元素的元素，并且该元素没有任何文本节点
+
+    */
+
+    // let num = 1;
+    // setInterval(function(){
+    //     let li = document.querySelector('#ul li:nth-last-child('+(num)+')')
+    //     li.style.background = 'skyblue';
+    //     num ++;
+    //     if(num > 4){
+    //         num = 1;
+    //     }
+    // },1000)
+
+
+</script>
+</body>
+</html>

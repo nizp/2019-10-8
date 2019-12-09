@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+/* #box span{
+    float: left;
+    width:50px;
+    height:30px;
+    background:red;
+}
+.clear{
+    clear: both;
+} */
+/* 通过父级来控制子级（item项目）*/
+*{
+    margin:0;
+    padding:0
+}
+#box{
+    display: flex;
+    border:5px solid skyblue;
+    /* justify-content: flex-end; */
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    /* justify-content:space-around; */
+    justify-content: space-evenly;
+}
+span{
+    width:50px;
+    height:30px;
+    background:red;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <!-- <div class="clear"></div> -->
+       
+    </div>
+    <div>444444444444444444444444</div>
+<script>
+    /*
+        弹性盒模型:
+            使用方便，PC端一不定兼容，移动端基本兼容
+
+        当父级写了flex之后就等同于左浮动（所有的子级），之前的浮动就没有效果了
+
+        默认方向是左对齐:
+            justify-content: flex-start;
+
+        可以设置右对齐:
+            justify-content:flex-end;
+
+        居中对齐:
+            justify-content:center
+
+        第一个和最后一个分别顶着父级的边，中间平均分
+            justify-content:space-between
+
+        平均分配剩余的空间
+            justify-content:space-around
+
+        间距平均分配
+            justify-content: space-evenly;
+
+        
+
+        
+
+
+    */
+</script>
+</body>
+</html>

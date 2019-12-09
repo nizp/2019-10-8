@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+
+/*border*/
+#box{
+    width: 100px;
+    height:100px;
+    background: red;
+    /* border-radius:50px; */
+    /* border-radius:50%; */
+
+    /* 
+        左上(里面还有2个值) 右上 右下 左下
+    */
+    /* border-radius:10px 10px 0 0 / 10px 10px 0 0; */
+    /* border-radius:10px 10px 0 0 / 10px 10px 0 0; */
+
+    /* border-top-left-radius:0 10px; */
+
+    /* border-top-right-radius:5px; */
+    /* border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px; */
+    /* border-radius:20% 10%/100%; */
+}
+
+/*文字阴影
+
+    第一个数字代表 水平方向 x
+    第二个数字代表 垂直方向 y
+    第三个数字模糊半径 
+    颜色
+*/
+#box{
+    width: 100px;
+    height:100px;
+    background: red;
+    text-shadow:1px 1px 2px #fff;
+    box-shadow:1px 1px 1px #000 ;
+}
+
+</style>
+</head>
+<body>
+    <div id="box">321321321</div>
+</body>
+</html>

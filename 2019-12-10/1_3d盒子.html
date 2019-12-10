@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+#warp {
+    width:510px;
+    height:510px;
+    margin: 6% auto;;
+    /* border:1px solid #000; */
+    perspective: 5000px;
+}
+#warp:hover > #box{
+    transform:rotateY(270deg) rotateX(483deg);
+}
+#box{
+    width:510px;
+    height:510px;
+    position: relative;
+    transform-origin:255px 255px 255px;
+    transform-style: preserve-3d;
+    /* transform:scale(.8); */
+    transition: 1s;
+    transform:rotateY(-50deg) rotateX(50deg);
+}
+li{
+    width:510px;
+    height:510px;
+    position: absolute;
+    top:0;
+    left:0;
+}
+ul li:nth-child(1){
+    background:url('./img/zf_cube1.png') no-repeat;
+    transform:translateZ(510px);
+
+}
+ul li:nth-child(2){
+    background:url('./img/zf_cube2.png') no-repeat;
+    /* top:-510px;  */
+    transform:rotateX(-90deg);
+    transform-origin:bottom;
+}
+ul li:nth-child(3){
+    background:url('./img/zf_cube3.png') no-repeat;
+    /* left:510px; */
+    transform-origin:left;
+    transform:rotateY(270deg) ;
+}
+ul li:nth-child(4){
+    background:url('./img/zf_cube4.png') no-repeat;
+    /* top:510px; */
+    transform-origin:top;
+    transform:rotateX(90deg);
+}
+ul li:nth-child(5){
+    background:url('./img/zf_cube5.png') no-repeat;
+    /* left:-510px; */
+    transform-origin:right;
+    transform:rotateY(90deg);
+}
+ul li:nth-child(6){
+    background:url('./img/zf_cube6.png') no-repeat;
+    transform:rotateY(180deg);
+}
+</style>
+</head>
+<body>
+    <div id="warp">
+        <ul id="box">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    
+<script>
+    /*
+        景深、设置子级3d、基准点、旋转的度数
+    */    
+</script>
+</body>
+</html>

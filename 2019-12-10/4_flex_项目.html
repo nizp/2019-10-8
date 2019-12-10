@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:300px;
+    height:30px;
+    /* height:300px; */
+    border:1px solid #000;
+    display: flex;
+
+}
+
+span{
+    flex:1;
+    height:30px;
+    background: orange;
+}
+
+/* span:nth-of-type(1){
+    width:50px;
+    height:30px;
+    background: orange;
+} */
+/* span:nth-of-type(2){
+    width:50px;
+    height:30px;
+    background:firebrick;
+    align-self:flex-end;
+    flex:1;
+    order:-1;
+    background:firebrick;
+} */
+/* span:nth-of-type(3){
+    width:50px;
+    height:30px;
+    background: orange;
+} */
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+<script>
+    /*
+        flex:给子级分配剩余部分的空间占比
+        order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0.
+        align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，等同于stretch。
+    */
+</script>
+</body>
+</html>

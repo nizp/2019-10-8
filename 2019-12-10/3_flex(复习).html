@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:300px;
+    height:300px;
+    border:1px solid #000;
+    display: flex;
+    flex-flow: row wrap;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    /* justify-content:space-evenly; */
+    /* justify-content:center;  主轴居中 */
+    /* align-items: center; 侧轴居中 */
+    /* align-items:flex-end; */
+    /* align-content:flex-end; */
+}
+span{
+    width:50px;
+    height:30px;
+    background: orange;
+}
+#box div{
+    width:50px;
+    height:30px;
+    background:indianred;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <div>4</div>
+        <span>5</span>
+        <span>6</span>
+        <div>7</div>
+        <span>8</span>
+        <div>9</div>
+    </div>
+<script>
+    /*
+        原理：
+            操作父级盒子来控制子级
+
+        一般来说给父级添加属性，操作子级
+    单行:
+        控制主轴
+        justify-content: flex-end;
+        justify-content:space-between;  顶端对齐，别的平均分
+        justify-content:space-around;  平均分配剩余部分(左右两边大，顶边小)
+        justify-content:space-evenly; 每个子级平均分配位置（距离都一样）
+
+        flex-direction: column;
+
+        align-items  控制**侧轴**方向的属性
+
+
+    多行:
+        align-content
+
+
+    复合样式:
+        flow (下面2个的结合体)
+            -> 
+                flex-wrap;
+                flex-direction
+
+        flex-flow:row wrap;
+
+    */
+</script>
+</body>
+</html>

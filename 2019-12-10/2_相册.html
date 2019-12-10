@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:510px;
+    height:510px;
+    position: relative;
+    /* border:1px solid #000; */
+    margin:2% auto;
+    transform:scale(.5);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+#box div{
+    width:51px;
+    height:51px;
+    position: absolute;
+    top:0;
+    left:0;
+    background:url('./img/zf_cube1.png') no-repeat;
+    transition:1s;
+    /* transform:skewX()*/
+} 
+</style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+<script>
+    /*
+        51px * 10 => 510px
+    */
+    const w = 51;
+    let temp = '';
+    for(let i=0;i<10;i++){
+        for(let j=0;j<10;j++){
+            temp += `<div data-x="${-i*w}" data-y="${-j*w}"  style="background-position:${-i*w+'px'} ${-j*w}px;top:${j*w}px;left:${i*w}px;"></div>`;
+        }
+    }
+    box.innerHTML = temp;
+
+    let child = box.children;
+    let num = 1;
+    box.onclick = function(){       
+        for(let i=0;i<child.length;i++){
+            const {x,y} = child[i].dataset;
+            child[i].style.top = -(y)*1 + random(-100,100) + 'px';
+            child[i].style.left = -x*1 + random(-100,100) + 'px';
+            child[i].style.opacity = 0;
+            child[i].style.transform = `skewX(${random(-45,45)}deg) translateZ(1000px)`;
+        }
+        setTimeout(() => {
+            num ++;
+            if(num > 6){
+                num = 1;
+            }
+            for(let i=0;i<child.length;i++){
+                const {x,y} = child[i].dataset;
+                child[i].style.top = -(y)*1  + 'px';
+                child[i].style.left = -x*1 + 'px';
+                child[i].style.transform = `skewX(0deg)`;  
+                child[i].style.opacity = 1;
+                child[i].style.backgroundImage = `url('./img/zf_cube${num}.png')`;
+            }
+        }, 1050);
+    }  
+    
+    function random(n,m){
+        return Math.round(Math.random() * (m-n)) + n;
+    }
+
+</script>
+</html>

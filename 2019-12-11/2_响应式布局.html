@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link media="screen and ( max-width:699px)" rel="stylesheet" href="1.css">
+    <link media="screen and ( min-width:700px)" rel="stylesheet" href="2.css">
+<style>
+#box,#box2{
+    width:100px;
+    height: 100px;
+    background: slateblue;
+}
+#box2{
+    background: springgreen;
+}
+    /*小于等于699的时候显示橘色*/
+/* @media screen and ( max-width:699px ){
+    body{
+        background: darkorange;
+    }
+    #box{
+        font-size:50px;
+    }
+} */
+    /*大于等于700的时候变成天空蓝*/
+/* @media screen and ( min-width:700px ){
+    body{
+        background: skyblue;
+    }
+    #box{
+        font-size:80px;
+    }
+} */
+
+</style>
+</head>
+<body>
+    <div id="box">12321331232</div>
+    <div id="box2">12321331232</div>
+<script>
+    /*
+        @media screen and (max-width: 980px) {
+
+        }
+
+        @media 空格 scree(支持什么设备)  and(并且) 空格 (max-width: 980px)什么样的条件{
+            满足了这个条件要干嘛
+        }
+
+        screen 支持什么设备
+            all 所有设备
+            screen 用于电脑屏幕，平板电脑，智能手机等。
+            print  用于打印机和打印预览
+
+
+        max-width  屏幕最大（小于等于）的时候就干什么事情
+
+        min-width  屏幕最小多少（大于等于）的时候就干什么事情
+
+        样式多了之后可以使用
+           link media 的方式去写代码
+    */    
+</script>
+</body>
+</html>

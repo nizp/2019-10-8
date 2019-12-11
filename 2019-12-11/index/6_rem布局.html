@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script>
+function refreshRem() {
+    var desW = 750,//设计图的宽度
+        winW = window.screen.width, //document.documentElement.clientWidth||document.body.clientWidth;
+        ratio = winW / desW,
+        html = document.documentElement;
+        html.style.fontSize = ratio * 100 + 'px';
+    }
+refreshRem();
+window.addEventListener('resize', refreshRem);   
+</script>
+<link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <section id="warp">
+        <div id="th">
+            <div id="head"></div>
+            <ul id="ul">
+                <!-- <li>
+                    <img class="icon" src="http://gw.alicdn.com/tfs/TB1ajLehrH1gK0jSZFwXXc7aXXa-102-69.png_110x10000.jpg_.webp">
+                    <img class="pic" src="http://gw.alicdn.com/bao/uploaded/TB1gjv6nWL7gK0jSZFBXXXZZpXa.jpg_150x10000Q75.jpg_.webp">
+                    <p>精美身体暖贴榜</p>
+                    <span>月销43.4万件</span>
+                </li> -->
+                <!-- <li></li>
+                <li></li> -->
+            </ul>
+        </div>
+    </section>
+<script>
+    fetch('./data.json').then(d=>d.json()).then(d=>{
+        let html = '';
+        d.forEach(ele=>{
+            let {onoff,title,pic,xl} = ele;
+            html += `
+                <li>
+                    ${onoff?'<img class="icon" src="http://gw.alicdn.com/tfs/TB1ajLehrH1gK0jSZFwXXc7aXXa-102-69.png_110x10000.jpg_.webp">':''}
+                    <img class="pic" src="${pic}">
+                    <p>${title}</p>
+                    <span>${xl}</span>
+                </li>
+            `;
+        });
+        ul.innerHTML = html;
+    });
+</script>
+</body>
+</html>

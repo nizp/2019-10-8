@@ -1,0 +1,64 @@
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: #b30000;
+}
+#warp {
+  width: 7.02rem;
+  margin: 0rem auto;
+}
+#warp #head {
+  width: 7.02rem;
+  height: 1.08rem;
+  background: url('../1.png') no-repeat;
+  background-size: 7.02rem 1.08rem;
+}
+#warp #ul {
+  margin-top: 0.06rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#warp #ul li {
+  margin-bottom: 0.1rem;
+  width: 2.3rem;
+  height: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.05rem;
+  background: #fff;
+  position: relative;
+}
+#warp #ul li .icon {
+  width: 0.68rem;
+  height: 0.46rem;
+  position: absolute;
+  left: 0.13rem;
+  top: 0rem;
+}
+#warp #ul li .pic {
+  height: 1.44rem;
+  width: 1.38rem;
+}
+#warp #ul li p {
+  margin-top: 0.14rem;
+  width: 2rem;
+  height: 0.36rem;
+  background: linear-gradient(to right, #fd4684, #f4333b);
+  border-radius: 0.1rem;
+  text-align: center;
+  line-height: 0.36rem;
+  font-size: 0.24rem;
+  color: #fff;
+}
+#warp #ul li span {
+  margin-top: 0.12rem;
+  font-size: 0.24rem;
+  text-align: center;
+  line-height: 0.36rem;
+}

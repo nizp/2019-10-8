@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:200px;
+    height:200px;
+    background: red;
+    font-size:30px;
+    color:#fff;
+}
+</style>
+</head>
+<body>
+    <div id="box">12321</div>
+<script>
+    /*
+        可以调试自己的手机:
+            1.同一个wifi要链手机和PC，能使用到局域网
+
+            2.liveServer
+
+            3.cmd
+                ipconfig -> 去看ip -> 找到IPv4 -> 172.18.1.223
+
+            targetTouches
+                触碰到元素身上触发，随着手指的增多，会动态更新
+
+            touches
+                随着手指的增多，会动态更新
+
+
+            **上面2个是按照手指放到屏幕上来算
+            **下面这个是按照当前手指触摸来算    
+
+            changedTouches
+                当一个手指按下的时候，再放另一根手指，这个时候还是显示一根手指，显示的为第二根手指
+                如果两根手指一起放到屏幕上，那么显示2根
+
+        移动端触点使用:
+            按下和移动的时候使用targetTouches
+
+            抬起的时候使用changedTouches
+            
+
+    */
+
+
+    // document.ontouchstart = function(ev){
+    //     // console.log();
+    // //    box.innerHTML = ev.targetTouches.length;
+    //     // box.innerHTML = ev.touches.length;
+    //     box.innerHTML = ev.changedTouches.length;
+    //     // alert(1)
+    // }
+
+    document.ontouchstart = function(ev){
+        box.innerHTML = ev.targetTouches.length;
+    }
+
+    
+
+
+    document.ontouchend = function(){
+        return false;
+    }
+
+
+
+</script>
+</body>
+</html>

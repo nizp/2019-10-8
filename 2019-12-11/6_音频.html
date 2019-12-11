@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#bar{
+    width:5px;
+    height:50px;
+    position: relative;
+    background:red;
+    margin-top:10px;
+}
+#bar2{
+    width:5px;
+    height:5px;
+    position: absolute;
+    top:0;
+    left:0;
+    background: #000;
+}
+</style>
+</head>
+<body>
+    <button id="btn1">播放</button>
+    <button id="btn2">暂停</button>
+    <button id="btn3">音量</button>
+    <button id="btn4">调进度</button>
+
+    <div id="bar">
+        <div id="bar2"></div>
+    </div>
+
+    <audio id="au" src="MC海伦-桥边姑娘.mp3" controls></audio>
+<script>
+    btn1.onclick = function(){
+        au.play(); //开始
+    }
+    btn2.onclick = function(){
+        au.pause(); //播放
+    }
+
+    //播放时间变化的时候触发
+    au.ontimeupdate = function(){
+        console.log(au.currentTime); //当前播放的时间
+    }
+
+    console.log(au.duration);//以秒为单位
+
+    btn3.onclick = function(){
+        au.volume = .2;
+        console.log(au.volume);
+    }
+    btn4.onclick = function(){
+        au.currentTime = 90;
+    }
+
+    //控制音量的
+    bar2.onmousedown = function(ev){
+        let disY = ev.pageY - bar2.offsetTop;
+        document.onmousemove = function(ev){
+            let t = ev.pageY - disY;
+            if(t < 0){
+                t = 0;
+            }else if(t > bar.offsetHeight - bar2.offsetHeight){
+                t = bar.offsetHeight - bar2.offsetHeight;
+            }
+
+            let scale = 1 - t/(bar.offsetHeight - bar2.offsetHeight);
+            // console.log(scale);
+            au.volume = scale;
+            bar2.style.top = t + 'px';
+        }
+
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+        }
+    }
+
+
+</script>
+</body>
+</html>

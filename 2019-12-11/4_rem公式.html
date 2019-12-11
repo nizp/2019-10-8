@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<script>
+    /*
+        设计图是640，那么调试工具也弄成640
+
+        640 / 640 = 1 * 100 = 1rem = 100px
+
+        好算 -> 
+
+            用设备的宽度 / 16 = 50  1rem = 50px
+
+            100 / 50 = 2rem
+
+            20px -> 20/50 => 0.4rem
+
+    */
+    function refreshRem() {
+        var desW = 750,//设计图的宽度
+            winW = window.screen.width, //document.documentElement.clientWidth||document.body.clientWidth;
+            ratio = winW / desW,
+            html = document.documentElement;
+            html.style.fontSize = ratio * 100 + 'px';
+    }
+    refreshRem();
+    window.addEventListener('resize', refreshRem);    
+</script>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+/* #warp{
+    display: flex;
+} */
+#box{
+    width:3.2rem;
+    height:100vh;
+    background:royalblue;
+    float: left;
+}
+#box2{
+    width:3.2rem;
+    height:100vh;
+    background:wheat;
+    float: right;
+}
+</style>
+</head>
+<body>
+    <div id="warp">
+        <div id="box"></div>
+        <div id="box2"></div>
+    </div>
+</body>
+</html>

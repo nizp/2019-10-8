@@ -1,0 +1,9 @@
+body{
+    background: darkorange;
+}
+/* #box{
+    font-size:50px;
+} */
+#box,#box2{
+    float: initial;
+}

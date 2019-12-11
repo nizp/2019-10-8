@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+<style>
+*{
+    padding:0;
+    margin: 0;
+}
+#box{
+    /* width:100px; */
+    width:100px;
+    height:100px;
+    background: red;
+    border:.5px solid #000;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    好好学习，天天向上
+<script>
+    /*
+        PC
+
+        移动（主流单一的开发，只针对于手机浏览器开发的）
+            flex布局
+            rem布局
+
+            （次于主流）
+                响应式布局（非常繁琐）
+                    一个项目要写若干个css去适配
+
+            百分比布局
+            table布局
+
+        视口:
+            布局视口
+                有滚动条，宽度以整个页面（整个文档）为主，document.documentElement.clientWidth
+            
+            视觉视口,能让pc上的页面，整个装到移动端浏览器上，但是会缩小体验不好，如果要看就要双指放大
+                是根据设备的宽度来走的，window.innerWidth
+
+            理想视口  √
+                一切显示都是根据设备来的，window.screen.width
+
+               
+            width=device-width   表示宽度为设备宽度
+            initial-scale=1.0    初始化缩放比例
+            maximum-scale=1.0    最大缩放比例
+            minimum-scale=1.0    最小缩放比例
+            user-scalable=no     是否允许缩放,no|0不能,yes|1能
+
+
+            <meta name="viewport" content="user-scalable=no,maximum-scale=1.0  ,minimum-scale=1.0,width=device-width, initial-scale=1.0">
+            
+
+            物理像素:一个屏幕有多少个像素点
+
+            逻辑像素：css设置的像素
+
+            在pc上物理像素和逻辑像素是相等的，所以布局的时候，量多少就是多少
+
+            Web App   html5 + css3
+
+            Hybrid App能够一套代码兼容多个端
+            
+            原生和 HTML5 团队（Hybrid App）
+
+            Cordova 
+
+            JSBridage   小程序
+
+            Flutter
+
+
+    */    
+</script>
+</body>
+</html>

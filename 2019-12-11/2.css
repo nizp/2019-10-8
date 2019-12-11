@@ -1,0 +1,13 @@
+body{
+    background: skyblue;
+}
+/* #box{
+    font-size:80px;
+} */
+
+#box{
+    float: left;
+ }
+ #box2{
+     float: left;
+  }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <!-- <form action="/get"  method="GET"> -->
+        <!-- 注册的用户名:<input name="user" type="text"/> </br>
+        注册的密码:<input type="password" name="pw"/> -->
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+        <!-- <input type="submit" value="提交" /> -->
+  <!-- </form> -->
+  <script>
+
+        let re = /^[a-zA-Z][\w-]{5,7}$/;
+
+        user.onfocus = function(){
+            user.style.border = '1px solid black';
+            s.innerText = '';
+        }
+
+        user.onblur = function(){
+            //发起ajax请求(打电话模式)
+            /*
+                1.创建一个电话
+                2.输入号码
+                3.按绿色键拨打
+                4.等待
+                5.通话
+            */
+            // console.log(XMLHttpRequest);
+
+            /*
+                以字母开头，以数字字母下划线-  6-8
+            */
+            let val = this.value.trim();
+            //保证不是空的，还要保证是符合规则的
+            if(val && re.test(val)){
+                let xhr = new XMLHttpRequest; //创建一个电话
+                xhr.open('get','/get?user='+this.value,true); //输入号码
+                xhr.send(); //按绿色按钮拨打
+                xhr.onload = function(){ //等待
+                    // console.log(JSON.parse(xhr.responseText)); //通话
+                    let d = JSON.parse(xhr.responseText);
+                    if(d.code === 0){
+                        user.style.border = '1px solid red';
+                    }else if(d.code === 1){
+                        user.style.border = '1px solid green';
+                    }
+                }
+            }else{
+                s.innerText = '请检查输入的格式';
+                user.style.border = '1px solid red';
+            }
+
+            
+        }
+  </script>
+</body>
+</html>

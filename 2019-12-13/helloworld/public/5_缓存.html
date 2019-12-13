@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+<script>
+    user.onblur = function(){
+        var xhr = new XMLHttpRequest;
+        xhr.open('get','/get?user='+encodeURI(this.value)+'&myNizp='+Date.now(),true);
+        xhr.send();
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+    }
+
+    /*
+        Ðø¶·Òú
+    */
+</script>
+</body>
+</html>

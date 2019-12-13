@@ -3,10 +3,11 @@ var router = express.Router();
 
 
 let person = [
-  '龙海丽',
-  '李亚茹',
   'tony',
-  'dida'
+  'dida',
+  'pjc',
+  'pl',
+  '尹德智'
 ];
 
 router.post('/', function(req, res, next) {

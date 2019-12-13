@@ -6,10 +6,11 @@ var router = express.Router();
   已经注册过的用户名
 */
 let person = [
-  'liucheng',
+  'liucheng1',
   'yindezhi',
   'lilei',
-  'zhaomou'
+  'zhaomou',
+  '续斗寅'
 ];
 
 router.get('/', function(req, res, next) {

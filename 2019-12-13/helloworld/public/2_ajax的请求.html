@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <!-- <form action="/get"  method="GET"> -->
+        <!-- 注册的用户名:<input name="user" type="text"/> </br>
+        注册的密码:<input type="password" name="pw"/> -->
+        注册的用户名:<input id="user" type="text"/> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+        <!-- <input type="submit" value="提交" /> -->
+  <!-- </form> -->
+  <script>
+        /*
+                url + 参数
+
+                code:1 -> 没有可以注册
+                code:0 -> 用户名被占用
+        */
+        // fetch('/get?user='+user.value+'&pw='+pw.value).then(d=>d.json()).then(d=>{
+        //     console.log(d);
+        // })
+        
+        //当用户名失焦的时候请求服务器，问问服务器到底当前的用户名能不能注册？
+        user.onblur = function(){
+            fetch('/get?user='+user.value).then(d=>d.json()).then(d=>{
+                // console.log(d);
+                if(d.code === 0){
+                    user.style.border = '1px solid red';
+                }else if(d.code === 1){
+                    user.style.border = '1px solid green';
+                }
+            })
+        }
+
+  </script>
+</body>
+</html>

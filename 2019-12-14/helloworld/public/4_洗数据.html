@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let str = `
+    <?xml version="1.0" encoding="UTF-8"?>
+        <content>
+            <person>
+                <name>小明</name>
+                <age>18</age>
+                <sex>男</sex>
+                <info>我是一个快乐的逗逼青年。</info>
+            </person>
+            <person>
+                <name>小红</name>
+                <age>16</age>
+                <sex>女</sex>
+                <info>有人陪我逛街么？</info>
+            </person>
+            <person>
+                <name>小梅</name>
+                <age>17</age>
+                <sex>女</sex>
+                <info>只要你看到我的笑容，不要你看到我的笑纹</info>
+            </person>
+            <person>
+                <name>小赵</name>
+                <age>19</age>
+                <sex>男</sex>
+                <info>阿里月饼666</info>
+            </person>
+            <person>
+                <name>小码</name>
+                <age>19</age>
+                <sex>男</sex>
+                <info>十一还加班，码农真心伤不起....</info>
+            </person>
+            <person>
+                <name>真胖</name>
+                <age>18</age>
+                <sex>男</sex>
+                <info>永生这个大屌丝,继续互相伤害</info>
+            </person>
+        </content>
+    `;
+    
+    // str.replace(/<name>(([\u4e00-\u9fa5a-zA-Z\d]){2,20})<\/name>/g,($0,$1)=>{
+    //     ary.push($1);
+    // });
+   
+    function fn(targ){
+        let ary = [];
+        let re = new RegExp(`<${targ}>(([\\u4e00-\\u9fa5a-zA-Z\\d,\\.，？。]){1,20})<\/${targ}>`,'g');
+        str.replace(re,($0,$1)=>{
+            ary.push($1);
+        });
+        return ary;
+    }
+
+    // let ary1 = fn('name');
+    // let ary2 = fn('age');
+    // let ary3 = fn('sex');
+    // let ary4 = fn('info');
+    let aryx = ['name','age','sex','info'];
+    let obj = {};
+
+    aryx.forEach((item,i)=>{
+        obj[item] = fn(item);
+    });
+
+    /*
+        [
+            {
+                name:
+                sex:
+                info
+            }
+        ]
+    */
+    let aryxx = [];
+
+    for(let i=0;i<obj[aryx[0]].length;i++){ //多少个人
+        let obj1 = {};
+        for(let j=0;j<aryx.length;j++){//4个属性
+            if(!obj1[aryx[j]]){
+                obj1[aryx[j]] = obj[aryx[j]][i]
+            }
+        }
+        aryxx.push(obj1);
+    } 
+
+    console.log(aryxx,JSON.stringify(aryxx));
+
+
+    // console.log(fn('age'));
+    // console.log(fn('sex'));
+    // console.log(fn('info'));
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+
+    <ul id="ul">
+
+    </ul>
+<script>
+
+    user.onblur = function(){
+
+        // ajax('./data.xml',{
+        //     success(d){
+        //         const person = d.getElementsByTagName('person');
+        //         let temp = '';
+        //         for(let i=0;i<person.length;i++){
+        //             temp += `<li>我的名字叫:${person[i].children[0].innerHTML},今年${person[i].children[1].innerHTML}岁,我想说:${person[i].children[3].innerHTML}</li>`
+        //         }
+        //         ul.innerHTML = temp;
+        //         console.log(person);
+        //     }
+        // },{
+        //     dataType:'xml'
+        // })
+       
+    //    ajax('/post',{
+    //         success(d){
+    //             console.log(d);
+    //         }
+    //    },{
+    //         body:'user='+this.value,
+    //         headers:{
+    //             'content-type':'application/x-www-form-urlencoded'
+    //         },
+    //         method:'post',
+    //         //设置3秒，3秒之后算超时，我们的post请求是5秒才过来，所以超时
+    //         timeout:3000,
+    //         ontimeout(){
+    //             console.log('你超时了');
+    //         }
+    //    }); 
+
+        ajax('/sleep?name='+this.value,{
+            success(d){
+                console.log(d);
+            }
+        },{
+            async:false,
+            // body:'name='+this.value
+        });
+
+        console.log('此处执行10000行');
+
+    }
+    function ajax(url,cb,opt){
+        //如果没有传入opt就myopt就是一个undefined
+        var myopt = opt &&  {
+            method:opt.method || 'get',
+            body:opt.body || '',
+            headers:opt.headers || {},
+            dataType:opt.dataType || 'json',
+            timeout:opt.timeout  || 10000,
+            ontimeout:opt.ontimeout || function(){},
+            async:(opt.async === undefined)? true:opt.async
+        }
+
+        // console.log(myopt.async);
+
+        var len = arguments.length;
+        var xhr = new XMLHttpRequest;
+        if(opt.async === true){
+            xhr.timeout = myopt.timeout; //设置超时时间
+            xhr.ontimeout = myopt.ontimeout; //监听超时
+        }   
+    
+        // console.log(xhr);
+
+        function ready(){
+            if(myopt.async === true){
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState === 4){
+                        if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                           
+                            if(myopt.dataType === 'json'){
+                            
+                                cb.success && cb.success(eval('('+xhr.responseText+')'))
+                            }else if(myopt.dataType === 'xml'){
+                                // console.log()
+                                cb.success && cb.success(xhr.responseXML)
+                            }
+                        }else{
+                            cb.error &&  cb.error(xhr.status);
+                        }
+                    }
+                }
+            }else{
+            
+                if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                    
+                    if(myopt.dataType === 'json'){
+                        console.log(12321321)
+                        cb.success && cb.success(eval('('+xhr.responseText+')'))
+                    }else if(myopt.dataType === 'xml'){
+                        // console.log()
+                        cb.success && cb.success(xhr.responseXML)
+                    }
+                }else{
+                    cb.error &&  cb.error(xhr.status);
+                }
+            }
+        }
+        if(len === 2){ //直接走get即可
+            xhr.open('get',url,true);
+            ready();
+            xhr.send();
+        }else if(len === 3){ //传了第三个参数（配置项）
+            if(/^get$/i.test(myopt.method)){
+                //有没有 myopt.body 如果有就url+body，没有就不用加?号了
+                url = myopt.body?url+'?'+myopt.body:url;
+                xhr.open('get',url+'&myrandom='+Date.now(),myopt.async);
+                xhr.send();
+                ready();
+            }else if(/^post$/i.test(myopt.method)){
+                xhr.open('post',url,myopt.async);
+                for(var attr in myopt.headers){
+                    if(myopt.headers.hasOwnProperty(attr)){
+                        xhr.setRequestHeader(attr,myopt.headers[attr]);
+                    }
+                }
+                xhr.send(myopt.body);
+                ready();
+            }
+        }    
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+<script>
+
+    /*
+        QueryUrlParmas
+
+        {
+            user:this.value,
+            pw:12345,
+            age:'10
+        }
+
+        user=小花花&pw=12345&age=10
+    */
+
+    // let obj = new URLSearchParams({
+    //     user:'haha',
+    //     pw:12345,
+    //     age:'10'
+    // });
+
+    // console.log(''+obj)
+
+
+
+
+    user.onblur = function(){
+        fetch('/post',{
+            method:'post',
+            body:''+new URLSearchParams({
+                user:this.value
+            }),
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        }).then(d=>d.json()).then(d=>{
+            console.log(d);
+        })
+
+        // var xhr = new XMLHttpRequest;
+        // xhr.open('post','/post',true);
+        // xhr.setRequestHeader('hahada','hehada');
+        // xhr.send('user='+this.value);
+        // xhr.onload = function(){
+        //     console.log(xhr.responseText);
+        // }
+    }
+</script>
+</body>
+</html>

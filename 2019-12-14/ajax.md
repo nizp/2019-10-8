@@ -37,11 +37,6 @@
         XML -> json -> '[]' || '{name:"小明",age:18,info:"哈哈哈"}'
 
         可以拿到data
-
-        JSON转对象
-            JSON.parse()
-            eval
-            new Function('','return '+'{name:"xxx"}')()
 ``` 
 
 - ajax最大的优点 -> 可以局部刷新，减轻服务器的压力，提升用户体验
@@ -67,16 +62,6 @@
     - 发送请求
     - 监听数据响应
     - 接收到数据
-
-
-    XMLHttpRequest IE除了IE6别的版本都有这个对象（IE6用ActiveXObject），
-    但是每个版本的属性是不一样的
-
-    IE9一下浏览器是没有onload的，但是所有浏览器都支持onreadystatechange事件
-
-    timeout  设置超时时间
-    ontimeout 监听超时回调
-
 
 ### GET和POST
 ```
@@ -127,76 +112,14 @@
         必须添加请求头
         xhr.setRequestHearder('content-type','application/x-www-form-urlencoded');
 
+
+
+
+
+
+
+
+
+
 ```
-
-### fetch的post
-```
-    fetch(url,{
-        method:'post',
-        headers:{
-            'content-type':'application/x-www-form-urlencoded'
-        },
-        body:'key=val&key2=val2'
-        也可以写成
-        body:''+new URLSearchParmas({
-            key:val,
-            key2:val2
-            如果value是中文还会帮我们转成URI编码
-        })
-    })
-```
-
-### 请求头和响应头
-
-General
-> Request URL  请求的地址
-> Request Method  请求的方式  GET POST HEAD DELETE PUT..
-> Status Code   状态码
-> Remote Address  当前页面的端口号
-
-Response Headers (响应头) -> 服务器发给你的东西(接收到的)
-
-Request Headers (请求头) -> 发给服务器的东西(发给别人的)
-
-Query String Parmeters (请求体)
-
-### http状态码  1-6开头的
-
-> 100 服务器已经接收请求，希望客户端继续发送请求
-
-> 200 - 207都是成功
-
-> 301 永久重定向
-
-> 302 临时重定向
-
-> 304 一种缓存
-
-> 400 就是有误的意思
-
-> 401 当前请求需要用户验证
-
-> 403 服务器已经理解请求，但是拒绝执行它
-
-> 404 请求失败，请求所希望得到的资源未被在服务器上发现
-
-> 5字开头的是服务器的错误
-
-> 500  服务器端出错了
-
-> 501 服务器不支持当前请求所需要的某个功能。
-
-> 502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。
-> 503 由于临时的服务器维护或者过载，服务器当前无法处理请求
-
-
-
-
-
-
-
-
-
-
-
  

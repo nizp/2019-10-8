@@ -112,14 +112,52 @@
         必须添加请求头
         xhr.setRequestHearder('content-type','application/x-www-form-urlencoded');
 
+```
 
 
+#### xhr有upload这个属性是一个对象，代表上传时候的事件
 
-
-
-
-
-
+> xhr.upload.onprogress  上传时候的进度
 
 ```
+    ev里面有total -> 文件的总体积
+    ev里面有loaded -> 当前上传的体积
+
+    ev.loaded / ev.total  =  0-1
+```
+
+
+刷新之后还有（数据是不变的） 
+
+    1.刷新之后请求一次数据
+
+    2.把数据存储在浏览器中
+        cookie 
+            - 后端技术，基于浏览器实现的
+            - 用来存储用户的操作信息
+            - 一次http请求（填写用户名密码），后端只知道这次请求某人是否合法，http是无状态的，不能记录某人登录过账户
+            所以说使用cookie去存储某个人操作，下次请求的时候，把上一次的操作发给后端，就知道某人是否登录过账户
+
+            cookie的生命周期
+            默认的生命周期是当浏览器关闭，生命就结束
+
+            如果不要走默认的生命周期使用 expires
+
+            expires=需要设置的时间 
+
+            let o = new Date();
+            o.setDate(new Date().getDate() + 1);  //比当前时间多1天
+
+            document.cookie = 'name=pq; expires='+o;
+
+            cookie，在以前每个域名只能设置几个或者几十个，字字千金，现在据说有5M
+
+            cookie必须使用服务器环境
+
+        
+            
+        localStorage
+        sessionStorage
+
+
  

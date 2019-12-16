@@ -7,6 +7,12 @@
 <body>
 <script>
     let fd = new FormData();
+    /*
+        user=1&user=2&user=3&user=4
+
+        user=1&passw=123&id=5&xx=yy
+
+    */
 
     // fd.append('user','hyw,bx,bw');
     // fd.append('user','bx');
@@ -21,8 +27,6 @@
     console.log(fd.get('user'));
 
     // console.log(fd.getAll('user')); //找出同名的key，返回一个数组
-
-
 
     
 </script>

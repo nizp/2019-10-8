@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+<script>
+    user.onblur = function(){
+        var xhr = new XMLHttpRequest;
+        //能多监听一次，但是从真实开发上来说毫无意义，因为使用ajax的目的只有拿到响应body
+        xhr.onreadystatechange = function(){
+            console.log(xhr.readyState);
+        }
+        xhr.open('get','/get?user='+this.value);
+
+        xhr.send();
+    }
+</script>
+</body>
+</html>

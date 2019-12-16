@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        localStorage
+            专门为前端准备的本地存储
+
+            生命周期:（跟域名走的）
+                只要不删除，就永远留着
+
+            据说有体积有5M，而且未来还会增加
+
+        增:
+            localStorage.setItem(key,val)
+        删：
+            localStorage.removeItem(key)
+        查:
+            localStorage.getItem(key)
+        清除:
+            localStorage.clear()
+    */    
+
+    // const {setItem,getItem,removeItem} = localStorage; //this会为window
+
+    localStorage.setItem('user','pjc');
+    localStorage.setItem('user2','pl');
+
+    localStorage.clear();
+
+    // console.log(localStorage.getItem('user'));
+
+
+   
+</script>
+</body>
+</html>

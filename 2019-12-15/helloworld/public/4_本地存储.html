@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    padding: 30px;
+    border:1px solid #000;
+}
+</style>
+</head>
+<body>
+    <!-- <ul id="ul"></ul> -->
+    <h1 id="h1"></h1>
+    <div id="box">
+        用户名:<input type="text" id="user"/>
+        密码:<input type="password" id="pw"/>
+        <button id="btn">登录</button>
+    </div>
+<script>
+    /*
+        刷新之后还有（数据是不变的） 
+
+        [1,2,3]
+
+        1.刷新之后请求一次数据
+
+        2.把数据存储在浏览器中
+            cookie 
+                - 后端技术，基于浏览器实现的(一般都是后端来设置,也可以前端来种)
+                - 用来存储用户的操作信息
+                - 一次http请求（填写用户名密码），后端只知道这次请求某人是否合法，http是无状态的，不能记录某人登录过账户
+                所以说使用cookie去存储某个人操作，下次请求的时候，把上一次的操作发给后端，就知道某人是否登录过账户
+            localStorage
+            sessionStorage
+    */
+
+    // ajax('data.xml',{
+    //     dataType:'xml'
+    // }).then(d=>{
+    //     const person = d.getElementsByTagName('person');
+    //     let temp = '';
+    //     for(let i=0;i<person.length;i++){
+    //         temp += `<li>我的名字叫:${person[i].children[0].innerHTML},今年${person[i].children[1].innerHTML}岁,我想说:${person[i].children[3].innerHTML}</li>`
+    //     }
+    //     ul.innerHTML = temp;
+    //     // console.log(person);
+    // })
+
+    // console.log(document.cookie); //读操作
+
+    // document.cookie = 'name=pq'; //写操作
+    // document.cookie = 'age=13';
+    // console.log(document.cookie); //读操作
+    /*
+        * 读操作需要注意的是，一次读取会把当前域名下的所有cookie都获取出来
+        格式为'key=val; key2=val2',分号后面有空格
+    */
+
+    // let o = new Date();
+    // o.setDate(new Date().getDate() + 1);
+
+    // console.log(o)
+
+    // document.cookie = 'name=pq; expires='+o;
+
+    /*
+        cookie的生命周期
+            默认的生命周期是当浏览器关闭，生命就结束
+
+            如果不要走默认的生命周期使用 expires
+
+            expires=需要设置的时间 
+
+            let o = new Date();
+            o.setDate(new Date().getDate() + 1);  //比当前时间多1天
+
+            document.cookie = 'name=pq; expires='+o;
+
+        cookie，在以前每个域名只能设置几个或者几十个，字字千金，现在据说有5M
+
+        cookie必须使用服务器环境
+    */
+
+
+    let sql = [
+        {
+            user:'郝永旺',
+            pw:123
+        },
+        {
+            user:'尹德智',
+            pw:321
+        }
+    ];
+
+
+    
+    setCookie('name','xxoo',{
+        setTime:{
+            date:10
+        }
+    });
+
+    function setCookie(key,val,time){
+        if(time){
+            let o = new Date;
+            // o.setMinutes(new Date().getMinutes() + time);
+            let t;
+            let prop;
+            for(let attr in time.setTime){
+                t = attr[0].toUpperCase()+attr.substr(1);
+                prop = attr;
+            }
+            // console.log('set'+t,time.setTime[prop])
+            // return ;
+            o['set'+t](new Date()['get'+t]()+time.setTime[prop]);
+
+            // console.log(o);
+
+            document.cookie = key + '=' + val + '; expires='+o;
+        }else{
+            document.cookie = key + '=' + val;
+        }   
+    }
+
+    function getCookie(key){
+        let c = document.cookie;
+        let val;
+        c.split('; ').forEach(item=>{
+            let ary = item.split('=');
+            if(ary[0] === key){
+                val = ary[1];
+            }
+        });
+        return val;
+    }
+
+    function removeCookie(key,val){
+        setCookie(key,val,{setTime:{date:-1}});
+    }
+
+    removeCookie('user','尹德智');
+
+    console.log(getCookie('user'));
+
+   
+
+
+
+    let c = document.cookie;
+    //刷新页面的时候取cookie，看看有没有user，有user说明已经登录过，否则没有人登录
+    c.split('; ').forEach(item=>{
+        let ary = item.split('=');
+        if(ary[0] === 'user'){
+           h1.innerHTML = '欢迎'+ ary[1] + "回来";
+           box.style.display = 'none';
+        }
+    }); //'user=xx; id=yy'->['user=xx','id=yy']
+
+
+
+    btn.onclick = function(){
+        let val1 = user.value;
+        let val2 = pw.value;
+
+        let o = sql.find(item=>item.user === val1);
+        if(o){
+            if(o.pw === val2*1){
+                alert('登录成功');
+                document.cookie = 'user='+o.user;
+                window.location.reload();
+            }else{  
+                alert('用户名或密码错误');
+            }
+        }else{
+            alert('没有此人');
+        }
+    }
+
+
+
+
+
+
+
+    function ajax(url,opt){
+        return new Promise(function(resolve,reject){
+            var myopt = opt || {}
+            let defaultObj = {
+                method: 'get',//默认的请求方式
+                body: '',//默认的请求体
+                headers:{},//默认的请求头
+                dataType:'json',//默认拿到的数据是对象
+                timeout:10000,//默认10秒后为超时
+                ontimeout: function(){},//超时干的事儿
+                async:true//默认异步
+            }
+            for(var attr in myopt){
+                defaultObj[attr] = myopt[attr];
+            }
+            myopt = defaultObj;
+
+
+            var len = arguments.length; //2为没有配置项，3为有配置项
+            var xhr = new XMLHttpRequest;
+            
+            //只有异步才能够进行设置超时和监听超时
+            if(myopt.async === true){
+                xhr.timeout = myopt.timeout; //设置超时时间
+                xhr.ontimeout = myopt.ontimeout; //监听超时
+            }   
+            function ready(){
+                //如果是异步才需要使用onreadystatechange去监听
+                if(myopt.async === true){
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState === 4){
+                            //成功
+                            succOrError();
+                        }
+                    }
+                }else{
+                    //同步时候逻辑
+                    succOrError();
+                }
+            }
+
+            function succOrError(){
+                if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                    if(myopt.dataType === 'json'){
+                        resolve(eval('('+xhr.responseText+')'));
+                    }else if(myopt.dataType === 'xml'){
+                        resolve(xhr.responseXML);
+                    }
+                }else{
+                    reject(xhr.status);
+                }
+            }
+
+            if(len === 1){ //直接走get即可
+                ready();
+                xhr.open('get',url,true);
+                xhr.send();
+            }else if(len === 2){ //传了第三个参数（配置项）
+                if(/^get$/i.test(myopt.method)){
+                    ready();
+                    //有没有 myopt.body 如果有就url+body，没有就不用加?号了,如果没有body，但是也没？就添加一个？号
+                    url = myopt.body?url+'?'+myopt.body:(url.includes('?')?url:url+'?');
+                    xhr.open('get',url+'&myrandom='+Date.now(),myopt.async);
+                    xhr.send();
+                    
+                }else if(/^post$/i.test(myopt.method)){
+                    ready();
+                    xhr.open('post',url,myopt.async);
+
+                    for(var attr in myopt.headers){
+                        if(myopt.headers.hasOwnProperty(attr)){
+                            xhr.setRequestHeader(attr,myopt.headers[attr]);
+                        }
+                    }
+                    xhr.send(myopt.body);
+                }
+            } 
+        });
+    }
+
+</script>
+</body>
+</html>

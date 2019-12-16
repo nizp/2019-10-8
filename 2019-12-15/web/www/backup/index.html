@@ -28,37 +28,6 @@
     </form>
     <p id="info" >请输入信息</p>
 </div>
-<script src="./axios_dev.js"></script>
-<script>
-    register.onclick = function(){
-        axios.post('/api/user/register',{
-                username:username.value,
-                password:password.value
-        })
-        .then((data)=>JSON.parse(data))
-        //data.json()
-        .then(d=>{
-            if(d.code === 1){
-                console.log('失败')
-            }else if(d.code === 0){
-                // console.log('成功');
-                info.innerHTML = '恭喜注册成功';
-                info.style.display = 'block';
-                let num = 3;
-                let timer = setInterval(() => {
-                    info.innerHTML = '('+num+'s)带你去一个神秘的地方!';
-                    num --;
-                    if(num < 0){
-                        clearInterval(timer);
-                        num = 3;
-                        window.location.href="http://localhost:88";
-                    }
-                }, 1000);
-            }
-            
-            console.log(d);
-        });
-    }
-</script>
+
 </body>
 </html>

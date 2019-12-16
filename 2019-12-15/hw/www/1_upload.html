@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- image类似于user也是个参数字段 -->
+    <!-- <form action="/upload" method="POST" enctype="multipart/form-data"> -->
+        <!-- 请选择:<input type="file" name="image"/> -->
+        请选择:<input type="file" id="file" multiple/>
+        <button id="btn">上传</button>
+        <!-- <input type="submit" value="上传"/> -->
+    </form>
+<script>
+    btn.onclick = function(){
+        const xhr = new XMLHttpRequest;
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+        xhr.open('post','/upload');
+        /*
+            key?  image=数据
+        */
+        // xhr.setRequestHeader('content-type','multipart/form-data');
+        /*
+            FormData
+                能够把files[n]变成二进制的数据
+
+            它的实例上有一个方法，append(key,value)
+
+            有几个字段就写几个append
+            fd.append('image',file.files[0]) 
+                'image=dnsadhshcduba9u'
+            fd.append('user',this.value);
+                'user=lilei'
+
+            'image=dnsadhshcduba9u&user=lilei'
+            
+
+        */
+        let fd = new FormData();
+
+        // console.dir(fd)
+
+        fd.append('image',file.files[0])
+        xhr.send(fd);
+
+        // console.dir(file)
+        // xhr.send('image='+file.files[0]);
+    }
+</script>
+</body>
+</html>

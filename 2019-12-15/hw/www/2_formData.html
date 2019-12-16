@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let fd = new FormData();
+
+    // fd.append('user','hyw,bx,bw');
+    // fd.append('user','bx');
+    fd.set('user','bx');  //'[1,2,3]'   //之前如果有的key值会被覆盖
+    // fd.append('user','bw'); //追加，不会覆盖同名的key值
+
+    // console.log(fd.has('user')) //失败包含参数key
+    
+    // fd.set('user'); 
+    fd.delete('user'); //删除参数key
+
+    console.log(fd.get('user'));
+
+    // console.log(fd.getAll('user')); //找出同名的key，返回一个数组
+
+
+
+    
+</script>
+</body>
+</html>

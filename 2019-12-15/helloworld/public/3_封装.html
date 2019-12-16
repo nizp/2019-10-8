@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+
+    <ul id="ul">
+
+    </ul>
+<script>
+
+    /*
+        new Promise(function(resolve,reject){
+            //放异步代码
+            resolve(x)
+        }).then(function(x){
+            return a;
+        })
+    */
+
+    user.onblur = function(){
+        ajax('/get?user='+this.value)
+        .then(d=>{
+            console.log(d);
+        });
+    }
+
+    /*
+        ajax:前后数据交互的技术
+            xhr(XMLHttpRequest) -> 老的方式
+            fetch -> 新的方式
+        $.ajax
+        axios + promise
+    */
+    function ajax(url,opt){
+        return new Promise(function(resolve,reject){
+            var myopt = opt || {}
+            let defaultObj = {
+                method: 'get',//默认的请求方式
+                body: '',//默认的请求体
+                headers:{},//默认的请求头
+                dataType:'json',//默认拿到的数据是对象
+                timeout:10000,//默认10秒后为超时
+                ontimeout: function(){},//超时干的事儿
+                async:true//默认异步
+            }
+            for(var attr in myopt){
+                defaultObj[attr] = myopt[attr];
+            }
+            myopt = defaultObj;
+
+
+            var len = arguments.length; //2为没有配置项，3为有配置项
+            var xhr = new XMLHttpRequest;
+            
+            //只有异步才能够进行设置超时和监听超时
+            if(myopt.async === true){
+                xhr.timeout = myopt.timeout; //设置超时时间
+                xhr.ontimeout = myopt.ontimeout; //监听超时
+            }   
+            function ready(){
+                //如果是异步才需要使用onreadystatechange去监听
+                if(myopt.async === true){
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState === 4){
+                            //成功
+                            succOrError();
+                        }
+                    }
+                }else{
+                    //同步时候逻辑
+                    succOrError();
+                }
+            }
+
+            function succOrError(){
+                if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                    if(myopt.dataType === 'json'){
+                        resolve(eval('('+xhr.responseText+')'));
+                    }else if(myopt.dataType === 'xml'){
+                        resolve(xhr.responseXML);
+                    }
+                }else{
+                    reject(xhr.status);
+                }
+            }
+
+            if(len === 1){ //直接走get即可
+                ready();
+                xhr.open('get',url,true);
+                xhr.send();
+            }else if(len === 2){ //传了第三个参数（配置项）
+                if(/^get$/i.test(myopt.method)){
+                    ready();
+                    //有没有 myopt.body 如果有就url+body，没有就不用加?号了,如果没有body，但是也没？就添加一个？号
+                    url = myopt.body?url+'?'+myopt.body:(url.includes('?')?url:url+'?');
+                    xhr.open('get',url+'&myrandom='+Date.now(),myopt.async);
+                    xhr.send();
+                    
+                }else if(/^post$/i.test(myopt.method)){
+                    ready();
+                    xhr.open('post',url,myopt.async);
+
+                    for(var attr in myopt.headers){
+                        if(myopt.headers.hasOwnProperty(attr)){
+                            xhr.setRequestHeader(attr,myopt.headers[attr]);
+                        }
+                    }
+                    xhr.send(myopt.body);
+                }
+            } 
+        });
+    }
+
+</script>
+</body>
+</html>

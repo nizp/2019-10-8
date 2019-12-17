@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+}
+</style>
+</head>
+<body style="height:3000px">
+    <button id="hash">改hash</button>
+    <button id="search">改search</button>
+    <div id="box"></div>
+<script>
+    /*
+        浏览器对象模型
+            基本不兼容
+            window.innerHeight  浏览器的高度
+            window.pageYoffset  滚动条的距离  只能读不能写
+            window.scrollTo(x,y) 设置滚动条距离 
+
+            window.location:
+                host -> host
+                hostname -> 当前host的名字
+                href -> url链接
+                origin -> 源
+                pathname -> 路径名字（一般是接口）
+                protocol: 协议
+                port: 端口
+                reload 刷新页面
+                
+                hash  锚信息，哈希值  #之后的（包含#号）*** 修改它不会刷新页面
+                        ajax最大的缺陷就是丧失浏览器历史记录，所谓的不安全
+
+                        当hash值变化的时候，会触发一个onhashchange的事件
+                dsadsa?dsdsa=112 >
+
+                
+                search  查询信息  ?dsdsa# ?号到#之间的信息 修改它是会刷新页面的
+
+                不管是改变hash还是改变search都会使浏览器记录用户操作（就可以使用返回前进键了）
+                
+
+                当切换路由的时候会从后端的静态资源中查找需要传资源到前台，后端跳转路由会刷新页面
+                这样会影响用户体验，所以使用hash来充当跳路由的动作来请求资源，这样一来第一能够成功请求
+                资源，二来，不刷新页面
+                
+
+                window.navigator.userAgent  用户的内核信息（字符串）（注意的是容易被模拟）
+
+    */    
+
+    let i = 0;
+    hash.onclick = function(){
+        window.location.hash = 'a=y'+i++;  //写操作
+        console.log(window.location.hash);//读操作
+    }
+
+    window.onhashchange = function(){
+        console.log(1);
+    }
+
+    // search.onclick = function(){
+    //     window.location.search = 'h=i'+i++;
+    //     console.log(window.location.search);//读操作
+    // }
+
+
+    // FF:Firefox
+    //Chrome:Chrome
+    if(/chrome/i.test(window.navigator.userAgent) && /windows/i.test(window.navigator.userAgent)){
+        box.style.background = 'red';
+    }else if(/firefox/i.test(window.navigator.userAgent)){
+        box.style.background = 'green';
+    }else if(/iphone/i.test(window.navigator.userAgent)){
+        box.style.background = 'yellow';
+    }else if(/android/i.test(window.navigator.userAgent)){
+        box.style.background = 'skyblue';
+    }
+
+    
+
+
+    document.onclick = function(){
+        // console.log( window.pageYOffset )
+        // document.documentElement.scrollTop = 0;
+        // window.scrollTo(0,0);
+        // console.log(window.location);
+        // window.location.href = 'http://www.baidu.com';
+        // console.log(window.navigator.userAgent)
+    }
+
+    // window.location.href = 'http://www.baidu.com'; //一打开页面就跳转到别的页面
+
+</script>
+</body>
+</html>

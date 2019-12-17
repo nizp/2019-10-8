@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>1111</button>
+    <button>2222</button>
+    <button>3333</button>
+    <p id="p">第一张图片</p>
+
+    <input type="button" value="后退" id="btn"/>
+
+<script>
+    let ary = ['第一张图片','第二张图片','第三张图片'];
+    const btns = document.querySelectorAll('button');
+
+    let hash = window.location.hash;
+    let index = 0;
+    if(hash){
+        index = window.location.hash.match(/page\/(\d)/)[1];
+        p.innerHTML = ary[index];
+    }else{
+        window.location.hash = 'page/0';
+    }
+
+    btns.forEach((ele,i)=>{
+        ele.onclick = function(){
+            p.innerHTML = ary[i];
+            window.location.hash = 'page/'+i; 
+        }
+    });
+
+    btn.onclick = function(){
+        index --
+        if(index < 0){
+            index = 0;
+        }
+        window.location.hash = 'page='+ index; 
+    }
+
+    window.onhashchange = function(){
+       index = window.location.hash.match(/page\/(\d)/)[1];
+       p.innerHTML = ary[index];
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!-- <div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div> -->
+        </div>
+        <div class="page" id="page">
+            <a href="#" class="active">1</a>
+            <a href="#" >2</a>
+        </div>
+    </div>
+</div>
+<script>
+
+    /*
+        只要是ajax请求，优先把数据打印出来看看
+    */
+
+    //刷新就请求第一页的数据
+    fetch('/api/weibo?act=get&page=1').then(d=>d.json()).then(d=>{
+        // console.log(d);
+        // div1.innerHTML = '';
+        d.reverse();
+        d.forEach(e=>{
+            render(e);
+        });
+        
+    });
+
+
+    /*
+        点击发送按钮，发送消息
+    */
+
+    function toDou(n){
+        return n<10?'0'+n:''+n;
+    }
+
+
+    submit.onclick = function(){
+        let {value} = text;
+        
+        //请求成功之后才能插入页面
+        fetch('/api/weibo?act=add&content='+value).then(d=>d.json()).then(d=>{
+            // console.log(d);
+            if(d.code === 0){
+                /*
+                    如果在使用服务器时间的时候，发现设置的时间为1970，直接*1000,因为服务器时间是以秒来计算的
+                */
+                // console.log(d);
+                //因为d里面没有content，但是render里需要content，所以给数据添加了一个content属性
+                d.content = value;
+                render(d);
+                text.value = '';
+            }
+
+        })
+
+    }
+
+
+    function render(d){
+        let o = new Date(d.time);
+        let year = o.getFullYear();
+        let moun = o.getMonth() + 1;
+        let date = o.getDate();
+        let h = o.getHours();
+        let m = o.getMinutes();
+        let s = o.getSeconds();
+        // console.log(o);
+        div1.innerHTML = `
+            <div class="reply">
+                    <p class="replyContent">${d.content}</p>
+                    <p class="operation">
+                        <span class="replyTime">${year}-${toDou(moun)}-${toDou(date)} ${toDou(h)}:${toDou(m)}:${toDou(s)}</span>
+                        <span class="handle">
+                            <a href="javascript:;" class="top">0</a>
+                            <a href="javascript:;" class="down_icon">0</a>
+                            <a href="javascript:;" class="cut">删除</a>
+                        </span>
+                    </p>
+            </div>
+        ` + div1.innerHTML;
+    }
+
+</script>
+</body>
+</html>

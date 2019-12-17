@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="Reddy.Huang"/>
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <title>Title</title>
+    <style>
+        h2 {
+            display: none;
+        }
+        #info{
+          display: none;
+        }
+    </style>
+</head>
+<body>
+<h2 id="userInfo">欢迎回来,<span id="user"></span></h2>
+<div class="form-wrapper">
+    <div class="banner"></div>
+    <!-- <form id="form"> -->
+        <div class="item-wrapper"><label for="username">登陆名</label><input type="text" name="username" id="username" value=""></div>
+        <div class="item-wrapper"><label for="password">密码</label><input type="password" name="password" id="password" value=""></div>
+        <input type="button" value="登陆" id="submit">
+        <input type="button" value="注册" id="register">
+    <!-- </form> -->
+    <p id="info" >请输入信息</p>
+</div>
+<script>
+    //注册
+    register.onclick = function(){
+        let v1 = username.value;
+        let p1 = password.value;
+
+        fetch('/api/user/register',{
+            method:'post',
+            body:''+new URLSearchParams({
+                username:v1,
+                password: p1
+            }),
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        })
+        .then(d=>d.json()).then(d=>{
+            if(d.code === 0){
+                alert('恭喜注册成功');
+                window.location.href = '/';
+            }else if(d.code === 1){
+                alert('用户名已被占用');
+            }
+            username.value = password.value = '';
+            console.log(d);
+        });
+    }
+
+
+    //登录
+    submit.onclick = function(){
+        let v1 = username.value;
+        let p1 = password.value;
+
+        fetch('/api/user/login',{
+            method:'post',
+            body:''+new URLSearchParams({
+                username:v1,
+                password: p1
+            }),
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        }).then(d=>d.json())
+        .then(d=>{
+            if(d.code === -3){
+                alert(d.msg);
+            }else if(d.code === 0){
+                alert('欢迎'+d.userInfo.username+'回来');
+                window.location.href = '/';
+                username.value = password.value = '';
+            }
+            console.log(d);
+        });
+    }
+
+
+    
+
+
+</script>
+</body>
+</html>

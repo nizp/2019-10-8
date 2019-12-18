@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function MyPromise(executor){
+        let that = this;
+
+        that.value = undefined; //成功的值
+        that.reason = undefined; //失败的值
+        that.status = 'pending'; //默认是个等待状态
+
+        /*
+            成功和失败的事件池，存储绑定的函数（订阅）
+        */
+        that.fulfilledCallback = [];
+        that.rejectedCallback = [];
+
+        //成功的函数
+        function fulfilled(value){//发布成功池
+            //在调用成功函数的时候只允许从pending到成功状态
+            // console.log(1111)
+            if(that.status === 'pending'){
+                that.status = 'fulfilled';
+                that.value = value;  //当调用成功函数的时候，把外界传入的参数赋值给this.value
+                
+                that.fulfilledCallback.forEach(fn=>{
+                    fn();
+                });
+            }
+        }
+        //失败的函数
+        function rejected(reason){//发布失败池
+            //在调用成功函数的时候只允许从pending到失败状态
+            if(that.status === 'pending'){
+                hat.status = 'rejected';
+                that.reason = reason;
+                that.rejectedCallback.forEach(fn=>{
+                    fn();
+                });
+            }
+        }   
+        executor(fulfilled,rejected); //只要调用MyPromise，就执行executor，所以在executor中有同步和异步代码
+    }
+
+    MyPromise.prototype.then = function(res,rej){
+        let that = this;
+        //成功的情况下调用res
+        if(that.status === 'fulfilled'){
+            res(that.value);
+        }
+
+        //失败的情况下调用rej
+        if(that.status === 'rejected'){
+            rej(that.reason);
+        }
+
+        //异步的情况,把成功和失败的函数订阅到对应的池子里去
+        if(that.status === 'pending'){
+            that.fulfilledCallback.push(function(){
+                res(that.value);
+            });
+            that.rejectedCallback.push(function(){
+                rej(that.reason);
+            });
+        }
+        // console.log(that.status)
+    }
+
+    new MyPromise(function(resolve,reject){
+        setTimeout(()=>{
+            resolve(10);
+        },1000);
+    }).then(function(d){
+        console.log(d);//10 成功
+    })
+
+    //then后面不能加then，因为then没有返回值是undefined
+    // .then(function(){
+    //     console.log(1)
+    // })
+
+
+
+
+    // addEventListener(function(d){
+    //     console.log(d);//10
+    // }
+
+
+
+
+
+</script>
+</body>
+</html>

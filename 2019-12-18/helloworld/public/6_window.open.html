@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        打开一个网页:window.open
+
+            必须人为手动来调用，才执行，不然会被高版本浏览器拦截
+
+            window.open(url,打开方式(默认新开一个窗口),控制浏览器[有兼容性问题])
+
+            返回值是新打开的页面，可以使用close()
+
+
+            window.close(); 关闭浏览器
+
+
+    */
+
+  
+
+    document.onclick = function(){
+        let a =  window.open('http://baidu.com');
+
+        setTimeout(() => {
+            a.close();
+        }, 3000);
+        // console.log(a);
+    }
+
+   
+</script>
+</body>
+</html>

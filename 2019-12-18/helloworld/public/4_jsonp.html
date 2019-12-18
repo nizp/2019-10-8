@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- <script src="http://localhost/1.js"></script> -->
+</head>
+<body>
+<script>
+    // var b = 20;
+    // function fn(a){
+    //     console.log(a);
+    // }
+    // fn(5);
+</script>
+<script>
+    // var a = 10;
+    // fn(a);
+    // console.log(b);
+    // function fn(a){
+    //     console.log(a);
+    // }
+
+    /*
+        有很标签天生就支持跨域:
+            a href = ""
+            img src = ""
+            link href="1.css"
+            script  src=""
+
+            script标签会尽量解析外链资源把资源变成js代码
+
+
+        jsonp需要哪些条件
+            1.*全局*定义一个函数
+            2.后端的数据要知道你定义的函数叫什么名字
+            3.后端把数据放到函数调用中
+            4.通过script标签发送请求 等同于函数调用,还传了参给你
+
+
+            ajax和jsonp数据有什么区别？
+
+                ajax请求来的数据不带函数名加括号
+                jsonp请求的数据是带函数名 + 括号的
+
+                jsonp只能是get请求，因为走的是url
+                ajax请求方式可以请求jsonp数据，但是jsonp数据不能访问到ajax数据
+                为什么？
+                因为ajax-> xhr.responseText (fn('{"name":"zhufeng"}'))
+                jsonp -> '{"name":"zhufeng"}'
+
+
+    */    
+    
+    function fn1(a){
+        console.log(a);
+    }
+
+    //点击是异步的
+    document.onclick = function(){
+        let o = document.createElement('script');
+        o.src = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=s&cb=fn2';
+        head.append(o);//插入到页面的时候，fn早就被解析完了
+
+        //*****上面这句话就等同于函数调用，等于下面这句话
+        // fn(5);
+    }
+
+    /*
+        https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=s
+    */
+
+   
+</script>
+<!-- <script src="http://localhost/1.js"></script> -->
+</body>
+</html>

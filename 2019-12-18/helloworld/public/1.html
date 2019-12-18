@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        跨域（源）
+        同源策略:一种关于安全方面的约定，它是浏览器最核心也最基本的安全功能，
+        如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。
+        Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。
+
+        源:
+            协议:
+                http/https(比http更加安全，因为在传输的时候需要进行安全证书的认证)
+                ftp
+                file
+                ....
+
+            域名:(IP的另一个名字)
+                www.baidu.com
+
+            端口:
+                好比服务员、门牌号专门是做某件事情的
+                8888,5500,80....
+                
+                
+
+            同源:同域名、同协议、同端口
+
+            跨源:不用域名、不同协议、不同端口，只要有一个不同就叫跨域
+
+            https://www.baidu.com:80  我
+
+            http://www.baidu.com:80  协议不一样=跨域
+
+            https://www.baidu.com:81 端口不一样=跨域
+
+            https://www.taobao.com:80 域名不一样=跨域
+
+            https://news.baidu.com:80  跨域
+
+
+            https://baidu.com   http://61.135.169.121
+            https://blog.baidu.com   跨域
+
+
+            你要用别人的东西   (别人借给你用) (变成自己的) (自己做一个和别人一样的东西)
+
+            跨域的解决方案:
+                1.CORS
+                    80端口下访问8080端口下的/kuayu接口
+
+                    需要高版本浏览的XMLHttpRequest + 后端设置白名单
+
+                    优点:
+                        前端什么都不用做，只需要后台添加白名单即可
+
+                    缺点:
+                        低版本不兼容
+
+                2.服务器代理
+
+                    服务器能够进行跨域请求第三方资源，服务器跨域的代码又和我端同源，就等同于我端跨域第三方资源
+
+                    优点:前端基本不用做什么，需要自己配置第三方资源路径
+
+                    缺点:别人变了的你也得变。
+
+                    http://localhost:80 -> https://movie.douban.com/j/search_subjects?type=tv&tag=国产剧
+
+                3.jsonp
+                    json + padding 把数据内填充
+
+                    fn([1,2,3])
+                    fn2(1,2,3)
+
+                    function fn(a){
+                        alert(a)
+                    }
+                    function fn2(a){
+                        console.log(a)
+                    }
+
+
+
+
+
+
+
+
+
+        
+    */
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    111
+    <script>
+        let xhr = new XMLHttpRequest;
+        xhr.open('get','http://localhost:8080/kuayu?name=hh');  
+        xhr.send();
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+        }  
+    </script>
+</body>
+</html>

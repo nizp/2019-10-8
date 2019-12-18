@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function MyPromise(executor){
+        let that = this;
+        that.value = undefined; //成功的值
+        that.reason = undefined; //失败的值
+        that.status = 'pending'; //默认是个等待状态
+
+        /*
+            成功和失败的事件池，存储绑定的函数（订阅）
+        */
+        that.fulfilledCallback = [];
+        that.rejectedCallback = [];
+
+        //成功的函数
+        function fulfilled(value){//发布成功池
+            //在调用成功函数的时候只允许从pending到成功状态
+            // console.log(1111)
+            if(that.status === 'pending'){
+                that.status = 'fulfilled';
+                that.value = value;  //当调用成功函数的时候，把外界传入的参数赋值给this.value
+                that.fulfilledCallback.forEach(fn=>{
+                    fn();
+                });
+            }
+        }
+        //失败的函数
+        function rejected(reason){//发布失败池
+            //在调用成功函数的时候只允许从pending到失败状态
+            if(that.status === 'pending'){
+                that.status = 'rejected';
+                that.reason = reason;
+                that.rejectedCallback.forEach(fn=>{
+                    fn();
+                });
+            }
+        }  
+
+        try {
+            executor(fulfilled,rejected);
+        } catch (error) {
+            rejected(error);
+        }
+        
+        // executor(fulfilled,rejected); //只要调用MyPromise，就执行executor，所以在executor中有同步和异步代码
+    }
+
+    MyPromise.prototype.then = function(res,rej){
+        let that = this;
+        //为了保证then一直then，then必须返回一个promise对象
+        let promise2 = new MyPromise(function(resolve2,reject2){
+            //成功的情况下调用res
+            if(that.status === 'fulfilled'){
+                // let x = res(that.value); //第一个返回值就是第二次then的参数
+                // resolve2(x);
+                try {
+                    let x = res(that.value);
+                    resolve2(x);
+                } catch (error) {
+                    resolve2(that.value);
+                }
+            }
+            //失败的情况下调用rej
+            if(that.status === 'rejected'){
+                // let x = rej(that.reason);
+                // reject2(x);
+                try {
+                    let x = rej(that.reason);
+                    reject2(x);
+                } catch (error) {
+                    rejected2(that.reason);
+                }
+            }
+
+            //异步的情况,把成功和失败的函数订阅到对应的池子里去
+            if(that.status === 'pending'){
+                that.fulfilledCallback.push(function(){
+                    try {
+                        let x = res(that.value);
+                        resolve2(x);
+                    } catch (error) {
+                        if(typeof res === 'function'){
+                            reject2(that.reason);
+                        }else{
+                            resolve2(that.value);
+                        }
+                    }
+                });
+                that.rejectedCallback.push(function(){
+                    try {
+                        let x = rej(that.reason);
+                        reject2(x);
+                    } catch (error) {
+                        rejected2(that.reason);
+                    }
+                });
+            }
+        });
+        return promise2;
+    }
+
+    new MyPromise(function(resolve,reject){
+        //  throw new Error('就是错了');
+        setTimeout(()=>{
+            resolve(10);
+        },1000);
+    })
+    .then((d)=>{
+        throw new Error('就是错了');
+    },(e)=>{
+        console.log(e);
+    })
+    .then(function(d2){
+        console.log(d2)
+    },function(err) {
+        console.log('错误')
+    });
+
+    // new Promise(function(res,rej){
+    //     // throw new Error('就是错了');
+    //     res(10);
+    // }).then((d)=>{
+    //     //console.log(d)
+    //     throw new Error('就是错了');
+    // },(d)=>{
+    //     console.log(d);
+    // }).catch(e=>{
+    //     console.log(e);
+    // })
+
+    // .then(d=>{
+    //     console.log(d);
+    // })
+
+
+
+
+
+    // addEventListener(function(d){
+    //     console.log(d);//10
+    // }
+
+
+
+
+
+</script>
+</body>
+</html>

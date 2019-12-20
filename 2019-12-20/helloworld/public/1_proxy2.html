@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+        let xhr = new XMLHttpRequest;
+        xhr.open('get','/proxy');  
+        xhr.send();
+        xhr.onload = function(){
+            // console.log(xhr.responseText)
+            document.write(xhr.responseText);
+        }  
+    </script>
+</body>
+</html>

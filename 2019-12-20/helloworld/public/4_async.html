@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    
+
+    document.onclick = async function fn(){
+        console.log('请求之前');
+        //唯一要注意的是，await后面必须是个promise对象
+        let res = await fetch('/sleep?user=123').then(e=>e.text());
+        console.log('拿到数据'+res);
+        console.log('请求之后');
+    }
+
+
+
+
+    /*
+        async function fn(){
+            console.log('请求之前');
+            let res = await fetch('/sleep?user=123');
+            console.log('拿到数据'+res);
+            console.log('请求之后');
+        }
+    */
+
+    // let f = fn();
+    // document.onclick = function(){
+    //     // f.next();
+    //     fn();
+    // }    
+
+    
+
+    // function request(url){
+    //     let xhr = new XMLHttpRequest;
+    //     xhr.open('get',url);
+    //     xhr.send();
+    //     xhr.onload = function(){
+    //         f.next(xhr.responseText);
+    //     }
+    // }
+
+</script>
+</body>
+</html>

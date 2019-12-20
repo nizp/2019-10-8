@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const request = require('request');
  
 // 配置静态文件服务中间件
-let serverUrl='https://movie.douban.com/cinema/nowplaying/kunming/';//server地址
+let serverUrl='http://flash.weather.com.cn/wmaps/xml/beijing.xml';//server地址
 app.use(express.static(path.join(__dirname, './')));//静态资源index.html和node代码在一个目录下
 app.use('/proxy', function(req, res) {
   let url = serverUrl + req.url;

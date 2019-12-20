@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="send">发送</button>
+    <button id="abort">中断</button>
+    <script>
+        /*
+            fetch
+            xhr
+
+            onabort  当网络中断的时候触发
+            xhr.abort()  强行中断
+
+        */
+        
+        // fetch('/proxy').then(d=>d.text())
+        // .then(d=>{
+        //     console.log(d);
+        // })
+        
+        let xhr = null;
+        send.onclick = function(){
+            xhr = new XMLHttpRequest;
+            xhr.open('get','/sleep?name=lilei');
+            xhr.send();
+            xhr.onload = function(){
+                console.log(xhr.responseText);
+            }
+            xhr.onabort = function(){
+                console.log('触发')
+            }
+        }
+        abort.onclick = function(){
+            xhr.abort();
+        }
+
+
+        
+    </script>
+</body>
+</html>

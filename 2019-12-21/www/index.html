@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:red;
+} 
+</style>
+</head>
+<body>
+    用户名:<input type="text" id="us"/>
+    密码:<input type="password" id="pw"/>
+    <button id="btn">注册</button>
+    <!-- <div id="box"></div> -->
+<script>
+
+    //post
+    us.onblur = async function(){
+        let data = await fetch('/post',{
+            body:'user='+this.value,
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            },
+            method:'post'
+        }).then(e=>e.json());
+
+        console.log(data);
+
+        // if(data.code === 0){
+        //     this.style.border = '1px solid green';
+        // }else if(data.code === 1){
+        //     this.style.border = '1px solid red';
+        // }
+    }
+
+
+    // us.onblur = async function(){
+    //     let data = await fetch('/getname?user='+this.value).then(e=>e.json());
+    //     if(data.code === 0){
+    //         this.style.border = '1px solid green';
+    //     }else if(data.code === 1){
+    //         this.style.border = '1px solid red';
+    //     }
+    // }
+
+
+    btn.onclick = function(){
+        fetch('/register?user='+us.value+'&password='+pw.value).then(d=>d.json())
+        .then(d=>{
+            // console.log(d);
+            if(d.code === 0){
+                alert('注册失败')
+            }else if(d.code === 1){
+                alert('注册成功')
+            }else if(d.code === 2){
+                alert(d.msg);
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:skyblue;
+} 
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    let obj = {};
+
+    /*
+        user=123   ^([^=]+)=([^&]+)&?
+        &pass=321
+    */
+
+    let str = 'user=彭_love_锦程&pass=321&wd=高兴&pass=321&pass=32pp';
+    str.replace(/([^=]+)=([^&]+)&?/g,($0,$1,$2)=>{
+        obj[$1] = $2;
+    });
+    console.log(obj)
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#adddir,#rename_box{
+    display: none;
+}
+
+</style>
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <input type="text" id="adddir"/>
+
+    <button id="rebtn">重命名</button>
+    <div id="rename_box">
+        <input type="text" id="oldname"/>
+        <input type="text" id="newname"/>
+        <button id="rename">确定替换</button>
+    </div>
+    <!-- index; -->
+<script>
+    /*
+        A B C
+        let data1 = await fetch('/a')
+        let data2 = await fetch('/b?'+data1.name)
+
+        请求 -> 
+            fetch('url?dsa=xs').then()
+    */
+    btn.onclick = function(){
+        adddir.style.display = 'block';
+    }
+
+    rebtn.onclick = function(){
+        rename_box.style.display = 'block';
+        rename.onclick = async function(){
+            // alert(1)
+            let v1 = oldname.value;
+            let v2 = newname.value;
+
+            let data = await fetch('http://localhost:80/rename',{
+                method:'post',
+                headers:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                body:`oldname=${v1}&newname=${v2}`
+            }).then(d=>d.json());
+
+            if(data.code === 1){
+                alert('修改成功');
+                rename_box.style.display = 'none';
+            }
+        }
+    }
+
+    
+    
+
+
+    adddir.onblur = async function(){
+        let val = adddir.value;
+        let data = await fetch('http://localhost:80/add?mkdirname='+val).then(d=>d.json());
+        if(data.code === 1){
+            alert('新建完成');
+            adddir.style.display = 'none';
+            adddir.value = '';
+        }
+    }
+</script>
+</body>
+</html>

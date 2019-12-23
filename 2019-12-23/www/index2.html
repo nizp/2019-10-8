@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<style type="text/css">
+body,
+h1 {
+	margin: 0;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+input {
+	outline: none;
+}
+table {
+	border-collapse: collapse;
+	border: #bbb;
+}
+body {
+	width: 100%;
+	height: 100%;
+	/*background: url(img/2.jpg) no-repeat;*/
+}
+.tBody {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 30px;
+	padding: 20px 30px 40px;
+	background-color: rgba(255,255,255,.6);
+}
+.title {
+	text-align: center;
+	color: #fca113;
+	text-shadow: 0 0 2px #fcf913;
+	line-height: 50px;
+}
+table {
+	background-color: #fff;
+}
+th {
+	background-color: #ddd;
+}
+tr {
+	height: 30px;
+}
+ul {
+	padding: 5px 0;
+	width: 600px;
+	text-align: center;
+}
+td{
+	text-align: center;
+}
+td input {
+	margin: 0 2px;
+}
+li {
+	padding: 5px 0;
+	overflow: hidden;
+}
+label {
+	display: inline-block;
+}
+input[type="text"] {
+	border: 1px solid #ccc;
+	width: 80px;
+	height: 20px;
+}
+/*.active {
+	background-color: #f7cb75;
+}*/
+/*#tab tbody tr:hover {
+	background-color: #f7cb75;
+}*/
+</style>
+</head>
+<body>
+<section class="tBody">
+	<h1 class="title"></h1>
+	<ul id="header">
+		<li class="addPre">
+			<label>名字： <input type="text" id="name1" /></label>
+			<label>年龄： <input type="text" id="age" /></label>
+			<input type="button" value="添加" id="add" />
+		</li>
+		<li>
+			<span>排序</span>
+			<select id="s1">
+				<option value="price">年龄</option>
+				<option value="id">编号</option>
+			</select>
+			<select id="s2">
+				<option value="2">从高到底</option>
+				<option value="1">从低到高</option>
+			</select>
+			<input type="button" value="提交" id="stBtn"/>
+			<input type="button" value="批量删除" id="rm" />
+		</li>
+	</ul>
+	<table id="tab" width="600" align="center" border="1">
+		<thead>
+			<th>全选<input type="checkbox" id="checkAll"></th>
+			<th index="id">编号</th>
+			<th>商品</th>
+			<th index="price">年龄</th>
+			<th>操作</th>
+		</thead>
+		<tbody>
+			<!-- <tr>
+				<td><input type="checkbox"></td>
+				<td>1</td>
+				<td>露露</td>
+				<td>12</td>
+				<td>
+					<input type="button" value="删除">
+					<input type="button" value="上移">
+					<input type="button" value="下移">
+				</td>
+			</tr> -->
+			
+		</tbody>
+	</table>	
+</section>
+</body>
+<script>
+
+/*
+	1.渲染数据
+	1.5 始终保持各行变色
+	2.添加内容
+	3.排序
+	4.选中
+	5.上移下移
+	6.删除
+	7.批量删除
+*/
+// var data = [
+//     {
+//         'id' : 1,
+//         'name' : 'momo',
+// 		'price' : 36,
+// 		'checked':false
+//     },
+//     {
+//         'id' : 2,
+//         'name' : '小恋',
+// 		'price' : 40,
+// 		'checked':false
+//     },
+//     {
+//         'id' : 3,
+//         'name' : 'yaya',
+// 		'price' : 20,
+// 		'checked':false
+//     },
+//     {
+//         'id' : 4,
+//         'name' : 'feifei',
+// 		'price' : 10,
+// 		'checked':false
+//     },
+//     {
+//         'id' : 5,
+//         'name' : 'hhehe',
+// 		'price' : 35,
+// 		'checked':false
+//     }
+// ];
+
+let tbody =  document.querySelector('tbody')
+
+/*---------------------------------------------生成---------------------------------------------------------*/
+function fn (data) {
+	let html = ''
+	data.forEach(e => {
+		html+=`
+			<tr>
+				<td><input type="checkbox" class="checkbox"></td>
+				<td>${e.id}</td>
+				<td>${e.name}</td>
+				<td>${e.age}</td>
+				<td>
+					<input type="button" value="删除" class="btn1">
+					<input type="button" data-id="${e.id}" value="上移" class="btn2">
+					<input type="button" value="下移" class="btn3">
+				</td>
+			</tr>`
+	});
+	tbody.innerHTML=html;
+
+	let btn2 = document.querySelectorAll('.btn2');
+	btn2.forEach((ele,i)=>{
+		ele.onclick = async function(){
+			let data = await fetch('/up?id='+ele.dataset.id).then(d=>d.json())
+			if(data.code === 0){
+				alert(data.msg)
+			}else if(data.code === 1){
+				fn(data.data)
+			}
+		}
+	})
+
+}
+
+fetch('/getdata').then(d=>d.json()).then(d=>{
+	// console.log(d.ary)
+	fn(d.ary);
+});
+
+add.onclick = async function(){
+	let v1 = name1.value;
+	console.log(v1)
+	let v2 = age.value;
+	let d = await fetch('/add?name='+v1+'&age='+v2).then(d=>d.json());
+	if(d.code === 0){
+		alert(d.msg);
+	}else if(d.code === 1){
+		alert(d.msg);
+		fn(d.response);
+	}else if(d.code === 2){
+		alert(d.msg);
+	}
+}
+
+
+
+
+// /*-----------------------------------------点哪儿删哪---------------------------------------------------------*/
+// 	let btn1 = document.querySelectorAll('.btn1')
+// 	for(let i=0;i<data.length;i++){
+// 		btn1[i].onclick = function (){
+// 			data.splice(i,1)
+// 			fn ()
+// 		}
+// 	}
+// /*---------------------------------------------上移---------------------------------------------------------*/
+// 	let btn2 = document.querySelectorAll('.btn2')
+// 	for(let j=0;j<data.length;j++){
+// 		btn2[j].onclick = function (){
+// 			if(j == 0) return
+// 			let copy = data.splice(j-1,1,data[j])
+// 			data.fill(copy[0],j,j+1)
+// 			fn ()
+// 		}
+// 	}
+// /*---------------------------------------------下移---------------------------------------------------------*/
+// let btn3 = document.querySelectorAll('.btn3')
+// 	for(let k=0;k<data.length;k++){
+// 		btn3[k].onclick = function (){
+// 			if(k == data.length-1) return
+// 			let copy = data.splice(k+1,1,data[k])
+// 			data.fill(copy[0],k,k+1)
+// 			fn ()
+// 		}
+// 	}
+
+
+
+
+// /*---------------------------------------------添加---------------------------------------------------------*/
+
+// let	name = document.getElementById('name')
+// let	age = document.getElementById('age')
+// let	add = document.getElementById('add')
+
+// add.onclick = function () {
+// 	if(name.value == '' || age.value == ''){
+// 		alert('请输入名字与年龄')
+// 	}else{
+// 		data.push({
+//         'id' : data.length+1,
+//         'name' : name.value,
+// 		'price' : Number(age.value),
+// 		'checked':false
+//     	})
+// 		console.log(data)
+// 		fn ()
+// 	}
+// }
+
+// /*---------------------------------------------排序---------------------------------------------------------*/
+
+// let	stBtn = document.getElementById('stBtn')
+// let	s1 = document.getElementById('s1')
+// let	s2 = document.getElementById('s2')
+
+// stBtn.onclick = function () {
+// 	if(s1.value == 'price' && s2.value == '2'){			//年龄,从高到底
+// 		for(let i=0;i<data.length;i++){
+// 			for(let j=i;j<data.length-1;j++){
+// 				let copy=0
+// 				if(data[i].price<data[j+1].price){
+// 					copy = data[i]
+// 					data[i] = data[j+1]
+// 					data[j+1] = copy
+// 				}
+// 			}
+// 		}
+// 	}else if(s1.value == 'price' && s2.value == '1'){			//年龄,从低到高
+// 		for(let i=0;i<data.length;i++){
+// 			for(let j=i;j<data.length-1;j++){
+// 				let copy=0
+// 				if(data[i].price>data[j+1].price){
+// 					copy = data[i]
+// 					data[i] = data[j+1]
+// 					data[j+1] = copy
+// 				}
+// 			}
+// 		}
+// 	}else if(s1.value == 'id' && s2.value == '2'){			//编号,从高到底
+// 		for(let i=0;i<data.length;i++){
+// 			for(let j=i;j<data.length-1;j++){
+// 				let copy=0
+// 				if(data[i].id<data[j+1].id){
+// 					copy = data[i]
+// 					data[i]= data[j+1]
+// 					data[j+1] = copy
+// 				}
+// 			}
+// 		}
+// 	}else if(s1.value == 'id' && s2.value == '1'){			//编号,从高到底
+// 		for(let i=0;i<data.length;i++){
+// 			for(let j=i;j<data.length-1;j++){
+// 				let copy=0
+// 				if(data[i].id>data[j+1].id){
+// 					copy = data[i]
+// 					data[i]= data[j+1]
+// 					data[j+1] = copy
+// 				}
+// 			}
+// 		}
+// 	}
+// 	fn ()
+// }
+
+// /*---------------------------------------------多选删除---------------------------------------------------------*/
+// let checkbox = Array.from(document.querySelectorAll('.checkbox'))
+// let num = data.length
+// for(let q=0;q<data.length;q++){		
+// 	if(data[q].checked == false){
+// 		num--
+// 	}
+// 	checkbox[q].onclick = function (){
+// 		if(data[q].checked == false){				//如果点击的那个是false那先给num++然后把那个值改成true
+// 			num++
+// 			data[q].checked = true
+// 		}else if(data[q].checked === true){
+// 			num--
+// 			data[q].checked = false
+// 		}
+// 		if(num == data.length){
+// 			checkAll.checked = true
+// 		}else{
+// 			checkAll.checked = false
+// 		}
+// 	}
+// }
+// rm.onclick = function (){		//批量删除
+// 	data = data.filter((e,i)=>{
+// 		return e.checked == false
+// 	})
+// 	fn (data)
+// }
+
+// let checkAll = document.getElementById('checkAll')
+// checkAll.onclick = function () {
+	
+// 	checkbox.forEach((e,i) =>{
+// 		if(checkAll.checked == true && e.checked == false){
+// 			checkAll.checked =true
+// 			e.checked = true
+// 			data[i].checked = true
+// 		}
+// 		if(checkAll.checked == false && e.checked == true){
+// 			checkAll.checked =false
+// 			e.checked = false
+// 			data[i].checked = false
+// 		}
+// 	})
+// }
+
+// }
+// fn ();
+
+
+
+
+
+
+
+
+</script>
+</html>

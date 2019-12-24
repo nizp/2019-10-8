@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width: 300px;
+    height: 200px;
+    border:1px solid green;
+    margin: 14% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#btn_box{
+    margin-top:20px;
+}
+.box1{
+    margin-top:10px;
+}
+#delog{
+    width:100px;
+    height:30px;
+    background: red;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    position: absolute;
+    top:-30px;
+    right:0;
+    bottom:0;
+    left:0;
+    margin:0 auto;
+    transition: .5s;
+}   
+.show{
+    display:block;
+}
+.hide{
+    display:none;
+}
+
+.active{
+    background: yellow;
+}
+</style>
+</head>
+<body>
+    <p id="p"></p>
+    <div id="delog"></div>
+    <button id="b1" class="active bb">要注册</button>
+    <button id="b2" class="bb">要登录</button>
+    <div id="box">
+        <div class="box1 box3"><span>注 册 用 户:</span><input placeholder="请输入用户名" autocomplete="off" type="text" id="user"/></div>
+        <div class="box1 hide box3"><span>登 录 用 户:</span><input placeholder="请输入用户名" autocomplete="off" type="text" id="user2"/></div>
+        <div class="box1"><span>提 交 密 码:</span><input type="password" id="pw"/></div>
+        <div id="btn_box">
+            <button id="re">注册</button><button id="login">登录</button>
+        </div>
+    </div>
+<script>
+
+    function delogFn(val){
+        delog.innerHTML = val;
+        delog.style.top = 0;
+        setTimeout(() => {
+            delog.style.top = '-30px';
+        }, 2000);
+    }
+
+
+    const bbs = document.querySelectorAll('.bb');
+    const box3 = document.querySelectorAll('.box3');
+    let b = 0;
+
+    bbs.forEach((ele,index)=>{
+        ele.onclick = function(){
+            bbs[b].classList.remove('active');
+            this.classList.add('active');
+            box3[b].classList.remove('show');
+            box3[b].classList.add('hide');
+            box3[index].classList.remove('hide');
+            box3[index].classList.add('show');
+            b = index;
+        }
+    })
+
+    user.onblur = async function(){
+       let v = this.value.trim();
+       if(v){
+            let d = await fetch('/getName',{
+                method:'post',
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded'
+                },
+                body:''+new URLSearchParams({
+                    user:v
+                })
+            }).then(d=>d.json())
+            console.log(d);
+            if(d.code == 0){
+                user.style.border = '1px solid green';
+                pw.style.border = '1px solid green';
+            }else if(d.code == 1){
+                user.style.border = '1px solid red';
+                delogFn(d.msg);
+            }else if(d.code == 2){
+                console.log(1)
+                user.style.border = '1px solid red';
+                delogFn(d.msg);
+            }
+        }else{
+            delogFn('请输入内容');
+       }
+    }
+
+    re.onclick = async function(){
+        let v = user.value.trim();
+        let v2 = pw.value.trim();
+       if(v && v2){
+            let d = await fetch('/register',{
+                method:'post',
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded'
+                },
+                body:''+new URLSearchParams({
+                    user:v,
+                    pw:v2
+                })
+            }).then(d=>d.json())
+            console.log(d);
+            if(d.code == 0){
+                delogFn('恭喜你成功抢注');
+                user.style.border = '1px solid green';
+                pw.style.border = '1px solid green';
+            }else if(d.code == 1){
+                user.style.border = '1px solid red';
+                delogFn(d.msg);
+            }else if(d.code == 2){
+                console.log(1)
+                user.style.border = '1px solid red';
+                delogFn(d.msg);
+            }
+        }else{
+            delogFn('请输入内容');
+        }
+    }
+
+    login.onclick = async function(){
+        let v = user2.value.trim();
+        let v2 = pw.value.trim();
+       if(v && v2){
+            let d = await fetch('/login',{
+                method:'post',
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded'
+                },
+                body:''+new URLSearchParams({
+                    user:v,
+                    pw:v2
+                })
+            }).then(d=>d.json())
+            if(d.code == 0){
+                delogFn('恭喜登录成功');
+                user.style.border = '1px solid green';
+                pw.style.border = '1px solid green';
+                let num = 10;
+                window.location.href = '/index2.html';
+                // setInterval(() => {
+                //     num --;
+                //     if(num < 0){
+                //         num = 0;
+                //         window.location.href = '/index2.html';
+                //     }
+                //     p.innerHTML = num+'秒之后开始走上人生巅峰~~';
+
+                // }, 1000);
+            }else if(d.code == 1){
+                user.style.border = '1px solid red';
+                pw.style.border = '1px solid red';
+                delogFn(d.msg);//没有注册
+            }else if(d.code == 2){//请核对用户信息
+                user.style.border = '1px solid red';
+                pw.style.border = '1px solid red';
+                delogFn(d.msg);
+            }else if(d.code == 3){//用户名或密码错误
+                user.style.border = '1px solid red';
+                pw.style.border = '1px solid red';
+                delogFn(d.msg);
+            }
+        }else{
+            delogFn('请输入内容');
+        }
+    }
+</script>
+</body>
+</html>

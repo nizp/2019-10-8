@@ -15,6 +15,7 @@
 		let d = data.data;
 		if(d.code == 0){
 			p.innerHTML = '欢迎'+d.user+'回来';
+			localStorage.setItem('session_id',d.user)
 		}else{
 			window.location.href = '/';
 		}

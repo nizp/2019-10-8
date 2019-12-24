@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./axios.js"></script>
+<script>
+    /*
+
+        全局拦截
+        axios.interceptors.request.use 请求拦截
+            开loading
+            登录验证
+            权限验证
+
+        axios.interceptors.response.use响应拦截
+            关loading
+            二次操作数据
+            如果接口自带登录验证或者权限验证，也可以做路由跳转
+
+        https://www.jianshu.com/p/13cf01cdb81f
+
+        解除拦截:
+            拦截器都有一个返回值，把返回值放到eject里面即可
+            axios.interceptors.response.eject(返回值)
+
+        自定义拦截器（局部拦截）:（自定义拦截了之后，只要用instance请求的都会被拦截）
+            const instance = axios.create();
+            instance === axios
+
+            instance.interceptors.response.use()
+
+            instance.get('/a')
+            axios.get('/b')
+
+        axios({
+            url:,
+            method
+            ..
+        }).then()
+
+
+    */
+    let timer = null,num=0;
+    //请求拦截
+    // axios.interceptors.request.use(async function(config){
+    //     // console.log('被拦截',config)
+    //     // timer = setInterval(() => {
+    //     //     console.log(num++)
+    //     // },1000);
+
+    //     let u = localStorage.getItem('session_id');
+    //     //先看看用户是否登录过，如果没有登录过就直接跳到登录页
+    //     if(u){
+    //         //如果用户登录过，但是有效期有可能已过，那么要请求是否登录的接口去验证
+    //         console.log(123);
+    //         let data = await fetch('/islogin').then(d=>d.json());
+    //         if(data.code == 0){
+    //             return config;
+    //         }else{
+    //             location.href = '/';
+    //         }
+            
+    //     }else{
+    //         location.href = '/';
+    //     }
+       
+    // },function(error){
+    //     return Promise.reject(error); 
+    // });
+
+    // //响应拦截
+    // axios.interceptors.response.use(function(config){
+    //     // clearInterval(timer);
+    //     console.log(config)
+    //     config.user = config.data.user;
+    //     return config;
+    // },function(error){
+    //     return Promise.reject(error); 
+    // });
+
+
+    const intance = axios.create();
+
+    let mm = intance.interceptors.request.use((config)=>{
+        console.log('被拦截');
+        return config;
+    })
+
+    document.onclick = function(){
+        axios.get('/a').then(({user})=>{
+            console.log(user);
+        });
+        intance.get('/b').then((d)=>{
+            console.log(d);
+            //当b数据回来的时候，取消局部拦截
+            intance.interceptors.request.eject(mm);
+        });
+    }    
+</script>
+</body>
+</html>

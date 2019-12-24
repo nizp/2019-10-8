@@ -64,7 +64,7 @@
 
     adddir.onblur = async function(){
         let val = adddir.value;
-        let data = await fetch('/add?mkdirname='+val).then(d=>d.json());
+        let data = await fetch('http://localhost:80/add?mkdirname='+val).then(d=>d.json());
         if(data.code === 1){
             alert('新建完成');
             adddir.style.display = 'none';

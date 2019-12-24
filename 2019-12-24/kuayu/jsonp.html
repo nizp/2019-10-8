@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        script src
+
+        ajax是干嘛的？拿数据
+
+
+    */  
+    
+    function fn(data){
+        data.forEach(e=>{
+            console.log(e);//1,2,3,4
+        })
+    }
+
+    //异步
+    document.onclick = function(){
+        fn([1,2,3,4]);
+        // let os = document.createElement('script');
+        // os.src = '1.txt';
+        // document.getElementsByTagName('head')[0].append(os);
+    }
+
+
+
+
+
+    function ff(data){
+        
+    }
+
+    ff(1);
+
+
+
+    
+    
+</script>
+</body>
+</html>

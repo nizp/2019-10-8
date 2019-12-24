@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.js"></script>
+    <script>
+        /*
+           并发:
+            axios.all([a,b]).then(axios.spread(function(a,b){
+                //a和b一起完成
+            }))
+
+            请求拦截器（interceptors.requst）是指可以拦截每次或指定HTTP请求，并可修改配置项。
+
+            响应拦截器（interceptors.response）可以在每次HTTP请求后拦截住每次或指定HTTP请求，并可修改返回结果项。
+
+
+        */
+
+        //a执行完才会执行b，一共用7秒
+        // document.onclick = async function(){
+        //     let a = await axios.get('/a');
+        //     let b = await axios.get('/b');
+        //     console.log(a,b)
+        // }
+
+        //一起开始请求，5秒就完
+        document.onclick = function(){
+            axios.all([axios.get('/a'),axios.get('/b')])
+            .then(axios.spread(function(a,b){
+                // console.log(a.data.user,b.data.iphone)
+                axios.get('/c?user='+a.data.user +'&iphone='+b.data.iphone).then(d=>d.data)
+                .then(d=>{
+                    console.log(d);
+                })
+            }));
+        }
+       
+    </script>
+</body>
+</html>

@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(session({
     secret: '12期',
     name: 'session_id',
-    cookie: {maxAge: 60000},
+    cookie: {maxAge: 10000},
     resave: false,
     saveUninitialized: true,
     rolling:true //刷新cookie重置时间
@@ -101,7 +101,7 @@ app.post('/login',(req,res)=>{
     res.json(msgObj);
 });
 
-
+//判断是否登录
 app.get('/islogin',(req,res)=>{
     if(req.session.userinfo){ //登录过
         res.json({
@@ -118,6 +118,7 @@ app.get('/islogin',(req,res)=>{
     // console.log(req.session.userinfo);
 });
 
+//退出
 app.get('/logout',(req,res)=>{
     req.session.destroy(function(err){
         console.log(err);
@@ -126,6 +127,35 @@ app.get('/logout',(req,res)=>{
         code:0
     });
 })
+
+
+//多并发
+app.get('/a',(req,res)=>{
+    setTimeout(() => {
+        res.json({user:'pjc'})
+    }, 2000);
+})
+
+app.get('/b',(req,res)=>{
+    setTimeout(() => {
+        res.json({iphone:'123456'})
+    }, 5000);
+});
+
+app.get('/c',(req,res)=>{
+    let {user,iphone} = req.query
+    if(user=='pjc'&& iphone=='123456'){
+        res.json({
+            code:0
+        })
+    }else{
+        res.json({
+            code:1
+        })
+    }
+    
+});
+
 
 
 

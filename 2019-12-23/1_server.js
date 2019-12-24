@@ -27,7 +27,8 @@ const app = http.createServer((req,res)=>{
     // console.log(800);
 
     let originAry = [
-        'http://localhost:81'
+        'http://localhost:81',
+        // 'http://localhost:5500'
     ];
 
     // console.log(originAryreq);
@@ -38,6 +39,8 @@ const app = http.createServer((req,res)=>{
             'Content-Type': 'text/html',
             'Access-Control-Allow-Origin':req.headers.origin
         }); 
+
+        console.log('进来呀');
     }
 
 
@@ -51,7 +54,7 @@ const app = http.createServer((req,res)=>{
         let data = fs.readFileSync('www/index.html');
         res.end(data.toString());
     }else if(re.test(pathname)){
-        console.log(urlModel.parse(req.url));
+        // console.log(urlModel.parse(req.url));
         // console.log('静态文件');
         try {
             let data = fs.readFileSync('www'+pathname);
@@ -70,7 +73,7 @@ const app = http.createServer((req,res)=>{
                     if(err){
                         if(err.code === 'EEXIST'){ //说明重名了
                             fs.readdir('www',(error,filesAry)=>{
-                                console.log(filesAry);//返回的是一个数组，数组中放的是当前文件下的所有文件名字
+                                // console.log(filesAry);//返回的是一个数组，数组中放的是当前文件下的所有文件名字
                                 //['js','js(1)']
                                 
                                 let num = 0;
@@ -84,14 +87,14 @@ const app = http.createServer((req,res)=>{
                                     name = name + '('+ (num) +')';
                                 }
                                 fs.mkdir('www/'+name+'/',(err)=>{
-                                    console.log('第二次创建成功');
+                                    // console.log('第二次创建成功');
                                    
                                     res.end(JSON.stringify({code:1,msg:'创建文件夹成功'}));
                                 });
                             });
                         }
-                        console.log('创建失败');
-                        console.log(err);
+                        // console.log('创建失败');
+                        // console.log(err);
                         return;
                     }
                     // console.log('创建成功');
@@ -117,8 +120,31 @@ const app = http.createServer((req,res)=>{
                 }
                 break;
             case '/jsonp':
-                //wd=1&callback=fn    
+                //wd=1&callback=fn3   
                 let o = qs.parse(query.toString());
+
+                /*
+                    o = {
+                        wd:1,
+                        callback:'fn'
+                    }
+
+                    data = {
+                        code:0,
+                        ary:[1,2,3,4]
+                    }
+                    
+                    'fn('{
+                        code:0,
+                        ary:[1,2,3,4]
+                    }')'
+
+                    fn({
+                        code:0,
+                        ary:[1,2,3,4]
+                    })
+                   
+                */
 
                 if(o.wd == 1){
                     let json = JSON.stringify({
@@ -154,11 +180,11 @@ app.listen(port);
     当服务器报错的时候触发
 */
 app.on('error',(e)=>{
-    console.log(e);
+    // console.log(e);
     //端口被占用的错误
     if(e.code === 'EADDRINUSE'){
         port ++;
-        // console.log(port)
+        console.log(port)
         app.listen(port)
     }
 })

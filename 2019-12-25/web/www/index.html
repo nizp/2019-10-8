@@ -1,0 +1,180 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!-- <div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div> -->
+        </div>
+        <div class="page" id="page">
+            <!-- <a href="#" class="active">1</a>
+            <a href="#" >2</a> -->
+        </div>
+    </div>
+</div>
+<script src="../public/js/axios.min.js"></script>
+<script>
+
+    /*
+        只要是ajax请求，优先把数据打印出来看看
+    */
+
+    let pageNum = 1;
+
+    //刷新就请求第一页的数据
+    function pageFn(num=1){
+        fetch('/api/weibo?act=get&page='+num).then(d=>d.json()).then(d=>{
+            render(d);
+        });
+    }
+    pageFn(pageNum);
+
+    /*
+        点击发送按钮，发送消息
+    */
+    submit.onclick = function(){
+        let {value} = text;
+        //请求成功之后才能插入页面
+        fetch('/api/weibo?act=add&content='+value).then(d=>d.json()).then(d=>{
+            if(d.code === 0){
+                pageNum = 1;
+                pageFn(pageNum); //当发送信息之后获取第1页数据（6条）
+                text.value = '';
+            }
+        });
+    }
+
+
+
+    //点赞和踩删除
+
+    div1.onclick = function(ev){
+        let ele = ev.target;
+        if(ele.className === 'top'){
+            const {id} = ele.parentNode.dataset;
+            axios.get('/api/weibo?act=like&id='+id).then(({data})=>{
+                if(data.code === 0){
+                    ele.innerText = ++ ele.innerText;
+                }
+            })
+        }else if(ele.className === 'down_icon'){
+            const {id} = ele.parentNode.dataset;
+            axios.get('/api/weibo?act=dislike&id='+id).then(({data})=>{
+                if(data.code === 0){
+                    ele.innerText = ++ ele.innerText;
+                }
+            });
+            //删除
+        }else if(ele.className === 'cut'){
+            const {id} = ele.parentNode.dataset;
+            axios.get('/api/weibo?act=del&id='+id).then(({data})=>{
+                if(data.code === 0){
+                    if(ele.parentNode.parentNode.parentNode.parentNode.children.length === 1){
+                        pageNum --;
+                    }
+                    pageFn(pageNum);
+                }
+            });
+        }
+    }
+
+
+
+    //页码
+
+    // <div class="page" id="page">
+    //         <!-- <a href="#" class="active">1</a>
+    //         <a href="#" >2</a> -->
+    //     </div>
+
+    function createPage(){
+        axios.get('/api/weibo?act=get_page_count').then(({data})=>{
+            // console.log(data)
+            let temp = '';
+            for(let i=0;i<data.count;i++){
+                temp += `<a href="javascript:void(0);" class="${i===(pageNum-1)?'active':''}">${(i+1)}</a>`;
+            }
+            page.innerHTML = temp;
+        });
+    }
+
+    //点页码
+    page.onclick = function(ev){
+        let ele = ev.target;
+        if(ele.tagName === 'A'){
+            // console.log(ele.innerText);
+            pageNum = ele.innerText;
+            pageFn(pageNum);
+        }
+    }
+
+    
+
+
+
+
+    //渲染
+    function render(data){
+       
+        let html = '';
+        if(data){
+            data.forEach(d=>{
+                let {like=0,dislike=0,content,id,time} = d;
+                let o = new Date(time);
+                let year = o.getFullYear();
+                let moun = o.getMonth() + 1;
+                let date = o.getDate();
+                let h = o.getHours();
+                let m = o.getMinutes();
+                let s = o.getSeconds();
+                html += ` <div class="reply">
+                            <p class="replyContent">${content}</p>
+                            <p class="operation">
+                                <span class="replyTime">${year}-${toDou(moun)}-${toDou(date)} ${toDou(h)}:${toDou(m)}:${toDou(s)}</span>
+                                <span class="handle" data-id="${id}">
+                                    <a href="javascript:;" class="top">${like}</a>
+                                    <a href="javascript:;" class="down_icon">${dislike}</a>
+                                    <a href="javascript:;" class="cut">删除</a>
+                                </span>
+                            </p>
+                    </div>
+                ` ;
+            });
+            createPage();  //刷新页码
+        }
+        div1.innerHTML = html;
+        
+    }
+
+    function toDou(n){
+        return n<10?'0'+n:''+n;
+    }
+
+
+</script>
+</body>
+</html>

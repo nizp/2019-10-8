@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+img{
+    width:100px;
+}
+</style>
+</head>
+<body>
+    <!-- <form action="/upload" method="POST" enctype="multipart/form-data"> -->
+        <input type="file" multiple name="filename" id="file">
+        <button id="btn">提交</button>
+        <!-- <input type="submit" value="提交" /> -->
+    <!-- </form> -->
+        <div id="box">
+
+        </div>
+<script src="./axios.js"></script>
+<script>
+    /*
+        FileReader可以把files[n]的数据，变成base64码(img原本的编码)
+        fr.readAsDataURL(图片数据)
+        fr.onload  解析完之后触发的事件
+            这个事件里面有个ev.target.result 就是base64码
+    */
+
+    let ary = []
+    file.onchange = function(){
+        let fr = new FileReader;
+        fr.readAsDataURL(this.files[0]); 
+        ary.push(this.files[0])
+        fr.onload = function(ev){
+            let img = new Image;
+            img.src = ev.target.result;
+            box.append(img);
+        }
+    }
+
+
+    btn.onclick = function(){
+        let fd = new FormData;
+        // fd.append('filename',file.files[0]);
+        ary.forEach(ele=>{
+            fd.append('filename',ele);
+        });
+
+        axios.post('/upload',fd,{
+            headers:{
+                "Content-Type": "multipart/form-data" 
+            }
+        }).then(({data})=>{
+            console.log('成功');
+        });
+    }
+</script>
+</body>
+</html>

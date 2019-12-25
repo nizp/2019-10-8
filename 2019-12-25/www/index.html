@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+#img{
+    display: none;
+}
+#box{
+    _display: none;
+}
+#btn3,#btn1,#btn2{
+    display: none;
+}
+</style>
+</head>
+<body>
+    登录:<input type="text" id="user"/>
+    
+    <hr />
+
+    <div id="box">
+        <button id="btn1">按钮1</button>
+        <button id="btn2">按钮2</button>
+        <button id="btn3">按钮3</button>
+    </div>
+
+
+    <img id="img" src="./1.gif" alt="" srcset="">
+    <script src="./axios.js"></script>
+    <script>
+        /*
+            为什么要用拦截器?
+                想在发起请求之前做些事情，也想在数据请求回来之后做点事情
+
+                钩子函数 -> 回调函数 -> 生命周期函数
+
+                axios.interceptors 公共的
+                axios.create 局部的
+        */
+        axios.interceptors.request.use(config => {
+            img.style.display = 'block';
+
+            console.log(config)
+            if(config.url === '/getary'){ //v1才能请求
+                let type = localStorage.getItem('type');
+                console.log(type)
+                if(type >= 1){
+                    return config;
+                }else{
+                    console.log('权限不够');
+                    config.url = ''; //破坏url
+                }
+            }
+            return config;
+            console.log(config);
+
+        },error => {
+            return Promise.reject(error);
+        });
+
+        axios.interceptors.response.use(response => {
+            img.style.display = 'none';
+
+            const {type} = response.data;
+            if(type !== undefined){ //非0充会员
+                if(type === 0){
+                    btn1.style.display = 'inline-block';
+                }else if(type === 1){
+                    btn2.style.display = btn1.style.display = 'inline-block';
+                }else if(type >= 9){
+                    btn3.style.display = btn2.style.display = btn1.style.display = 'inline-block';
+                }
+                //为了请求的时候判断权限级别，可以通过权限判断用户是否能够访问接口
+                localStorage.setItem('type',type);
+            }else{
+                //没有权限就删除type
+                localStorage.removeItem('type');
+            }
+            
+            console.log(response.data)
+
+            return response;
+        },error => {
+            return Promise.reject(error);
+        });
+
+
+        user.onblur = function(){
+            axios.post('/login2',{name:this.value}).then(d=>d.data).then(d=>{
+                console.log(d);
+            });
+        }
+
+
+        const intance = axios.create();
+
+        intance.interceptors.response.use(response => {
+            if(response.data.code === 100){
+                location.href = '/';
+            }else{
+                return response;
+            }
+        });
+
+        btn1.onclick = function(){
+            let postData = {name:'haha'};//'name=hehe&pw=123';
+            axios.post('/login',postData).then(d=>{
+                console.log(d);
+            });
+        }
+        btn2.onclick = function(){
+            axios.get('/getary').then(d=>{
+                console.log(d.data);
+            });
+        }
+        btn3.onclick = function(){
+            intance.get('/noloading').then(d=>{
+                console.log(d.data);
+            });
+        }
+
+
+    </script>
+</body>
+</html>

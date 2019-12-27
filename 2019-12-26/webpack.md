@@ -86,6 +86,8 @@
             比如:
                 import * as aaa from  '路径'
                 就等同于把路径中的所有内容都获取出来了，并且是一个对象
+
+                aaa.xxx去拿对象里面的值，如果是default，要用aaa.default.xxx拿
     ```
 
 

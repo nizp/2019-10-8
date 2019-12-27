@@ -1,0 +1,12 @@
+body{
+    background:green;
+}
+#box{
+    width:500px;
+    height:200px;
+    background:skyblue;
+    border:2px solid red;
+}
+#box2{
+    width:100px;
+}

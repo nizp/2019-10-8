@@ -11,7 +11,7 @@
 ### 使用webpack
 
 - 安装 
-    - npm install webpack -g (全局安装)
+    - npm install webpack -g (全局安装) ,只需要一次就可以了
     - 新建一个文件夹（这个文件夹不要是中文&&不能叫webpack） npm init -y
     - npm install --save-dev webpack (局部安装)  yarn add webpack --dev(局部安装)
     ```
@@ -22,7 +22,8 @@
         npm run dev     yarn run dev
     ```
     - 手动创建一个 webpack.config.js 文件
-    - mode: production生产模式（打包上线，压缩）  development开发环境（码农要的）
+    - mode: production生产模式（打包上线，压缩，优化体积）  
+            development开发环境（码农要的，需要一些非常方便语法，快捷开发，工具，比如:ES6的模块,JSX,LESS,SASS....）
 
 
     ES6 -> ECMAScript6 -> ECMAScript2015 +

@@ -1,0 +1,14 @@
+style-loader css-loader html-webpack-plugin mini-css-extract-plugin 
+optimize-css-assets-webpack-plugin 
+
+webpack-dev-server webpack webpack-cli
+
+
+-- save-dev 开发模式 （打包之后不会处理这个里面的代码）
+-- save     生产模式（打包必须处理里面的代码）
+
+
+
+1.node完结
+2.webpack完结
+3.ajax考试

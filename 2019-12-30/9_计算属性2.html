@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:100px;
+    height:100px;
+    background:red;
+    position: absolute;
+    top:0;
+    left:0
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <input v-model.lazy="fullName"/>
+       {{fullName}}
+       <p>{{fName}}</p>
+       <p>{{lName}}</p>
+    </div>
+<script src="vue.js"></script>
+<script>
+     new Vue({
+        el:"#app",
+        data:{
+            fName:'李磊',
+            lName:'李淑磊'
+        },
+        computed: {
+            //可以为一个对象，里面可以设置get，set
+            fullName:{
+                get(){
+                    return this.fName +' '+ this.lName
+                },
+                set(val){
+                    let ary = val.split(' ');
+                    this.fName = ary[0];
+                    this.lName = ary[ary.length-1];
+                }
+            }
+        }
+     })
+</script>
+</body>
+
+</html>

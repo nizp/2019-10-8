@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    _display: none;
+}
+#box div.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <!-- <button class="active" @click="fn(0)">按钮一</button>
+        <button @click="fn(1)">按钮二</button>
+        <button @click="fn(2)">按钮三</button>
+        <div class="show" v-if="block === 0">11111</div>
+        <div v-if="block === 1">22222</div>
+        <div v-if="block === 2">33333</div> -->
+        
+        <button 
+            _class="active" 
+            @click="fn(key)"
+            v-for="(val,key) in btns"
+        >{{val}}</button>
+        <div 
+            class="show" 
+            v-for="(val,key) in content"
+            v-show="block === key"
+        >{{ val }}</div>
+
+        <ul>
+            <li v-for="(val,key) in obj">{{key}}:{{val}}</li>
+        </ul>
+    </div>
+
+   
+   
+
+<script src="./vue.js"></script>
+<script>
+    /*
+        @click
+        v-if
+
+        <%for(){%>
+
+        <%}%>
+
+        {{for(){ }}   
+        
+        }}}
+    */
+    new Vue({
+        el:'#box',
+        data:{
+            block:0,
+            content:[1111,22222,33333],
+            btns:['按钮一','按钮二','按钮三'],
+            obj:{
+                name:'白伟',
+                age:45,
+                sex:'男',
+                info:'天天叫董尚起床'
+            }
+        },
+        methods:{
+            fn(num){
+                // console.log(num);
+                this.block = num;
+            }
+        }
+    })
+</script>
+</body>
+</html>

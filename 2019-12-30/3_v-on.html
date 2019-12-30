@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:salmon;
+}
+#box2{
+    width:50px;
+    height:50px;
+    background:gold;
+}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" @input="change(1,$event)"/> -->
+        <input 
+            type="text" 
+            v-model="val"
+            @keyup.13="add"
+        />
+        <button @click="add">发送</button>
+        <ul>
+            <li v-for="(val) in ary">{{val}}</li>
+        </ul>
+
+
+        <div id="box" @click="click1">
+            <div id="box2" @click.stop="click2"></div>
+        </div>
+
+        <input type="text" @mousedown.prevent>
+        <button @click.once="once">点一次就完</button>
+
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            ary:[11111],
+            val:''
+        },
+        methods:{
+            once(){
+                alert(1)
+            },
+            click1(){
+                alert(1);
+            },
+            click2(ev){
+                alert(2);
+                // console.log(ev)
+                // ev.cancelBubble = true;
+                // ev.stopPropagation();
+            },
+            add(){
+                // console.log(this.val)
+                this.ary.push(this.val);
+            },
+            // change(num,ev){
+            //     //如果不传参，第一个参数就是事件对象
+            //     //*** 如果传了参还想拿到事件对象，需要在模板中的事件函数内传一个$event
+            //     // console.log(ev.target.value);
+            //     this.val = ev.target.value;
+            // }
+        }
+    })
+</script>
+</body>
+</html>

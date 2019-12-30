@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:100px;
+    height:100px;
+    background:red;
+    position: absolute;
+    top:0;
+    left:0
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.trim="val" @input="fn"/>
+        <!-- <input type="text" v-model.number="val" @input="fn"/> -->
+        <!-- <input type="text" v-model.lazy="val"/> -->
+        <!-- <input type="text" @change="fn"/> -->
+        <hr />
+       <p> {{val}} </p>
+       <input type="checkbox" v-model="b">
+       <p>{{b}}</p>
+       <hr />
+       <input type="checkbox" v-model="ary" value="pjc">pjc<br />
+       <input type="checkbox" v-model="ary" value="ydz">ydz<br />
+       <input type="checkbox" v-model="ary" value="lc">lc<br />
+       {{ary}}
+       <hr />
+       男:<input value="0" type="radio" v-model="num"/>
+       女:<input value="1" type="radio" v-model="num"/>
+       {{ary2[num]}}
+    </div>
+<script src="vue.js"></script>
+<script>
+    /*
+        修饰符:
+            lazy  (把oninput转成了onchange)
+            number 自动把value转成数字
+
+    */
+     new Vue({
+        el:"#app",
+        data:{
+            val:'',
+            b:false,
+            ary:[],
+            ary2:['男','女'],
+            num:0
+        },
+        methods:{
+            fn(ev){
+                console.log( this.val );
+                // this.val = ev.target.value;
+            }
+        }
+     })
+</script>
+</body>
+
+</html>

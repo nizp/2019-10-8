@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.box{
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+}
+.box2{
+    width:100px;
+    height:100px;
+    border:1px solid red;
+}
+.red{
+    color:red;
+}
+.green{
+    color:green;
+}
+</style>
+</head>
+<body>
+    <div class="app">
+        <button @click="num=0">第一张图片</button>
+        <button @click="num=1">第二张图片</button @>
+        <img 
+            v-for="val in imgs"
+            :src="val"
+        >
+        <!-- <img v-bind:src="imgs[num]" alt="" srcset=""> -->
+        <!-- <p :style="{fontSize: size +'px'}">3213231</p> -->
+        <p :style="[objA,{color:'green'}]">这个是</p>
+        <p :class="color">321321</p>
+        <div v-bind="{data:1}"></div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    /*
+        如果说属性需要**动态操作**，那么就使用v-bind:xx
+        缩写:   :
+
+        :style="{属性名:属性值（可以为数据）}"
+        :style="[{属性名1:属性值1（可以为数据）},{属性名2:属性值2（可以为数据）}]"
+        :class="{类名:布尔值}"
+        v-bind="{data:1}"  没有具体的属性可以使用v-bind=对象（批量设置属性）
+    */
+    new Vue({
+        el:'.app',
+        data:{
+            num:0,
+            imgs:['./1.png','./2.jpg'],
+            size:50,
+            color:{
+                // red:false
+                green:true
+            },
+            objA:{
+                fontSize:'20px'
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.box{
+    width:100px;
+    height:100px;
+    border:1px solid #000;
+}
+.box2{
+    width:100px;
+    height:100px;
+    border:1px solid red;
+}
+</style>
+</head>
+<body>
+    <div class="app">
+        <!-- <div v-text="str"></div> -->
+        <!-- <div v-html="str"></div> -->
+        <!-- <div v-show="b" class="box"></div> -->
+        <button @click="b=!b">{{ title }}</button>
+        <div v-if="b" class="box"></div>
+        <!-- <div>11111</div> -->
+        <!-- <div class="box2" v-else></div> -->
+
+    </div>
+<script src="./vue.js"></script>
+<script>
+
+    /*
+        class A{
+            methods:{
+                a(){
+
+                },
+                b(){
+
+                }
+            }
+            watch:{
+                c(){
+
+                }
+            }
+        }
+    */
+    let v = new Vue({
+        el:'.app',
+        data:{
+            name:'周柯含',
+            str:'<p>哈哈</p>',
+            b:true,
+            title:'点击收起'
+        },
+        //专门放函数的（一般是事件函数）
+        // methods:{
+        //     click(){
+        //         //this是实例
+        //         // console.log(this.b);
+        //         // alert(1);
+        //         this.b = !this.b;
+        //         this.title = `${this.b?'点击收起':'点击展开'}`;
+        //     }
+        // }
+    });
+
+    // setTimeout(() => {
+    //     v.b = false;
+    // }, 3000);
+</script>
+</body>
+</html>

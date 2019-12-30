@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    width:100px;
+    height:100px;
+    background:red;
+    position: absolute;
+    top:0;
+    left:0
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="val"/>
+       <!-- <p >{{ val.split('').reverse().join('') }}</p> -->
+       <!-- <p>{{ fn() }}</p>  -->
+       <p>{{ revers }}</p>
+    </div>
+<script src="vue.js"></script>
+<script>
+    /*
+        getter
+        setter
+    */
+     new Vue({
+        el:"#app",
+        data:{
+            val:'训 培 峰 珠',
+        },
+        //上来就执行一次，当数据发生了变化也会继续执行
+        computed: {
+            //getter
+            revers(){
+                return this.val.split('').reverse().join('')
+            }
+        },
+        // methods:{
+        //     fn(){
+        //         return this.val.split('').reverse().join('')
+        //     }
+        // }
+     })
+</script>
+</body>
+
+</html>

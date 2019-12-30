@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        //数据拦截（劫持）  双向数据绑定
+        Object.defineProperty(obj, prop, desc)
+    */
+    let obj = {name:'haha'} ;
+
+    // obj.age = 2;
+
+    // let num = 2;
+    // Object.defineProperty(obj, 'age', {
+    //     // value:2,
+    //     // writable:false,  //属性不可被修改
+    //     enumerable:false, //属性是否可以被枚举
+    //     configurable:false, //是否可以被删除
+    //     get(){
+    //         //当读取这个属性的时候触发
+    //         console.log('读了');
+    //        //return后的内容就是读操作后的结果（必须写return）
+    //         return num;
+    //     },
+    //     set(val){
+    //         //当写操作（这个属性）的是时候触发(可以没有return的)
+    //         console.log('也来了')
+    //         // console.log(val);//5
+    //         num = val;
+    //     }
+    // });
+
+    // console.log(obj.age);
+
+    // obj.age = 5;
+
+    // console.log(obj.age)
+
+
+    // for(let attr in obj){
+    //     console.log(attr);
+    // }
+    // obj.age = 5;
+    // console.log(delete obj.name);
+    // console.log(delete obj.age);
+    // console.log(obj)
+
+    // .....
+
+    let num = 0;
+    Object.defineProperty(obj, 'age', {
+        get(){
+            return num += 2.6
+        }
+    });
+    
+    console.log(obj.age < 3 && obj.age > 5);//true
+
+    // console.log(obj.age)
+
+
+
+</script>
+</body>
+</html>

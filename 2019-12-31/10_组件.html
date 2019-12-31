@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+[v-cloak]{
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        我是父组件
+        <hr />
+        <ppa></ppa>
+        <btn></btn>
+       <!--
+       <ppa></ppa>
+       <ppa></ppa> -->
+    </div>
+<script src="./vue.js"></script>
+<script>
+    
+    /*
+        **** 模板中顶层只能有一个元素
+    */
+    
+
+    const btn = {
+        template:`<button @click="click">按钮{{num}}</button>`,
+        data(){
+            return {
+                num:0
+            }
+        },
+        methods:{
+            click(){
+                this.num++
+            }
+        }
+    }
+
+    const ppa = {
+        template:`
+            <div>
+                <div>1</div>
+                <span>Vue真的太简单了</span>
+                <btn></btn>
+            </div>`,
+        components:{
+            btn
+        }
+    }
+
+
+
+
+
+    // Vue.component('ppa',ppa); //注册组件
+
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'haha'
+        },
+        methods:{
+            
+        },
+        //通过components去注册子组件
+        components:{
+            // ppa:ppa
+            ppa,
+            btn
+        }
+    });
+
+    
+
+</script>
+</body>
+</html>

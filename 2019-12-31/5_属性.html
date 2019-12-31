@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="app">
+        <div 
+            v-bind="{'class':a,id:'box'}"
+            @click="fn(key)"
+            v-for="(val,key) in ary"
+        >132132</div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            a:'active',
+            num:1,
+            ary:[1,2,3,4]
+        },
+        methods: {
+            fn(key){
+                console.dir(box);
+            },
+            // fn:()=>{
+
+            // }
+        },
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+[v-cloak]{
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        我是父组件
+        <hr />
+       <my-app></my-app>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    
+    /*
+        定义子组件:
+            Vue.component('组件的名字',{
+                template:`<div></div>`,
+
+            })
+        组件的名字如果是直接引vue.js，那么尽量不要使用驼峰命名,
+        因为命名之后，使用子组件的时候会报错，如果非要使用把
+        子组件改成烤串命名
+    */
+    
+
+    /*
+        注册组件必须在new Vue上方   
+    */
+
+    Vue.component('my-app',{
+        template:`<div 
+            @click="click"
+        >我是子组件 {{ num }}</div>`,
+        data(){
+            return {
+                num:0
+            }
+        },
+        methods:{
+            click(){
+                alert(1);
+            }
+        }
+    });
+
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'haha'
+        },
+        methods:{
+            
+        }
+    });
+
+    
+
+</script>
+</body>
+</html>

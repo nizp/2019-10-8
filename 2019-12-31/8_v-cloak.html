@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+[v-cloak]{
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div id="app">
+       <div v-cloak>
+            {{ msg }}
+       </div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    /*
+        v-cloak 加载的时候不显示小胡子
+    */
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'haha'
+        },
+        methods:{
+            
+        }
+    });
+
+
+   
+
+
+</script>
+</body>
+</html>

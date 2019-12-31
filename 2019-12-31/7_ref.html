@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="app">
+        <button
+            @click="fn"
+        >点击取值</button
+            >
+       <div id="box" ref="box">123456</div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    /*
+        ref:为了让你快速定位一个元素或者组件
+
+        定义:
+            元素或者组件上添加一个ref的属性即可
+                <div ref="box">
+
+        获取:
+                this.$refs.box
+        
+    */
+    new Vue({
+        el:'#app',
+        data:{
+            val:'123456'
+        },
+        methods:{
+            fn(){
+                console.log(this.$refs.box);
+            }
+        }
+    });
+
+
+   
+
+
+</script>
+</body>
+</html>

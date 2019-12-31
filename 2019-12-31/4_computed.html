@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.number="val">
+        <!-- {{ reverse }} -->
+        {{ val | todoule }}
+        <p>{{val}}</p>
+    </div>
+<script src="./vue.js"></script>
+<script>
+   /*
+        computed:
+            数据的第二次处理
+
+        管道符:（数据的第二次处理）
+            |
+            局部注册:
+                filters:{
+                    fn(val管道符之前的值){
+                        return 基于管道符之前的值进行二次处理
+                    }
+                }
+
+            全局注册:
+                Vue.filter('名字',function(val管道符之前的值){
+                    return 基于管道符之前的值进行二次处理
+                })
+
+                全局注册了之后，只要是当前Vue实例下的所有组件都能享受到这个全局注册的过滤器
+                局部注册，只有当前这个组件才能享受
+
+        class {
+            B(){
+                fn(){
+
+                }
+            }
+            A(){
+                fn2(){
+                
+                }
+            }
+        }
+   */
+
+    Vue.filter('todoule',function(val){
+        console.log(val)
+        return val<10?'0'+val:''+val;
+    });
+    //注册全局的过滤器，要放在new Vue的上方
+
+    new Vue({
+        el:'#app',
+        data:{
+            val:'珠峰培训'
+        },
+        methods:{
+            // fn(){
+            //     return this.val.split('').reverse().join('')
+            // }
+        },
+        // computed:{
+        //     reverse(){
+        //         return this.val.split('').reverse().join('')
+        //     }
+        // },
+        filters:{
+            rever(val){
+                return val.split('').reverse().join('');
+            },
+            clearNum(val){
+                return val.replace(/\d+/,'')
+            },
+            //如果全局和局部都注册了相同名字的过滤器，那么优先级最高的是局部
+            // todoule(val){
+            //     return 0;
+            // }
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

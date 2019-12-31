@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    left:0;
+    top:0;
+}
+</style>
+</head>
+<body>
+    <div id="app">
+        <div 
+            id="box"
+            :style="{top:t+'px',left:l+'px'}"
+            @mousedown="down($event)"
+        ></div>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            t:0,
+            l:0
+        },
+        methods:{
+            down(ev){
+                console.log(this);
+                let disX = ev.pageX - this.l;
+                let disY = ev.pageY - this.t;
+                let _that = this;
+                document.onmousemove = function(ev){
+                    _that.move(ev,disX,disY);
+                }
+                document.onmouseup = function(){
+                    document.onmouseup = document.onmousemove = null;
+                }
+            },
+            move(ev,x,y){
+                this.t = ev.pageY - y;
+                this.l = ev.pageX - x;
+            }
+        }
+    });
+
+    /*
+        钩子函数
+        
+        回调函数（某个条件成立触发这个函数）
+
+        obj.age = 10; 
+        set(){
+            //当指定的属性被写操作的时候触发
+        }
+    */
+
+    let obj = {};
+    let num = 0;
+    Object.defineProperty(obj,"age",{
+        //当读age的时候触发get
+        get(){
+            // console.log('我读了')
+            // alert('呵呵,你敢偷看我')
+            return num;
+        },
+        //当操作age的时候触发set
+        set(val){
+            num = toD(val);
+        }
+    });
+
+    obj.age = 5;
+    obj.age = 9;
+    console.log(obj.age);
+
+    function toD(n){
+        return n<10?'0'+n:''+n;
+    }
+
+
+</script>
+</body>
+</html>

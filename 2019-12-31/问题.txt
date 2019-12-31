@@ -1,0 +1,12 @@
+1.拖拽
+2.数据拦截  obj.name    obj.name = 10;
+3.$event是什么东西
+4.className如何操作
+5.v-model到底干了啥？
+6.获取焦点
+7.computed,methods
+8.自定义属性 v-bind={id:1}
+9.'data-index':1  -> data-index="1"
+10.:style='{'color':green}'
+
+

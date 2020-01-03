@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>父元素</h1>
+        <button @click="++num">父元素按钮{{num}}</button>
+        <hr />
+        <!-- 使用组件 -->
+        <temp1 
+            :yourname="name" 
+            :nn="num"
+        ></temp1>
+    </div>
+
+    <template id="temp1">
+        <div>
+            <h5>子元素</h5>
+            <button>子按钮{{nn+1}}</button>
+            <p>我的名字叫:{{yourname}}</p>
+        </div>
+    </template>
+    
+<script src="./vue.js"></script>
+<script>
+    
+
+    //定义组件
+    const temp1 = {
+        template:'#temp1',
+        // props:['nn']
+        props:{
+            nn:{
+                //如果数据不是指定的数据类型，那么就报错
+                type:Number,
+                default:0
+            },
+            yourname:{
+                //是否必传
+                required:true,
+                validator: function (value) {
+                    return /[\u4e00-\u9fa5]+/.test(value)
+                }
+            }
+        }
+    } 
+
+    
+    new Vue({
+        el:'#app',
+        data:{
+            num:0,
+            name:'小脾气'
+        },
+        components:{
+            //注册组件
+            temp1
+        }
+    })
+</script>
+</body>
+</html>

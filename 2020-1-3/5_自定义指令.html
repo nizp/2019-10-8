@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-color="'green'">
+            {{val}}
+        </div>
+        <input type="text" v-focus   value="1111"/>
+        <hr>
+        <aaa></aaa>
+    </div>
+
+    <template id="aaa">
+        <div v-size="50">32132321</div>
+    </template>
+<script src="./vue.js"></script>
+<script>
+
+    /*
+        Vue.directive('my-directive', {
+            bind: function () {},
+            inserted: function () {},
+            update: function () {},
+            componentUpdated: function () {},
+            unbind: function () {}
+        })
+    */
+
+    Vue.directive('color',function(el,val){
+        // console.log(el,val);
+        el.style.color = val.value?val.value:'red';
+    });
+
+    Vue.directive('focus',{
+        
+        inserted(el){
+            // Vue.nextTick(()=>{
+            //     el.select();
+            // })
+            el.select();
+            // console.log(el);
+        }
+    });
+
+
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            val:'vue是最后一关'
+        },
+        components:{
+            aaa:{
+                template:'#aaa',
+                directives:{
+                    size(el,val){
+                        console.log(el);
+                        el.style.fontSize = val.value?val.value+'px':'12px';
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

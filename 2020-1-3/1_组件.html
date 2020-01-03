@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <pap></pap>
+        <ppa></ppa>
+        <tempb></tempb>
+    </div>
+
+    <template id="tempb">
+        <div>哈哈，我是模板{{num}}</div>
+    </template>
+<script src="./vue.js"></script>
+<script>
+    const ppa = {
+        template:'<div>第一个子组件</div>'
+    }
+
+    const pap = {
+        template:`<div>
+                <h5>第二个子组件</h5>
+                <ppa></ppa>
+            </div>`,
+        components:{
+            //局部注册的只能在局部组件中使用
+            ppa
+        }
+    }
+
+    const tempb = {
+        template:'#tempb',
+        data(){
+            return {
+                num:10
+            }
+        }
+    }
+
+
+    Vue.component('tempb',tempb);
+    Vue.component('pap',pap);//全局注册在哪里用都可以
+    Vue.component('ppa',ppa);
+
+    new Vue({
+        el:'#app'
+    })
+</script>
+</body>
+</html>

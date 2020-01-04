@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <ppa :data="ary" >
+           <template #cdata="chldrenData">
+               <!-- {{chldrenData}} -->
+                <h2>我的名字叫:{{chldrenData.nn}}</h2>
+                <p>我的年龄是:{{chldrenData.age}}</p>
+                <p>我的编号是:{{chldrenData.id}}</p>
+           </template>
+          
+        </ppa>
+    </div>
+
+    <template id="ppa">
+        <div>
+            <ul>
+                <li  v-for="(val,key) in data">
+                    <slot
+                        name="cdata" 
+                        :nn="val.name" 
+                        :age="val.age"
+                        :id="val.id"
+                    > {{val.name}} </slot
+                    >
+                </li>
+            </ul>
+        </div>
+    </template>
+<script src="vue.js"></script>
+<script>
+    /*
+        插槽:
+            在开发中写什么结构就是什么结构，优点就是固定统一，缺点就是不够灵活
+
+            就是为了解决不灵活的问题，能够自定义一些组件，能够替换之前默认的配置
+
+
+            匿名插槽:
+                子组件中定义slot
+                父组件中给调用的子组件双标签内填入结构
+                这个时候slot就被填入结构覆盖
+
+            具名插槽
+                在slot标签中设置一个name属性，值为随意
+                在插入替换内容的时候，在替换标签中定义一个slot的属性值和要替换的name对应
+                
+            作用域插槽
+                在子级的slot中
+                    1.定义一个name="唯一个标识符"
+                    2.通过v-bind去传入使用的数据
+
+                在父级template中
+                    1.v-slot:name标识符 = "自定义的名字"
+                        ** v-slot可以缩写为#
+                    2.使用自定义的名字.xx
+
+                <slot name="cc" :age="index" >
+
+                <template #cc="cdata">
+                    {{cdata.age}}
+                </template>
+
+    */
+
+    const ppa = {
+        template:'#ppa',
+        props:['data']
+    }
+
+
+    new Vue({
+        el:'#app',
+        data:{
+            ary:[
+                {
+                    name:'李磊',
+                    age:18,
+                    id:0
+                },
+                {
+                    name:'刘艳旭',
+                    age:8,
+                    id:1
+                },
+                {
+                    name:'彭锦程',
+                    age:30,
+                    id:2
+                }
+            ]
+        },
+        components:{
+            ppa
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+.box{
+   
+}
+
+.box2{
+   
+}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <ppa>
+            <div slot="footer">我有八只脚</div>
+            <div slot="body">我的身体有万丈</div>
+            <div slot="head">我的头有9个</div>
+        </ppa>
+    </div>
+
+    <template id="ppa">
+        <div>
+            <slot name="head">
+                <div class="head">头部</div>
+            </slot>
+            <slot name="body">
+                <div class="body">身体</div>
+            </slot>
+            <slot name="footer">
+                <div class="footer">脚</div>
+            </slot>
+        </div>
+       
+    </template>
+<script src="vue.js"></script>
+<script>
+    /*
+        插槽:
+            在开发中写什么结构就是什么结构，优点就是固定统一，缺点就是不够灵活
+
+            就是为了解决不灵活的问题，能够自定义一些组件，能够替换之前默认的配置
+
+
+            匿名插槽:
+                子组件中定义slot
+                父组件中给调用的子组件双标签内填入结构
+                这个时候slot就被填入结构覆盖
+
+            具名插槽
+                在slot标签中设置一个name属性，值为随意
+                在插入替换内容的时候，在替换标签中定义一个slot的属性值和要替换的name对应
+                
+            作用域插槽
+    */
+
+    const ppa = {
+        template:'#ppa'
+    }
+
+
+    new Vue({
+        el:'#app',
+        components:{
+            ppa
+        }
+    })
+</script>
+</body>
+</html>

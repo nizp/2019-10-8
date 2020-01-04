@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+#box{
+    width:20px;
+    height:20px;
+    background-color: skyblue;
+    border-radius: 50%;
+}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <button 
+            @click="onoff = !onoff"
+        >点击</button>
+        <transition
+               @before-enter="beforeEnter"
+               @enter="enter"
+               @after-enter="afterEnter"
+        >
+            <ppa v-show="onoff"></ppa>
+        </transition>
+    </div>
+    <template id="tk">
+       <div id="box"></div>
+    </template>
+<script src="vue.js"></script>
+<script>
+    const ppa = {
+        template:'#tk'
+    }
+    new Vue({
+        el:'#app',
+        data:{
+            onoff:false,
+        },
+        methods:{
+            beforeEnter(ele){
+                ele.style.transform = 'translate(0,0)';
+            },
+            enter(ele){
+                ele.offsetTop;
+                ele.style.transition = '.5s';
+                ele.style.transform = 'translate(200px,400px)';
+            },
+            afterEnter(ele){
+                ele.style.opacity = '0';
+            }
+        },
+        components:{
+            ppa
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding:0;
+}
+/* 初始位置 */
+.v-enter,.v-leave-to{
+    opacity: 0;
+    transform:translateX(300px)
+}
+/* 运动过程 */
+.v-enter-active,.v-leave-active{
+    transition: .5s;
+}
+/* 结束 */
+.v-enter-to,.v-leave{
+    opacity: 1;
+    transform:translateX(0)
+}
+
+
+
+/* 自定义的都是n-开头 */
+/* 初始位置 */
+.n-enter,.n-leave-to{
+    opacity: 0;
+    transform:translateY(300px)
+}
+/* 运动过程 */
+.n-enter-active,.n-leave-active{
+    transition: .5s;
+}
+/* 结束 */
+.n-enter-to,.n-leave{
+    opacity: 1;
+    transform:translateY(0)
+}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <button 
+            @click="onoff = !onoff"
+        >点击</button>
+        <transition>
+            <ppa v-show="onoff"></ppa>    
+        </transition>
+        <hr>
+        <button 
+            @click="onoff2 = !onoff2"
+        >点击</button>
+        
+        <!-- 可以设置一个name属性，让我们能够自定义css动画 -->
+        <transition name="n">
+            <div v-show="onoff2">
+                2222
+            </div>    
+        </transition>
+    </div>
+    <template id="tk">
+       <div>好好好</div>
+    </template>
+<script src="vue.js"></script>
+<script>
+    const ppa = {
+        template:'#tk'
+    }
+    new Vue({
+        el:'#app',
+        data:{
+            onoff:false,
+            onoff2:false
+        },
+        components:{
+            ppa
+        }
+    })
+</script>
+</body>
+</html>

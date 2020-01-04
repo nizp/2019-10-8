@@ -26,27 +26,52 @@
     justify-content: center;
     /* align-items: flex-end; */
     position: absolute;
-    /* left:50%;
+    z-index: 99999;
+    left:50%;
     margin-left:-200px;
-    transform:translateY(100px); */
-    left:0;
+    transform:translateY(100px);
+    /* left:0;
     top:0;
     right:0;
-    bottom:0; 
-    margin: auto;
+    bottom:0; */
+    /* margin: auto; */
     box-shadow: 1px 1px 1px rgba(0,0,0,.5);
 }
 .btns{
-   position:absolute;
+   position: absolute;
    bottom: 0;
 }
 .txt{
-
     width:300px;
     height:150px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.v-enter{
+    opacity: 0;
+}
+.v-enter-active{
+    transition: .8s;
+}
+
+
+/* 初始位置 */
+.n-enter,.n-leave-to{
+    z-index:999;
+    transform:translateY(-500px);
+}
+/* 运动过程 */
+.n-enter-active,.n-leave-active{
+    z-index:999;
+    transition: .8s;
+}
+
+.tk_box{
+    position: relative;
+    z-index: 999;
 }
 
 </style>
@@ -56,15 +81,7 @@
         <button 
             @click="changOnoff"
         >点击</button>
-        <transition 
-            name="n" 
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @after-enter="afterEnter"
-            @before-leave="beforeLeave"
-            @leave="leave"
-            @after-leave="afterLeave"
-        >
+        <transition name="n" appear>
             <ppa 
                 v-show="onoff" 
                 :of="onoff"
@@ -77,11 +94,13 @@
             </ppa>
         </transition>
 
-        <div class="shadow" v-show="onoff"></div>
+        <transition>
+            <div class="shadow" v-show="onoff"></div>
+        </transition>
 
     </div>
     <template id="tk">
-        <div>
+        <div class="tk_box">
                 <div id="box">
                     <div class="txt">
                         <div>
@@ -115,36 +134,6 @@
         methods:{
             changOnoff(){
                 this.onoff = !this.onoff;
-            },
-            beforeEnter(ele){
-                console.log( ele)
-                ele.style.position = 'relative';
-                ele.style.zIndex = 999;
-                ele.style.transition = '.5s';
-                ele.style.transform = 'translateY(0)';
-            },
-            enter(ele){
-                ele.style.zIndex = 999;
-                // ele.children[0].style.zIndex = 999;
-                ele.offsetLeft;
-                ele.style.transition = '.5s';
-                ele.style.transform = 'translateY(200px)';
-            },
-            afterEnter(ele){
-                // ele.style.opacity = '0';
-            },
-            beforeLeave(ele){
-                ele.style.position = 'relative';
-                ele.style.zIndex = 999;
-                ele.style.transform = 'translateY(200px)';
-            },
-            leave(ele){
-                ele.offsetLeft;
-                ele.style.transition = '.5s';
-                ele.style.transform = 'translateY(-200px)';
-            },
-            afterLeave(ele){
-               
             }
         },
         components:{

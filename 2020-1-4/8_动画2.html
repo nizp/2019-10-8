@@ -45,15 +45,18 @@
         },
         methods:{
             beforeEnter(ele){
+                ele.style.opacity = '1';
                 ele.style.transform = 'translate(0,0)';
             },
-            enter(ele){
+            enter(ele,done){
                 ele.offsetTop;
                 ele.style.transition = '.5s';
                 ele.style.transform = 'translate(200px,400px)';
+                done();
             },
             afterEnter(ele){
-                ele.style.opacity = '0';
+                ele.style.opacity = '.2';
+                this.onoff = false;
             }
         },
         components:{

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        new Vue({
+            el:'#app',
+            data:{
+                //数据
+                num:0
+            },
+            //事件方法或者公共方法
+            methods:{  
+                toDoule(){
+
+                }
+            },
+            computed:{
+                计算属性（一上来就执行一次，只要数据发生变化又执行）
+                数据的二次处理
+                watchNum(){ //get
+                    return this.toDoule(this.num);
+                }
+
+                watchNum:{
+                    //读操作拦截
+                    get(){
+                        return 
+                    },
+                    //写操作拦截
+                    set(val){
+
+                    }
+                }
+            },
+            一上来不执行，只有数据改变的时候才执行(数据的二次处理)
+            watch:{
+                num(){
+
+                }
+                num:{
+                    handler(){
+
+                    },
+                    deep:true,  //深度监听
+                    immediate:true  //是否一上来就执行
+                }
+            },
+            components:{
+                注册组件
+            },
+            directives:{ //自定义指令
+                focus(el){
+                    bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+                    inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
+                    update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前
+                }
+            },
+            filters:{ //管道符
+                定义:xx(){
+                    return xxx.revers()
+                }
+                使用:{{yy | xx}}
+            },
+            created(){
+                //数据请求
+            },
+            mounted(){
+                //操作DOM
+            },
+            destroyed(){
+                //解除事件绑定、定时器
+            }
+        })
+    */    
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div id="box">
+            <button @click="++num">点击添加{{num}}</button>
+            <button @click="add">添加数据</button>
+            <button @click="rm">删除组件</button>
+            <p v-for="(val,key) in arr">{{val}}</p>
+        </div>
+    </div>
+<script src="vue.js"></script>
+<script>
+
+    /*
+        重点:
+            created  可以做ajax请求
+            mounted  可以进行DOM操作
+            destroyed 可以解除一些定时器、事件监听..
+    */
+    new Vue({
+        // el:'#app',
+        data:{
+            num:0,
+            arr:['下雪了','开战了','上课了','开心了'],
+            timer:null
+        },
+        methods:{
+            add(){
+                this.arr.push(++ this.num)
+            },
+            rm(){
+                this.$destroy();
+            }
+        },
+        beforeCreate() {
+			console.log(this.num,'初始化之前');//拿不到数据
+		},
+		//ajax请求的时候就在这使用
+		created(){
+            console.log(this.num,'初始化之后');//可以拿到data中的数据
+            this.timer = setInterval(()=>{
+                console.log(1);
+            },1000)
+        },
+        
+        //如果没有挂在元素，就没有下面的生命周期了
+
+        //渲染之前
+        beforeMount() {
+            console.log('渲染之前',box.children);
+        },
+        //DOM渲染之后，DOM操作
+        mounted() {
+            console.log('渲染之后',box.children);
+        },
+
+        //下面这2个都是数据更新之后，一个是DOM更新之前一个是DOM更新之后
+        
+        // DOM更新之前
+        beforeUpdate() {
+            console.log('数据更新之前',box.children,this.arr);
+        },
+        //DOM更新之后
+        updated(){
+            console.log('数据更新之后',box.children,this.arr)
+        },
+        //销毁之前
+        beforeDestroy() {
+            console.log('销毁之前')
+        },
+        //销毁之后 ，可以把一些事件、定时器...解除
+        destroyed(){
+            console.log('销毁之后');
+            clearInterval(this.timer);
+        }
+
+    }).$mount('#app')
+</script>
+</body>
+</html>

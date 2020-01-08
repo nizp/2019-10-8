@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-     <router-link to="/about/1">About1</router-link>
-    <router-link to="/about/2">About2</router-link>
-      <!-- <router-link to="/b1">去b1</router-link>
-      <router-link to="/b2">去b2</router-link>
-      <router-link to="/foo/1">去foo1</router-link>
-      <router-link to="/foo/2">去foo2</router-link> -->
+    <div id="nav">
+      <router-link to="/" tag="button">home</router-link>
+      <router-link to="/about" tag="button">about</router-link>
+      <router-link to="/login" tag="button">login</router-link>
+      <router-link to="/public" tag="button">public</router-link>
+    </div>
     <router-view/>
   </div>
 </template>
 
 <style>
+/* .active{
+  background:yellow
+} */
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

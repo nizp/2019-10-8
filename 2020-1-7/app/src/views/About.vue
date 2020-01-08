@@ -1,8 +1,9 @@
 <template>
   <div class="about">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about/nizp/id/1">About1</router-link>
-    <router-link to="/about/ds/id/2">About2</router-link>
+    
+    <!-- <router-link to="/about/nizp/id/1">About1</router-link>
+    <router-link to="/about/ds/id/2">About2</router-link> -->
     <router-link to="/public">public</router-link>
     <h1>This is an about page</h1>
     <!-- <div v-if="$route.params.id == 1">

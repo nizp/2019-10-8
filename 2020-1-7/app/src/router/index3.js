@@ -47,7 +47,7 @@ const router = new VueRouter({
   next(false) 中断路由跳转
   next('/') 等同于push  或者使用  next({ path: '/' })
 
-  如果有全局和局部，那么全局优先级大
+  如果有全局和路由，那么全局优先级大
 
   全局的beforeEach(要切换路由的时候触发)
 

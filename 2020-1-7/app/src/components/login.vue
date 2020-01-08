@@ -34,26 +34,26 @@
                 ];
                 const {uname,pass} = this;
 
-                // fetch('http://localhost:80/login?uname='+ uname +'&pass='+pass).then(e=>e.json()).then(data=>{
-                //     if(data.code === 0){
-                //         this.$router.push('/');
-                //     }else{
-                //         alert('没有登录成功');
-                //     }
-                // })
-               
-                setTimeout(() => {
-                    // console.log(1)
-                    // console.log(ary.some(item=> item.un === uname && item.pass === pass ))
-                    if(ary.some(item=> item.un === uname && item.pass === pass )){
-                        localStorage.setItem('login',uname);
-                        this.$router.push({
-                            path:this.path
-                        });
+                fetch('http://localhost:80/login?uname='+ uname +'&pass='+pass).then(e=>e.json()).then(data=>{
+                    if(data.code === 0){
+                        this.$router.push('/');
                     }else{
-                        localStorage.clear();
+                        alert('没有登录成功');
                     }
-                }, 2000);
+                })
+               
+                // setTimeout(() => {
+                //     // console.log(1)
+                //     // console.log(ary.some(item=> item.un === uname && item.pass === pass ))
+                //     if(ary.some(item=> item.un === uname && item.pass === pass )){
+                //         localStorage.setItem('login',uname);
+                //         this.$router.push({
+                //             path:this.path
+                //         });
+                //     }else{
+                //         localStorage.clear();
+                //     }
+                // }, 2000);
             }
         }
     }

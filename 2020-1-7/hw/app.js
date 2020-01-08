@@ -7,7 +7,8 @@ app.use(session({
     secret: 'zf',
     cookie: {maxAge: 10000},
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    rolling:true
 }));
 
 
@@ -39,6 +40,7 @@ app.use('/login',router.get('/',(req,res)=>{
     const {uname,pass} = req.query;
     if(ary.some(item=> item.un === uname && item.pass === pass )){
         req.session.username = uname;
+        // console.log(req.session,'种了')
         res.json({
             code:0,
             msg:'成功'

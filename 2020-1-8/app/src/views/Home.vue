@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <el-container>
+    <el-container class="home_box">
       <el-header>Header</el-header>
       <el-container>
         <el-aside width="200px">
@@ -10,7 +10,7 @@
           <list />
         </el-main>
       </el-container>
-      <el-footer>Footer</el-footer>
+      <!-- <el-footer>Footer</el-footer> -->
     </el-container>
 
   </div>
@@ -32,20 +32,25 @@ export default {
   margin:0;
   padding:0;
 }
-  .el-header, .el-footer {
+.home_box{
+  height:100vh;
+}
+.el-header, .el-footer {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
     line-height: 60px;
   }
-  
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
-    line-height:80vh;
-  }
-  
+
+.el-aside {
+  background-color: #D3DCE6;
+  color: #333;
+  text-align: center;
+  /* line-height:90vh; */
+  overflow-y: scroll;
+}
+
+
   .el-main {
     background-color: #E9EEF3;
     color: #333;

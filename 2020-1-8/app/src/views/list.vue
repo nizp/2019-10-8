@@ -1,10 +1,12 @@
 <template>
   <el-table
     :data="tableData"
-    style="width: 100%">
+    style="width: 100%"
+    >
     <el-table-column
-      label="日期"
-      width="180">
+        label="日期1"
+        width="180"
+      >
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
@@ -86,3 +88,8 @@
     }
   }
 </script>
+<style>
+.el-main{
+    line-height: 25px !important;
+}
+</style>

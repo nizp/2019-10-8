@@ -15,7 +15,8 @@
       <!-- <button>点击增加{{$store.state.store1.num}}</button> -->
       <!-- <button>点击增加{{num}}</button> -->
 
-      <!-- {{storev()}} -->
+     <!-- {{cv()}} -->
+
   </div>
 </template>
 
@@ -30,11 +31,13 @@ export default {
   name: 'home',
 
   methods:{
-    ...mapMutations(['increment','store2/changeval']),
+    // ...mapMutations({
+    //   cv(data){
+    //       console.log(data)
+    //   }
+    // }),
     changeVal(){
-        // this.changeval()
-        this['store2/changeval']();
-      // console.log(this.$store.dispatch('changeval'))
+      // console.log(this.$store._modules.root._children.store2)
     }
   },
 

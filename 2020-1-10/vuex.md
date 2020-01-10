@@ -113,5 +113,26 @@ actions，响应在 view 上的用户输入导致的状态变化。(v-model)
             this.asyncIncrement() === this.$store.dispatch('asyncIncrement')
         ```
 
+### getter(为了修改数据之后的二次操作)
+    如果数据的二次操作多个组件需要复用，可以使用getters
+
+    ```
+        {
+            getters:{
+                toDou(state){
+                    return state.xx的二次操作
+                }
+            }
+        }
+
+        import {mapGetters} from 'vuex';
+
+        computed:{
+            ...mapGetters(['toDou'])
+        }
+
+    ```
+### module 当数据比较多的时候，可以把store分割为多个小的模块，最后通过modules去合并
+
 
  

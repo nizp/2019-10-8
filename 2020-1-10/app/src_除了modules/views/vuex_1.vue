@@ -2,6 +2,7 @@
     <div>
         <h1>Vuex_1</h1>
         {{reverse}}
+        {{$store.getters.toDou}}
         <button @click="add">{{num}}</button>
         <!-- <button @click="add">{{$store.state.num}}</button> -->
     </div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="./md5.min.js"></script>
+<script>
+    //8376ac810bb9f231d28fcf1f
+    //8376ac810bb9f231d28fcf1f
+    //e807f1fcf82d132f9bb018ca6738a19f
+    function handleMD5(val) {
+        val = val.substring(4);
+        val = val.split('').reverse().join('');
+        val = val.substring(4);
+        return val;
+    }
+    console.log(handleMD5(md5('1234567890')))
+    //
+</script>
+</body>
+</html>

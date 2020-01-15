@@ -22,8 +22,6 @@ route.post('/login', (req, res) => {
 		password = ''
 	} = req.body || {};
 
-	// console.log('珠峰培训')
-
 	password = handleMD5(password);
 
 	const item = req.$userDATA.find(item => {
@@ -31,24 +29,26 @@ route.post('/login', (req, res) => {
 	});
 
 	if (item) {
+		const power = req.$jobDATA.find(key=>key.id == item.jobId);
+
 		const token = jwt.sign({
 			name:item.name,
 			jobId:item.jobId,
 			id:item.id,
+			power:power.power,
 			departmentId:item.departmentId
 		},secret,{expiresIn: 60*60});
 
 		res.send(success(true, {
 			power:{
-				jobId:item.jobId,  //工号
+				power:power.power, //权限
+				jobId:item.jobId,  //级别
 				name:item.name, //名字
 				sex:item.sex,  //性别
-				departmentId:item.departmentId //权限
+				departmentId:item.departmentId //部门
 			},
 			token
 		}));
-
-
 		return;
 	}
 	res.send(success(false, {
@@ -65,13 +65,25 @@ route.get('/login', (req, res) => {
 			res.send(success(false, {
 				codeText: 'current user is not logged in!'
 			}));
+			return;
 		}
+
+		// console.log(data,'看看name')
+
 		res.json({
 			code:0,
+			power:{
+				name:data.name,
+				jobId:data.jobId,
+				id:data.id,
+				power:data.power,
+				departmentId:data.departmentId
+			},
 			token:jwt.sign({
 				name:data.name,
 				jobId:data.jobId,
 				id:data.id,
+				power:data.power,
 				departmentId:data.departmentId
 			},secret,{expiresIn: 60*60})
 		});
@@ -91,11 +103,27 @@ route.get('/signout', (req, res) => {
 //=>获取用户通讯录
 route.get('/list', (req, res) => {
 	let data = req.$userDATA;
+	let len = data.length;
 	// console.log(data,222);
 	let {
 		departmentId = 0,
-		search = ''
+		search = '',
+		pagenum = 0,
+		count = 5
 	} = req.query;
+
+	let pageData = [];
+	console.log('从'+pagenum*count+'到'+((pagenum*1+1)*count))
+	for(let i=pagenum*count;i<(pagenum*1+1)*count;i++){
+		if(data[i]){
+			pageData.push(data[i]);
+		}
+	}
+
+	// console.log(pageData,'看看数据')
+
+	// data = data.slice(pagenum*count,(pagenum+1)*count);
+	data = pageData;
 	if (parseFloat(departmentId) !== 0) {
 		data = data.filter(item => {
 			return parseFloat(item.departmentId) === parseFloat(departmentId);
@@ -106,6 +134,9 @@ route.get('/list', (req, res) => {
 			return item.name.includes(search) || item.phone.includes(search) || item.email.includes(search);
 		});
 	}
+
+	
+
 	data = data.map(item => {
 		return {
 			id: item.id,
@@ -122,7 +153,8 @@ route.get('/list', (req, res) => {
 	});
 	if (data.length > 0) {
 		res.send(success(true, {
-			data: data
+			data: data,
+			total:len
 		}));
 		return;
 	}
@@ -255,33 +287,80 @@ route.get('/delete', (req, res) => {
 });
 
 //=>修改（重置）用户密码
-route.post('/resetpassword', (req, res) => {
+/*
+	session
+
+
+	//如果不传获取当前用户信息
+	if (parseFloat(userId) === 0) {
+		try {
+			userId = await jwt.verify(authorization, secret).id;
+		} catch (error) {
+			res.send(success(false, {
+				codeText: 'no matching data was found!'
+			}));
+		}
+	}
+*/
+route.post('/resetpassword', async(req, res) => {
+	const {authorization} = req.headers;
 	let $userDATA = req.$userDATA;
 	let {
 		userId = 0,
-			password
+		password
 	} = req.body;
-	if (parseFloat(userId) === 0) {
-		//=>修改登录者的密码
-		userId = req.session.userID;
-		password = handleMD5(password);
-	} else {
-		password = handleMD5('e807f1fcf82d132f9bb018ca6738a19f');
+	// if (parseFloat(userId) === 0) {
+	// 	//=>修改登录者的密码
+	// 	userId = await jwt.verify(authorization, secret).id;
+	// 	password = handleMD5(password);
+	// } else {
+	password = handleMD5(password);
+	// }
+	//如果用户没有传userId，那么就说明参数错误
+	if(userId === 0){
+		res.json({
+			code:4,
+			msg:'参数错误'
+		});
+		return;
 	}
-	$userDATA = $userDATA.map(item => {
-		if (parseFloat(item.id) === parseFloat(userId)) {
-			return {
-				...item,
-				password: password
-			};
+
+	//拿到管理员权限
+	const userPowerId = await jwt.verify(authorization, secret).id;
+	const user = $userDATA.find(item=>item.id*1 === userPowerId*1);//管理员
+	
+	//只有总裁办的管理员 和 后勤部的经理才能重置别人的密码
+	if(user.departmentId*1 === 1 && user.jobId*1 === 1 || user.departmentId*1 === 4 && user.jobId*1 === 6){
+			//如果有权限修改，那么找到要修改密码的用户
+			const user2 = $userDATA.find(item=>item.id*1 === userId*1);
+			if(user2.password == password){
+				res.json({
+					code:1,
+					msg:'不能使用原密码'
+				});
+			}else{
+				$userDATA = $userDATA.map(item => {
+					if (parseFloat(item.id) === parseFloat(userId)) {
+						return {
+							...item,
+							password: password
+						};
+					}
+					return item;
+				});
+				writeFile('./json/user.json', $userDATA).then(() => {
+					res.send(success(true,{code:0,msg:'修改成功'}));
+				}).catch(() => {
+					res.send(success(false));
+				});
 		}
-		return item;
-	});
-	writeFile('./json/user.json', $userDATA).then(() => {
-		res.send(success(true));
-	}).catch(() => {
-		res.send(success(false));
-	});
+	}else{
+		res.json({
+			code:2,
+			msg:'权限不够!'
+		});
+	}
+	
 });
 
 //=>获取用户权限
@@ -295,14 +374,15 @@ route.post('/resetpassword', (req, res) => {
 	resetpassword:修改密码
 */
 route.get('/power', (req, res) => {
-	// console.log('power')
+
 	const powerList = {
 		'1':'userhandle|departhandle|jobhandle|departcustomer|allcustomer|resetpassword',
-		'2':'userhandle|departhandle|jobhandle|departcustomer|resetpassword',
-		'3':'userhandle|departhandle',
+		'6':'userhandle|departhandle|jobhandle|departcustomer|resetpassword',
+		'3':'',
 		'4':'departcustomer',
-		'5':'userhandle',
-		'6':''
+		'7':'userhandle',
+		'5':'',
+		'2':'departcustomer'
 	}
 	const {authorization} = req.headers;
 	jwt.verify(authorization, secret,(err,data)=>{
@@ -312,73 +392,71 @@ route.get('/power', (req, res) => {
 				msg:'重新登录'
 			});
 		}
-		const createObj = powerList[data.departmentId].split('|');
+		const power = powerList[data.jobId];
+
+		// console.log(power,'看看权限')
+
+		let pList = [
+			{
+				name:'员工管理',
+				id:1,
+				children:[{
+					name:'员工列表',
+					id:'1-1',
+					path:'/userhandle/list'
+				}]
+			},
+			{
+				name:'部门管理',
+				id:2,
+				children:[
+					{
+						name:'部门列表',
+						id:'2-1',
+						path:'/departhandle/list'
+					},
+				]
+			}
+		];
 		
-		let pList = [];
+		//只要带userhandle就有新增员工
+		if(power.includes('userhandle')){
+			pList[0].children.push({
+				name:'新增员工',
+				id:'1-2',
+				path:'/userhandle/add'
+			})
+		}
 
-		createObj.forEach(ele=>{
-			if(ele === 'userhandle'){
-				pList.push({
-					name:'员工管理',
-					id:1,
-					children:[{
-						name:'员工列表',
-						id:'1-1',
-						path:'/userhandle/list'
-					}]
-				})
-				if(data.departmentId <= 3){
-					pList[0].children.push({
-						name:'新增员工',
-						id:'1-2',
-						path:'/userhandle/add'
-					})
-				}
-			}
-			if(ele === 'departhandle'){
-				pList.push({
-					name:'部门管理',
-					id:2,
-					children:[
-						{
-							name:'部门列表',
-							id:'2-1',
-							path:'/departhandle/list'
-						},
-					]
-				});
+		//只要带departhandle就有新增部门
+		if(power.includes('departhandle')){
+			pList[1].children.push({
+				name:'新增部门',
+				id:'2-2',
+				path:'/departhandle/add'
+			})
+		}
 
-				if(data.departmentId <= 3){
-					pList[1].children.push({
-						name:'新增部门',
-						id:'2-2',
-						path:'/departhandle/add'
-					})
-				}
-			}
-			if(ele === 'jobhandle'){
-				pList.push({
-					name:'职务管理',
-					id:3,
-					children:[
-						{
-							name:'职务列表',
-							id:'3-1',
-							path:'/jobhandle/list'
-						}
-					]
-				})
-				console.log(data.departmentId,33333)
-				if(data.departmentId <= 3){
-					pList[2].children.push({
+		//只要带jobhandle就能添加职务
+		if(power.includes('jobhandle')){
+			pList.push({
+				name:'职务管理',
+				id:3,
+				children:[
+					{
+						name:'职务列表',
+						id:'3-1',
+						path:'/jobhandle/list'
+					},
+					{
 						name:'新增职务',
 						id:'3-2',
 						path:'/jobhandle/add'
-					})
-				}
-			}
-		})
-
+					}
+				]
+			});
+		}
+	
 		res.send(success(true, {
 			code:0,
 			pList:pList

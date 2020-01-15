@@ -62,6 +62,16 @@ jobId
 URL：/user/list
 METHOD：GET
 PARAMS：departmentId=0&search=''
+PARAMS：pagenum=1&count='10' -> 1-10
+
+	pagenum=0&count='10' - > 1 - 10 
+	pagenum=1&count='10' - > 11 - 20
+	pagenum=2&count='10' - > 21 - 30
+
+	for(let i=(pagenum)*10+1);i<=(pagenum+1)*count;i++){
+
+	}
+
 
 /user/list（获取到所有的数据）如果加了departmentId，专门找部门，加了search就是查询条件
 
@@ -141,6 +151,12 @@ RESULT：{
 	code:0  
 	codeText:'OK'
 }
+
+code:0  成功
+code:4  失败-参数错误
+code:1  失败-不能使用原密码
+code:2  权限不够
+
 ----
 获取用户权限
 URL：/user/power

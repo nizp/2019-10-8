@@ -26,8 +26,11 @@ instance.interceptors.request.use(config => {
 //响应拦截
 //获取token或者别的令牌信息，然后存储到本地
 instance.interceptors.response.use(config => {
-    console.log(config)
+    // console.log(config)
     if(config.data.power){ //权限信息，要把权限信息写入本地
+        //把上一次的权限信息清除
+        sessionStorage.removeItem('power');
+        //添加权限信息
         sessionStorage.setItem('power',JSON.stringify(config.data.power));
     }
     if(config.data.token){

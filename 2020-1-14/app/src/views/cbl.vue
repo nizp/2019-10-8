@@ -64,6 +64,17 @@ export default {
     methods:{
       
     },
+    watch:{
+        $route(to,b){
+            console.log(to.path)
+            if(to.path === '/userhandle/list'){
+                this.path = this.$route.path;
+                console.log(this.path,'路由')
+            }
+            
+            // console.log('触发路由',this.$route.path,a,b);
+        }
+    },
     async created(){
         const data = await powerAPI();
         if(data.code === 0){

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="./node_modules/mockjs/dist/mock-min.js"></script>
+<script>
+    const data = Mock.mock({
+    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+    'list|1-100': [{
+        'id|+1': 1,
+        'name|+1':'name'+1
+        }]
+    });
+
+    console.log(data);
+</script>
+</body>
+</html>

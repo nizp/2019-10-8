@@ -1,5 +1,5 @@
 /*mutations*/
-export const INCREMENT = "INCREMENT";
+export const CREATE_CBL_LIST = "CREATE_CBL_LIST";
 
 
 

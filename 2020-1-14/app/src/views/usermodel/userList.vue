@@ -40,7 +40,8 @@
                     <div class="grid-content bg-purple">
                         <el-input 
                             v-model="search" 
-                            @change="searchFn" 
+                            @clear="searchFn"
+                            ref="search"
                             placeholder="请输入内容"
                             clearable
                             autofocus
@@ -140,9 +141,12 @@
             </el-table>
 
             <el-pagination
+                @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
+                :page-sizes="[6, 12, 15]"
                 :current-page="currentPage"
                 :page-size="pageSize"
+                layout="sizes , prev, pager, next"
                 :total="total">
             </el-pagination>
         </el-card>
@@ -259,7 +263,7 @@
 
 <script>
 import md5 from 'js-md5';
-import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfoAPI,changeUserAPI} from '../api/api';
+import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfoAPI,changeUserAPI} from '../../api/api';
     export default {
         created(){
             this.getList();
@@ -269,7 +273,14 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
                 this.userhandler = JSON.parse(session).power.includes('userhandle')
                 this.resetPass = JSON.parse(session).power.includes('resetpassword')
             }
-          
+        },
+        mounted() {
+            const that = this;
+            this.$refs.search.$el.children[0].onkeyup = function(ev){
+                if(ev.keyCode === 13){
+                    that.searchFn();
+                }
+            }
         },
         data(){
 
@@ -302,7 +313,7 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
                 }
             };
             return {
-                pageSize:5,
+                pageSize:6,
                 total:10,//总页数
                 currentPage:1, //当前页
                 resetPass:false,
@@ -372,6 +383,12 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
             }
         },
         methods:{
+            
+            handleSizeChange(val){
+                this.pageSize = val;
+                this.getList();
+                // console.log(val);
+            },
             handleCurrentChange(num){
                 this.currentPage = num;
                 this.getList();
@@ -489,6 +506,7 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
                 console.log(d.data);
             },
             searchFn(){
+                console.log(111)
                 this.getList({
                     departmentId:this.searchId,
                     search:this.search
@@ -538,7 +556,8 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
                 //选择查询(切换select的时候触发)
                 this.searchId = id;
                 this.getList({
-                    departmentId:id
+                    departmentId:id,
+                    search:this.search
                 });
             },
             //选择部门
@@ -613,6 +632,8 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
     }
 }
 
+
+
 .myselect {
     .el-input__suffix{
         top:4px;
@@ -629,6 +650,9 @@ import {resetPassAPI,userListAPI,userSelectAPI,userDeleteAPI,allListAPI,userInfo
 .box-card{
     margin-top:20px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.1) !important;
+    .el-pagination{
+        margin-top:20px;
+    }
 }
 .el-row{
     width:50%;

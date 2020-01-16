@@ -11,14 +11,42 @@ const {
 } = require('../utils/promiseFS');
 
 
+/*
+	list?pagenum=1&count=6
+*/
 //=>获取部门列表
 route.get('/list', (req, res) => {
 	let data = req.$departmentDATA;
+
+	let {
+		search = '',
+		pagenum = 0,
+		count = 5
+	} = req.query;
+
+	let len = data.length;
+
+	let pageData = [];
+	for(let i=pagenum*count;i<(pagenum*1+1)*count;i++){
+		if(data[i]){
+			pageData.push(data[i]);
+		}
+	}
+	data = pageData;
+
+	if (search !== '') {
+		data = data.filter(item => {
+			return item.name.includes(search) ||  item.desc.includes(search) || (item.id+"").includes(search) || (item.time+'').includes(search);
+		});
+	}
+
+
 	data = data.map(item => {
 		return {
 			id: item.id,
 			name: item.name,
-			desc: item.desc
+			desc: item.desc,
+			time:item.time
 		}
 	});
 	if (data.length > 0) {

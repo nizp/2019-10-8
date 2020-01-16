@@ -157,6 +157,11 @@ route.get('/list', (req, res) => {
 			total:len
 		}));
 		return;
+	}else{
+		res.send(success(true, {
+			data: [],
+			total:len
+		}));
 	}
 	res.send(success(false, {
 		codeText: 'no matching data was found!'

@@ -11,7 +11,7 @@
         :default-active="path"
     >
   
-      <el-submenu :index="''+val.id" v-for="val in powerList" :key="val.id">
+      <el-submenu :index="''+val.id" v-for="val in cblAry" :key="val.id">
         <template slot="title">
           <i :class="iconList[val.id]"></i>
           <span>{{ val.name }}</span>
@@ -26,29 +26,12 @@
 </template>
 
 <script>
-
-    /*
-        data:{
-            jobId:1,
-            name:'员工管理',
-            children:[
-                {
-                    jobId:'1-1',
-                    name:'员工列表'
-                },
-                {
-                    jobId:'1-2',
-                    name:'员工新增'
-                }
-            ]
-        }
-    */
-
-import {powerAPI} from '../api/api';
-
+import {mapState} from 'vuex';
 export default {
-  
     props:['pcollap'],
+    computed:{
+        ...mapState(['cblAry'])
+    },
     data(){
         return {
             collapse:false,
@@ -76,12 +59,13 @@ export default {
         }
     },
     async created(){
-        const data = await powerAPI();
-        if(data.code === 0){
-            this.powerList = data.pList;
-        }else{
-            this.$message.error('获取列表失败');
-        }
+        
+        // const data = await powerAPI();
+        // if(data.code === 0){
+        //     this.powerList = data.pList;
+        // }else{
+        //     this.$message.error('获取列表失败');
+        // }
         this.path = this.$route.path;
         // console.log( this.$route,'看看')
         // console.log(await powerAPI());

@@ -1,5 +1,7 @@
 const express = require('express'),
-	route = express.Router();
+	route = express.Router(),
+	jwt = require('jsonwebtoken'),
+	secret = '小脾气';
 
 const {
 	success,
@@ -124,12 +126,92 @@ route.get('/info', (req, res) => {
 	}));
 });
 
+
+
+route.get('/power', (req, res) => {
+
+	const powerList = {
+		'1':'userhandle|departhandle|jobhandle|departcustomer|allcustomer|resetpassword',
+		'6':'userhandle|departhandle|jobhandle|departcustomer|resetpassword',
+		'3':'',
+		'4':'departcustomer',
+		'7':'userhandle',
+		'5':'',
+		'2':'departcustomer'
+	}
+	const {authorization} = req.headers;
+	jwt.verify(authorization, secret,(err,data)=>{
+		if(err){
+			res.json({
+				code:1,
+				msg:'重新登录'
+			});
+		}
+		const power = powerList[data.jobId];
+
+		let pList = [
+			{
+				name:'客户管理',
+				id:1,
+				children:[
+					{
+						name:'我的客户',
+						id:'1-1',
+						path:'/customer/list/my'
+					},
+					{
+						name:'新增客户',
+						id:'1-2',
+						path:'/add/customer'
+					}
+				]
+			}
+		];
+
+		let flag = false;
+
+		if(power.includes('allcustomer') || power.includes('departcustomer')){
+			pList[0].children.unshift({
+				name:'全部客户',
+				id:'1-0',
+				path:'/customer/list/all'
+			})
+			flag = true;
+		}
+
+
+		//如果没有权限进行客户管理，那么pList就是一个空的
+		if(!flag){
+			pList.length = 0;
+		}
+		
+	
+		res.send(success(true, {
+			flag,
+			code:0,
+			pList:pList
+		}));
+	})
+	
+});
+
+
+/*
+	/customer/list
+		type
+		search
+		lx -> all || my
+		limit = 10,
+		page = 1
+
+*/
+
 //=>获取客户列表信息
 route.get('/list', (req, res) => {
 	let data = req.$customerDATA;
 	//=>筛选处理
 	let {
-		type = '',
+			type = '',
 			search = '',
 			lx = 'all'
 	} = req.query;
@@ -144,64 +226,72 @@ route.get('/list', (req, res) => {
 		});
 	}
 	//=>权限校验
-	let power = req.session.power,
-		userID = req.session.userID;
-	if (lx === 'my') {
-		data = data.filter(item => {
-			return parseFloat(item.userId) === parseFloat(userID);
-		});
-	} else {
-		if (!power.includes('departcustomer') && !power.includes('allcustomer')) {
+	const {authorization} = req.headers;
+	jwt.verify(authorization, secret,(err,data2)=>{
+		let power = data2.power,
+		userID = data2.id;
+
+		if (lx === 'my') {
 			data = data.filter(item => {
 				return parseFloat(item.userId) === parseFloat(userID);
 			});
-		} else if (power.includes('departcustomer') && !power.includes('allcustomer')) {
-			data = data.filter(item => {
-				return parseFloat(item.departmentId) === parseFloat(getUserInfo(userID, req).departmentId);
-			});
+		} else {
+			if (!power.includes('departcustomer') && !power.includes('allcustomer')) {
+				data = data.filter(item => {
+					return parseFloat(item.userId) === parseFloat(userID);
+				});
+			} else if (power.includes('departcustomer') && !power.includes('allcustomer')) {
+				data = data.filter(item => {
+					return parseFloat(item.departmentId) === parseFloat(getUserInfo(userID, req).departmentId);
+				});
+			}
 		}
-	}
-	
-	//=>分页处理
-	let {
-		limit = 10,
+
+		console.log(data,lx,1111)
+
+
+		//=>分页处理
+		let {
+			limit = 10,
 			page = 1
-	} = req.query;
-	let totalPage = Math.ceil(data.length / limit),
-		total = data.length,
-		result = [];
-	if (page <= totalPage) {
-		for (let i = (page - 1) * limit; i <= (page * limit - 1); i++) {
-			let item = data[i];
-			if (!item) break;
-			result.push({
-				id: item.id,
-				name: item.name,
-				sex: item.sex,
-				email: item.email,
-				phone: item.phone,
-				QQ: item.QQ,
-				weixin: item.weixin,
-				type: item.type,
-				address: item.address,
-				userId: item.userId,
-				userName: getUserInfo(item.userId, req).name
-			});
+		} = req.query;
+		let totalPage = Math.ceil(data.length / limit),
+			total = data.length,
+			result = [];
+		if (page <= totalPage) {
+			for (let i = (page - 1) * limit; i <= (page * limit - 1); i++) {
+				let item = data[i];
+				if (!item) break;
+				result.push({
+					id: item.id,
+					name: item.name,
+					sex: item.sex,
+					email: item.email,
+					phone: item.phone,
+					QQ: item.QQ,
+					weixin: item.weixin,
+					type: item.type,
+					address: item.address,
+					userId: item.userId,
+					userName: getUserInfo(item.userId, req).name
+				});
+			}
 		}
-	}
-	if (result.length > 0) {
-		res.send(success(true, {
-			page: page,
-			limit: limit,
-			total: total,
-			totalPage: totalPage,
-			data: result
+		if (result.length > 0) {
+			res.send(success(true, {
+				page: page,
+				limit: limit,
+				total: total,
+				totalPage: totalPage,
+				data: result
+			}));
+			return;
+		}
+		res.send(success(false, {
+			codeText: 'no matching data was found!'
 		}));
-		return;
-	}
-	res.send(success(false, {
-		codeText: 'no matching data was found!'
-	}));
+	})
+	
 });
 
 module.exports = route;

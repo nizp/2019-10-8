@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import {userSelectAPI,allListAPI,userAddAPI} from '../api/api';
+import {userSelectAPI,allListAPI,userAddAPI} from '../../api/api';
     export default {
         created(){
             this.userSelectFn();

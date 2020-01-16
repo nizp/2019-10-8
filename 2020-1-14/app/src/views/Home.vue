@@ -1,7 +1,12 @@
 <template>
-    <el-container>
+    <el-container class="home">
       <el-header>
         <h1 class="logo">CRM-客户管理系统</h1>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="组织结构" name="first"></el-tab-pane>
+          <el-tab-pane v-if="customerPower" label="客户管理" name="second"></el-tab-pane>
+        </el-tabs>
+        <div class="padd"></div>
         <div>
           <span class="name">欢迎：{{uname}}</span> 
           <el-button 
@@ -31,32 +36,71 @@
 
 <script>
 import cbl from './cbl';
+import {mapActions} from 'vuex';
 export default {
 
   created() {
+    
     let obj = sessionStorage.getItem('power');
     if(obj){
-        this.uname = JSON.parse(obj).name;
+        const {name,power} = JSON.parse(obj)
+        this.uname = name;
+        if(power.includes('allcustomer') || power.includes('departcustomer')){
+          this.customerPower = true;
+        }
     }
+    this.activeName = this.$route.path.includes('/customer/list/')?'second':'first';
+    this.handleClick();
+    // console.log(this.activeName);
+
   },
   data(){
     return {
+      customerPower:false,
       uname:'',
-      isCollapse:false
+      isCollapse:false,
+      activeName:'first'
     }
   },
   methods:{
+    ...mapActions(['customerList','userList']),
     logout(){
       sessionStorage.setItem('token','');
       this.$router.push('/login');
+    },
+    handleClick(){
+      // console.log('就切换路由')
+      if(this.activeName === 'second'){
+        this.customerList();
+      }else if(this.activeName === 'first'){
+        this.userList();
+      }
     }
   },
+  
   components:{
       cbl
   }
 }
 </script>
-<style>
+
+<style lang="less">
+
+.home{
+  .padd{
+    width:40%;
+  }
+  .el-tabs{
+    align-self: flex-start;
+  }
+  .is-top{
+    color:#409EFF;
+    font-size:16px;
+  }
+  .is-active{
+    color:#fff;
+  }
+}
 .btn_primary{
   width:100%;
 }

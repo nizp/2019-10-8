@@ -19,11 +19,20 @@ const routes = [
     children:[
       {
         path:'/userhandle/list',
-        component:() => import('../views/userList.vue'),
+        component:() => import('../views/usermodel/userList.vue'),
       },
       {
         path:'/userhandle/add',
-        component:() => import('../views/userAdd.vue'),
+        component:() => import('../views/usermodel/userAdd.vue'),
+      },
+      {
+        path:'/departhandle/list',
+        component:() => import('../views/departmodel/departList.vue'),
+      },
+      {
+        path:'/customer/list/:id',
+        component:() => import('../views/customermodel/customerList.vue'),
+        
       }
     ],
     meta:{

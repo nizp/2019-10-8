@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num">
+        {{num}}
+        <input type="button" value="按钮">
+        {{num2}}
+    </div>
+<script src="./vue.min.js"></script>
+<script src="mvvm.js"></script>
+<script>
+
+    /*
+        DOM的操作
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+    */
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            num:0,
+            num2:1
+        }
+    });
+</script>
+</body>
+</html>

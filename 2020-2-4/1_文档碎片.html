@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+<script>
+    
+    /*
+        2.08203125ms
+        3.880126953125ms
+        2.360107421875ms
+
+
+        计时器: 2.10107421875ms
+        计时器: 2.26904296875ms
+
+        文档碎片（放到了内存中）
+        document.createDocumentFragment  
+    */
+
+    console.time('计时器');
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<1000;i++){
+        let div = document.createElement('div');
+        frag.appendChild(div);
+    }
+    app.appendChild(frag);
+    console.timeEnd('计时器')
+</script>
+</body>
+</html>

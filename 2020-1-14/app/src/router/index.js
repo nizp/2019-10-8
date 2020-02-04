@@ -32,7 +32,6 @@ const routes = [
       {
         path:'/customer/list/:id',
         component:() => import('../views/customermodel/customerList.vue'),
-        
       }
     ],
     meta:{

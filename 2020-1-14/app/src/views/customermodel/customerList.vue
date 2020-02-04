@@ -3,9 +3,13 @@
         <div class="userlist">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>员工管理</el-breadcrumb-item>
-                <el-breadcrumb-item>员工列表</el-breadcrumb-item>
+                <el-breadcrumb-item>客户管理</el-breadcrumb-item>
+                <el-breadcrumb-item  v-if="$route.params.id==='all'">全部客户</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="$route.params.id==='my'">我的客户</el-breadcrumb-item>
             </el-breadcrumb>
+
+           
+          
            
             <el-row :gutter="20">
                 <el-col :span="6">

@@ -52,6 +52,10 @@ class Complier {
                         let value = this.vm.$data[nodeValue];
                         // console.dir(this.vm.$data[nodeValue])
                         // console.log(node)
+                        node.oninput = (ev)=>{
+                            this.vm.$data[nodeValue] = ev.target.value; //set
+                            // console.log(this.vm.$data[nodeValue])
+                        }
                         node.value = value;
                     }
                 });

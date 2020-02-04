@@ -16,6 +16,7 @@ const actions = {
     const data = await powerAPI('customer');
     //请求成功并且有客户管理的权限才能有客户管理
     if(data.code == 0){
+      console.log('客户侧边栏',data.pList)
       commit(CREATE_CBL_LIST,data.pList);
     }
   },
@@ -24,6 +25,7 @@ const actions = {
     const data = await powerAPI();
     //请求成功并且有客户管理的权限才能有客户管理
     if(data.code === 0){
+      console.log('员工侧边栏',data.pList,'111')
       commit(CREATE_CBL_LIST,data.pList);
     }
   }

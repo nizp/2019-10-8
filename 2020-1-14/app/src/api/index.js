@@ -14,7 +14,7 @@ const instance = axios.create({
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css'
 
-console.log(nprogress)
+// console.log(nprogress)
 
 instance.interceptors.request.use(config => {
     nprogress.start();

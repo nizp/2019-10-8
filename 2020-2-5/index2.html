@@ -11,7 +11,7 @@
         <input type="text" v-model="num">
         {{num}}
         <input type="button" value="按钮">
-        {{num2}}
+        {{getName}}
     </div>
 <!-- <script src="./vue.min.js"></script> -->
 <script src="mvvm.js"></script>
@@ -47,6 +47,11 @@
             num2:1,
             obj:{
                 name:'哈哈'
+            }
+        },
+        computed:{
+            getName(){
+                return this.num*1 + 1;
             }
         }
     });

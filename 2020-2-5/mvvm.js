@@ -2,10 +2,30 @@ class Vue {
     constructor(opt){
         this.$el = opt.el;
         this.$data = opt.data;
+        this.computed = opt.computed;
         //专门就是来编译模板的
         if(this.$el){
+
+            for(let key in  this.computed){
+                Object.defineProperty(this.$data,key,{
+                    get:()=>{
+                        return this.computed[key].call(this)
+                    }
+                });
+            }
+
             new Obsever(this.$data);
+            this.proxyVM(this.$data);
             new Complier(this.$el,this);
+        }
+    }
+    proxyVM(data){
+        for(let key in data){
+            Object.defineProperty(this,key,{
+                get(){
+                    return data[key]
+                }
+            })
         }
     }
 }
@@ -52,14 +72,15 @@ class Complier {
                     //看头是否为v-的属性，如果是就把数据中的值取出来赋值给元素的属性
                     if(attr.nodeName.startsWith('v-')){
                         let {nodeValue} = attr;
-                        //value就是data中的数据
+                        //value就是data中的数据（页面跟着数据的更新而变化）
                         new Watcher(this.vm,nodeValue,(newVal)=>{
                             node.value = newVal; //把最新的数据赋值给input的value
+                            console.log('只要notify出发就会执行回调')
                         });
                         let value = this.vm.$data[nodeValue];
                         node.oninput = (ev)=>{
                             this.vm.$data[nodeValue] = ev.target.value; //set
-                            // console.log(this.vm.$data[nodeValue])
+                            // console.log(this.vm.$data[nodeValue])      
                         }
                         node.value = value;
                     }
@@ -96,10 +117,12 @@ class Dep {
     }
     //订阅
     addSub(watcher){
+        console.log('watcher',watcher)
         this.sub.push(watcher);
     }
     //发布
     notify(){
+        console.log('发布收集的事务')
         this.sub.forEach(watcher=>{
             watcher.update();
         });
@@ -113,12 +136,14 @@ class Dep {
 class Watcher {
     //vm -> vm.$data   key -> 监控的数据  cb -> 数据变化之后的回调
     constructor(vm,key,cb){
-        //当实例化Watcher的时候把实例挂到Dep的属性下
+        //当实例化Watcher的时候把实例挂到Dep的属性下,方便所有的人去拿
         Dep.target = this; //let target = this
         this.vm = vm;
         this.key = key;
         this.cb = cb;
         this.oldVal = this.get();
+        //把实例用完之后把Dep.target给置空，防止只要是get数据就push Watcher
+        Dep.target = null;
     }
     get(){
         let val = this.vm.$data[this.key];
@@ -127,7 +152,7 @@ class Watcher {
     update(){
         let newVal = this.get(); //设置的时候才拿得到新值
         if(newVal !== this.oldVal){
-            this.cb(newVal)
+            this.cb(newVal); //执行回调函数
         }
     }
 }
@@ -157,10 +182,12 @@ class Obsever {
         Object.defineProperty(obj,key,{
             get(){
                 //在获取数据的时候进行订阅
-                dep.addSub(Dep.target);
+                Dep.target && dep.addSub(Dep.target);
+                console.log('出发了多少次',key)
                 return value;
             },
             set:(newVal)=>{
+                console.log('进了set')
                 //在设置value值的时候如果新值和老值不相等就更新数据
                 if(value !== newVal){
                     this.obsever(newVal); //保证新赋值的数据也被数据劫持了

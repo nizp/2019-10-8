@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="num">
+        {{num}}
+        <input type="button" value="按钮">
+        {{num2}}
+    </div>
+<!-- <script src="./vue.min.js"></script> -->
+<script src="mvvm.js"></script>
+<script>
+
+    /*
+        DOM的操作
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+
+
+        1.把数据关联到视图中
+            把DOM中的节点放到文档碎片中
+                从文档碎片中获取DOM节点，然后查找关键的属性名(v-model)或者{{}}
+
+        2.操作数据会重新渲染视图
+            需要把数据变成数据劫持的方式
+                观察者模式 (发布、订阅)
+
+        3.操作视图会修改数据
+
+        4.别的小扩展了
+            vm.$data.num   ->  vm.num  this.num  
+
+        
+    */
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            num:0,
+            num2:1,
+            obj:{
+                name:'哈哈'
+            }
+        }
+    });
+</script>
+</body>
+</html>

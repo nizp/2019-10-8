@@ -85,6 +85,20 @@
                 通过属性的方式传递
                     <Child pnum={this.state.num}>
 
+
+                    //批量添加数据使用下面的方式
+                    <P5Child {...{
+                        pnum:num,
+                        pnum2:num2,
+                        pary:ary
+                    }}/>
+
+                    <P5Child 
+                        pnum={num} 
+                        pnum2={num2} 
+                        pary={ary}
+                    />
+
                 子级接收
                     render(){
                         const {pum} = this.props;

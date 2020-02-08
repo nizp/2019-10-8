@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <a href="#/home">home</a>
+    <a href="#/about">about</a> -->
+    <a href="/home">home</a>
+    <a href="/路由.html/about">about</a>
+    <h1 id="h1"></h1>
+<script>
+    /*
+        hash
+    */
+    window.onload = function(){
+        let hash = location.hash?location.hash:'#/home';
+        location.hash = hash;
+        h1.innerHTML = hash.slice(2);
+    }
+    window.onhashchange = function(){
+        h1.innerHTML = location.hash.slice(2); //#/home
+    }
+
+    /*
+        history
+            pushState
+            onpopstate
+    */
+
+    window.onload = function(){
+        let pathname = decodeURI(location.pathname) === '/路由.html'?'/home':'location.pathname';
+        // location.pathname = pathname;
+        // console.log(decodeURI(location.pathname))
+        // pushState({a:'b'},null,'/home')
+        h1.innerHTML = pathname.slice(1);
+    }
+    window.onpopstate = function(ev){
+        //ev.data
+        h1.innerHTML = location.hash.slice(2); //#/home
+    }
+
+
+
+</script>
+</body>
+</html>

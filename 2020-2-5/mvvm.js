@@ -19,6 +19,7 @@ class Vue {
             new Complier(this.$el,this);
         }
     }
+    // this.num = this.$data.num
     proxyVM(data){
         for(let key in data){
             Object.defineProperty(this,key,{

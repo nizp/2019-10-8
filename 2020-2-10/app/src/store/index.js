@@ -5,6 +5,7 @@ import Vuex from './myvuex';
 
 Vue.use(Vuex);
 
+// Vue.use(Vuex);
 
 
 /*
@@ -21,16 +22,13 @@ export default new Vuex.Store({
   },
   mutations: {
     add(state,payload){
-      // console.log(state,payload,333)
       state.num += payload;
     }
   },
   actions: {
-    asyncadd(...arg){
-      // console.log(arg)
+    asyncAdd(commit,...payload){
       setTimeout(()=>{
-        arg[0]('add',arg[1]);//this属于window
-        // console.log(commit)
+        commit('add',...payload);
       },1000)
     }
   },

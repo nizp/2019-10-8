@@ -1,13 +1,26 @@
 import React from 'react'
 
 /*
-    React的生命周期从广义上分为三个阶段：挂载、渲染、卸载
+    React的生命周期从广义上分为三个阶段：挂载、渲染、更新、卸载
 
     执行一次:
         constructor   1
         componentWillMount  2
         render   3
         componentDidMount 4
+
+    数据更新阶段
+        父级数据变化
+            componentWillReceiveProps(nextProps)  (1)
+
+        数据发生变化的时候出发(不管是子级的数据还是父级的数据)
+            shouldComponentUpdate(nextProps,nextState)   (2)
+
+        render  (3)
+
+
+
+    
 
 */
 
@@ -42,6 +55,14 @@ class App extends React.Component {
         }
         return true;
     }
+
+    componentWillUpdate(){
+        console.log('更新之前')
+    }
+    componentDidUpdate(){
+        console.log('DOMM更新之后')
+    }
+
     render() {
         console.log('render');
         return (

@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <button @click="add2">{{$store.state.num}}</button>
+    <button @click="add2">{{num}}</button>
+    <button @click="add3">异步修改数据{{$store.state.num}}</button>
   </div>
 </template>
 
@@ -8,31 +9,34 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 
-import {mapState,mapMutations} from '../store/myvuex';
-// import {mapState} from '../store/vuex';
+import Vuex,{mapState} from '../store/myvuex';
 
 
+let that = null;
 export default {
   name: 'Home',
+  beforeCreate(){
+    that = this;
+  },
   methods:{
-    // ...mapMutations(),
+    // ...mapMutations.call(that,[]),
     add2(){
-      // this.$store.commit('add',1);
-      this.$store.dispatch('asyncadd',2);
-      //this.add(1);
+      this.$store.commit('add',1);
+    },
+    add3(){
+      this.$store.dispatch('asyncAdd',1);
     }
   },
   data(){
     return {
       ...mapState.call(this,['num']),
-      num2:5
+      num2:5,
+      that:null
     }
   },
-  beforeCreate(){
-    console.log(this.$store)
-  },
+
   mounted(){
-    console.log(this.num);
+    console.log(this.$store.state.num);
   }
 
 }

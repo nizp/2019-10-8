@@ -16,10 +16,32 @@ import React from 'react'
         数据发生变化的时候出发(不管是子级的数据还是父级的数据)
             shouldComponentUpdate(nextProps,nextState)   (2)
 
-        render  (3)
+        DOM更新之前
+            componentWillUpdate(3) (用的不多)
+        
+        render  (4)
+
+        DOM更新之后
+            componentDidUpdate(有用)
+
+    只要是钩子函数中都要小心使用this.setState,小心死循环，使用的时候建议加判断。
 
 
 
+
+    一次的
+        component  Will Mount
+        component  Did Mount
+
+    更新
+        component Will Updtae
+        component Did  Updtae
+
+        
+        component Will Receive Props
+
+        should Component Update
+    
     
 
 */
@@ -29,8 +51,11 @@ class App extends React.Component {
         super(props);
         console.log('constructor',this.state)
         this.state = {
-            val:'只要父级点了val，子级就会变'
+            val:'只要父级点了val，子级就会变',
+            ary:[1,2,3]
         };
+        this.len = 0;
+        this.timer = null;
     }
     //可以拿到数据（一般用的很少）
     componentWillMount(){
@@ -38,7 +63,11 @@ class App extends React.Component {
     }
     //这里可以使用ajax请求,还可以操作DOM、定时器操作
     componentDidMount(){
-        console.log(document.getElementById('oo'),'DidMount');
+        // console.log(document.getElementById('oo'),'DidMount');
+        this.len = document.querySelectorAll('li').length;
+        console.log(document.querySelectorAll('li').length,'DidMount');
+
+        this.timer = setInterval(()=>{console.log(123)},1000)
     }
 
     componentWillReceiveProps(nextProps){
@@ -57,20 +86,40 @@ class App extends React.Component {
     }
 
     componentWillUpdate(){
-        console.log('更新之前')
+        console.log('DOM更新之前')
+        console.log(document.querySelectorAll('li').length)
     }
     componentDidUpdate(){
-        console.log('DOMM更新之后')
+        console.log('DOM更新之后')
+        this.len = document.querySelectorAll('li').length;
+
+        console.log(this.len)
+    }
+    componentWillUnmount(){
+        console.log('子组件销毁')
+        clearInterval(this.timer);
     }
 
     render() {
+        /*
+            在render里面不要使用this.setState()不然会1死循环
+        */
         console.log('render');
+        let list = this.state.ary.map((item,i)=><li key={i}>{item}</li>);
+        
         return (
             <div id="oo">
                 <p>{this.props.pnum}</p>
                 <p>{this.state.val}</p>
+                <button onClick={this.add}>点击更新li</button>
+                <ul>{list}</ul>
             </div>
         );
+    }
+    add = () => {
+        let {ary} = this.state;
+        ary.push(8);
+        this.setState({ary});
     }
 }
 

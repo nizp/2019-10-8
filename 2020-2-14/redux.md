@@ -41,4 +41,34 @@
 ```
 
 
+### bindActionCreators  
+    - 让发起action更加好用
+
+    - 有2个参数
+    - 1.actionCreators(本身是一个对象)
+        对象一个一个的小函数，函数只能返回一个对象
+        "INCREMENT"  ->  add
+
+        function add(){
+            return {type:"INCREMENT"}
+        }
+
+    - 2.store.dispatch
+
+### combineReducers
+    - 合并多个reducer变成一个纯函数的方法
+
+    ```
+        const {combineReducers} = Redux
+        const rootReducers = combineReducers({
+            第一个reducer名字:第一个reducer,
+            第二个reducer名字:第二个reducer,
+            ....
+        })
+    ```
+
+        
+
+
+
     

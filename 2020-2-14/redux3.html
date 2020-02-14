@@ -9,6 +9,7 @@
     <div id="app">
         <button id="btn"></button>
         <button id="btn2">减少</button>
+        <button id="btn3">不监听了</button>
     </div>
 <script src="./node_modules/redux/dist/redux.js"></script>
 <script>
@@ -18,7 +19,7 @@
 
     //1.引包
     const {createStore} = Redux;
-    // console.log(Redux)
+    console.log(Redux)
 
     //2.创建store(通过createStore来创建)
     const store = createStore(reducer);
@@ -69,15 +70,26 @@
 
     btn2.onclick = function(){
         store.dispatch({ type:DECREMENT });
+        console.log(store.getState().num)
     }
 
     /*
         subscribe(监听数据变化)只要reducer的state发生了变化，那么就会触发subscribe中的回调函数
+
+        store.subscribe,有个返回值(函数)，返回的是解除监听状态，只要调用这个返回函数，
+        那么就不在做状态监听，但是状态继续变化，是不影响store中的state更新的
     */
-    store.subscribe(()=>{
+    let unsub = store.subscribe(()=>{
         render();
     });
-    // console.log(store)
+
+    btn3.onclick = function(){
+        unsub()
+    }
+
+    // console.log(unsub)
+
+   
 
 
 

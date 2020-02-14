@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button id="btn"></button>
+    </div>
+<script src="./node_modules/redux/dist/redux.js"></script>
+<script>
+    const {createStore,bindActionCreators} = Redux;
+
+    const store = createStore(reducer);
+
+    const actionCreators = bindActionCreators({add},store.dispatch);
+
+
+    function reducer(state=0,action){
+        switch(action.type){
+            case "INCREMENT":
+                return ++ state
+        }
+        return state;
+    }
+
+
+    //actionCreators
+    function add(){
+        return {type:'INCREMENT'}
+    }
+
+    btn.onclick = function(){
+        // store.dispatch({type:'INCREMENT'});
+        ac.add();
+        // console.log(actionCreators)
+    }
+
+
+
+
+    function render(){
+        btn.innerHTML = store.getState();
+    }
+    render();
+
+    store.subscribe(()=>{
+        render();
+    });
+
+
+
+
+
+
+</script>
+</body>
+</html>

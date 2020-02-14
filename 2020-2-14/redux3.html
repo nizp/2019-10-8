@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button id="btn"></button>
+        <button id="btn2">减少</button>
+    </div>
+<script src="./node_modules/redux/dist/redux.js"></script>
+<script>
+
+    const INCREMENT = 'INCREMENT';
+    const DECREMENT = 'DECREMENT';
+
+    //1.引包
+    const {createStore} = Redux;
+    // console.log(Redux)
+
+    //2.创建store(通过createStore来创建)
+    const store = createStore(reducer);
+    // const store = createStore(reducer,{num:0});
+
+
+    /*
+      
+        ary.push(3);
+
+    */
+
+    //3.创建reducer（数据,修改数据的方法，这些方法叫action）
+    function reducer(state={
+        num:0,
+
+    },action){
+        /*  
+            终极解决方案 
+                使用JSON.parse(JSON.stringify)
+        
+        */
+        state = JSON.parse(JSON.stringify(state));
+        switch(action.type){
+            case INCREMENT :
+                ++ state.num;
+                break;
+               
+            case DECREMENT :
+                -- state.num;
+                break;
+        }
+        return state;
+    }
+
+    //4.通过store的getState去获取数据
+    // console.log(store.getState().num);
+
+    function render(){
+        btn.innerText = store.getState().num;
+    }
+    render();
+
+    //5.操作视图去修改数据
+    btn.onclick = function(){
+        store.dispatch({ type:INCREMENT });
+    }
+
+    btn2.onclick = function(){
+        store.dispatch({ type:DECREMENT });
+    }
+
+    /*
+        subscribe(监听数据变化)只要reducer的state发生了变化，那么就会触发subscribe中的回调函数
+    */
+    store.subscribe(()=>{
+        render();
+    });
+    // console.log(store)
+
+
+
+    
+
+</script>
+</body>
+</html>

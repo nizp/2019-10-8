@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button id="btn"></button>
+        <button id="btn2">减少</button>
+    </div>
+<script src="./node_modules/redux/dist/redux.js"></script>
+<script>
+
+    const INCREMENT = 'INCREMENT';
+    const DECREMENT = 'DECREMENT';
+
+    //1.引包
+    const {createStore} = Redux;
+    // console.log(Redux)
+
+    //2.创建store(通过createStore来创建)
+    const store = createStore(reducer);
+    // const store = createStore(reducer,{num:0});
+
+    //3.创建reducer（数据,修改数据的方法，这些方法叫action）
+    function reducer(state={num:0},action){
+        // console.log(state)
+
+        //需要添加一个修改数据的action，increment(增加) decrement(减少)
+        //increment(state){state.num += 1}
+
+        //*** 在action中返回的对象一定要是一个新地址的对象，不要直接操作state
+        /*
+            //这种方式有可能会遇到坑，因为这2种方式都是潜拷贝
+
+            let newstate = {num:++ state.num}
+            //newstate.num = ++ state.num;
+            return {...state,newstate}
+
+            let newstate = Object.assgin({},state);  
+            newstate.num = ++ state.num;
+            return newstate;
+
+
+            终极解决方案：看redux3
+        */
+        switch(action.type){
+            //action
+            case INCREMENT :
+                // console.log('进increment',{...state,num:++ state.num})
+                return {...state,num:++ state.num}
+                /*
+                    {num:1}
+                */
+            case DECREMENT :
+                return {...state,num:--state.num}
+        }
+
+        return state;
+    }
+
+    //4.通过store的getState去获取数据
+    // console.log(store.getState().num);
+
+    function render(){
+        btn.innerText = store.getState().num;
+    }
+    render();
+
+    //5.操作视图去修改数据
+    btn.onclick = function(){
+        store.dispatch({ type:INCREMENT });
+    }
+
+    btn2.onclick = function(){
+        store.dispatch({ type:DECREMENT });
+    }
+
+    /*
+        subscribe(监听数据变化)只要reducer的state发生了变化，那么就会触发subscribe中的回调函数
+    */
+    store.subscribe(()=>{
+        render();
+    });
+    // console.log(store)
+
+
+
+    
+
+</script>
+</body>
+</html>

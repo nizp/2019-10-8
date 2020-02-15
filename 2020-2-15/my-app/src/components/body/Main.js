@@ -7,9 +7,24 @@ class Main extends React.Component {
         this.state = {  };
     }
     render() {
-        const {ary} = this.props;
-        // console.log(ary)
-        let list = ary.map((item,index)=>{
+        const {ary,collect,select,add} = this.props;
+
+        let selectAry = [];
+        switch(select){
+            case 'all':
+                selectAry = ary;
+            break;
+            case 'collect':
+                selectAry = collect;
+            break;
+            case 'add':
+                selectAry = add;
+            break;
+            default:
+                selectAry = ary;
+        }
+        
+        let list = selectAry.map((item,index)=>{
             return ( <List {...{
                 id:item.id,
                 key:item.id,
@@ -19,6 +34,8 @@ class Main extends React.Component {
                 index
             }}/>)
         })
+        
+        
 
         return (
             <ul id="list">

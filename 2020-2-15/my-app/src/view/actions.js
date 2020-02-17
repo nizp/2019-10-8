@@ -1,8 +1,8 @@
 export function addnum(){
+    // console.log(1)
     return function(dispatch){
-        console.log(2);
         setTimeout(() => {
-            dispatch(()=>({type:'INCREMENT'}));
+            dispatch({type:'INCREMENT'});
         }, 2000);
     }
 }

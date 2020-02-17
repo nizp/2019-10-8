@@ -4,7 +4,6 @@ import App from './view/thunk'
 import {createStore,applyMiddleware}  from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-
 //概念就是只要发起 发起action ->  就得让数据更新
 
 //点击的时候不发起action,
@@ -15,10 +14,33 @@ import thunk from 'redux-thunk';
 
 */
 
-const store = createStore(renducer,applyMiddleware(thunk.withExtraArgument()));
+//applyMiddleware(thunk)(createStore)(renducer)
+
+// function thunkFn({dispatch,getState}){
+   
+//     return next => action => {
+//         console.log(123)
+//         if(typeof action === 'function'){
+            
+//             return action(dispatch,getState)
+//         }
+//         return next(action)
+//     }
+// }
 
 
-function renducer(state={num:0},action){
+// function thunkFn({dispatch,getState}){
+//     return function(next){
+//         return function(acton){
+           
+//             console.log(next)
+//         }
+//     }
+// }
+
+const store = createStore(reducer,applyMiddleware(thunk));
+
+function reducer(state={num:0},action){
     state = JSON.parse(JSON.stringify(state));
     switch(action.type){
         case 'INCREMENT':

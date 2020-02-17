@@ -23,7 +23,11 @@ class Thunk extends React.Component {
         // addnum();
         // console.log(this.props.addnum())
         this.props.addnum()
+        // console.log(this.props.addnum)
     }
 }
 
-export default connect(state=>state,()=>({...actions}))(Thunk);
+//第二个参数尽量使用对象
+export default connect(state=>state,actions)(Thunk);
+
+// export default connect(state=>state,()=>({...actions}))(Thunk);

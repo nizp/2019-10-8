@@ -57,7 +57,12 @@ function createStore(reducer,initState){
         if(!isObject(action)){
             throw new Error('action必须为对象')
         }
+        currentState = JSON.parse(JSON.stringify(currentState));
+        
         currentState = currentReducer(currentState,action);
+
+        // currentState = JSON.parse(JSON.stringify(currentState));
+
         //只要发起action就到订阅池中去把池子中的函数依次调用
         currentList.forEach(listener=>listener());
     }   

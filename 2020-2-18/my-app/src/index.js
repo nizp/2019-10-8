@@ -28,10 +28,10 @@ const store = createStore(reducer);
 
 
 */
-function reducer(state={num:0},action){
+function reducer(state={num:1},action){
     state = JSON.parse(JSON.stringify(state));
     switch(action.type){
-        case 'Add':
+        case 'ADD':
             state.num ++;
         break;
         default:

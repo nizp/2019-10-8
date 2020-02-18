@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        柯理化:
+            其实就是收集函数的过程
+
+            fn.bind(this,1,2,3)
+            fn.bind(this)(1,2,3)
+
+        高阶函数就是传一个函数进去，返回一个新的函数
+        高阶组件就是传一个组件进去，返回一个新的组件
+    */
+
+    Function.prototype.myBind = function(that,...arg){
+        //this -> fun
+        let _this = this;
+        return function(...arg2){
+            //如果this.prototype是个undefined，说明用户new过
+            _this.apply(that,[...arg,...arg2]);
+        }
+    }
+
+    function fun(a,b,c){
+        console.log(this,a,b,c);//document
+    }
+
+    let f = fun.myBind(document,1,2,3);
+
+    f(1,2,3);
+
+
+</script>
+</body>
+</html>

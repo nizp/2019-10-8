@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ppa":"../../components/ppa/ppa",
+    "header": "../../components/header/header"
+  }
+}

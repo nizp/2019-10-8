@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ppa":"../../components/ppa/ppa"
+  },
+  "navigationBarBackgroundColor":"#35ACE4",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText": "我们的小春天"
+}

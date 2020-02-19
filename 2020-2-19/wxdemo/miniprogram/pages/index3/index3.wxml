@@ -1,0 +1,15 @@
+<view>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view>
+            <view>要不要启动疯狂模式</view>
+            <switch name="switch"/>
+            <view>要不要启动疯狂模式2</view>
+            <switch name="switch2"/>
+        </view>
+
+        <view>
+            <button formType="submit">Submit</button>
+            <button formType="reset">Reset</button>
+        </view>
+    </form>
+</view>

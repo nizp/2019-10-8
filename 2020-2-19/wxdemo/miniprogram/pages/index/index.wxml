@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class="container">
+  <header></header>
+  你好,小程序
+   <text>{{num}}</text>
+   <view wx:for="{{ary}}"  wx:for-index="i" wx:key="{{item.id}}">
+      <text>{{i}}{{item.txt}}</text>
+      <checkbox  
+        checked="{{item.checked}}"
+        bindtap = "changed"
+        data-id="{{item.id}}"
+      ></checkbox >
+      <text>{{item.checked}}</text>
+   </view>
+   <button hidden type="primary"  bindtap="click">点击按钮</button>
+</view>

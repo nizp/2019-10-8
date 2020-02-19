@@ -1,0 +1,9 @@
+<view class="wrap">
+    <view wx:for="{{info}}">
+        <view>{{item.specialname}}</view>
+        <cover-image src="{{item.imgurl}}"/>
+        <navigator wx:for="{{item.songs}}" wx:for-item="item2">
+            <text>{{item2.filename}}</text>
+        </navigator>
+    </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="wrap">
+    <navigator
+        wx:for="{{list}}" 
+        class="list"
+        url="../play/play"
+    >
+        <view class="list_text">{{item.filename}}</view>
+    </navigator>
+</view>

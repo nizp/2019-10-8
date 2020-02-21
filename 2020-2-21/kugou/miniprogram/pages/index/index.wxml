@@ -1,0 +1,10 @@
+<view class="wrap">
+    <navigator 
+        wx:for="{{info}}" 
+        class="list"
+        url="../list/list?id={{index}}"
+    >
+        <cover-image class="list_pic" src="{{item.imgurl}}"/>
+        <view class="list_text">{{item.specialname}}</view>
+    </navigator>
+</view>

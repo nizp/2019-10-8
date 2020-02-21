@@ -1,0 +1,17 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/list/list",
+    "pages/play/play",
+    "pages/mock/mock"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "我们的小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

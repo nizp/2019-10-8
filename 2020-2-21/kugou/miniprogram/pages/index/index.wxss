@@ -1,0 +1,16 @@
+
+.list{
+    height:188rpx;
+    padding: 22rpx;
+    display: flex;
+    border-bottom: 1rpx solid #e8e8e8;
+}
+.list_pic {
+    width:172rpx;
+    height:172rpx;
+}
+.list_text{
+    line-height: 172rpx;
+    margin-left:34rpx;
+    font-size:35rpx;
+}

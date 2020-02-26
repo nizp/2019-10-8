@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        在定义对象的时候，不能直接访问该定义的对象，访问就报错
+    */
+    // let obj = { 
+    //     a:1,
+    //     fn:function () {
+    //         return this.a
+    //     }
+    // };
+
+    //面试题
+    // let obj = { 
+    //     a:1,
+    //     fn:(function(val){
+    //         console.log(val)
+    //     })(obj.a)
+    // };
+
+    // var obj = {
+    //     a:5
+    // }
+    // var obj = { 
+    //     a:1,
+    //     fn:(function(val){
+    //         console.log(obj.a)
+    //     })(obj.a)
+    // };
+
+    
+    // obj.fn();
+    // let obj2 = obj;
+    // obj2.fn();
+
+    // console.log(obj.fn)
+
+/*****************************************/
+
+    // let obja = {
+
+    // }
+    // let objb = {
+    //    a:5
+    // }
+    // let objc = {
+    //     a:7
+    // }
+    // //key值是个字符串，objb，objc => '[object Object]'
+    // obja[objb] = 6;
+    // obja[objc] = 8;
+
+    // console.log(obja[objb],obja);
+
+
+    /*****************************************/
+
+    // let a = 3;
+    // let b = new Number(3);
+    // let c = 3;
+    // console.log(a == b); //双等，数字跟对象比，对象会转成数字
+    // console.log(a === b);
+    // console.log(b === c);
+
+
+    /*****************************************/
+
+
+    // let ary = [];
+    // ary.constructor = {};
+    // console.log(ary.constructor === Array)
+    // console.log(ary instanceof Array); //在iframe中会有坑
+
+    // const getSum = new Function('a', 'b' , 'return a + b');
+
+    // console.log(getSum(1,2));
+
+    // console.log('5' + '+' + '6');
+
+    // console.log(eval('5' + '+' + '6'));
+
+    // console.log(new Function('','return ' + ('5' + '+' + '6'))());
+
+    /*****************************************/
+
+
+    // for(var i=0;i<2;i++){
+    //     console.log(i,'里面的');
+    // }
+    // console.log(i);
+
+    
+    // for (var i = 0; i < 3; i++) {
+    //     setTimeout(() => console.log(i), 1);
+    // }
+
+    // for (let i = 0; i < 3; i++) {
+    //     setTimeout(() => console.log(i), 1);
+    // }
+
+    // for (var i = 0; i < 3; i++) {
+    //     (function(i){
+    //         setTimeout(() => console.log(i), 1);
+    //     })(i)
+    // }
+
+    // function fn(a){
+    //     console.log(this.a); //?
+    // }
+    
+    // function fn2(a){
+    //     console.log(this.a);
+    //     fn(this.a);
+    // }
+    // var a = 8;
+    // fn2.a = 4;
+    // document.a = 5;
+    // fn2();
+    // // fn2.call(document,a);
+    // console.log(fn2.a);
+
+
+    /*
+        闭包:
+            主要作用是存值  
+            应用局部作用域的特性能够不让局部的变量被污染
+    */
+    // function fn(a){
+    //     function fn2(){
+    //         a++;
+    //         console.log(a);
+    //     }
+    //     return fn2;
+    // }
+    // let a = 5;
+    // let f = fn(a);
+    // f(a);
+    // f(a);
+    // // console.log(a);
+    // console.dir(f);
+
+    
+    // document.onclick = (function(a){
+    //     return function fn(){
+    //         a++
+    //         console.log(a);
+    //         document.onclick = null; //赋值null
+    //     }   
+    // })(5);
+
+    // console.dir(document.onclick)
+
+
+    let sum = 10;
+    let ary = [1,2,3,4,5,6,7,8,9];
+    let ary2 = [];
+    // for(let i=0;i<ary.length;i++){
+    //     if(ary[i] + ary[ary.length-1]-i === sum){
+    //         ary2.push(ary[i],ary[ary.length-1]-i);
+    //         break
+    //     }
+    // }
+    
+    let flag = false;
+    for(let i=0;i<ary.length;i++){
+        for(let j=i+1;j<ary.length;j++){
+            if(ary[i] + ary[j] === 18){
+                ary2.push(ary[i],ary[j]);
+                flag = true;
+                break;
+            }
+        }
+        if(flag){
+            break;
+        }
+    }
+    if(!flag){
+        console.log('notfound')
+    }
+
+
+   
+
+
+    console.log(ary2)
+    // console.log(ary.length);
+
+   
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

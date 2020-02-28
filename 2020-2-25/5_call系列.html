@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function fn(a,b){
+        console.log(a,b);
+        return 5
+    }
+
+
+    
+    // Function.prototype.mycall = function(that,...arg){
+    //     that.xx = this;  //对象的属性和值是属于这个对象的
+    //     return that.xx(...arg);
+    // }
+
+    // Function.prototype.myapply = function(that,ary){
+    //     that.xx = this;  //对象的属性和值是属于这个对象的
+    //     return that.xx(...ary);
+    // }
+
+
+    Function.prototype.myapply = function(that,ary){
+        that.xx = this;  //对象的属性和值是属于这个对象的
+        return that.xx(...ary);
+    }
+
+
+
+    Function.prototype.mybind = function (that,...arg){
+        let _this = this;//原始函数
+        function ts(...arg2){
+            if(!(this instanceof ts)){ //如果没有new，才修改this
+                // _this.call(that,...[...arg,...arg2]);
+                _this.apply(that,[...arg,...arg2])
+            }else{
+                //如果new了，是不需要修改this的
+                new _this(...[...arg,...arg2]);
+            }
+            _this.外衣 = '花衣裳';
+        }
+
+        ts.prototype = this.prototype;
+
+        return ts;
+    }
+
+
+    // console.log( fn.mybind(document,1) )
+
+    let f = fn.mybind(document,1);
+
+    fn.prototype.cc = 6;
+
+
+    // f(2);
+    // new f(2)
+    console.log(new f(2).cc);
+
+
+
+    // console.log( fn.myapply(document,[1]) )
+
+
+</script>
+</body>
+</html>

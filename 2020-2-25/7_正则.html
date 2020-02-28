@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // var str = 'http://www.zhufengpeixun.cn/?lx=1&from=wx&b=12&c=13#qqqq=666';
+
+    // //不包含?或者=或者$ 加上= 再加上不是?不是&也不是#
+    // // var reg = /([^?=&]+)=([^?=&#]+)/g;
+    // var reg = /(([a-z]+)=(\w+))|((#[^=]+)=\w+)/g
+    // console.log(str.match(reg));
+
+
+    // let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
+    // let data = {
+    //     name: '姓名',
+    //     age: 18
+    // }
+    // console.log(render(template, data)); // 我是姓名，年龄18，性别undefined
+
+    // function render(tpl,data){
+    //     return tpl.replace(/\{\{(\w+)\}\}/g,($0,$1)=>data[$1]);
+    // }
+
+
+    // var str = '1234567';
+    // function moneyFormate2(str){
+    //     let s = '';
+    //     s = str.replace(/(\d{1,3})(?=(\d{3})+$)/g,($0,$1)=>{
+    //         return $1 + ',';
+    //     });
+    //     return s;
+    // }
+    // console.log(moneyFormate2(str));
+
+    var str = '    1234567    ';
+
+    console.log(str.replace(/^\s+/,''))
+
+
+
+    
+
+</script>
+</body>
+</html>

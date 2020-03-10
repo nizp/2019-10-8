@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:'李磊',
+            age:18,
+            obj2:{
+                sex:'男'
+            }
+        }
+
+        obj = new Proxy(obj,{
+            get(target,key){
+                // console.log(target,key);
+                return target[key];
+            },
+            set(target,key,newVal){
+                console.log(target,newVal)
+                //通过全局对象Reflect去设置对象的新值
+                //return Reflect.set(target, key, newVal);
+
+                target[key] = newVal;
+            }
+        });
+
+
+        // console.log(Reflect)
+
+        // obj.age = 19;
+        obj.obj2.sex = '未知';
+        console.log(obj.obj2.sex);
+
+
+    </script>
+</body>
+</html>

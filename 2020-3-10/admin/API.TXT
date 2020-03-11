@@ -1,0 +1,425 @@
+﻿***USER用户管理***
+----
+用户登录
+URL：/user/login
+METHOD：POST
+PARAMS：account=xxx&password=xxx
+RESULT：{
+	code:0  //=>0成功 1失败
+	codeText:'OK',  //=>CODE状态码描述
+	token:token
+	//=>用户权限
+	power:{
+
+		jobId:1,  //职务
+		name:名字 //名字
+		sex:性别  //性别
+	}
+}
+----
+检测是否登录
+URL：/user/login
+METHOD：GET
+PARAMS：null
+通过请求头token带给后台
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+0是成功，1是失败
+----
+退出登录
+URL：/user/signout
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+获取用户通讯录（员工列表）
+departmentId
+0 全部
+1 总裁办
+2 销售部
+3 产品研发部
+4 后勤部
+
+jobId
+管理员    1
+销售经理  2
+销售员工  3
+产品研发部经理 4
+产品研发部员工 5
+后勤部经理 6
+后勤部员工 7
+
+
+
+
+
+
+URL：/user/list
+METHOD：GET
+PARAMS：departmentId=0&search=''
+PARAMS：pagenum=1&count='10' -> 1-10
+
+	pagenum=0&count='10' - > 1 - 10 
+	pagenum=1&count='10' - > 11 - 20
+	pagenum=2&count='10' - > 21 - 30
+
+	for(let i=(pagenum)*10+1);i<=(pagenum+1)*count;i++){
+
+	}
+
+
+/user/list（获取到所有的数据）如果加了departmentId，专门找部门，加了search就是查询条件
+
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id: 1,
+		name: "珠峰培训",
+		sex: 0,
+		email: "1144709265@qq.com",
+		phone: "18310612838",
+		departmentId: 1,
+		department: '总裁办',
+		jobId: 1,
+		job: '管理员',
+		desc: "珠峰培训最高管理员账户"
+	},...]
+}
+----
+获取用户详细信息
+URL：/user/info
+METHOD：GET
+PARAMS：userId=1  不传是获取登录者信息（userID为id）
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:{
+		id: 1,
+		name: "珠峰培训",
+		sex: 0,
+		email: "1144709265@qq.com",
+		phone: "18310612838",
+		departmentId: 1,
+		department: '总裁办',
+		jobId: 1,
+		job: '管理员',
+		desc: "珠峰培训最高管理员账户"
+	}
+}
+
+----
+增加用户信息
+URL：/user/add
+METHOD：POST
+PARAMS：name=xxx&sex=0&email=xxx&phone=xxx&departmentId=1&jobId=1&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改用户信息
+URL：/user/update
+METHOD：POST
+PARAMS：userId=1&name=xxx&sex=0&email=xxx&phone=xxx&departmentId=1&jobId=1&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除用户信息
+URL：/user/delete
+METHOD：GET
+PARAMS：userId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改（重置）用户密码
+URL：/user/resetpassword
+METHOD：POST
+PARAMS：
+	userId=1  重置某个用户密码
+	password=xxx 修改登录者密码
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+
+code:0  成功
+code:4  失败-参数错误
+code:1  失败-不能使用原密码
+code:2  权限不够
+
+----
+获取用户权限
+URL：/user/power
+METHOD：GET
+PARAMS：NULL
+RESULT：{
+	code:0  
+	codeText:'OK',
+	power:'xxx|xxx'
+}
+
+***DEPARTMENT部门管理***
+----
+获取部门信息
+URL：/department/list
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id: 1,
+		name: "总裁办",
+		desc: ""
+	},...]
+}
+----
+获取部门详细信息
+URL：/department/info
+METHOD：GET
+PARAMS：departmentId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:{
+		id: 1,
+		name: "总裁办",
+		desc: ""
+	}
+}
+----
+增加部门信息
+URL：/department/add
+METHOD：POST
+PARAMS：name=xxx&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改部门信息
+URL：/department/update
+METHOD：POST
+PARAMS：departmentId=1&name=xxx&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除部门信息
+URL：/department/delete
+METHOD：GET
+PARAMS：departmentId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+
+***JOB职务管理***
+----
+获取职务信息
+URL：/job/list
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id: 1,
+		name: "",
+		desc: "",
+		power:''
+	},...]
+}
+----
+获取职务详细信息
+URL：/job/info
+METHOD：GET
+PARAMS：jobId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:{
+		id: 1,
+		name: "",
+		desc: "",
+		power:'xxx|xxx'
+	}
+}
+----
+增加职务信息
+URL：/job/add
+METHOD：POST
+PARAMS：name=xxx&desc=xxx&power=xxx|xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改职务信息
+URL：/job/update
+METHOD：POST
+PARAMS：jobId=1&name=xxx&desc=xxx&power=xxx|xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除职务信息
+URL：/job/delete
+METHOD：GET
+PARAMS：jobId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+
+***CUSTOMER客户管理***
+----
+增加客户信息
+URL：/customer/add
+METHOD：POST
+PARAMS：name=xxx&sex=xxx&email=xxx&phone=xxx&QQ=xxx&weixin=xxx&type=xxx&address=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改客户信息
+URL：/customer/update
+METHOD：POST
+PARAMS：customerId=xxx&name=xxx&sex=xxx&email=xxx&phone=xxx&QQ=xxx&weixin=xxx&type=xxx&address=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除客户信息
+URL：/customer/delete
+METHOD：GET
+PARAMS：customerId=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+获取客户详细信息
+URL：/customer/info
+METHOD：GET
+PARAMS：customerId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:{
+		id: 1,
+		name: "",
+		sex: 0,
+		email: '',
+		phone: '',
+		QQ: '',
+		weixin: '',
+		type: '',
+		address: "",
+		userId: 0,
+		userName:''
+	}
+}
+----
+获取客户列表
+URL：/customer/list
+METHOD：GET
+PARAMS：lx=my&type=''&search=''&limit=10&page=1
+   lx=my获取我的客户
+   lx=all获取全部客户（默认）
+RESULT：{
+	code:0  
+	codeText:'OK',
+	page:0,
+	limit:0,
+	total:0,
+	totalPage:0,
+	data:[{
+		id: 1,
+		name: "",
+		sex: 0,
+		email: '',
+		phone: '',
+		QQ: '',
+		weixin: '',
+		type: '',
+		address: "",
+		userId: 0,
+		userName:''
+	},...]
+}
+
+***VISIT回访记录管理***
+----
+获取回访记录信息
+URL：/visit/list
+METHOD：GET
+PARAMS：customerId=xxx
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id: 1,
+		customerId:1,
+		customerName:'xxx',
+		visitText: "",
+		visitTime: ""
+	},...]
+}
+----
+获取回访详细信息
+URL：/visit/info
+METHOD：GET
+PARAMS：visitId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:{
+		id: 1,
+		customerId:1,
+		customerName:'xxx',
+		visitText: "",
+		visitTime: ""
+	}
+}
+----
+增加回访信息
+URL：/visit/add
+METHOD：POST
+PARAMS：customerId=xxx&visitText=xxx&visitTime=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改回访信息
+URL：/visit/update
+METHOD：POST
+PARAMS：visitId=1&customerId=xxx&visitText=xxx&visitTime=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除回访信息
+URL：/visit/delete
+METHOD：GET
+PARAMS：visitId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}

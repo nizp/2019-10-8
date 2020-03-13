@@ -15,7 +15,7 @@ const {
 	writeFile
 } = require('../utils/promiseFS');
 
-const times = 10;
+const times = 60*60;
 
 //=>用户登录
 route.post('/login', (req, res) => {
@@ -412,7 +412,7 @@ route.get('/power', (req, res) => {
 				children:[{
 					name:'员工列表',
 					id:'1-1',
-					path:'/userhandle/list'
+					path:'/home/list'
 				}]
 			},
 			{
@@ -433,7 +433,7 @@ route.get('/power', (req, res) => {
 			pList[0].children.push({
 				name:'新增员工',
 				id:'1-2',
-				path:'/userhandle/add'
+				path:'/home/add'
 			})
 		}
 

@@ -9,9 +9,9 @@ import lazy from './lazy.js';
 import Login from '../components/login/login';
 
 
+
 const Home = lazy(()=>import('../components/home/Home'));
 
-// const AboutChild = lazy(()=>import('../components/aboutChild'));
 // const Login = lazy(()=>import('../components/login'));
 // const NoRouter = lazy(()=>import('../components/NoRouter'));
 
@@ -22,13 +22,6 @@ const routes = [
     {
         path:'/login',
         component:Login,
-        // render:(props)=>{
-        //     let login = sessionStorage.getItem('login')?JSON.parse(sessionStorage.getItem('login')):false;
-        //     if(!login){
-        //         return <Redirect to="/login"/>
-        //     }
-        //     return <Home {...props}/> 
-        // }
     },
     {
         path:'/',
@@ -37,16 +30,17 @@ const routes = [
         }
     },
     {
-        path:'/home',
+        path:'/home/:id',
         render:(props)=>{
-            const PrivateRoute = withHocPrivateRoute(Home);
+            console.log('来了',props)
+            const PrivateRoute = withHocPrivateRoute(Home,props);
             return <PrivateRoute />
-        }
+        },
     }
 ];
 
 //高阶路由守卫
-function withHocPrivateRoute(WrappedComponent){
+function withHocPrivateRoute(WrappedComponent,props){
     if(!WrappedComponent){
         throw new Error("缺少组件参数");
         return false;
@@ -79,7 +73,7 @@ function withHocPrivateRoute(WrappedComponent){
             }
             render(){
                 return this.state.isAuthenticated ?  (
-                    <WrappedComponent/>
+                    <WrappedComponent {...props}/>
                 ) : <p></p>;
             }
         }

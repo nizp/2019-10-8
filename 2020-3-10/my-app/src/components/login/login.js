@@ -19,7 +19,7 @@ class Login extends React.Component {
         const {history:{replace}} = this.props;
         loginAPI({account:user,password:md5(pass)}).then(data=>{
             if(data.code === 0){
-                replace('/home');
+                replace('/home/userlist');
                 // console.log(this.props);
             }
         });

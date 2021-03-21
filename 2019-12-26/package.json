@@ -214,7 +214,7 @@
     "source-map-support": "^0.5.16",
     "source-map-url": "^0.4.0",
     "split-string": "^3.1.0",
-    "ssri": "^6.0.1",
+    "ssri": "^8.0.1",
     "static-extend": "^0.1.2",
     "stream-browserify": "^2.0.2",
     "stream-each": "^1.2.3",

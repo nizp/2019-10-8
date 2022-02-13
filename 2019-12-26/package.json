@@ -5,7 +5,7 @@
   "main": "1.js",
   "dependencies": {
     "acorn": "^6.4.0",
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.3",
     "ajv-errors": "^1.0.1",
     "ajv-keywords": "^3.4.1",
     "anymatch": "^2.0.0",

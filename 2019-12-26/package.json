@@ -143,7 +143,7 @@
     "minimalistic-assert": "^1.0.1",
     "minimalistic-crypto-utils": "^1.0.1",
     "minimatch": "^3.0.4",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "mississippi": "^3.0.0",
     "mixin-deep": "^1.3.2",
     "mkdirp": "^0.5.1",

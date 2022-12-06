@@ -63,7 +63,7 @@
     "crypto-browserify": "^3.12.0",
     "cyclist": "^1.0.1",
     "debug": "^2.6.9",
-    "decode-uri-component": "^0.2.0",
+    "decode-uri-component": "^0.2.1",
     "define-property": "^0.2.5",
     "des.js": "^1.0.1",
     "diffie-hellman": "^5.0.3",

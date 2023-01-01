@@ -126,7 +126,7 @@
     "isobject": "^3.0.1",
     "json-parse-better-errors": "^1.0.2",
     "json-schema-traverse": "^0.4.1",
-    "json5": "^1.0.1",
+    "json5": "^2.2.2",
     "kind-of": "^3.2.2",
     "loader-runner": "^2.4.0",
     "loader-utils": "^1.2.3",
